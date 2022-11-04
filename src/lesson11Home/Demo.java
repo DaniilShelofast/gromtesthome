@@ -13,7 +13,7 @@ public class Demo {
         API apis4 = API.findRooms(100, 2, "Odessa", "Ukraine");
 
 
-        API[] apis = new API[]{apis1, apis2, apis3, apis4};
+
 
         Controller controller = new Controller(apis);
         System.out.println(Arrays.deepToString(controller.requestRooms(100, 2, "Odessa", "Ukraine")));

@@ -70,7 +70,7 @@ public class Controller {
     private boolean checkRoom(API api, Room room) {
         for (int i = 0; i < api.getAll().length; i++) {
 
-            if (room.getPrice() == api.getAll()[i].getPrice() && room.getPersons() == api.getAll()[i].getPersons() && room.getCityName() == api.getAll()[i].getCityName() && room.getHotelName() == api.getAll()[i].getHotelName()) {
+            if ((room.getPrice() == api.getAll()[i].getPrice()) && (room.getPersons() == api.getAll()[i].getPersons()) && (room.getCityName() == api.getAll()[i].getCityName()) && (room.getHotelName() == api.getAll()[i].getHotelName())) {
                 return true;
 
             }

@@ -10,5 +10,6 @@ public class FirstProject {
         Checker checker = new Checker();
         System.out.println(checker.checkCompanyName("Google"));
 
+
     }
 }

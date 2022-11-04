@@ -1,5 +1,7 @@
 package lesson15Home;
 
+import java.util.Arrays;
+
 public class UserRepository {
     private User[] users;
 
@@ -12,9 +14,9 @@ public class UserRepository {
     }
 
     public User findById(long id) {
-        for (int i = 0; i < users.length; i++) {
-            if (users[i] != null &&  users[i].getId() == id) {
-                return users[i];
+        for (User it : users) {
+            if (it != null && id == it.getId()) {
+                return it;
             }
         }
         return null;
@@ -29,18 +31,20 @@ public class UserRepository {
 
     }
 
+
     public User upDate(User user) {
 
         for (int i = 0; i < users.length; i++) {
-            if (users[i] != null && user.getId() == users[i].getId()) {
+            if (users[i] != null && user.equals(users[i])) {
                 users[i] = user;
                 return user;
             }
-
-
         }
+
         return null;
+
     }
+
 
     public User save(User user) {
         User findById = findById(user.getId());
@@ -57,4 +61,17 @@ public class UserRepository {
         }
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserRepository that = (UserRepository) o;
+        return Arrays.equals(users, that.users);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(users);
+    }
 }

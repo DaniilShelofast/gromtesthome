@@ -25,6 +25,16 @@ public class User {
         return sessionId;
     }
 
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", sessionId='" + sessionId + '\'' +
+                '}';
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -36,14 +46,5 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, sessionId);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", sessionId='" + sessionId + '\'' +
-                '}';
     }
 }

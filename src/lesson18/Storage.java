@@ -1,4 +1,4 @@
-package lesson17;
+package lesson18;
 
 public abstract class Storage {
 

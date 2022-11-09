@@ -1,4 +1,4 @@
-package lesson16Home;
+package lesson17Home;
 
 public class MinMaxWord {
     public static void main(String[] args) {

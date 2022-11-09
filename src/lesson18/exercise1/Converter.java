@@ -1,4 +1,4 @@
-package lesson17.exercise1;
+package lesson18.exercise1;
 
 public class Converter {
     public static void main(String[] args) {

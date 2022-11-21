@@ -4,21 +4,70 @@ public class Controller {
 
 
     public static void put(Storage storage, File file) throws Exception {
-        for (int i = 0; i < storage.getFiles().length; i++) {
-            if (storage.getFiles()[i] != null ) {
-                storage.getFiles()[i] = file;
-            }
-        }
-        formatCheck(storage, file);
+
         checkId(storage, file);
+        formatCheck(storage, file);
         checkSizeStorage(storage, file);
         freeSpace(storage);
+        for (int i = 0; i < storage.getFiles().length; i++) {
+            if (storage.getFiles()[i] == null) {
+                storage.getFiles()[i] = file;
+                break;
+
+            }
+
+        }
 
     }
 
+    public static void delete(Storage storage, File file) {
+
+        for (int i = 0; i < storage.getFiles().length; i++) {
+            if (storage.getFiles()[i].getId() == file.getId() && storage.getFiles()[i].getName().equals(file.getName())) {
+                storage.getFiles()[i] = null;
+                break;
+
+            }
+        }
+    }
+
+    public static void transferFile(Storage storageFrom, Storage storageTo, long id) throws Exception {
+
+        File file = null;
+        for (int i = 0; i < storageFrom.getFiles().length; i++) {
+            if (storageFrom.getFiles()[i] != null && storageFrom.getFiles()[i].getId() == id) {
+                file = storageFrom.getFiles()[i];
+                break;
+            }
+        }
+
+        checkId(storageTo, file);
+        formatCheck(storageTo, file);
+        checkSizeStorage(storageTo, file);
+        freeSpace(storageTo);
+
+        for (int i = 0; i < storageTo.getFiles().length; i++) {
+            if ( storageTo.getFiles()[i] == null) {
+                storageTo.getFiles()[i] = file;
+
+
+            }
+        }
+
+        for (int j = 0; j < storageFrom.getFiles().length; j++) {
+            if (file != null && storageFrom.getFiles()[j].getId() == file.getId() && storageFrom.getFiles()[j].getName().equals(file.getName())) {
+                storageFrom.getFiles()[j] = null;
+
+
+            }
+        }
+
+    }
+
+
     private static boolean checkId(Storage storage, File file) throws Exception {
         for (int i = 0; i < storage.getFiles().length; i++) {
-            if (storage.getFiles()[i] != null && storage.getFiles()[i].getId() != file.getId()) {
+            if (file != null && storage.getFiles()[i] != null && storage.getFiles()[i].getId() != file.getId()) {
                 throw new Exception(" ID inappropriate!");
             }
         }
@@ -27,7 +76,7 @@ public class Controller {
 
     private static boolean formatCheck(Storage storage, File file) throws Exception {
         for (int i = 0; i < storage.getFormatsSupported().length; i++) {
-            if (storage.getFormatsSupported()[i] != null && storage.getFormatsSupported()[i].equals(file.getFormat())) {
+            if (file.getFormat() != null && storage.getFormatsSupported()[i] != null && storage.getFormatsSupported()[i].equals(file.getFormat())) {
                 return true;
             }
         }
@@ -42,7 +91,7 @@ public class Controller {
             }
         }
         long value = storage.getStorageSize() - sumaFiles;
-        if (value <= file.getSize()) {
+        if (file != null && value <= file.getSize()) {
             throw new Exception("Size inappropriate!");
         }
         return true;
@@ -51,21 +100,14 @@ public class Controller {
     private static boolean freeSpace(Storage storage) throws Exception {
         for (int i = 0; i < storage.getFiles().length; i++) {
             if (storage.getFiles()[i] == null) {
-               return true;
+                return true;
             }
         }
-         throw new Exception("not freely");
+        throw new Exception("Not freely..!");
 
     }
 
-
-    public static void delete(Storage storage, File file) {
-        for (int i = 0; i < storage.getFiles().length; i++) {
-            if (storage.getFiles()[i] != null && file.getId() == storage.getFiles()[i].getId()) {
-                storage.getFiles()[i] = null;
-
-            }
-        }
-    }
 
 }
+
+

@@ -14,7 +14,7 @@ public class Solution1 {
 
     public static int[] findNumbers(String text) {
         String[] texts = text.split(" ");
-      //int[] index = new int[texts.length];
+
         int score = 0;
         for (int j = 0; j < texts.length; j++) {
             try {

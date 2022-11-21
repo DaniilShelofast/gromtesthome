@@ -30,7 +30,6 @@ public class UserRepository {
         long[] it = new long[users.length];
         for (int i = 0; i < users.length; i++) {
             if (users[i] != null) {
-                // users[i].getName();
                 it[i] = users[i].getId();
             }
         }
@@ -40,6 +39,7 @@ public class UserRepository {
     public String getUserNameById(long id) {
         for (User it : users) {
             if (id == it.getId()) {
+
                 return it.getName();
             }
         }
@@ -48,7 +48,7 @@ public class UserRepository {
 
     public User getUserByName(String name) {
         for (User it : users) {
-            if (name == it.getName()) {
+            if (name.equals(it.getName())) {
 
                 return it;
             }

@@ -36,7 +36,7 @@ public class TransferAll {
         for (int j = 0; j < storageFrom.getFiles().length; j++) {
             for (int i = 0; i < storageTo.getFiles().length; i++) {
                 if (storageFrom.getFiles()[j] != null && storageTo.getFiles()[i] != null && storageFrom.getFiles()[j].getId() == storageTo.getFiles()[i].getId()) {
-                    throw new Exception(" ID inappropriate!");
+                    throw new Exception("error :these files corresponds ID,the transfer is invalid.");
                 }
             }
         }
@@ -44,11 +44,11 @@ public class TransferAll {
     }
 
     private static boolean formatCheck(Storage storageFrom, Storage storageTo) throws Exception {
-        int add = 0;
+
         for (int i = 0; i < storageFrom.getFiles().length; i++) {
             for (int j = 0; j < storageTo.getFormatsSupported().length; j++) {
                 if (storageTo.getFormatsSupported()[j] != null && storageFrom.getFiles()[i] != null && storageFrom.getFiles()[i].getFormat() != storageTo.getFormatsSupported()[j]) {
-                    throw new Exception("Format inappropriate!");
+                    throw new Exception("error : the format of these files is not appropriate,the transfer is invalid.");
 
                 }
             }
@@ -77,7 +77,7 @@ public class TransferAll {
         if (sumaFilesFrom <= valueTo) {
             return true;
         }
-        throw new Exception("Size inappropriate!");
+        throw new Exception("error :size is not enough,the transfer is invalid.");
     }
 
     private static boolean freeSpace(Storage storageFrom, Storage storageTo) throws Exception {
@@ -98,6 +98,6 @@ public class TransferAll {
             return true;
         }
 
-        throw new Exception("Not freely..!");
+        throw new Exception("error :there is no free space, the transfer is invalid.");
     }
 }

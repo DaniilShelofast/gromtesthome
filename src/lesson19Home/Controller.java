@@ -13,11 +13,11 @@ public class Controller {
             if (storage.getFiles()[i] == null) {
                 storage.getFiles()[i] = file;
                 break;
-
             }
-
         }
-
+       /* if (storage.getFiles()[0] != file) {
+            throw new Exception("error: it is not possible to add a new user");
+        }*/
     }
 
     public static void delete(Storage storage, File file) {
@@ -69,7 +69,7 @@ public class Controller {
 
     private static boolean checkId(Storage storage, File file) throws Exception {
         for (int i = 0; i < storage.getFiles().length; i++) {
-            if ( storage.getFiles()[i] != null && storage.getFiles()[i].getId() == file.getId()) {
+            if (storage.getFiles()[i] != null && storage.getFiles()[i].getId() == file.getId()) {
                 throw new Exception(" ID inappropriate!");
             }
         }

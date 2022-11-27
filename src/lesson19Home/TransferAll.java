@@ -21,7 +21,7 @@ public class TransferAll {
 
         for (int i = 0; i < storageFrom.getFiles().length; i++) {
             for (int j = 0; j < storageTo.getFiles().length; j++) {
-                if (storageFrom.getFiles()[i] != null && storageTo.getFiles()[j] != null && storageFrom.getFiles()[i] == storageTo.getFiles()[j]) {
+                if (storageFrom.getFiles()[i] != null && storageTo.getFiles()[j] != null && storageFrom.getFiles()[i].getId() == storageTo.getFiles()[j].getId() && storageFrom.getFiles()[i].getName().equals(storageTo.getFiles()[j].getName())) {
                     storageFrom.getFiles()[i] = null;
                     break;
                 }

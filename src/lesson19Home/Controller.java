@@ -42,7 +42,7 @@ public class Controller {
         }
 
         if (file == null) {
-            throw new Exception("error : the required file was not found! ");
+            throw new Exception("error : the required file was not found!");
         }
 
         checkIdFile(storageTo, file);

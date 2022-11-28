@@ -19,7 +19,7 @@ public class Demo {
         File[] filesFrom = new File[4];
         filesFrom[0] = new File(10, "abc", "txt", 2);
         filesFrom[1] = new File(11, "cg", "txt", 1);
-        filesFrom[2] = new File(113, "cg", "txt", 2);
+        filesFrom[2] = new File(111, "cg", "txt", 2);
 
         File[] filesTo = new File[4];
         filesTo[0] = new File(101, "ccc", "txt", 21);

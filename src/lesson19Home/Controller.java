@@ -55,6 +55,7 @@ public class Controller {
                 storageTo.getFiles()[i] = file;
                 break;
             }
+
         }
 
         checkDeleteFile(storageFrom, file);
@@ -86,7 +87,7 @@ public class Controller {
 
         for (int i = 0; i < storageFrom.getFiles().length; i++) {
             for (int j = 0; j < storageTo.getFiles().length; j++) {
-                if (storageFrom.getFiles()[i] != null && storageTo.getFiles()[j] != null && storageFrom.getFiles()[i] == storageTo.getFiles()[j]) {
+                if (storageFrom.getFiles()[i] != null && storageTo.getFiles()[j] != null) {
                     storageFrom.getFiles()[i] = null;
                     break;
                 }
@@ -100,7 +101,7 @@ public class Controller {
     private static boolean checkIdFile(Storage storage, File file) throws Exception {
         for (int i = 0; i < storage.getFiles().length; i++) {
             if (storage.getFiles()[i] != null && storage.getFiles()[i].getId() == file.getId()) {
-                throw new Exception(" ID inappropriate!" + file.getId() + " before this " + storage.getId());
+                throw new Exception("error : ID inappropriate " + file.getId() + " before this " + storage.getId());
             }
         }
         return true;
@@ -112,7 +113,7 @@ public class Controller {
                 return true;
             }
         }
-        throw new Exception("Format inappropriate!" + file.getId() + " before this " + storage.getId());
+        throw new Exception("error : format inappropriate " + file.getId() + " before this " + storage.getId());
     }
 
 
@@ -125,7 +126,7 @@ public class Controller {
         }
         long value = storage.getStorageSize() - sumaFiles;
         if (value <= file.getSize()) {
-            throw new Exception("Size inappropriate!" + file.getId() + " before this " + storage.getId());
+            throw new Exception(" error : size inappropriate " + file.getId() + " before this " + storage.getId());
         }
         return true;
     }
@@ -136,7 +137,7 @@ public class Controller {
                 return true;
             }
         }
-        throw new Exception("Not freely..! " + file.getId() + " before this " + storage.getId());
+        throw new Exception("error : not freely " + file.getId() + " before this " + storage.getId());
     }
 
     private static boolean checkDeleteFile(Storage storage, File file) throws Exception {

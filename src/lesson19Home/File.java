@@ -12,7 +12,7 @@ public class File {
     public File(long id, String name, String format, long size) throws Exception {
 
         if (name.length() > 10) {
-            throw new Exception("many symbol! existence impossible" + " " + name + "!!!");
+            throw new Exception("many symbol! existence impossible " + name + " !!!");
         }
 
         this.id = id;

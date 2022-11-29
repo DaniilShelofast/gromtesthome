@@ -7,15 +7,18 @@ public class Demo {
 
         String[] formatsSupported = new String[1];
         formatsSupported[0] = "txt";
-       /* File[] files = new File[2];
+      /*  File[] files = new File[3];
+        files[0] = new File(32, "vvv", "txt", 3);
+        files[1] = new File(1, "cc", "txt", 2);
+        files[2] = new File(14, "ccc", "txt", 2);
 
         File file = new File(14, "ccc", "txt", 2);
         Storage storage = new Storage(87, files, formatsSupported, "USA", 1000);
-        Controller.put(storage, file);
-        System.out.println(Arrays.deepToString(storage.getFiles()));
-         Controller.delete(storage, file);
+        // Controller.put(storage, file);
+        //System.out.println(Arrays.deepToString(storage.getFiles()));
+        Controller.delete(storage, file);
         System.out.println(Arrays.deepToString(storage.getFiles()));*/
-        File file = new File(11, "cg", "txt", 2);
+        /*File file = new File(11, "cg", "txt", 2);
         File[] filesFrom = new File[4];
         filesFrom[0] = new File(10, "abc", "txt", 2);
         filesFrom[1] = new File(11, "cg", "txt", 1);
@@ -32,7 +35,7 @@ public class Demo {
         Controller.transferAll(storageFrom, storageTo);
 
         System.out.println(Arrays.toString(storageFrom.getFiles()));
-        System.out.println(Arrays.toString(storageTo.getFiles()));
+        System.out.println(Arrays.toString(storageTo.getFiles()));*/
     }
 }
 

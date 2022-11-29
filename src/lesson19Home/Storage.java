@@ -19,8 +19,6 @@ public class Storage {
     }
 
 
-
-
     public long getId() {
         return id;
     }
@@ -60,6 +58,18 @@ public class Storage {
     public void setStorageSize(long storageSize) {
         this.storageSize = storageSize;
     }
+
+    public static long calculateUsedSize(Storage storage) {
+
+        long sumaFileSize = 0;
+        for (int i = 0; i < storage.getFiles().length; i++) {
+            if (storage.getFiles()[i] != null) {
+                sumaFileSize += storage.getFiles()[i].getSize();
+            }
+        }
+        return sumaFileSize;
+    }
+
 
     @Override
     public String toString() {

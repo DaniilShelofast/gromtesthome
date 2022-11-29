@@ -42,7 +42,7 @@ public class Controller {
         }
 
         if (file == null) {
-            throw new Exception("error : the required file was not found!");
+            throw new Exception("error : the required file was not found! " + file);
         }
 
         checkIdFile(storageTo, file);
@@ -57,8 +57,6 @@ public class Controller {
             }
 
         }
-
-        checkDeleteFile(storageFrom, file);
 
         for (int j = 0; j < storageFrom.getFiles().length; j++) {
             if (storageFrom.getFiles()[j].getId() == file.getId() && storageFrom.getFiles()[j].getName().equals(file.getName())) {
@@ -143,11 +141,11 @@ public class Controller {
     private static boolean checkDeleteFile(Storage storage, File file) throws Exception {
         for (int i = 0; i < storage.getFiles().length; i++) {
             if (storage.getFiles()[i] != null && storage.getFiles()[i].getId() != file.getId()) {
-                throw new Exception("error : cannot be deleted, there is no file with this ID " + file.getId() + " from storage " + storage.getId());
-
+                return true;
             }
         }
-        return true;
+        throw new Exception("error : cannot be deleted, there is no file with this ID " + file.getId() + " from storage " + storage.getId());
+
     }
 
     private static boolean checkIdStorageTo(Storage storageFrom, Storage storageTo) throws Exception {
@@ -178,7 +176,9 @@ public class Controller {
     }
 
     private static boolean checkSizeStorageTo(Storage storageFrom, Storage storageTo) throws Exception {
-        calculateUsedSize(storageFrom);
+
+        Storage.calculateUsedSize(storageFrom);
+
         long sumaFilesTo = 0;
         for (int j = 0; j < storageTo.getFiles().length; j++) {
             if (storageTo.getFiles()[j] != null) {
@@ -188,7 +188,7 @@ public class Controller {
 
         long valueTo = storageTo.getStorageSize() - sumaFilesTo;
 
-        if (calculateUsedSize(storageFrom) <= valueTo) {
+        if (Storage.calculateUsedSize(storageFrom) <= valueTo) {
             return true;
         }
         throw new Exception("error :size is not enough,the transfer is invalid. " + storageTo.getId());
@@ -215,16 +215,7 @@ public class Controller {
         throw new Exception("error :there is no free space, the transfer is invalid. " + storageTo.getId());
     }
 
-
-    private static long calculateUsedSize(Storage storage) {
-        long sumaFileSize = 0;
-        for (int i = 0; i < storage.getFiles().length; i++) {
-            if (storage.getFiles()[i] != null) {
-                sumaFileSize += storage.getFiles()[i].getSize();
-            }
-        }
-        return sumaFileSize;
-    }
 }
+
 
 

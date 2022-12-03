@@ -5,12 +5,12 @@ import java.util.Arrays;
 public class Demo {
     public static void main(String[] args) throws Exception {
 
-        String[] formatsSupported = new String[1];
+      /*  String[] formatsSupported = new String[1];
         formatsSupported[0] = "txt";
-      /*  File[] files = new File[3];
-        files[0] = new File(32, "vvv", "txt", 3);
-        files[1] = new File(1, "cc", "txt", 2);
-        files[2] = new File(14, "ccc", "txt", 2);
+        File[] files = new File[3];
+        files[0] = new File(146, "ccc", "txt", 3);
+        files[1] = new File(14, "ccc", "txt", 2);
+        files[2] = new File(1, "ccc", "txt", 2);
 
         File file = new File(14, "ccc", "txt", 2);
         Storage storage = new Storage(87, files, formatsSupported, "USA", 1000);

@@ -140,12 +140,12 @@ public class Controller {
 
     private static boolean checkDeleteFile(Storage storage, File file) throws Exception {
         for (int i = 0; i < storage.getFiles().length; i++) {
-            if (storage.getFiles()[i] != null && storage.getFiles()[i].getId() != file.getId()) {
+            if (storage.getFiles()[i] != null && storage.getFiles()[i].getId() == file.getId()) {
+
                 return true;
             }
         }
         throw new Exception("error : cannot be deleted, there is no file with this ID " + file.getId() + " from storage " + storage.getId());
-
     }
 
     private static boolean checkIdStorageTo(Storage storageFrom, Storage storageTo) throws Exception {

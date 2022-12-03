@@ -36,7 +36,7 @@ public class UkrainianBankSystem implements BankSystem {
     public void paySalary(User user) {
 
         fund(user, user.getSalary());
-        System.out.println("Pay Salary");
+        System.out.println("salary " + user.getId() + user.getName() + "listed " + user.getBank());
     }
 
 

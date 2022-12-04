@@ -24,9 +24,9 @@ public class Controller {
     public static void transferFile(Storage storageFrom, Storage storageTo, long id) throws Exception {
 
         File file = null;
-        for (int i = 0; i < storageFrom.getFiles().length; i++) {
-            if (storageFrom.getFiles()[i] != null && storageFrom.getFiles()[i].getId() == id) {
-                file = storageFrom.getFiles()[i];
+        for (File f : storageFrom.getFiles()) {
+            if (storageFrom.getFiles() != null) {
+                file = f;
                 break;
             }
         }
@@ -56,7 +56,6 @@ public class Controller {
         for (int i = 0; i < storageFrom.getFiles().length; i++) {
 
             storageTo.addFile(storageFrom.getFiles()[i]);
-
         }
 
         for (int i = 0; i < storageFrom.getFiles().length; i++) {
@@ -112,7 +111,6 @@ public class Controller {
     private static boolean checkDeleteFile(Storage storage, File file) throws Exception {
         for (int i = 0; i < storage.getFiles().length; i++) {
             if (storage.getFiles()[i] != null && storage.getFiles()[i].getId() == file.getId() && storage.getFiles()[i].getName().equals(file.getName())) {
-
                 return true;
             }
         }
@@ -137,27 +135,15 @@ public class Controller {
             for (int j = 0; j < storageTo.getFormatsSupported().length; j++) {
                 if (storageTo.getFormatsSupported()[j] != null && storageFrom.getFiles()[i] != null && !storageFrom.getFiles()[i].getFormat().equals(storageTo.getFormatsSupported()[j])) {
                     throw new Exception("error : the format of these files is not appropriate,the transfer is invalid. " + storageTo.getId());
-
                 }
             }
-
         }
-
         return true;
     }
 
     private static boolean checkSizeStorageTo(Storage storageFrom, Storage storageTo) throws Exception {
 
-        storageFrom.calculateUsedSize();
-
-        long sumaFilesTo = 0;
-        for (int j = 0; j < storageTo.getFiles().length; j++) {
-            if (storageTo.getFiles()[j] != null) {
-                sumaFilesTo += storageTo.getFiles()[j].getSize();
-            }
-        }
-
-        long valueTo = storageTo.getStorageSize() - sumaFilesTo;
+        long valueTo = storageTo.getStorageSize() - storageTo.calculateUsedSize();
 
         if (storageFrom.calculateUsedSize() <= valueTo) {
             return true;

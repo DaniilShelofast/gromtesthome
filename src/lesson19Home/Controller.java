@@ -67,8 +67,8 @@ public class Controller {
 
 
     private static boolean checkIdFile(Storage storage, File file) throws Exception {
-        for (int i = 0; i < storage.getFiles().length; i++) {
-            if (storage.getFiles()[i] != null && storage.getFiles()[i].getId() == file.getId()) {
+        for (File f : storage.getFiles()) {
+            if (f != null && f.getId() == file.getId()) {
                 throw new Exception("error : ID inappropriate " + file.getId() + " before this " + storage.getId());
             }
         }
@@ -87,9 +87,9 @@ public class Controller {
 
     private static boolean checkSizeStorageFile(Storage storage, File file) throws Exception {
         long sumaFiles = 0;
-        for (int i = 0; i < storage.getFiles().length; i++) {
-            if (storage.getFiles()[i] != null) {
-                sumaFiles += storage.getFiles()[i].getSize();
+        for (File f : storage.getFiles()) {
+            if (f != null) {
+                sumaFiles += f.getSize();
             }
         }
         long value = storage.getStorageSize() - sumaFiles;
@@ -100,8 +100,8 @@ public class Controller {
     }
 
     private static boolean freeSpaceFile(Storage storage, File file) throws Exception {
-        for (int i = 0; i < storage.getFiles().length; i++) {
-            if (storage.getFiles()[i] == null) {
+        for (File f : storage.getFiles()) {
+            if (f == null) {
                 return true;
             }
         }
@@ -109,8 +109,8 @@ public class Controller {
     }
 
     private static boolean checkDeleteFile(Storage storage, File file) throws Exception {
-        for (int i = 0; i < storage.getFiles().length; i++) {
-            if (storage.getFiles()[i] != null && storage.getFiles()[i].getId() == file.getId() && storage.getFiles()[i].getName().equals(file.getName())) {
+        for (File f : storage.getFiles()) {
+            if (f != null && f.getId() == file.getId() && f.getName().equals(file.getName())) {
                 return true;
             }
         }
@@ -119,9 +119,9 @@ public class Controller {
 
     private static boolean checkIdStorageTo(Storage storageFrom, Storage storageTo) throws Exception {
 
-        for (int j = 0; j < storageFrom.getFiles().length; j++) {
-            for (int i = 0; i < storageTo.getFiles().length; i++) {
-                if (storageFrom.getFiles()[j] != null && storageTo.getFiles()[i] != null && storageFrom.getFiles()[j].getId() == storageTo.getFiles()[i].getId()) {
+        for (File f : storageFrom.getFiles()) {
+            for (File j : storageTo.getFiles()) {
+                if (f != null && j != null && f.getId() == j.getId()) {
                     throw new Exception("error :these files corresponds ID,the transfer is invalid. " + storageTo.getId());
                 }
             }
@@ -153,14 +153,14 @@ public class Controller {
 
     private static boolean freeSpaceStorageTo(Storage storageFrom, Storage storageTo) throws Exception {
         int add = 0;
-        for (int j = 0; j < storageFrom.getFiles().length; j++) {
-            if (storageFrom.getFiles()[j] != null) {
+        for (File f : storageFrom.getFiles()) {
+            if (f != null) {
                 add++;
             }
         }
         int increaseEmpty = 0;
-        for (int i = 0; i < storageTo.getFiles().length; i++) {
-            if (storageTo.getFiles()[i] == null) {
+        for (File h : storageTo.getFiles()) {
+            if (h == null) {
                 increaseEmpty++;
             }
         }

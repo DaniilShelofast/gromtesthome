@@ -18,7 +18,7 @@ public class Controller {
         }
 
     }
-
+//
     public static void delete(Storage storage, File file) throws Exception {
         checkDeleteFile(storage, file);
 

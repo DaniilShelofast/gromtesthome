@@ -21,10 +21,10 @@ public class TransactionDAO {
         for (int i = 0; i < transactions.length; i++) {
             if (transactions[i] == null) {
                 transactions[i] = transaction;
-                return transaction;
+                break;
             }
         }
-        throw new BadRequestException("error :");
+        return transaction;
     }
 
     public Transaction[] transactionList() throws BadRequestException {
@@ -33,6 +33,7 @@ public class TransactionDAO {
         for (int i = 0; i < transactions.length; i++) {
             if (transactions[i] != null) {
                 transaction = transactions[i];
+                break;
             }
         }
 
@@ -72,6 +73,7 @@ public class TransactionDAO {
         for (int i = 0; i < transactions.length; i++) {
             if (transactions[i] != null && city == transactions[i].getCity()) {
                 transaction = transactions[i];
+                break;
             }
         }
 
@@ -91,6 +93,7 @@ public class TransactionDAO {
             if (transactions[i] != null && transactions[i].getId() == transaction.getId() && transactions[i].getAmount() == transaction.getAmount() &&
                     transactions[i].getCity().equals(transaction.getCity()) && transactions[i].getDescription().equals(transaction.getDescription()) && transactions[i].getType() == transaction.getType()) {
                 add++;
+
             }
         }
 
@@ -101,6 +104,7 @@ public class TransactionDAO {
                     transactions[i].getCity().equals(transaction.getCity()) && transactions[i].getDescription().equals(transaction.getDescription()) && transactions[i].getType() == transaction.getType()) {
                 box[count] = transactions[i];
                 count++;
+
             }
         }
         return box;
@@ -111,6 +115,7 @@ public class TransactionDAO {
         for (int i = 0; i < transactions.length; i++) {
             if (transactions[i] != null && amount == transactions[i].getAmount()) {
                 transaction = transactions[i];
+                break;
             }
         }
 
@@ -145,13 +150,7 @@ public class TransactionDAO {
 
     private boolean validateAmount(Transaction transaction) throws LimitExceeded {
 
-        int index = 0;
-        for (Transaction value : transactions) {
-            if (value != null) {
-                index += value.getAmount();
-            }
-        }
-        if (index >= utils.getLimitSimpleTransactionAmount()) {
+        if (transaction.getAmount() > utils.getLimitSimpleTransactionAmount()) {
             throw new LimitExceeded("Transaction limit exceed " + transaction.getId() + ". Can`t be saved");
         }
         return true;
@@ -164,7 +163,7 @@ public class TransactionDAO {
                 sum += tr.getAmount();
             }
         }
-        if (sum >= utils.getLimitTransactionsPerDayAmount()) {
+        if (sum > utils.getLimitTransactionsPerDayAmount()) {
             throw new LimitExceeded("Transaction limit per day amount exceed " + transaction.getId() + ". Can`t be saved");
         }
         return true;
@@ -178,7 +177,7 @@ public class TransactionDAO {
                 count++;
             }
         }
-        if (count >= utils.getLimitTransactionsPerDayCount()) {
+        if (count > utils.getLimitTransactionsPerDayCount()) {
             throw new LimitExceeded("Transaction limit per day count exceed " + transaction.getId() + ". Can`t be saved");
         }
         return true;

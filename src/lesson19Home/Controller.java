@@ -119,9 +119,9 @@ public class Controller {
 
     private static boolean checkIdStorageTo(Storage storageFrom, Storage storageTo) throws Exception {
 
-        for (File f : storageFrom.getFiles()) {
-            for (File j : storageTo.getFiles()) {
-                if (f != null && j != null && f.getId() == j.getId()) {
+        for (File from : storageFrom.getFiles()) {
+            for (File to : storageTo.getFiles()) {
+                if (from != null && to != null && from.getId() == to.getId()) {
                     throw new Exception("error :these files corresponds ID,the transfer is invalid. " + storageTo.getId());
                 }
             }
@@ -131,9 +131,9 @@ public class Controller {
 
     private static boolean formatCheckStorageTo(Storage storageFrom, Storage storageTo) throws Exception {
 
-        for (int i = 0; i < storageFrom.getFiles().length; i++) {
+        for (File from : storageFrom.getFiles()) {
             for (int j = 0; j < storageTo.getFormatsSupported().length; j++) {
-                if (storageTo.getFormatsSupported()[j] != null && storageFrom.getFiles()[i] != null && !storageFrom.getFiles()[i].getFormat().equals(storageTo.getFormatsSupported()[j])) {
+                if (storageTo.getFormatsSupported()[j] != null && from != null && !from.getFormat().equals(storageTo.getFormatsSupported()[j])) {
                     throw new Exception("error : the format of these files is not appropriate,the transfer is invalid. " + storageTo.getId());
                 }
             }
@@ -153,14 +153,14 @@ public class Controller {
 
     private static boolean freeSpaceStorageTo(Storage storageFrom, Storage storageTo) throws Exception {
         int add = 0;
-        for (File f : storageFrom.getFiles()) {
-            if (f != null) {
+        for (File from : storageFrom.getFiles()) {
+            if (from != null) {
                 add++;
             }
         }
         int increaseEmpty = 0;
-        for (File h : storageTo.getFiles()) {
-            if (h == null) {
+        for (File to : storageTo.getFiles()) {
+            if (to == null) {
                 increaseEmpty++;
             }
         }

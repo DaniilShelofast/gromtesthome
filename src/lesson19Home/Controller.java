@@ -76,8 +76,8 @@ public class Controller {
     }
 
     private static boolean formatCheckFile(Storage storage, File file) throws Exception {
-        for (int i = 0; i < storage.getFormatsSupported().length; i++) {
-            if (storage.getFormatsSupported()[i] != null && storage.getFormatsSupported()[i].equals(file.getFormat())) {
+        for (String f : storage.getFormatsSupported()) {
+            if (f != null && f.equals(file.getFormat())) {
                 return true;
             }
         }
@@ -132,8 +132,8 @@ public class Controller {
     private static boolean formatCheckStorageTo(Storage storageFrom, Storage storageTo) throws Exception {
 
         for (File from : storageFrom.getFiles()) {
-            for (int j = 0; j < storageTo.getFormatsSupported().length; j++) {
-                if (storageTo.getFormatsSupported()[j] != null && from != null && !from.getFormat().equals(storageTo.getFormatsSupported()[j])) {
+            for (String to : storageTo.getFormatsSupported()) {
+                if (to != null && from != null && !from.getFormat().equals(to)) {
                     throw new Exception("error : the format of these files is not appropriate,the transfer is invalid. " + storageTo.getId());
                 }
             }

@@ -23,7 +23,7 @@ public class Controller {
         checkDeleteFile(storage, file);
 
         for (int i = 0; i < storage.getFiles().length; i++) {
-            if (storage.getFiles()[i] != null && storage.getFiles()[i].getId() == file.getId() && storage.getFiles()[i].getName().equals(file.getName())) {
+            if (storage.getFiles()[i] != null && storage.getFiles()[i].equals(file) && storage.getFiles()[i].getName().equals(file.getName())) {
                 storage.getFiles()[i] = null;
                 break;
 
@@ -59,7 +59,7 @@ public class Controller {
         }
 
         for (int j = 0; j < storageFrom.getFiles().length; j++) {
-            if (storageFrom.getFiles()[j].getId() == file.getId() && storageFrom.getFiles()[j].getName().equals(file.getName())) {
+            if (storageFrom.getFiles()[j].equals(file) && storageFrom.getFiles()[j].getName().equals(file.getName())) {
                 storageFrom.getFiles()[j] = null;
                 break;
             }
@@ -177,7 +177,7 @@ public class Controller {
 
     private static boolean checkSizeStorageTo(Storage storageFrom, Storage storageTo) throws Exception {
 
-        Storage.calculateUsedSize(storageFrom);
+        storageFrom.calculateUsedSize();
 
         long sumaFilesTo = 0;
         for (int j = 0; j < storageTo.getFiles().length; j++) {
@@ -188,7 +188,7 @@ public class Controller {
 
         long valueTo = storageTo.getStorageSize() - sumaFilesTo;
 
-        if (Storage.calculateUsedSize(storageFrom) <= valueTo) {
+        if (storageFrom.calculateUsedSize() <= valueTo) {
             return true;
         }
         throw new Exception("error :size is not enough,the transfer is invalid. " + storageTo.getId());

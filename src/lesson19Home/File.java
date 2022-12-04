@@ -71,12 +71,12 @@ public class File {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         File file = (File) o;
-        return id == file.id && size == file.size && Objects.equals(name, file.name) && Objects.equals(format, file.format);
+        return id == file.id && Objects.equals(name, file.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, format, size);
+        return Objects.hash(id, name);
     }
 
     public File() {

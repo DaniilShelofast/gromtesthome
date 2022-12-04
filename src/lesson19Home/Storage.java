@@ -18,12 +18,11 @@ public class Storage {
         this.storageSize = storageSize;
     }
 
-    public static long calculateUsedSize(Storage storage) {
-
+    public long calculateUsedSize() {
         long sumaFileSize = 0;
-        for (int i = 0; i < storage.getFiles().length; i++) {
-            if (storage.getFiles()[i] != null) {
-                sumaFileSize += storage.getFiles()[i].getSize();
+        for (int i = 0; i < getFiles().length; i++) {
+            if (getFiles()[i] != null) {
+                sumaFileSize += getFiles()[i].getSize();
             }
         }
         return sumaFileSize;

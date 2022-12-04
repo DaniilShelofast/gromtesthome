@@ -12,7 +12,7 @@ public class Demo {
         Transaction transaction = new Transaction(12, "Odessa", 40, "money", TransactionType.INCOME, new Date());
         controller.save(transaction);
         System.out.println(controller.save(transaction));
-        System.out.println(Arrays.toString(controller.transactionList()));
+        //System.out.println(Arrays.toString(controller.transactionList()));
 
 
 

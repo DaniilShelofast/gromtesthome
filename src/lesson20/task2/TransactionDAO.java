@@ -21,13 +21,15 @@ public class TransactionDAO {
         for (int i = 0; i < transactions.length; i++) {
             if (transactions[i] == null) {
                 transactions[i] = transaction;
-                break;
+
+                return transaction;
             }
         }
-        return transaction;
+        throw new BadRequestException("error: ");
+
     }
 
-    public Transaction[] transactionList() throws BadRequestException {
+    public Transaction[] transactionList() throws Exception {
 
         Transaction transaction = null;
         for (int i = 0; i < transactions.length; i++) {
@@ -67,7 +69,7 @@ public class TransactionDAO {
         return box;
     }
 
-    public Transaction[] transactionList(String city) throws BadRequestException {
+    public Transaction[] transactionList(String city) throws Exception {
 
         Transaction transaction = null;
         for (int i = 0; i < transactions.length; i++) {
@@ -110,7 +112,8 @@ public class TransactionDAO {
         return box;
     }
 
-    public Transaction[] transactionList(int amount) throws BadRequestException {
+    public Transaction[] transactionList(int amount) throws Exception {
+
         Transaction transaction = null;
         for (int i = 0; i < transactions.length; i++) {
             if (transactions[i] != null && amount == transactions[i].getAmount()) {
@@ -122,13 +125,13 @@ public class TransactionDAO {
         if (transaction == null) {
             throw new BadRequestException("error :");
         }
-
+        validateParameters(transaction);
         validateAmount(transaction);
         validatePerDayCount(transaction);
         validateSum(transaction);
         validateCity(transaction);
 
-        validateParameters(transaction);
+
         //тут я навпаки залишив перевірку.не знаю чи так краще.
         int add = 0;
         for (int i = 0; i < transactions.length; i++) {

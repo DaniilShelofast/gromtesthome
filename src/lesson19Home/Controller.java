@@ -9,26 +9,16 @@ public class Controller {
         formatCheckFile(storage, file);
         checkSizeStorageFile(storage, file);
         freeSpaceFile(storage, file);
-        for (int i = 0; i < storage.getFiles().length; i++) {
-            if (storage.getFiles()[i] == null) {
-                storage.getFiles()[i] = file;
-                break;
-            }
 
-        }
+        storage.addFile(file);
 
     }
-//
+
+
     public static void delete(Storage storage, File file) throws Exception {
         checkDeleteFile(storage, file);
 
-        for (int i = 0; i < storage.getFiles().length; i++) {
-            if (storage.getFiles()[i] != null && storage.getFiles()[i].equals(file) && storage.getFiles()[i].getName().equals(file.getName())) {
-                storage.getFiles()[i] = null;
-                break;
-
-            }
-        }
+        storage.delete(file);
     }
 
     public static void transferFile(Storage storageFrom, Storage storageTo, long id) throws Exception {
@@ -50,20 +40,9 @@ public class Controller {
         checkSizeStorageFile(storageTo, file);
         freeSpaceFile(storageTo, file);
 
-        for (int i = 0; i < storageTo.getFiles().length; i++) {
-            if (storageTo.getFiles()[i] == null) {
-                storageTo.getFiles()[i] = file;
-                break;
-            }
+        storageTo.addFile(file);
 
-        }
-
-        for (int j = 0; j < storageFrom.getFiles().length; j++) {
-            if (storageFrom.getFiles()[j].equals(file) && storageFrom.getFiles()[j].getName().equals(file.getName())) {
-                storageFrom.getFiles()[j] = null;
-                break;
-            }
-        }
+        storageFrom.delete(file);
 
     }
 
@@ -75,23 +54,15 @@ public class Controller {
         freeSpaceStorageTo(storageFrom, storageTo);
 
         for (int i = 0; i < storageFrom.getFiles().length; i++) {
-            for (int j = 0; j < storageTo.getFiles().length; j++) {
-                if (storageTo.getFiles()[j] == null) {
-                    storageTo.getFiles()[j] = storageFrom.getFiles()[i];
-                    break;
-                }
-            }
+
+            storageTo.addFile(storageFrom.getFiles()[i]);
+
         }
 
         for (int i = 0; i < storageFrom.getFiles().length; i++) {
-            for (int j = 0; j < storageTo.getFiles().length; j++) {
-                if (storageFrom.getFiles()[i] != null && storageTo.getFiles()[j] != null) {
-                    storageFrom.getFiles()[i] = null;
-                    break;
-                }
-            }
-        }
 
+            storageFrom.delete(storageFrom.getFiles()[i]);
+        }
 
     }
 
@@ -140,7 +111,7 @@ public class Controller {
 
     private static boolean checkDeleteFile(Storage storage, File file) throws Exception {
         for (int i = 0; i < storage.getFiles().length; i++) {
-            if (storage.getFiles()[i] != null && storage.getFiles()[i].getId() == file.getId()) {
+            if (storage.getFiles()[i] != null && storage.getFiles()[i].getId() == file.getId() && storage.getFiles()[i].getName().equals(file.getName())) {
 
                 return true;
             }

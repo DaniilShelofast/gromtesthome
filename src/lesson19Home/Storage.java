@@ -18,6 +18,25 @@ public class Storage {
         this.storageSize = storageSize;
     }
 
+    public void addFile(File file) {
+        for (int i = 0; i < getFiles().length; i++) {
+            if (getFiles()[i] == null) {
+                getFiles()[i] = file;
+                break;
+            }
+        }
+    }
+
+    public void delete(File file) {
+        for (int i = 0; i < getFiles().length; i++) {
+            if (getFiles()[i] != null && getFiles()[i].equals(file)) {
+                getFiles()[i] = null;
+                break;
+
+            }
+        }
+    }
+
     public long calculateUsedSize() {
         long sumaFileSize = 0;
         for (int i = 0; i < getFiles().length; i++) {

@@ -9,7 +9,7 @@ public class Controller {
         return transactionDAO.save(transaction);
     }
 
-    public Transaction[] transactionList() throws Exception {
+    public Transaction[] transactionList()  {
 
         return transactionDAO.transactionList();
     }

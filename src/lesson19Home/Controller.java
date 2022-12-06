@@ -25,7 +25,7 @@ public class Controller {
 
         File file = null;
         for (File f : storageFrom.getFiles()) {
-            if (storageFrom.getFiles() != null) {
+            if (storageFrom.getFiles() != null && f.getId() == id) {
                 file = f;
                 break;
             }
@@ -76,8 +76,8 @@ public class Controller {
     }
 
     private static boolean formatCheckFile(Storage storage, File file) throws Exception {
-        for (String f : storage.getFormatsSupported()) {
-            if (f != null && f.equals(file.getFormat())) {
+        for (String fileFormat : storage.getFormatsSupported()) {
+            if (fileFormat != null && fileFormat.equals(file.getFormat())) {
                 return true;
             }
         }
@@ -119,9 +119,9 @@ public class Controller {
 
     private static boolean checkIdStorageTo(Storage storageFrom, Storage storageTo) throws Exception {
 
-        for (File from : storageFrom.getFiles()) {
-            for (File to : storageTo.getFiles()) {
-                if (from != null && to != null && from.getId() == to.getId()) {
+        for (File fromFile : storageFrom.getFiles()) {
+            for (File toFile : storageTo.getFiles()) {
+                if (fromFile != null && toFile != null && fromFile.getId() == toFile.getId()) {
                     throw new Exception("error :these files corresponds ID,the transfer is invalid. " + storageTo.getId());
                 }
             }
@@ -131,9 +131,9 @@ public class Controller {
 
     private static boolean formatCheckStorageTo(Storage storageFrom, Storage storageTo) throws Exception {
 
-        for (File from : storageFrom.getFiles()) {
-            for (String to : storageTo.getFormatsSupported()) {
-                if (to != null && from != null && !from.getFormat().equals(to)) {
+        for (File fromFile : storageFrom.getFiles()) {
+            for (String toFormatFile : storageTo.getFormatsSupported()) {
+                if (toFormatFile != null && fromFile != null && !fromFile.getFormat().equals(toFormatFile)) {
                     throw new Exception("error : the format of these files is not appropriate,the transfer is invalid. " + storageTo.getId());
                 }
             }
@@ -153,8 +153,8 @@ public class Controller {
 
     private static boolean freeSpaceStorageTo(Storage storageFrom, Storage storageTo) throws Exception {
         int add = 0;
-        for (File from : storageFrom.getFiles()) {
-            if (from != null) {
+        for (File fromFile : storageFrom.getFiles()) {
+            if (fromFile != null) {
                 add++;
             }
         }

@@ -79,7 +79,4 @@ public class File {
         return Objects.hash(id, name);
     }
 
-    public File() {
-        super();
-    }
 }

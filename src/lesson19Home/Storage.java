@@ -39,9 +39,9 @@ public class Storage {
 
     public long calculateUsedSize() {
         long sumaFileSize = 0;
-        for (int i = 0; i < getFiles().length; i++) {
-            if (getFiles()[i] != null) {
-                sumaFileSize += getFiles()[i].getSize();
+        for (File f : getFiles()) {
+            if (f != null) {
+                sumaFileSize += f.getSize();
             }
         }
         return sumaFileSize;

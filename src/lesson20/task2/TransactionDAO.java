@@ -32,68 +32,68 @@ public class TransactionDAO {
 
     public Transaction[] transactionList() {
 
-        int index = 0;
-        for (Transaction tr : transactions) {
-            if (tr != null) {
-                index++;
-            }
-        }
-
-        Transaction[] box = new Transaction[index];
-
         int count = 0;
         for (Transaction tr : transactions) {
             if (tr != null) {
-                box[count] = tr;
                 count++;
             }
         }
 
-        return box;
+        Transaction[] newOverwrite = new Transaction[count];
+
+        int index = 0;
+        for (Transaction tr : transactions) {
+            if (tr != null) {
+                newOverwrite[index] = tr;
+                index++;
+            }
+        }
+
+        return newOverwrite;
     }
 
     public Transaction[] transactionList(String city) {
 
-        int index = 0;
-        for (Transaction tr : transactions) {
-            if (tr != null && tr.getCity().equals(city)) {
-                index++;
-            }
-        }
-
-        Transaction[] box = new Transaction[index];
-
         int count = 0;
         for (Transaction tr : transactions) {
             if (tr != null && tr.getCity().equals(city)) {
-                box[count] = tr;
                 count++;
             }
         }
 
-        return box;
+        Transaction[] newOverwrite = new Transaction[count];
+
+        int index = 0;
+        for (Transaction tr : transactions) {
+            if (tr != null && tr.getCity().equals(city)) {
+                newOverwrite[index] = tr;
+                index++;
+            }
+        }
+
+        return newOverwrite;
     }
 
     public Transaction[] transactionList(int amount) {
 
-        int index = 0;
-        for (Transaction tr : transactions) {
-            if (tr != null && tr.getAmount() == amount) {
-                index++;
-            }
-        }
-
-        Transaction[] box = new Transaction[index];
-
         int count = 0;
         for (Transaction tr : transactions) {
             if (tr != null && tr.getAmount() == amount) {
-                box[count] = tr;
                 count++;
             }
         }
 
-        return box;
+        Transaction[] newOverwrite = new Transaction[count];
+
+        int index = 0;
+        for (Transaction tr : transactions) {
+            if (tr != null && tr.getAmount() == amount) {
+                newOverwrite[index] = tr;
+                index++;
+            }
+        }
+
+        return newOverwrite;
     }
 
 
@@ -106,12 +106,12 @@ public class TransactionDAO {
     }
 
     private void validateSum(Transaction transaction) throws LimitExceeded {
-        int sum = 0;
+        int sumDay = 0;
         for (Transaction tr : getTransactionPerDey(transaction.getDateCreated())) {
-            sum += tr.getAmount();
+            sumDay += tr.getAmount();
         }
-        sum = transaction.getAmount();
-        if (sum > utils.getLimitTransactionsPerDayAmount()) {
+        sumDay = transaction.getAmount();
+        if (sumDay > utils.getLimitTransactionsPerDayAmount()) {
             throw new LimitExceeded("Transaction limit per day amount exceed " + transaction.getId() + ". Can`t be saved");
         }
 

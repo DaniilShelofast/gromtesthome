@@ -106,11 +106,11 @@ public class TransactionDAO {
     }
 
     private void validateSum(Transaction transaction) throws LimitExceeded {
-        int sumDay = 0;
+        int sumDay = transaction.getAmount();
         for (Transaction tr : getTransactionPerDey(transaction.getDateCreated())) {
             sumDay += tr.getAmount();
         }
-        sumDay = transaction.getAmount();
+
         if (sumDay > utils.getLimitTransactionsPerDayAmount()) {
             throw new LimitExceeded("Transaction limit per day amount exceed " + transaction.getId() + ". Can`t be saved");
         }
@@ -119,13 +119,13 @@ public class TransactionDAO {
 
     private void validatePerDayCount(Transaction transaction) throws LimitExceeded {
 
-        int count = 0;
-        for (Transaction tr : getTransactionPerDey(transaction.getDateCreated())) {
-            count++;
-        }
+
+        long count = getTransactionPerDey(transaction.getDateCreated()).length + 1;
+
         if (count > utils.getLimitTransactionsPerDayCount()) {
             throw new LimitExceeded("Transaction limit per day count exceed " + transaction.getId() + ". Can`t be saved");
         }
+
 
     }
 

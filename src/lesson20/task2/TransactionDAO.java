@@ -8,7 +8,7 @@ import lesson20.task2.exception.LimitExceeded;
 import java.util.Calendar;
 import java.util.Date;
 
-import static lesson20.task2.Utils.*;
+
 
 public class TransactionDAO {
     private static Transaction[] transactions = new Transaction[10];
@@ -100,7 +100,7 @@ public class TransactionDAO {
 
     private static void validateAmount(Transaction transaction) throws LimitExceeded {
 
-        if (transaction.getAmount() > getLimitSimpleTransactionAmount()) {
+        if (transaction.getAmount() > Utils.getLimitSimpleTransactionAmount()) {
             throw new LimitExceeded("Transaction limit exceed " + transaction.getId() + ". Can`t be saved");
         }
 
@@ -112,7 +112,7 @@ public class TransactionDAO {
             sumDay += tr.getAmount();
         }
 
-        if (sumDay > getLimitTransactionsPerDayAmount()) {
+        if (sumDay > Utils.getLimitTransactionsPerDayAmount()) {
             throw new LimitExceeded("Transaction limit per day amount exceed " + transaction.getId() + ". Can`t be saved");
         }
 
@@ -123,7 +123,7 @@ public class TransactionDAO {
 
         long count = getTransactionPerDey(transaction.getDateCreated()).length + 1;
 
-        if (count > getLimitTransactionsPerDayCount()) {
+        if (count > Utils.getLimitTransactionsPerDayCount()) {
             throw new LimitExceeded("Transaction limit per day count exceed " + transaction.getId() + ". Can`t be saved");
         }
 
@@ -132,7 +132,7 @@ public class TransactionDAO {
 
 
     private static boolean validateCity(Transaction transaction) throws BadRequestException {
-        for (String tr : getCities()) {
+        for (String tr : Utils.getCities()) {
             if (tr != null && tr.equals(transaction.getCity())) {
                 return true;
             }

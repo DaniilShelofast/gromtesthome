@@ -2,26 +2,26 @@ package lesson20.task2;
 
 
 public class Controller {
-    private TransactionDAO transactionDAO = new TransactionDAO();
 
-    public Transaction save(Transaction transaction) throws Exception {
 
-        return transactionDAO.save(transaction);
+    public static Transaction save(Transaction transaction) throws Exception {
+
+        return save(transaction);
     }
 
-    public Transaction[] transactionList()  {
+    public static Transaction[] transactionList()  {
 
-        return transactionDAO.transactionList();
+        return transactionList();
     }
 
-    public Transaction[] transactionList(String city) {
+    public static Transaction[] transactionList(String city) {
 
-        return transactionDAO.transactionList();
+        return transactionList();
     }
 
-    public Transaction[] transactionList(int amount) {
+    public static Transaction[] transactionList(int amount) {
 
-        return transactionDAO.transactionList();
+        return transactionList();
     }
 
 

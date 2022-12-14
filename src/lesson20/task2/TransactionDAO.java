@@ -19,7 +19,7 @@ import static lesson20.task2.Utils.getLimitTransactionsPerDayCount;*/
 import static lesson20.task2.Utils.*;
 
 public class TransactionDAO {
-    private static final Transaction[] transactions = new Transaction[10];
+    private final static Transaction[] transactions = new Transaction[10];
 
 
     public static Transaction save(Transaction transaction) throws Exception {

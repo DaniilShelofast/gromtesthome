@@ -10,6 +10,7 @@ import java.util.Date;
 
 import static lesson20.task2.Utils.*;
 
+
 public class TransactionDAO {
     private final static Transaction[] transactions = new Transaction[10];
 

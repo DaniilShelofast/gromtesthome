@@ -8,14 +8,6 @@ import lesson20.task2.exception.LimitExceeded;
 import java.util.Calendar;
 import java.util.Date;
 
-/*import static lesson20.task2.Utils.getLimitSimpleTransactionAmount;
-import static lesson20.task2.Utils.getCities;
-import static lesson20.task2.Utils.getLimitTransactionsPerDayAmount;
-import static lesson20.task2.Utils.getLimitTransactionsPerDayCount;*/
-// Андрій я тут подивився в неті що так можна зробити, взагалі так роблять?
-// маю на увазі імпорти
-
-
 import static lesson20.task2.Utils.*;
 
 public class TransactionDAO {

@@ -1,8 +1,6 @@
 package lesson25;
 
 
-import java.sql.Array;
-
 public class GeneralDAO<T extends IdEntity> {
 
     @SuppressWarnings("undchecked")
@@ -14,13 +12,14 @@ public class GeneralDAO<T extends IdEntity> {
         System.out.println("order is: " + order.toString());
     }
 
-    public <T extends IdEntity> void validate(T t) throws Exception {
+    public  void validate(T t) throws Exception {
         if (t.getId() <= 0) {
             throw new Exception("id can`t be negative");
         }
     }
 
     public <K> void validate(K k) {
+
         if (k.equals(100)) {
             System.out.println("true");
         } else {

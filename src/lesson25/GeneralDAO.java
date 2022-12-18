@@ -32,13 +32,8 @@ public class GeneralDAO<T extends IdEntity> {
 
     public T save(T t) throws Exception {
 
-        if (t == null) {
-            throw new Exception(" error : null ");
-        }
-
         checkId(t);
         freeUsers();
-
 
         for (int i = 0; i < users.length; i++) {
             if (users[i] == null) {

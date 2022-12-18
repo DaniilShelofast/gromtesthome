@@ -1,0 +1,82 @@
+package lesson25;
+
+
+public class GeneralDAO<T> extends IdEntity {
+    private long id;
+
+
+    @SuppressWarnings("undchecked")
+    private final T[] users = (T[]) new Object[10];
+
+    public T[] getUsers() {
+        return users;
+    }
+
+    private void print(Order order) {
+        System.out.println("order is: " + order.toString());
+    }
+
+    public <T extends IdEntity> void validate(T t) throws Exception {
+        if (t.getId() <= 0) {
+            throw new Exception("id can`t be negative");
+        }
+    }
+
+    public <K> void validate(K k) {
+        if (k.equals(100)) {
+            System.out.println("true");
+        } else {
+            System.out.println("false");
+        }
+
+    }
+
+
+    public T save(T t) throws Exception {
+
+
+        checkId(t);
+        freeUsers();
+
+        for (int i = 0; i < users.length; i++) {
+            if (users[i] == null) {
+                users[i] = t;
+                return t;
+            }
+        }
+        throw new Exception("error: writing to the array is not possible ");
+    }
+
+
+    public T[] getAll() {
+
+        return users;
+    }
+
+
+    public <T extends IdEntity> boolean checkId(T t) throws Exception {
+
+
+        for (int i = 0; i < users.length; i++) {
+            if (users[i] != null && users[i].equals(t.getId())) {
+                throw new Exception("error : with the same ID cannot be stored in an array. ");
+            }
+        }
+        return true;
+    }
+
+    public boolean freeUsers() throws Exception {
+
+        for (T us : users) {
+            if (us == null) {
+                return true;
+            }
+        }
+        throw new Exception("error: not freely ");
+    }
+
+    @Override
+    public long getId() {
+        return id;
+    }
+}

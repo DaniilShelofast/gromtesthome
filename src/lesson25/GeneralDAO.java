@@ -3,13 +3,9 @@ package lesson25;
 
 public class GeneralDAO<T extends IdEntity> {
 
-
     @SuppressWarnings("undchecked")
     private final T[] users = (T[]) new Object[10];
 
-    public T[] getUsers() {
-        return users;
-    }
 
     private void print(Order order) {
         System.out.println("order is: " + order.toString());
@@ -60,7 +56,7 @@ public class GeneralDAO<T extends IdEntity> {
     public boolean checkId(T t) throws Exception {
 
         for (T user : users) {
-            if (user != null && user.equals(t.getId())) {
+            if (user != null && user.getId() == t.getId()) {
                 throw new Exception("error : with the same ID cannot be stored in an array. ");
             }
         }

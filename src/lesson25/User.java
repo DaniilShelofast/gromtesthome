@@ -1,6 +1,6 @@
 package lesson25;
 
-public class User {
+public class User extends IdEntity {
     private long id;
     private String name;
 

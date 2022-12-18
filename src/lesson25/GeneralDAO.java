@@ -1,10 +1,13 @@
 package lesson25;
 
 
+import java.sql.Array;
+
 public class GeneralDAO<T extends IdEntity> {
 
     @SuppressWarnings("undchecked")
-    private final T[] users = (T[]) new Object[10];
+
+    public final T[] users = (T[]) new IdEntity[10];
 
 
     private void print(Order order) {

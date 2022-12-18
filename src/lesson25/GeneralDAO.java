@@ -1,8 +1,7 @@
 package lesson25;
 
 
-public class GeneralDAO<T> extends IdEntity {
-    private long id;
+public class GeneralDAO<T extends IdEntity> {
 
 
     @SuppressWarnings("undchecked")
@@ -58,11 +57,10 @@ public class GeneralDAO<T> extends IdEntity {
     }
 
 
-    public <T extends IdEntity> boolean checkId(T t) throws Exception {
+    public boolean checkId(T t) throws Exception {
 
-
-        for (int i = 0; i < users.length; i++) {
-            if (users[i] != null && users[i].equals(t.getId())) {
+        for (T user : users) {
+            if (user != null && user.equals(t.getId())) {
                 throw new Exception("error : with the same ID cannot be stored in an array. ");
             }
         }
@@ -71,16 +69,12 @@ public class GeneralDAO<T> extends IdEntity {
 
     public boolean freeUsers() throws Exception {
 
-        for (T us : users) {
-            if (us == null) {
+        for (T user : users) {
+            if (user == null) {
                 return true;
             }
         }
         throw new Exception("error: not freely ");
     }
 
-    @Override
-    public long getId() {
-        return id;
-    }
 }

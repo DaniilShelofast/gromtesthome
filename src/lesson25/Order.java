@@ -13,4 +13,10 @@ public class Order extends IdEntity {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                '}';
+    }
 }

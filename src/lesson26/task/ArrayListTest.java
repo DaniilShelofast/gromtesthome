@@ -11,7 +11,7 @@ public class ArrayListTest {
     }
 
     public ArrayList<Order> useList() {
-        Order order = new Order(1, 100, "USA", "microcircuit", "GGG");
+        Order order = new Order(1, 100, "USA", "microcircuit", "Opel");
         Order secondOrder = new Order(2, 170, "USA", "microcircuit", "Lada");
         Order thirdOrder = new Order(3, 150, "USA", "microcircuit", "Audi");
         Order fourthOrder = new Order(4, 300, "USA", "microcircuit", "Volvo");

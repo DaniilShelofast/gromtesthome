@@ -7,7 +7,6 @@ import java.util.Arrays;
 public class ArrayListTest {
     public static void main(String[] args) {
         ArrayListTest arrayListTest = new ArrayListTest();
-
         System.out.println(arrayListTest.useList());
     }
 
@@ -42,7 +41,6 @@ public class ArrayListTest {
         Order secondOrder = new Order(12, 200, "USA", "microcircuit", "BMW");
         ArrayList<Order> secondList = new ArrayList<>();
         secondList.add(secondOrder);
-
         list.addAll(secondList);
 
         return list;

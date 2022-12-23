@@ -23,7 +23,7 @@ public class ArrayListTest {
         list.clear();
 
         ArrayList<Order> secondList = new ArrayList<>();
-        secondList.addAll(0, list);
+        secondList.addAll(0,list);
 
         return order;
     }

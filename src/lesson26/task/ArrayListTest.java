@@ -11,10 +11,10 @@ public class ArrayListTest {
     }
 
     public ArrayList<Order> useList() {
-        Order order = new Order(1, 100, "USA", "microcircuit", "ITM");
-        Order eighthOrder = new Order(8, 150, "USA", "microcircuit", "Audi");
-        Order ninthOrder = new Order(9, 300, "USA", "microcircuit", "Volvo");
-        Order seventhOrder = new Order(7, 170, "USA", "microcircuit", "Mercedes");
+        Order order = new Order(1, 100, "USA", "microcircuit", "GGG");
+        Order eighthOrder = new Order(8, 150, "USA", "microcircuit", "AudiQ8");
+        Order ninthOrder = new Order(9, 300, "USA", "microcircuit", "Reno");
+        Order seventhOrder = new Order(7, 170, "USA", "microcircuit", "MercedesGlM");
         ArrayList<Order> list = new ArrayList<>();
 
         list.add(order);

@@ -6,11 +6,11 @@ import java.util.Arrays;
 
 public class ArrayListTest {
     public static void main(String[] args) {
-        ArrayListTest arrayListTest = new ArrayListTest();
-        System.out.println(arrayListTest.useList());
+
+        System.out.println(useList());
     }
 
-    public ArrayList<Order> useList() {
+    public static ArrayList<Order> useList() {
         Order order = new Order(1, 100, "USA", "microcircuit", "Opel");
         Order secondOrder = new Order(2, 170, "USA", "microcircuit", "Lada");
         Order thirdOrder = new Order(3, 150, "USA", "microcircuit", "Audi");
@@ -45,7 +45,7 @@ public class ArrayListTest {
         list.addAll(secondList);
 
         list.add(eighthOrder);
-        list.add(0,ninthOrder);
+        list.add(0, ninthOrder);
 
         return list;
     }

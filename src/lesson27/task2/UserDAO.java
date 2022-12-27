@@ -2,77 +2,97 @@ package lesson27.task2;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 
 public class UserDAO {
+    public static void main(String[] args) {
+        ArrayList<User> list = new ArrayList<>();
+        User user1 = new User(1001, "Oleg", "one");
+        User user2 = new User(1651, "Sasha", "one");
 
-    static ArrayList<User> users = new ArrayList<>();
+
+        System.out.println(save(user1));
+        System.out.println(getUsers());
+        saveUser(user1);
+        System.out.println(Arrays.deepToString(getUs()));
+    }
+
+    private final static User[] us = new User[10];
+
+    public static User[] getUs() {
+        return us;
+    }
+
+
+    final static ArrayList<User> users = new ArrayList<>();
+
 
     public static ArrayList<User> getUsers() {
         return users;
     }
 
-    public static LinkedList<String> getUserNames() {
-        LinkedList<String> linkedList = new LinkedList<>();
+    public static String[] getUserNames() {
+
         String[] userNames = new String[users.size()];
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i) != null) {
                 userNames[i] = users.get(i).getName();
             }
         }
-        return linkedList;
+        return userNames;
     }
 
-    public static LinkedList<Long> getUserIds() {
-        LinkedList<Long> linkedList = new LinkedList<>();
+    public static long[] getUserIds() {
+
         long[] it = new long[users.size()];
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i) != null) {
                 it[i] = users.get(i).getId();
             }
         }
-        return linkedList;
+        return it;
     }
 
-    public static ArrayList<String> getUserNameById(long id) {
+    public static String getUserNameById(long id) {
         ArrayList<String> arrayList = new ArrayList<>();
         for (User it : users) {
             if (id == it.getId()) {
 
-                return arrayList;
+                return it.getName();
             }
         }
         return null;
     }
 
     public static ArrayList<User> getUserByName(String name) {
-        ArrayList<User> arrayList = new ArrayList<>();
+
         for (User it : users) {
             if (name.equals(it.getName())) {
 
-                return arrayList;
+                return users;
             }
         }
         return null;
     }
 
     public static ArrayList<User> getUserById(long id) {
-        ArrayList<User> arrayList = new ArrayList<>();
+
         for (User it : users) {
             if (id == it.getId()) {
 
-                return arrayList;
+                return users;
             }
         }
         return null;
     }
 
     public static ArrayList<User> getUserBySessionId(String sessionId) {
-        ArrayList<User> arrayList = new ArrayList<>();
+
         for (User it : users) {
             if (sessionId.equals(it.getSessionId())) {
-                return arrayList;
+                return users;
             }
         }
         return null;
@@ -80,20 +100,22 @@ public class UserDAO {
 
 
     public static ArrayList<User> findById(long id) {
-        ArrayList<User> arrayList = new ArrayList<>();
+
         for (User it : users) {
             if (it != null && id == it.getId()) {
-                return arrayList;
+                return users;
             }
         }
         return null;
     }
 
 
-    public static LinkedList<User> save(User user) {
-        LinkedList<User> linkedList = new LinkedList<>();
+    public static ArrayList<User> save(User user) {
+
 
         ArrayList<User> findById = findById(user.getId());
+
+
         if (findById != null) {
             return null;
         } else {
@@ -101,7 +123,24 @@ public class UserDAO {
                 if (users.get(i) == null) {
                     users.add(user);
 
-                    return linkedList;
+                    return users;
+                }
+            }
+            return null;
+        }
+
+    }
+
+    public static User saveUser(User user) {
+
+        ArrayList<User> findById = findById(user.getId());
+        if (findById != null) {
+            return null;
+        } else {
+            for (int i = 0; i < us.length; i++) {
+                if (us[i] == null) {
+                    us[i] = user;
+                    return user;
                 }
             }
             return null;
@@ -111,11 +150,11 @@ public class UserDAO {
 
 
     public static ArrayList<User> upDate(User user) {
-        ArrayList<User> arrayList = new ArrayList<>();
+
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i) != null && user.getId() == users.get(i).getId()) {
                 users.add(user);
-                return arrayList;
+                return users;
             }
 
         }

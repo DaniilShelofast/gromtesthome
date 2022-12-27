@@ -9,6 +9,9 @@ public class UserDAO {
 
     static ArrayList<User> users = new ArrayList<>();
 
+    public static ArrayList<User> getUsers() {
+        return users;
+    }
 
     public static LinkedList<String> getUserNames() {
         LinkedList<String> linkedList = new LinkedList<>();
@@ -97,6 +100,7 @@ public class UserDAO {
             for (int i = 0; i < users.size(); i++) {
                 if (users.get(i) == null) {
                     users.add(user);
+
                     return linkedList;
                 }
             }

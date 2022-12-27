@@ -10,6 +10,7 @@ public class Demo {
         UserRepository.save(user1);
         UserRepository.save(user2);
 
+
         System.out.println(Arrays.deepToString(UserRepository.getUsers()));
 
     }

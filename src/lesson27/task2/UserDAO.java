@@ -1,27 +1,21 @@
 package lesson27.task2;
 
-import lesson22.repository.User;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-//
+
 public class UserDAO {
 
-    private final static User[] users = new User[10];
-
-    public static User[] getUsers() {
-
-        return users;
-    }
+    static ArrayList<User> users = new ArrayList<>();
 
 
     public static LinkedList<String> getUserNames() {
         LinkedList<String> linkedList = new LinkedList<>();
-        String[] userNames = new String[users.length];
-        for (int i = 0; i < users.length; i++) {
-            if (users[i] != null) {
-                userNames[i] = users[i].getName();
+        String[] userNames = new String[users.size()];
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i) != null) {
+                userNames[i] = users.get(i).getName();
             }
         }
         return linkedList;
@@ -29,10 +23,10 @@ public class UserDAO {
 
     public static LinkedList<Long> getUserIds() {
         LinkedList<Long> linkedList = new LinkedList<>();
-        long[] it = new long[users.length];
-        for (int i = 0; i < users.length; i++) {
-            if (users[i] != null) {
-                it[i] = users[i].getId();
+        long[] it = new long[users.size()];
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i) != null) {
+                it[i] = users.get(i).getId();
             }
         }
         return linkedList;
@@ -100,9 +94,9 @@ public class UserDAO {
         if (findById != null) {
             return null;
         } else {
-            for (int i = 0; i < users.length; i++) {
-                if (users[i] == null) {
-                    users[i] = user;
+            for (int i = 0; i < users.size(); i++) {
+                if (users.get(i) == null) {
+                    users.add(user);
                     return linkedList;
                 }
             }
@@ -114,9 +108,9 @@ public class UserDAO {
 
     public static ArrayList<User> upDate(User user) {
         ArrayList<User> arrayList = new ArrayList<>();
-        for (int i = 0; i < users.length; i++) {
-            if (users[i] != null && user.getId() == users[i].getId()) {
-                users[i] = user;
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i) != null && user.getId() == users.get(i).getId()) {
+                users.add(user);
                 return arrayList;
             }
 
@@ -127,9 +121,9 @@ public class UserDAO {
     public static void delete(long id) {
 
 
-        for (int i = 0; i < users.length; i++) {
-            if (users[i] != null && id == users[i].getId()) {
-                users[i] = null;
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i) != null && id == users.get(i).getId()) {
+                users.remove(i);
             }
         }
     }

@@ -2,7 +2,7 @@ package lesson27.task2;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-
+//
 public class UserDAO {
 
     public static ArrayList<User> findById(long id) throws Exception {

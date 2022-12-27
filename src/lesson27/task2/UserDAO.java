@@ -3,28 +3,20 @@ package lesson27.task2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 
 
 public class UserDAO {
     public static void main(String[] args) {
-        ArrayList<User> list = new ArrayList<>();
+
         User user1 = new User(1001, "Oleg", "one");
         User user2 = new User(1651, "Sasha", "one");
 
-
         System.out.println(save(user1));
+        System.out.println(save(user2));
         System.out.println(getUsers());
-        saveUser(user1);
-        System.out.println(Arrays.deepToString(getUs()));
+
+
     }
-
-    private final static User[] us = new User[10];
-
-    public static User[] getUs() {
-        return us;
-    }
-
 
     final static ArrayList<User> users = new ArrayList<>();
 
@@ -112,10 +104,7 @@ public class UserDAO {
 
     public static ArrayList<User> save(User user) {
 
-
         ArrayList<User> findById = findById(user.getId());
-
-
         if (findById != null) {
             return null;
         } else {
@@ -128,24 +117,6 @@ public class UserDAO {
             }
             return null;
         }
-
-    }
-
-    public static User saveUser(User user) {
-
-        ArrayList<User> findById = findById(user.getId());
-        if (findById != null) {
-            return null;
-        } else {
-            for (int i = 0; i < us.length; i++) {
-                if (us[i] == null) {
-                    us[i] = user;
-                    return user;
-                }
-            }
-            return null;
-        }
-
     }
 
 

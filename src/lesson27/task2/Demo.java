@@ -8,8 +8,7 @@ public class Demo {
         User user1 = new User(1001, "Oleg", "one2345");
         User user2 = new User(1651, "Sasha", "one2345");
 
-        UserDAO.save(user1);
-        UserDAO.save(user2);
+
 
         System.out.println(UserDAO.getUsers());
 

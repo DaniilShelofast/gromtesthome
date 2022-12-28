@@ -7,9 +7,9 @@ public class UserDAO {
     public static void main(String[] args) {
 
         User user1 = new User(4, "Oleg", "one");
-        User user2 = new User(9, "Sasha", "ttt");
-        User user3 = new User(4, "ppp", "ppp");
-        User user4 = new User(5, "Oleg", "one");
+        User user2 = new User(9, "Sasha", "two");
+        User user3 = new User(4, "Max", "two");
+        User user4 = new User(5, "Daryna", "one");
 
         save(user1);
         save(user2);
@@ -21,7 +21,7 @@ public class UserDAO {
         System.out.println(upDate(new User(5, "test", "test")));
         System.out.println(getUsers());
         System.out.println("-----------");
-        getUserIds();
+
         System.out.println(getUserIds());
         System.out.println(getUserNames());
 

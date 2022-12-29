@@ -13,7 +13,7 @@ public class Demo {
         UserDAO.save(user2);
         UserDAO.save(user4);
 
-        UserDAO.delete(4);
+        UserDAO.delete(9);
         System.out.println(UserDAO.getUsers());
 
 

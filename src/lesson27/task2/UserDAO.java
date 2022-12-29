@@ -16,7 +16,6 @@ public class UserDAO {
 
         ArrayList<String> userNamesList = new ArrayList<>();
 
-
         for (User user : users) {
             if (user != null) {
                 userNamesList.add(user.getName());
@@ -121,10 +120,9 @@ public class UserDAO {
         throw new Exception("error: " + user.getId() + " not correct, try to change ID.");
     }
 
-    public static void delete(long id) throws Exception {
+    public static void delete(long id) {
 
         users.removeIf(user -> id == user.getId());
-
 
     }
 

@@ -4,29 +4,7 @@ import java.util.ArrayList;
 
 
 public class UserDAO {
-    public static void main(String[] args) {
 
-        User user1 = new User(4, "Oleg", "one");
-        User user2 = new User(9, "Sasha", "two");
-        User user3 = new User(4, "Max", "two");
-        User user4 = new User(5, "Daryna", "one");
-
-        save(user1);
-        save(user2);
-        save(user3);
-        save(user4);
-
-        delete(4);
-        System.out.println(getUsers());
-        System.out.println(upDate(new User(5, "test", "test")));
-        System.out.println(getUsers());
-        System.out.println("-----------");
-
-        System.out.println(getUserIds());
-        System.out.println(getUserNames());
-
-
-    }
 
     static ArrayList<User> users = new ArrayList<>();
 
@@ -36,26 +14,27 @@ public class UserDAO {
 
     public static ArrayList<String> getUserNames() {
 
-        ArrayList<String> userName = new ArrayList<>(users.size());
+        ArrayList<String> userNamesList = new ArrayList<>();
+
 
         for (User user : users) {
             if (user != null) {
-                userName.add(user.getName());
+                userNamesList.add(user.getName());
             }
         }
-        return userName;
+        return userNamesList;
     }
 
     public static ArrayList<Long> getUserIds() {
 
-        ArrayList<Long> it = new ArrayList<>(users.size());
+        ArrayList<Long> userLongsList = new ArrayList<>();
 
         for (User user : users) {
             if (user != null) {
-                it.add(user.getId());
+                userLongsList.add(user.getId());
             }
         }
-        return it;
+        return userLongsList;
     }
 
     public static String getUserNameById(long id) {
@@ -115,45 +94,38 @@ public class UserDAO {
     }
 
 
-    public static User save(User user) {
+    public static User save(User user) throws Exception {
 
         User findById = findById(user.getId());
-        users.add(new User(user.getId(), user.getName(), user.getSessionId()));
 
         if (findById != null) {
-            return null;
-        } else {
-            for (int i = 0; i < users.size(); i++) {
-                if (users.get(i) == null) {
-                    users.add(user);
-
-                    return user;
-                }
-            }
+            throw new Exception("error : user already exists " + user.getId() + " . change it or contact support");
         }
-        return null;
+
+        users.add(user);
+
+        return user;
     }
 
 
-    public static User upDate(User user) {
+    public static User update(User user) throws Exception {
 
         for (int i = 0; i < users.size(); i++) {
-            if (users.get(i) != null && user.getId() == users.get(i).getId()) {
-                users.add(user);
+            if (user.getId() == users.get(i).getId()) {
+                users.set(i, user);
 
                 return user;
             }
 
         }
-        return null;
+        throw new Exception("error: " + user.getId() + " not correct, try to change ID.");
     }
 
-    public static void delete(long id) {
+    public static void delete(long id) throws Exception {
 
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i) != null && id == users.get(i).getId()) {
-                users.remove(i);
-            }
-        }
+        users.removeIf(user -> id == user.getId());
+
+
     }
+
 }

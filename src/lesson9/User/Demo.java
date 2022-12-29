@@ -16,12 +16,12 @@ public class Demo {
 
         //System.out.println(Arrays.deepToString(users));
 
-        //System.out.println(getUserNameById.upDate(new User(1, "Igor", "two")));
-        //System.out.println(Arrays.deepToString(users));
-
-        System.out.println(getUserNameById.save(new User(12, "Artem", "one")));
+        System.out.println(getUserNameById.upDate(new User(3, "Igor", "two")));
         System.out.println(Arrays.deepToString(users));
-        System.out.println(getUserNameById.findById(3));
+
+        //System.out.println(getUserNameById.save(new User(12, "Artem", "one")));
+        //System.out.println(Arrays.deepToString(users));
+       // System.out.println(getUserNameById.findById(3));
 
 
     }

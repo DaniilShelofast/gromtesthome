@@ -38,12 +38,6 @@ public class Capability implements Comparable<Capability> {
     }
 
     @Override
-    public int compareTo(Capability capability) {
-        System.out.println("compareTo is used.");
-        return this.id - capability.getId();
-    }
-
-    @Override
     public String toString() {
         return "Capability{" +
                 "id=" + id +
@@ -52,5 +46,13 @@ public class Capability implements Comparable<Capability> {
                 ", isActive=" + isActive +
                 ", dateCreated=" + dateCreated +
                 '}';
+
     }
+
+    @Override
+    public int compareTo(Capability capability) {
+        System.out.println("compareTo is used.");
+        return this.id - capability.getId();
+    }
+
 }

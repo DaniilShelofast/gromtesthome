@@ -15,17 +15,10 @@ public class FullComparator implements Comparator<Capability> {
 
         } else if (!o1.getFingerprint().equals(o2.getFingerprint())) {
             return o1.getFingerprint().compareTo(o2.getFingerprint());
-
-        } else if (o1.getDateCreated().getTime() >= o2.getDateCreated().getTime()) {
-            return -1;
-
-        } else if (o1.getDateCreated().getTime() == o2.getDateCreated().getTime() || o1.getDateCreated().getTime() != o2.getDateCreated().getTime()) {
-            return 0;
-        } else
-            return 1;
+        }
+        return o2.getDateCreated().compareTo(o1.getDateCreated());
 
     }
-
 }
 
 

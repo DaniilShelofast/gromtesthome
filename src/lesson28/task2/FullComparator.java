@@ -12,16 +12,20 @@ public class FullComparator implements Comparator<Capability> {
         System.out.println("compareTo is used.");
 
         if (!o1.getChannelName().equals(o2.getChannelName())) {
+
             return o1.getChannelName().compareTo(o2.getChannelName());
 
         } else if (!o1.getFingerprint().equals(o2.getFingerprint())) {
+
             return o1.getFingerprint().compareTo(o2.getFingerprint());
 
-        } else if (!o1.getDateCreated().equals(o2.getDateCreated())) {
-            return o1.getDateCreated().compareTo(o2.getDateCreated());
-        }
+        } else if (o1.getDateCreated().getTime() >= o2.getDateCreated().getTime()) {
+            return -1;
+        } else if (o1.getDateCreated().getTime() == o2.getDateCreated().getTime() || o1.getDateCreated().getTime() != o2.getDateCreated().getTime()) {
+            return 0;
+        } else
+            return 1;
 
-        return 0;
     }
 }
 

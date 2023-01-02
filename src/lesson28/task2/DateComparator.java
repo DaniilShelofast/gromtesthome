@@ -8,11 +8,14 @@ import java.util.Comparator;
 public class DateComparator implements Comparator<Capability> {
     @Override
     public int compare(Capability capability1, Capability capability2) {
-        System.out.println("time.");
-        if (capability1.getDateCreated().equals(capability2.getDateCreated())) {
-            return capability1.getDateCreated().compareTo(capability2.getDateCreated());
-        }
+        System.out.println("compareTo is used.");
+        if (capability1.getDateCreated().getTime() >= capability2.getDateCreated().getTime()) {
+            return -1;
+        } else if (capability1.getDateCreated().getTime() == capability2.getDateCreated().getTime() || capability1.getDateCreated().getTime() != capability2.getDateCreated().getTime()) {
+            return 0;
+        } else
+            return 1;
 
-        return 0;
+
     }
 }

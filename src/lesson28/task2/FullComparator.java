@@ -24,7 +24,6 @@ public class FullComparator implements Comparator<Capability> {
 
         } else if (o1.getDateCreated().getTime() == o2.getDateCreated().getTime() || o1.getDateCreated().getTime() != o2.getDateCreated().getTime()) {
             return 0;
-
         } else
             return 1;
 

@@ -56,7 +56,6 @@ public class HashSetTest {
         while (iterator.hasNext()) {
             System.out.println(iterator.next().getItemName());
         }
-
         System.out.println("--");
 
         hashSet.remove(order11);

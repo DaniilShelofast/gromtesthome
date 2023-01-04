@@ -8,14 +8,14 @@ public class Order {
     private int price;
     private String currency;
     private String itemName;
-    private String shopIdentification;
+    private String shopIdentificator;
 
-    public Order(long id, int price, String currency, String itemName, String shopIdentification) {
+    public Order(long id, int price, String currency, String itemName, String shopIdentificator) {
         this.id = id;
         this.price = price;
         this.currency = currency;
         this.itemName = itemName;
-        this.shopIdentification = shopIdentification;
+        this.shopIdentificator = shopIdentificator;
     }
 
     public long getId() {
@@ -34,9 +34,9 @@ public class Order {
         return itemName;
     }
 
-    public String getShopIdentification() {
+    public String getShopIdentificator() {
 
-        return shopIdentification;
+        return shopIdentificator;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Order {
                 ", price=" + price +
                 ", currency='" + currency + '\'' +
                 ", itemName='" + itemName + '\'' +
-                ", shopIdentification='" + shopIdentification + '\'' +
+                ", shopIdentification='" + shopIdentificator + '\'' +
                 '}';
     }
 

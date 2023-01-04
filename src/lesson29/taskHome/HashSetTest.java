@@ -1,14 +1,11 @@
 package lesson29.taskHome;
 
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 
 public class HashSetTest {
-    public static void main(String[] args) {
-        System.out.println(useHashSet());
-
-    }
 
     public static HashSet<Order> useHashSet() {
         HashSet<Order> hashSet = new HashSet<>();
@@ -27,6 +24,7 @@ public class HashSetTest {
         hashSet.add(order5);
         hashSet.add(order6);
         hashSet.add(order7);
+
 
         hashSet.remove(order2);
 
@@ -48,15 +46,16 @@ public class HashSetTest {
         hashSet.add(order11);
         hashSet.add(order12);
 
-        Order[] orders = hashSet.toArray(new Order[10]);
+        Order[] orders =  hashSet.toArray(new Order[0]);
         System.out.println(Arrays.deepToString(orders));
         System.out.println("--");
         System.out.println(hashSet.size());
         System.out.println("--");
 
         Iterator<Order> iterator = hashSet.iterator();
-        while (iterator.hasNext())
+        while (iterator.hasNext()) {
             System.out.println(iterator.next().getItemName());
+        }
 
         System.out.println("--");
 

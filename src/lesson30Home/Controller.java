@@ -1,10 +1,16 @@
 package lesson30Home;
 
+import java.util.LinkedList;
+
 public class Controller {
 
+    private static final LinkedList<Project> employees = new LinkedList<>();
 
     public Employee projectsByEmployee(Employee employee) {
-        return null;
+        Customer customer = new Customer("eee","eee","eee",100);
+        Project project = new Project("rrr",customer);
+        employees.add(project);
+        return employee;
     }
 
     public DepartmentType employeesByDepartmentWithoutProject(DepartmentType departmentType) {

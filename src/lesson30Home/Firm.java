@@ -5,14 +5,8 @@ import java.util.Date;
 
 public class Firm {
     private Date dateFounder;
-    private Collection<Department> departments;
-    private Collection<Customer> customers;
-
-    public Firm(Date dateFounder, Collection<Department> departments, Collection<Customer> customers) {
-        this.dateFounder = dateFounder;
-        this.departments = departments;
-        this.customers = customers;
-    }
+    private static Collection<Department> departments;
+    private static Collection<Customer> customers;
 
     public Date getDateFounder() {
         return dateFounder;

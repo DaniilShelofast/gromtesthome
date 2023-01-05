@@ -9,15 +9,15 @@ public class Employee {
     private Date dateHired;
     private Position position;
     private Department department;
-    private Collection<Project> projects;
+    private static Collection<Project> projects;
 
-    public Employee(String firstName, String lastName, Date dateHired, Position position, Department department, Collection<Project> projects) {
+    public Employee(String firstName, String lastName, Date dateHired, Position position, Department department) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateHired = dateHired;
         this.position = position;
         this.department = department;
-        this.projects = projects;
+
     }
 
     public String getFirstName() {

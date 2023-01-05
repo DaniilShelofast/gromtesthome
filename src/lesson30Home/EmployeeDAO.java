@@ -30,7 +30,9 @@ public class EmployeeDAO {
 
     public static void delete(Employee employee) {
         for (int i = 0; i < employees.size(); i++) {
-            if (employee.getFirstName().equals(employees.get(i).getFirstName()) && employee.getLastName().equals(employees.get(i).getLastName())) {
+            if (employee.getFirstName().equals(employees.get(i).getFirstName()) && employee.getLastName().equals(employees.get(i).getLastName()) && employee
+                    .getDepartment().equals(employees.get(i).getDepartment()) && employee.getPosition().equals(employees.get(i).getPosition()) && employee.getProjects().equals(employees.get(i).getProjects())) {
+
                 employees.remove(i);
             }
         }

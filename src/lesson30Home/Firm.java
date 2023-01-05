@@ -1,8 +1,8 @@
 package lesson30Home;
 
-
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedList;
 
 public class Firm {
     private Date dateFounder;
@@ -12,8 +12,8 @@ public class Firm {
 
     public Firm(Date dateFounder) {
         this.dateFounder = dateFounder;
-        this.departments = departments;
-        this.customers = customers;
+        this.departments = new LinkedList<>();
+        this.customers = new LinkedList<>();
     }
 
 

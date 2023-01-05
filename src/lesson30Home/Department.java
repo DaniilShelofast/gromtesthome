@@ -1,6 +1,7 @@
 package lesson30Home;
 
 import java.util.Collection;
+import java.util.LinkedList;
 
 public class Department {
 
@@ -9,7 +10,7 @@ public class Department {
 
     public Department(DepartmentType departmentType) {
         this.departmentType = departmentType;
-        this.employees = employees;
+        this.employees = new LinkedList<>();
     }
 
 

@@ -32,10 +32,6 @@ public class Employee {
         return dateHired;
     }
 
-    public void setDateHired(Date dateHired) {
-        this.dateHired = dateHired;
-    }
-
     public Position getPosition() {
         return position;
     }

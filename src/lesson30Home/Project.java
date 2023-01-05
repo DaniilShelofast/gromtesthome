@@ -16,7 +16,6 @@ public class Project {
     public Customer getCustomer() {
         return customer;
     }
-
     @Override
     public String toString() {
         return "Project{" +

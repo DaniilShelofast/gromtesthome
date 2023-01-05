@@ -4,8 +4,13 @@ import java.util.Collection;
 
 public class Department {
 
-    private static DepartmentType departmentType;
+    private DepartmentType departmentType;
     private static Collection<Employee> employees;
+
+    public Department(DepartmentType departmentType) {
+        this.departmentType = departmentType;
+
+    }
 
 
     public DepartmentType getDepartmentType() {

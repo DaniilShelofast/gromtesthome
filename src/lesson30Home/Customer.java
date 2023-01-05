@@ -13,6 +13,9 @@ public class Customer {
         this.monthlyPay = monthlyPay;
     }
 
+    public Customer() {
+    }
+
     public String getFirstName() {
         return firstName;
     }

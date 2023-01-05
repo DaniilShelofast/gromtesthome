@@ -1,41 +1,26 @@
 package lesson30Home;
 
+import java.util.Date;
 import java.util.LinkedList;
 
 public class EmployeeDAO {
-    static LinkedList<Employee> employees = new LinkedList<>();
+    private static final LinkedList<Employee> employees = new LinkedList<>();
 
-    public LinkedList<Employee> getEmployees() {
+    public EmployeeDAO() {
+        Department department = new Department(DepartmentType.ANALYSTS);
+        Employee employee1 = new Employee("rrr", "rrr", new Date(), Position.ANALYST, department);
+
+        Department department2 = new Department(DepartmentType.DESIGNERS);
+        Employee employee2 = new Employee("ttt", "ttt", new Date(), Position.DESIGNER, department2);
+
+        employees.add(employee1);
+        employees.add(employee2);
+    }
+
+    public static LinkedList<Employee> getEmployees() {
+
         return employees;
     }
 
-    public static Employee add(Employee employee) {
 
-        employees.add(employee);
-
-        return employee;
-    }
-
-    public static Employee update(Employee employee) {
-        for (int i = 0; i < employees.size(); i++) {
-            if (employee.getFirstName().equals(employees.get(i).getFirstName()) && employee.getLastName().equals(employees.get(i).getLastName()) && employee
-                    .getDepartment().equals(employees.get(i).getDepartment()) && employee.getPosition().equals(employees.get(i).getPosition()) && employee.getProjects().equals(employees.get(i).getProjects())) {
-
-                employees.set(i, employee);
-                return employee;
-            }
-        }
-        return null;
-    }
-
-    public static void delete(Employee employee) {
-        for (int i = 0; i < employees.size(); i++) {
-            if (employee.getFirstName().equals(employees.get(i).getFirstName()) && employee.getLastName().equals(employees.get(i).getLastName()) && employee
-                    .getDepartment().equals(employees.get(i).getDepartment()) && employee.getPosition().equals(employees.get(i).getPosition()) && employee.getProjects().equals(employees.get(i).getProjects())) {
-
-                employees.remove(i);
-            }
-        }
-
-    }
 }

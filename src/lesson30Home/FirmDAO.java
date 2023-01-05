@@ -26,6 +26,7 @@ public class FirmDAO {
 
         }
         throw new Exception("error: ");
+
     }
 
     public static void delete(Customer customer) {

@@ -18,24 +18,12 @@ public class Firm {
         return dateFounder;
     }
 
-    public void setDateFounder(Date dateFounder) {
-        this.dateFounder = dateFounder;
-    }
-
     public Collection<Department> getDepartments() {
         return departments;
     }
 
-    public void setDepartments(Collection<Department> departments) {
-        this.departments = departments;
-    }
-
     public Collection<Customer> getCustomers() {
         return customers;
-    }
-
-    public void setCustomers(Collection<Customer> customers) {
-        this.customers = customers;
     }
 
 }

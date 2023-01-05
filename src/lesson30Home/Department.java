@@ -12,5 +12,11 @@ public class Department {
         this.employees = employees;
     }
 
+    public DepartmentType getDepartmentType() {
+        return departmentType;
+    }
 
+    public Collection<Employee> getEmployees() {
+        return employees;
+    }
 }

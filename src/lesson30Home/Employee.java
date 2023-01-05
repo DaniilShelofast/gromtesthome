@@ -24,16 +24,8 @@ public class Employee {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public Date getDateHired() {
@@ -48,23 +40,23 @@ public class Employee {
         return position;
     }
 
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
     public Department getDepartment() {
         return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
     }
 
     public Collection<Project> getProjects() {
         return projects;
     }
 
-    public void setProjects(Collection<Project> projects) {
-        this.projects = projects;
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dateHired=" + dateHired +
+                ", position=" + position +
+                ", department=" + department +
+                ", projects=" + projects +
+                '}';
     }
 }

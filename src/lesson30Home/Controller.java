@@ -27,11 +27,11 @@ public class Controller {
         return null;
     }
 
-    public Employee projectsByCustomer(Customer customer) {
+    public Customer projectsByCustomer(Customer customer) {
         return null;
     }
 
-    public Employee employeesByCustomerProject(Customer customer) {
+    public Customer employeesByCustomerProject(Customer customer) {
         return null;
     }
 

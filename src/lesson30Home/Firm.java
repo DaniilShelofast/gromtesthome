@@ -1,18 +1,21 @@
 package lesson30Home;
 
+
 import java.util.Collection;
 import java.util.Date;
 
 public class Firm {
     private Date dateFounder;
-    private static   Collection<Department> departments;
-    private static Collection<Customer> customers;
+    private Collection<Department> departments;
+    private Collection<Customer> customers;
 
 
     public Firm(Date dateFounder) {
         this.dateFounder = dateFounder;
-
+        this.departments = departments;
+        this.customers = customers;
     }
+
 
     public Date getDateFounder() {
         return dateFounder;

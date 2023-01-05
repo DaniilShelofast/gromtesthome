@@ -5,11 +5,11 @@ import java.util.Collection;
 public class Department {
 
     private DepartmentType departmentType;
-    private static Collection<Employee> employees;
+    private Collection<Employee> employees;
 
     public Department(DepartmentType departmentType) {
         this.departmentType = departmentType;
-
+        this.employees = employees;
     }
 
 

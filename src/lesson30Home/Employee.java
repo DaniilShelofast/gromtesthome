@@ -9,7 +9,7 @@ public class Employee {
     private Date dateHired;
     private Position position;
     private Department department;
-    private static Collection<Project> projects;
+    private Collection<Project> projects;
 
     public Employee(String firstName, String lastName, Date dateHired, Position position, Department department) {
         this.firstName = firstName;
@@ -17,7 +17,7 @@ public class Employee {
         this.dateHired = dateHired;
         this.position = position;
         this.department = department;
-
+        this.projects = projects;
     }
 
     public String getFirstName() {

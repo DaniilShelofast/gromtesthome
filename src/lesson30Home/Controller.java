@@ -58,8 +58,6 @@ public class Controller {
                 list.add(employee);
             }
         }
-
-
         return list;
 
     }

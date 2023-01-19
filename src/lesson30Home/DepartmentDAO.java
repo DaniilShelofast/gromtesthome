@@ -1,5 +1,6 @@
 package lesson30Home;
 
+import java.util.Date;
 import java.util.LinkedList;
 
 public class DepartmentDAO {
@@ -12,9 +13,11 @@ public class DepartmentDAO {
 
         departments.add(department1);
         departments.add(department2);
+
+
     }
 
-    public static LinkedList<Department> getEmployees() {
+    public static LinkedList<Department> getDepartments() {
         return departments;
     }
 

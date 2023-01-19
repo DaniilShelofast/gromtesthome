@@ -53,7 +53,6 @@ public class Employee {
                 ", dateHired=" + dateHired +
                 ", position=" + position +
                 ", department=" + department +
-                ", projects=" + projects +
                 '}';
     }
 }

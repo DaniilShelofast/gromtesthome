@@ -6,4 +6,5 @@ public enum DepartmentType {
     ANALYSTS,
     MANAGEMENT,
     FINANCE
+
 }

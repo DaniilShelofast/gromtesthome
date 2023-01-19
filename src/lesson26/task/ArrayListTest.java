@@ -27,7 +27,7 @@ public class ArrayListTest {
         list.subList(0, 2).clear();
         list.remove(order);
         System.out.println(list.contains(fourthOrder));
-        Order[] orders = list.toArray(new Order[5]);
+        Order[] orders = list.toArray(new Order[0]);
         System.out.println(Arrays.deepToString(orders));
         list.clear();
 

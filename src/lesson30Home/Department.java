@@ -21,4 +21,12 @@ public class Department {
     public Collection<Employee> getEmployees() {
         return employees;
     }
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "departmentType=" + departmentType +
+                ", employees=" + employees +
+                '}';
+    }
 }

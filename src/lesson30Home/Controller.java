@@ -11,7 +11,7 @@ public class Controller {
 
 
         for (Employee emp : EmployeeDAO.getEmployees()) {
-            if (!emp.equals(employee)) {
+            if (emp.equals(employee)) {
                 return emp.getProjects();
             }
         }
@@ -53,22 +53,65 @@ public class Controller {
         //список подчиньоних для заданого керівника(по всім проектам, у яких він руководить)
         ArrayList<Employee> list = new ArrayList<>();
 
-        for (Employee employee : EmployeeDAO.getEmployees()) {
-            if (employee.getProjects() == lead) {
-                list.add(employee);
+
+        for (Employee teamLead : EmployeeDAO.getEmployees()) {
+            if (teamLead.equals(lead)) {
+
+                for (Employee emp : EmployeeDAO.getEmployees()) {
+                    if (!emp.getPosition().equals(teamLead.getPosition())) {
+                        for (Project pr : teamLead.getProjects()) {
+                            if (emp.getProjects().contains(pr)) {
+
+                                list.add(emp);
+                            }
+                        }
+                    }
+                }
             }
         }
         return list;
+    }
 
+    public ArrayList<Employee> teamLeadsByEmployee(Employee employee) {
+        ArrayList<Employee> list = new ArrayList<>();
+        //список лідів для працівника( у всіх проектах у яких він працює )
+        for (Employee emp : EmployeeDAO.getEmployees()) {
+            if (emp.equals(employee)) {
+
+                for (Employee e : EmployeeDAO.getEmployees()){
+                    if (!e.equals(emp)){
+                        for (Project project : emp.getProjects()){
+                            if (e.getProjects().contains(project)){
+
+                                list.add(e);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return list;
     }
 
 
-    public Employee teamLeadsByEmployee(Employee employee) {
-        return null;
-    }
+    public ArrayList<Employee> employeesByProjectEmployee(Employee employee) {
+        ArrayList<Employee> list = new ArrayList<>();
+        //список працівників,працюючи на тих самих проектах,що заданий працівник.
 
-    public Employee employeesByProjectEmployee(Employee employee) {
-        return null;
+        for (Employee emp : EmployeeDAO.getEmployees()) {
+            if (emp.equals(employee)) {
+                list.add((Employee) emp.getProjects());
+
+                for (Employee e : EmployeeDAO.getEmployees()) {
+                    if (e.getProjects().isEmpty()) {
+                        list.add(e);
+                    }
+                }
+
+            }
+        }
+
+        return list;
     }
 
     public ArrayList<Customer> projectsByCustomer(Customer customer) {

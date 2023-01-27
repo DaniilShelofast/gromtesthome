@@ -2,6 +2,7 @@ package lesson30Home;
 
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class Department {
 
@@ -28,5 +29,18 @@ public class Department {
                 "departmentType=" + departmentType +
                 ", employees=" + employees +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Department that = (Department) o;
+        return departmentType == that.departmentType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(departmentType);
     }
 }

@@ -1,5 +1,7 @@
 package lesson30Home;
 
+import java.util.Objects;
+
 public class Customer {
     private String firstName;
     private String lastName;
@@ -38,5 +40,18 @@ public class Customer {
                 ", country='" + country + '\'' +
                 ", monthlyPay=" + monthlyPay +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return monthlyPay == customer.monthlyPay && Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName) && Objects.equals(country, customer.country);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, country, monthlyPay);
     }
 }

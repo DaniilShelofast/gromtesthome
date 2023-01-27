@@ -3,6 +3,7 @@ package lesson30Home;
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class Firm {
     private Date dateFounder;
@@ -28,4 +29,18 @@ public class Firm {
     public Collection<Customer> getCustomers() {
         return customers;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Firm firm = (Firm) o;
+        return Objects.equals(dateFounder, firm.dateFounder);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dateFounder);
+    }
 }
+

@@ -15,6 +15,5 @@ public class Demo {
         System.out.println(Controller.employeesByTeamLead(employee2));
         System.out.println(Controller.employeesByTeamLead(employee1));
 
-
     }
 }

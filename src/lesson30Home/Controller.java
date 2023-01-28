@@ -114,15 +114,42 @@ public class Controller {
         return list;
     }
 
-    public ArrayList<Customer> projectsByCustomer(Customer customer) {
+    public Collection<Project> projectsByCustomer(Customer customer) {
         //список проектів. виповняємих для замовника
+        ArrayList<Project> list = new ArrayList<>();
 
-        return null;
+        for (Customer cus : CustomerDAO.getCustomers()) {
+            if (cus.equals(customer)) {
+
+                for (Project project : ProjectDAO.getProjects()) {
+                    if (project.getCustomer().equals(cus)) {
+                        list.add(project);
+                    }
+                }
+            }
+        }
+        return list;
     }
 
-    public Customer employeesByCustomerProject(Customer customer) {
+    public ArrayList<Employee> employeesByCustomerProject(Customer customer) {
+        //список працівників,участвующий в проектах,виконуючи для замовника
+        ArrayList<Employee> list = new ArrayList<>();
 
-        return null;
+        for (Customer custom : CustomerDAO.getCustomers()) {
+            if (custom.equals(customer)) {
+
+                for (Project project : ProjectDAO.getProjects()) {
+                    if (project.getCustomer().equals(custom)) {
+                        for (Employee employee : EmployeeDAO.getEmployees()) {
+                            if (employee.getProjects().contains(project)) {
+                                  list.add(employee);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return list;
     }
 
 }

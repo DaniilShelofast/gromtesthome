@@ -44,7 +44,7 @@ public class Controller {
     }
 
     public static LinkedList<Employee> employeesByTeamLead(Employee lead) {
-        //список подчиньоних для заданого керівника(по всім проектам, у яких він руководить)
+        //список працівників для заданого керівника, по всім проєктам, у яких він лід.
         LinkedList<Employee> list = new LinkedList<>();
 
         for (Employee teamLead : EmployeeDAO.getEmployees()) {
@@ -67,7 +67,7 @@ public class Controller {
 
     public LinkedList<Employee> teamLeadsByEmployee(Employee employee) {
         LinkedList<Employee> list = new LinkedList<>();
-        //список лідів для працівника( у всіх проектах у яких він працює )
+        //список тім лідерів, для працівника, у всіх проєктах у яких він працює.
         for (Employee emp : EmployeeDAO.getEmployees()) {
             if (emp.equals(employee)) {
 
@@ -89,7 +89,7 @@ public class Controller {
 
     public LinkedList<Employee> employeesByProjectEmployee(Employee employee) {
         LinkedList<Employee> list = new LinkedList<>();
-        //список працівників,працюючи на тих самих проектах,що заданий працівник.
+        //список працівників, виконуючи роботу на тих самих проєктах, що і заданий працівник.
 
         for (Employee emp : EmployeeDAO.getEmployees()) {
             if (emp.equals(employee)) {
@@ -107,7 +107,7 @@ public class Controller {
     }
 
     public LinkedList<Project> projectsByCustomer(Customer customer) {
-        //список проектів. виповняємих для замовника
+        //перелік проєктів для замовника.
         LinkedList<Project> list = new LinkedList<>();
 
         for (Customer cus : CustomerDAO.getCustomers()) {

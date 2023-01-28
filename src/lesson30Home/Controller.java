@@ -104,7 +104,6 @@ public class Controller {
                 for (Employee employees : EmployeeDAO.getEmployees()) {
                     for (Project project : emp.getProjects()) {
                         if (employees.getProjects().contains(project)) {
-
                             list.add(employee);
                         }
                     }

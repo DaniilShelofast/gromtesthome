@@ -12,9 +12,8 @@ public class Controller {
                 return emp.getProjects();
             }
         }
-        throw new Exception("error : ");
+        throw new Exception("error : Project list not found, this employee. ");
     }
-
 
     public static LinkedList<Employee> employeesByDepartmentWithoutProject(DepartmentType departmentType) {
 

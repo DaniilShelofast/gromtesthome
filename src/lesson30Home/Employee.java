@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Employee {
     private String firstName;
     private String lastName;
-    private Date dateHired ;
+    private Date dateHired;
     private Position position;
     private Department department;
     private Collection<Project> projects;
@@ -16,7 +16,7 @@ public class Employee {
     public Employee(String firstName, String lastName, Date dateHired, Position position, Department department) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.dateHired = new Date(105, 5, 4);
+        this.dateHired = dateHired;
         this.position = position;
         this.department = department;
         this.projects = new LinkedList<>();

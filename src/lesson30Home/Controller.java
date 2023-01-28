@@ -1,14 +1,11 @@
 package lesson30Home;
 
-
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 
 public class Controller {
 
-
     public static Collection<Project> projectsByEmployee(Employee employee) throws Exception {
-
 
         for (Employee emp : EmployeeDAO.getEmployees()) {
             if (emp.equals(employee)) {
@@ -19,9 +16,9 @@ public class Controller {
     }
 
 
-    public static ArrayList<Employee> employeesByDepartmentWithoutProject(DepartmentType departmentType) {
+    public static LinkedList<Employee> employeesByDepartmentWithoutProject(DepartmentType departmentType) {
 
-        ArrayList<Employee> list = new ArrayList<>();
+        LinkedList<Employee> list = new LinkedList<>();
         for (Department department : DepartmentDAO.getDepartments()) {
             if (department.getDepartmentType().equals(departmentType)) {
 
@@ -38,9 +35,9 @@ public class Controller {
         return list;
     }
 
-    public static ArrayList<Employee> employeesWithoutProject() {
+    public static LinkedList<Employee> employeesWithoutProject() {
 
-        ArrayList<Employee> list = new ArrayList<>();
+        LinkedList<Employee> list = new LinkedList<>();
         for (Employee employee : EmployeeDAO.getEmployees()) {
             if (employee.getProjects().isEmpty()) {
                 list.add(employee);
@@ -49,10 +46,9 @@ public class Controller {
         return list;
     }
 
-    public static ArrayList<Employee> employeesByTeamLead(Employee lead) {
+    public static LinkedList<Employee> employeesByTeamLead(Employee lead) {
         //список подчиньоних для заданого керівника(по всім проектам, у яких він руководить)
-        ArrayList<Employee> list = new ArrayList<>();
-
+        LinkedList<Employee> list = new LinkedList<>();
 
         for (Employee teamLead : EmployeeDAO.getEmployees()) {
             if (teamLead.equals(lead)) {
@@ -72,8 +68,8 @@ public class Controller {
         return list;
     }
 
-    public ArrayList<Employee> teamLeadsByEmployee(Employee employee) {
-        ArrayList<Employee> list = new ArrayList<>();
+    public LinkedList<Employee> teamLeadsByEmployee(Employee employee) {
+        LinkedList<Employee> list = new LinkedList<>();
         //список лідів для працівника( у всіх проектах у яких він працює )
         for (Employee emp : EmployeeDAO.getEmployees()) {
             if (emp.equals(employee)) {
@@ -94,8 +90,8 @@ public class Controller {
     }
 
 
-    public ArrayList<Employee> employeesByProjectEmployee(Employee employee) {
-        ArrayList<Employee> list = new ArrayList<>();
+    public LinkedList<Employee> employeesByProjectEmployee(Employee employee) {
+        LinkedList<Employee> list = new LinkedList<>();
         //список працівників,працюючи на тих самих проектах,що заданий працівник.
 
         for (Employee emp : EmployeeDAO.getEmployees()) {
@@ -110,13 +106,12 @@ public class Controller {
                 }
             }
         }
-
         return list;
     }
 
-    public Collection<Project> projectsByCustomer(Customer customer) {
+    public LinkedList<Project> projectsByCustomer(Customer customer) {
         //список проектів. виповняємих для замовника
-        ArrayList<Project> list = new ArrayList<>();
+        LinkedList<Project> list = new LinkedList<>();
 
         for (Customer cus : CustomerDAO.getCustomers()) {
             if (cus.equals(customer)) {
@@ -131,9 +126,9 @@ public class Controller {
         return list;
     }
 
-    public ArrayList<Employee> employeesByCustomerProject(Customer customer) {
+    public LinkedList<Employee> employeesByCustomerProject(Customer customer) {
         //список працівників,участвующий в проектах,виконуючи для замовника
-        ArrayList<Employee> list = new ArrayList<>();
+        LinkedList<Employee> list = new LinkedList<>();
 
         for (Customer custom : CustomerDAO.getCustomers()) {
             if (custom.equals(customer)) {
@@ -142,7 +137,7 @@ public class Controller {
                     if (project.getCustomer().equals(custom)) {
                         for (Employee employee : EmployeeDAO.getEmployees()) {
                             if (employee.getProjects().contains(project)) {
-                                  list.add(employee);
+                                list.add(employee);
                             }
                         }
                     }

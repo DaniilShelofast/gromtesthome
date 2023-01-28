@@ -16,8 +16,8 @@ public class Controller {
     }
 
     public static LinkedList<Employee> employeesByDepartmentWithoutProject(DepartmentType departmentType) {
-
         LinkedList<Employee> list = new LinkedList<>();
+
         for (Department department : DepartmentDAO.getDepartments()) {
             if (department.getDepartmentType().equals(departmentType)) {
 
@@ -25,18 +25,16 @@ public class Controller {
                     if (emp.getProjects().isEmpty()) {
 
                         list.add(emp);
-
                     }
                 }
             }
-
         }
         return list;
     }
 
     public static LinkedList<Employee> employeesWithoutProject() {
-
         LinkedList<Employee> list = new LinkedList<>();
+
         for (Employee employee : EmployeeDAO.getEmployees()) {
             if (employee.getProjects().isEmpty()) {
                 list.add(employee);

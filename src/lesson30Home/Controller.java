@@ -78,10 +78,10 @@ public class Controller {
         for (Employee emp : EmployeeDAO.getEmployees()) {
             if (emp.equals(employee)) {
 
-                for (Employee e : EmployeeDAO.getEmployees()){
-                    if (!e.equals(emp)){
-                        for (Project project : emp.getProjects()){
-                            if (e.getProjects().contains(project)){
+                for (Employee e : EmployeeDAO.getEmployees()) {
+                    if (!e.equals(emp)) {
+                        for (Project project : emp.getProjects()) {
+                            if (e.getProjects().contains(project)) {
 
                                 list.add(e);
                             }
@@ -100,14 +100,15 @@ public class Controller {
 
         for (Employee emp : EmployeeDAO.getEmployees()) {
             if (emp.equals(employee)) {
-                list.add((Employee) emp.getProjects());
 
-                for (Employee e : EmployeeDAO.getEmployees()) {
-                    if (e.getProjects().isEmpty()) {
-                        list.add(e);
+                for (Employee employees : EmployeeDAO.getEmployees()) {
+                    for (Project project : emp.getProjects()) {
+                        if (employees.getProjects().contains(project)) {
+
+                            list.add(employee);
+                        }
                     }
                 }
-
             }
         }
 

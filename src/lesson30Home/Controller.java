@@ -52,7 +52,6 @@ public class Controller {
                 for (Employee emp : EmployeeDAO.getEmployees()) {
                     for (Project pr : teamLead.getProjects()) {
                         if (emp.getProjects().contains(pr)) {
-
                             list.add(emp);
                             return list;
                         }
@@ -86,7 +85,6 @@ public class Controller {
                 return null;
             }
         }
-
         throw new Exception("error");
     }
 

@@ -52,11 +52,14 @@ public class Controller {
                 for (Employee emp : EmployeeDAO.getEmployees()) {
                     for (Project pr : teamLead.getProjects()) {
                         if (emp.getProjects().contains(pr)) {
+
                             list.add(emp);
                             return list;
                         }
                     }
                 }
+            } else {
+                return null;
             }
         }
         throw new Exception("error ");
@@ -67,6 +70,7 @@ public class Controller {
         //список тім лідерів, для працівника, у всіх проєктах у яких він працює.
         for (Employee emp : EmployeeDAO.getEmployees()) {
             if (emp.equals(employee)) {
+
                 for (Employee e : EmployeeDAO.getEmployees()) {
                     if (!e.equals(emp)) {
                         for (Project project : emp.getProjects()) {
@@ -77,8 +81,12 @@ public class Controller {
                         }
                     }
                 }
+
+            } else {
+                return null;
             }
         }
+
         throw new Exception("error");
     }
 

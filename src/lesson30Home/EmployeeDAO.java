@@ -20,8 +20,8 @@ public class EmployeeDAO {
 
         employee1.getProjects().add(project1);
         employee4.getProjects().add(project1);
-        employee2.getProjects().add(project1);
-        employee3.getProjects().add(project1);
+        employee2.getProjects().add(project2);
+        employee3.getProjects().add(project2);
         employees.add(employee1);
         employees.add(employee2);
         employees.add(employee3);

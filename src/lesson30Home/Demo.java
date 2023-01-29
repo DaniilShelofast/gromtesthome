@@ -17,10 +17,10 @@ public class Demo {
 
         Project project = new Project("te", customer);
 
-        System.out.println(Controller.employeesByProjectEmployee(employee1));
-        System.out.println(Controller.employeesByProjectEmployee(employee2));
-        System.out.println(Controller.employeesByProjectEmployee(employee3));
-        System.out.println(Controller.employeesByProjectEmployee(employee4));
+        System.out.println(Controller.employeesByTeamLead(employee1));
+        System.out.println(Controller.employeesByTeamLead(employee2));
+        System.out.println(Controller.employeesByTeamLead(employee3));
+        System.out.println(Controller.employeesByTeamLead(employee4));
 
         //System.out.println(EmployeeDAO.getEmployees());
 

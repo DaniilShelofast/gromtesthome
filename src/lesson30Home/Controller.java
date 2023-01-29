@@ -83,7 +83,7 @@ public class Controller {
     }
 
 
-    public static LinkedList<Employee> employeesByProjectEmployee(Employee employee) {
+    public static LinkedList<Employee> employeesByProjectEmployee(Employee employee) throws Exception {
         LinkedList<Employee> list = new LinkedList<>();
         //список працівників, виконуючи роботу на тих самих проєктах, що і заданий працівник.
 
@@ -100,10 +100,10 @@ public class Controller {
                 }
             }
         }
-        return null;
+        throw new Exception("error");
     }
 
-    public LinkedList<Project> projectsByCustomer(Customer customer) {
+    public LinkedList<Project> projectsByCustomer(Customer customer) throws Exception {
         //перелік проєктів для замовника.
         LinkedList<Project> list = new LinkedList<>();
 
@@ -113,14 +113,15 @@ public class Controller {
                 for (Project project : ProjectDAO.getProjects()) {
                     if (project.getCustomer().equals(cus)) {
                         list.add(project);
+                        return list;
                     }
                 }
             }
         }
-        return list;
+        throw new Exception("error");
     }
 
-    public LinkedList<Employee> employeesByCustomerProject(Customer customer) {
+    public LinkedList<Employee> employeesByCustomerProject(Customer customer) throws Exception {
         //список працівників,участвующий в проектах,виконуючи для замовника
         LinkedList<Employee> list = new LinkedList<>();
 
@@ -132,13 +133,14 @@ public class Controller {
                         for (Employee employee : EmployeeDAO.getEmployees()) {
                             if (employee.getProjects().contains(project)) {
                                 list.add(employee);
+                                return list;
                             }
                         }
                     }
                 }
             }
         }
-        return list;
+        throw new Exception("error");
     }
 
 }

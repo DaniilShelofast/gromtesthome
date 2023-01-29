@@ -43,51 +43,47 @@ public class Controller {
         return list;
     }
 
-    public static LinkedList<Employee> employeesByTeamLead(Employee lead) {
+    public static LinkedList<Employee> employeesByTeamLead(Employee lead) throws Exception {
         //список працівників для заданого керівника, по всім проєктам, у яких він лід.
         LinkedList<Employee> list = new LinkedList<>();
-
         for (Employee teamLead : EmployeeDAO.getEmployees()) {
             if (teamLead.equals(lead)) {
 
                 for (Employee emp : EmployeeDAO.getEmployees()) {
-                    if (!emp.getPosition().equals(teamLead.getPosition())) {
-                        for (Project pr : teamLead.getProjects()) {
-                            if (emp.getProjects().contains(pr)) {
-
-                                list.add(emp);
-                            }
+                    for (Project pr : teamLead.getProjects()) {
+                        if (emp.getProjects().contains(pr)) {
+                            list.add(emp);
+                            return list;
                         }
                     }
                 }
             }
         }
-        return list;
+        throw new Exception("error ");
     }
 
-    public LinkedList<Employee> teamLeadsByEmployee(Employee employee) {
+    public static LinkedList<Employee> teamLeadsByEmployee(Employee employee) throws Exception {
         LinkedList<Employee> list = new LinkedList<>();
         //список тім лідерів, для працівника, у всіх проєктах у яких він працює.
         for (Employee emp : EmployeeDAO.getEmployees()) {
             if (emp.equals(employee)) {
-
                 for (Employee e : EmployeeDAO.getEmployees()) {
                     if (!e.equals(emp)) {
                         for (Project project : emp.getProjects()) {
                             if (e.getProjects().contains(project)) {
-
                                 list.add(e);
+                                return list;
                             }
                         }
                     }
                 }
             }
         }
-        return list;
+        throw new Exception("error");
     }
 
 
-    public LinkedList<Employee> employeesByProjectEmployee(Employee employee) {
+    public static LinkedList<Employee> employeesByProjectEmployee(Employee employee) {
         LinkedList<Employee> list = new LinkedList<>();
         //список працівників, виконуючи роботу на тих самих проєктах, що і заданий працівник.
 
@@ -98,12 +94,13 @@ public class Controller {
                     for (Project project : emp.getProjects()) {
                         if (employees.getProjects().contains(project)) {
                             list.add(employee);
+                            return list;
                         }
                     }
                 }
             }
         }
-        return list;
+        return null;
     }
 
     public LinkedList<Project> projectsByCustomer(Customer customer) {

@@ -70,17 +70,16 @@ public class Controller {
         checkNotLeads(employee);
 
         for (Employee index : EmployeeDAO.getEmployees()) {
-            if (!index.equals(employee)) {
+            if (index.getPosition() == Position.TEAM_LEAD || index.getPosition() == Position.LEAD_DESIGNER) {
                 for (Project project : index.getProjects()) {
                     if (index.getProjects().contains(project)) {
                         list.add(index);
-
                     }
                 }
             }
+
         }
         return list;
-
     }
 
 
@@ -88,20 +87,20 @@ public class Controller {
         LinkedList<Employee> list = new LinkedList<>();
         //список працівників, виконуючи роботу на тих самих проєктах, що і заданий працівник.
 
-        for (Employee emp : EmployeeDAO.getEmployees()) {
-            if (emp.equals(employee)) {
+        checkEmployee(employee);
+        checkNotLeads(employee);
 
-                for (Employee employees : EmployeeDAO.getEmployees()) {
-                    for (Project project : emp.getProjects()) {
-                        if (employees.getProjects().contains(project)) {
-                            list.add(employee);
-                            return list;
-                        }
+        for (Employee emp : EmployeeDAO.getEmployees()) {
+            if (!emp.equals(employee)) {
+
+                for (Project project : emp.getProjects()){
+                    if (emp.getProjects().contains(project)){
+                        list.add(emp);
                     }
                 }
             }
         }
-        throw new Exception("error");
+        return list;
     }
 
     public LinkedList<Project> projectsByCustomer(Customer customer) throws Exception {

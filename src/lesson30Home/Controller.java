@@ -44,48 +44,43 @@ public class Controller {
     }
 
     public static LinkedList<Employee> employeesByTeamLead(Employee lead) throws Exception {
-        //список працівників для заданого керівника, по всім проєктам, у яких він лід.
         LinkedList<Employee> list = new LinkedList<>();
-        for (Employee teamLead : EmployeeDAO.getEmployees()) {
-            if (teamLead.equals(lead)) {
+        checkPosition(lead);
+        checkEmployee(lead);
 
-                for (Employee emp : EmployeeDAO.getEmployees()) {
-                    for (Project pr : teamLead.getProjects()) {
-                        if (emp.getProjects().contains(pr)) {
-                            list.add(emp);
-                            return list;
-                        }
+        for (Employee teamLead : EmployeeDAO.getEmployees()) {
+            if (!teamLead.equals(lead)) {
+                for (Project pr : teamLead.getProjects()) {
+                    if (teamLead.getProjects().contains(pr)) {
+                        list.add(teamLead);
+
                     }
                 }
-            } else {
-                return null;
             }
+
         }
-        throw new Exception("error ");
+        return list;
     }
+
 
     public static LinkedList<Employee> teamLeadsByEmployee(Employee employee) throws Exception {
         LinkedList<Employee> list = new LinkedList<>();
-        //список тім лідерів, для працівника, у всіх проєктах у яких він працює.
-        for (Employee emp : EmployeeDAO.getEmployees()) {
-            if (emp.equals(employee)) {
 
-                for (Employee e : EmployeeDAO.getEmployees()) {
-                    if (!e.equals(emp)) {
-                        for (Project project : emp.getProjects()) {
-                            if (e.getProjects().contains(project)) {
-                                list.add(e);
-                                return list;
-                            }
-                        }
+        checkEmployee(employee);
+        checkNotLeads(employee);
+
+        for (Employee index : EmployeeDAO.getEmployees()) {
+            if (!index.equals(employee)) {
+                for (Project project : index.getProjects()) {
+                    if (index.getProjects().contains(project)) {
+                        list.add(index);
+
                     }
                 }
-
-            } else {
-                return null;
             }
         }
-        throw new Exception("error");
+        return list;
+
     }
 
 
@@ -147,6 +142,30 @@ public class Controller {
             }
         }
         throw new Exception("error");
+    }
+
+    private static boolean checkEmployee(Employee employee) throws Exception {
+        for (Employee employee1 : EmployeeDAO.getEmployees()) {
+            if (employee1.equals(employee)) {
+                return true;
+            }
+        }
+        throw new Exception("error : this employee does not exist in this list.");
+    }
+
+    private static boolean checkPosition(Employee lead) throws Exception {
+        if (lead.getPosition() == Position.TEAM_LEAD || lead.getPosition() == Position.LEAD_DESIGNER) {
+            return true;
+        }
+        throw new Exception("error : this employee is not a leader on this project.");
+    }
+
+    private static boolean checkNotLeads(Employee lead) throws Exception {
+        if (lead.getPosition() == Position.DESIGNER || lead.getPosition() == Position.DEVELOPER || lead.getPosition() == Position.FINANCE
+                || lead.getPosition() == Position.ANALYST || lead.getPosition() == Position.MANAGER) {
+            return true;
+        }
+        throw new Exception("error : this employee is a manager.");
     }
 
 }

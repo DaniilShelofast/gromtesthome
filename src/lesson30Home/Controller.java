@@ -160,9 +160,9 @@ public class Controller {
         throw new Exception("error : this employee is not a leader on this project.");
     }
 
-    private static boolean checkNotLeads(Employee lead) throws Exception {
-        if (lead.getPosition() == Position.DESIGNER || lead.getPosition() == Position.DEVELOPER || lead.getPosition() == Position.FINANCE
-                || lead.getPosition() == Position.ANALYST || lead.getPosition() == Position.MANAGER) {
+    private static boolean checkNotLeads(Employee employee) throws Exception {
+        if (employee.getPosition() == Position.DESIGNER || employee.getPosition() == Position.DEVELOPER || employee.getPosition() == Position.FINANCE
+                || employee.getPosition() == Position.ANALYST || employee.getPosition() == Position.MANAGER) {
             return true;
         }
         throw new Exception("error : this employee is a manager.");

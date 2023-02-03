@@ -23,7 +23,6 @@ public class Controller {
 
                 for (Employee emp : department.getEmployees()) {
                     if (emp.getProjects().isEmpty()) {
-
                         list.add(emp);
                     }
                 }
@@ -45,6 +44,7 @@ public class Controller {
 
     public static LinkedList<Employee> employeesByTeamLead(Employee lead) throws Exception {
         LinkedList<Employee> list = new LinkedList<>();
+
         checkPosition(lead);
         checkEmployee(lead);
 
@@ -77,7 +77,6 @@ public class Controller {
                     }
                 }
             }
-
         }
         return list;
     }
@@ -85,17 +84,45 @@ public class Controller {
 
     public static LinkedList<Employee> employeesByProjectEmployee(Employee employee) throws Exception {
         LinkedList<Employee> list = new LinkedList<>();
-        //список працівників, виконуючи роботу на тих самих проєктах, що і заданий працівник.
 
         checkEmployee(employee);
-        checkNotLeads(employee);
+        checkProject(employee);
 
         for (Employee emp : EmployeeDAO.getEmployees()) {
             if (!emp.equals(employee)) {
+                if (emp.getProjects().containsAll(employee.getProjects())) {
+                    list.add(emp);
+                }
+            }
+        }
+        return list;
+    }
 
-                for (Project project : emp.getProjects()){
-                    if (emp.getProjects().contains(project)){
-                        list.add(emp);
+    public static LinkedList<Project> projectsByCustomer(Customer customer) throws Exception {
+        LinkedList<Project> list = new LinkedList<>();
+
+        checkCustomer(customer);
+        checkProjectCustomer(customer);
+
+        for (Project project : ProjectDAO.getProjects()) {
+            if (project.getCustomer().equals(customer)) {
+                list.add(project);
+            }
+        }
+        return list;
+    }
+
+    public static LinkedList<Employee> employeesByCustomerProject(Customer customer) throws Exception {
+        LinkedList<Employee> list = new LinkedList<>();
+
+        checkCustomer(customer);
+        checkProjectCustomer(customer);
+
+        for (Project project : ProjectDAO.getProjects()) {
+            if (project.getCustomer().equals(customer)) {
+                for (Employee employee : EmployeeDAO.getEmployees()) {
+                    if (employee.getProjects().contains(project)) {
+                        list.add(employee);
                     }
                 }
             }
@@ -103,49 +130,9 @@ public class Controller {
         return list;
     }
 
-    public LinkedList<Project> projectsByCustomer(Customer customer) throws Exception {
-        //перелік проєктів для замовника.
-        LinkedList<Project> list = new LinkedList<>();
-
-        for (Customer cus : CustomerDAO.getCustomers()) {
-            if (cus.equals(customer)) {
-
-                for (Project project : ProjectDAO.getProjects()) {
-                    if (project.getCustomer().equals(cus)) {
-                        list.add(project);
-                        return list;
-                    }
-                }
-            }
-        }
-        throw new Exception("error");
-    }
-
-    public LinkedList<Employee> employeesByCustomerProject(Customer customer) throws Exception {
-        //список працівників,участвующий в проектах,виконуючи для замовника
-        LinkedList<Employee> list = new LinkedList<>();
-
-        for (Customer custom : CustomerDAO.getCustomers()) {
-            if (custom.equals(customer)) {
-
-                for (Project project : ProjectDAO.getProjects()) {
-                    if (project.getCustomer().equals(custom)) {
-                        for (Employee employee : EmployeeDAO.getEmployees()) {
-                            if (employee.getProjects().contains(project)) {
-                                list.add(employee);
-                                return list;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        throw new Exception("error");
-    }
-
     private static boolean checkEmployee(Employee employee) throws Exception {
-        for (Employee employee1 : EmployeeDAO.getEmployees()) {
-            if (employee1.equals(employee)) {
+        for (Employee e : EmployeeDAO.getEmployees()) {
+            if (e.equals(employee)) {
                 return true;
             }
         }
@@ -166,5 +153,31 @@ public class Controller {
         }
         throw new Exception("error : this employee is a manager.");
     }
+
+    private static boolean checkProject(Employee employee) throws Exception {
+        if (!employee.getProjects().isEmpty()) {
+            return true;
+        }
+        throw new Exception("error : the project does not exist. ");
+    }
+
+    private static boolean checkCustomer(Customer customer) throws Exception {
+        for (Customer c : CustomerDAO.getCustomers()) {
+            if (c.equals(customer)) {
+                return true;
+            }
+        }
+        throw new Exception("error : the client does not have in the database.");
+    }
+
+    private static boolean checkProjectCustomer(Customer customer) throws Exception {
+        for (Project project : ProjectDAO.getProjects()) {
+            if (project.getCustomer().equals(customer)) {
+                return true;
+            }
+        }
+        throw new Exception("error : the client has no projects.");
+    }
+
 
 }

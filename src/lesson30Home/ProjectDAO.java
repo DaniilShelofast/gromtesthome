@@ -16,9 +16,11 @@ public class ProjectDAO {
         Project project3 = new Project("www", customer1);
         projects.add(project1);
         projects.add(project2);
-       // projects.add(project3);
+        // projects.add(project3);
 
     }
+
+
 
     public static LinkedList<Project> getProjects() {
         return projects;

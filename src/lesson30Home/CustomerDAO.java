@@ -3,6 +3,8 @@ package lesson30Home;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import static lesson30Home.ProjectDAO.getProjects;
+
 public class CustomerDAO {
     private static final LinkedList<Customer> customers = new LinkedList<>();
 

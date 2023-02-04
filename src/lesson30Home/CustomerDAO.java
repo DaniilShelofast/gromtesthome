@@ -1,9 +1,10 @@
 package lesson30Home;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class CustomerDAO {
-    private static final ArrayList<Customer> customers = new ArrayList<>();
+    private static final LinkedList<Customer> customers = new LinkedList<>();
 
     public CustomerDAO() {
         Customer customer1 = new Customer("rrr", "ccc", "eee", 100);
@@ -13,7 +14,7 @@ public class CustomerDAO {
         customers.add(customer2);
     }
 
-    public static ArrayList<Customer> getCustomers() {
+    public static LinkedList<Customer> getCustomers() {
         return customers;
     }
 }

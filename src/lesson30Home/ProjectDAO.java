@@ -1,10 +1,11 @@
 package lesson30Home;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class ProjectDAO {
 
-    private static ArrayList<Project> projects = new ArrayList<>();
+    private static LinkedList<Project> projects = new LinkedList<>();
 
     public ProjectDAO() {
         Customer customer1 = new Customer("rrr", "ccc", "eee", 100);
@@ -19,7 +20,7 @@ public class ProjectDAO {
 
     }
 
-    public static ArrayList<Project> getProjects() {
+    public static LinkedList<Project> getProjects() {
         return projects;
     }
 }

@@ -102,7 +102,6 @@ public class Controller {
         LinkedList<Project> list = new LinkedList<>();
 
         checkCustomer(customer);
-        checkProjectCustomer(customer);
 
         for (Project project : ProjectDAO.getProjects()) {
             if (project.getCustomer().equals(customer)) {

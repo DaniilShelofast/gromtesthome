@@ -115,7 +115,6 @@ public class Controller {
         LinkedList<Employee> list = new LinkedList<>();
 
         checkCustomer(customer);
-        checkProjectCustomer(customer);
 
         for (Project project : ProjectDAO.getProjects()) {
             if (project.getCustomer().equals(customer)) {
@@ -169,14 +168,14 @@ public class Controller {
         throw new Exception("error : the client does not have in the database.");
     }
 
-    private static boolean checkProjectCustomer(Customer customer) throws Exception {
+   /* private static boolean checkProjectCustomer(Customer customer) throws Exception {
         for (Project project : ProjectDAO.getProjects()) {
             if (project.getCustomer().equals(customer)) {
                 return true;
             }
         }
         throw new Exception("error : the client has no projects.");
-    }
+    }*/
 
 
 }

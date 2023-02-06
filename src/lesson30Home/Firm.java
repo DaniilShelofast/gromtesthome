@@ -17,7 +17,6 @@ public class Firm {
         this.customers = new LinkedList<>();
     }
 
-
     public Date getDateFounder() {
         return dateFounder;
     }
@@ -30,17 +29,5 @@ public class Firm {
         return customers;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Firm firm = (Firm) o;
-        return Objects.equals(dateFounder, firm.dateFounder);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(dateFounder);
-    }
 }
 

@@ -24,13 +24,14 @@ public class Demo {
         Employee employee5 = new Employee("ooo", "vvv", new Date(105, 1, 2), Position.ANALYST, department2);
         Employee employee6 = new Employee("ggg", "iii", new Date(105, 3, 6), Position.DESIGNER, department2);
         employee.getProjects().add(project1);
+        //employee.getProjects().add(project2);
         employee2.getProjects().add(project1);
         employee3.getProjects().add(project1);
         employee4.getProjects().add(project2);
         employee5.getProjects().add(project2);
         employee6.getProjects().add(project2);
 
-        System.out.println(Controller.employeesByCustomerProject(customer2));
+        System.out.println(Controller.projectsByEmployee(employee));
 
     }
 }

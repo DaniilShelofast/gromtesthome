@@ -1,11 +1,13 @@
 package lesson30Home;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
 public class ProjectDAO {
 
-    private static LinkedList<Project> projects = new LinkedList<>();
+    private static Set<Project> projects = new HashSet<>();
 
     public ProjectDAO() {
         Customer customer1 = new Customer("rrr", "ccc", "eee", 100);
@@ -22,7 +24,7 @@ public class ProjectDAO {
 
 
 
-    public static LinkedList<Project> getProjects() {
+    public static Set<Project> getProjects() {
         return projects;
     }
 }

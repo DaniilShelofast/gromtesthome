@@ -1,12 +1,10 @@
 package lesson30Home;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-
-import static lesson30Home.ProjectDAO.getProjects;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CustomerDAO {
-    private static final LinkedList<Customer> customers = new LinkedList<>();
+    private static final Set<Customer> customers = new HashSet<>();
 
     public CustomerDAO() {
         Customer customer1 = new Customer("rrr", "ccc", "eee", 100);
@@ -16,7 +14,7 @@ public class CustomerDAO {
         customers.add(customer2);
     }
 
-    public static LinkedList<Customer> getCustomers() {
+    public static Set<Customer> getCustomers() {
         return customers;
     }
 }

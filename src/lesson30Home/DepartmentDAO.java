@@ -1,10 +1,11 @@
 package lesson30Home;
 
-import java.util.Date;
-import java.util.LinkedList;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class DepartmentDAO {
-    private static final LinkedList<Department> departments = new LinkedList<>();
+    private static final Set<Department> departments = new HashSet<>();
 
 
     public DepartmentDAO() {
@@ -17,7 +18,7 @@ public class DepartmentDAO {
 
     }
 
-    public static LinkedList<Department> getDepartments() {
+    public static Set<Department> getDepartments() {
         return departments;
     }
 

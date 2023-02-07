@@ -1,9 +1,6 @@
 package lesson30Home;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.Objects;
+import java.util.*;
 
 public class Employee {
     private String firstName;
@@ -19,7 +16,7 @@ public class Employee {
         this.dateHired = dateHired;
         this.position = position;
         this.department = department;
-        this.projects = new LinkedList<>();
+        this.projects = new HashSet<>();
     }
 
     public String getFirstName() {

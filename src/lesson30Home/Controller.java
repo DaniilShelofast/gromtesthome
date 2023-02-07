@@ -1,7 +1,9 @@
 package lesson30Home;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
 public class Controller {
 
@@ -48,16 +50,17 @@ public class Controller {
         checkPosition(lead);
         checkEmployee(lead);
 
-        for (Employee teamLead : EmployeeDAO.getEmployees()) {
-            if (!teamLead.equals(lead)) {
-                for (Project pr : teamLead.getProjects()) {
-                    if (teamLead.getProjects().contains(pr)) {
-                        list.add(teamLead);
+        for (Project project : ProjectDAO.getProjects()) {
+            if (lead.getProjects().contains(project)) {
 
+                for (Employee teamLead : EmployeeDAO.getEmployees()) {
+                    if (!teamLead.equals(lead)) {
+                        if (teamLead.getProjects().containsAll(lead.getProjects())) {
+                            list.add(teamLead);
+                        }
                     }
                 }
             }
-
         }
         return list;
     }
@@ -70,7 +73,7 @@ public class Controller {
         checkNotLeads(employee);
 
         for (Employee index : EmployeeDAO.getEmployees()) {
-            if (index.getPosition() == Position.TEAM_LEAD || index.getPosition() == Position.LEAD_DESIGNER) {
+            if (index.getPosition() == Position.TEAM_LEAD) {
                 for (Project project : index.getProjects()) {
                     if (index.getProjects().contains(project)) {
                         list.add(index);
@@ -88,18 +91,23 @@ public class Controller {
         checkEmployee(employee);
         checkProject(employee);
 
-        for (Employee emp : EmployeeDAO.getEmployees()) {
-            if (!emp.equals(employee)) {
-                if (emp.getProjects().containsAll(employee.getProjects())) {
-                    list.add(emp);
+        for (Project project : ProjectDAO.getProjects()) {
+            if (employee.getProjects().contains(project)) {
+
+                for (Employee emp : EmployeeDAO.getEmployees()) {
+                    if (!emp.equals(employee)) {
+                        if (emp.getProjects().containsAll(employee.getProjects())) {
+                            list.add(emp);
+                        }
+                    }
                 }
             }
         }
         return list;
     }
 
-    public static LinkedList<Project> projectsByCustomer(Customer customer) throws Exception {
-        LinkedList<Project> list = new LinkedList<>();
+    public static Set<Project> projectsByCustomer(Customer customer) throws Exception {
+        Set<Project> list = new HashSet<>();
 
         checkCustomer(customer);
 
@@ -138,7 +146,7 @@ public class Controller {
     }
 
     private static boolean checkPosition(Employee lead) throws Exception {
-        if (lead.getPosition() == Position.TEAM_LEAD || lead.getPosition() == Position.LEAD_DESIGNER) {
+        if (lead.getPosition() == Position.TEAM_LEAD) {
             return true;
         }
         throw new Exception("error : this employee is not a leader on this project.");
@@ -146,7 +154,7 @@ public class Controller {
 
     private static boolean checkNotLeads(Employee employee) throws Exception {
         if (employee.getPosition() == Position.DESIGNER || employee.getPosition() == Position.DEVELOPER || employee.getPosition() == Position.FINANCE
-                || employee.getPosition() == Position.ANALYST || employee.getPosition() == Position.MANAGER) {
+                || employee.getPosition() == Position.ANALYST || employee.getPosition() == Position.MANAGER || employee.getPosition() == Position.LEAD_DESIGNER) {
             return true;
         }
         throw new Exception("error : this employee is a manager.");

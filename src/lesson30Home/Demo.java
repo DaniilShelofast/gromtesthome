@@ -23,14 +23,9 @@ public class Demo {
         Employee employee4 = new Employee("nnn", "aaa", new Date(105, 2, 5), Position.TEAM_LEAD, department2);
         Employee employee5 = new Employee("ooo", "vvv", new Date(105, 1, 2), Position.ANALYST, department2);
         Employee employee6 = new Employee("ggg", "iii", new Date(105, 3, 6), Position.DESIGNER, department2);
-        //employee.getProjects().add(project1);
-       /* employee2.getProjects().add(project1);
-        employee3.getProjects().add(project1);
-        employee4.getProjects().add(project2);
-        employee5.getProjects().add(project2);
-        employee6.getProjects().add(project2);*/
+
         System.out.println(Controller.employeesByProjectEmployee(employee2));
-       /* System.out.println(ProjectDAO.getProjects());*/
+
 
 
 

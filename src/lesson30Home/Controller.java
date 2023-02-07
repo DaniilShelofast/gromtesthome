@@ -194,6 +194,4 @@ public class Controller {
         }
         throw new Exception("error : the client does not have in the database.");
     }
-
-
 }

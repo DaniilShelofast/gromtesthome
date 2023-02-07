@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.Set;
 
 public class Controller {
+    EmployeeDAO employeeDAO = new EmployeeDAO();
+
 
     public static Collection<Project> projectsByEmployee(Employee employee) throws Exception {
 
@@ -47,18 +49,26 @@ public class Controller {
     public static LinkedList<Employee> employeesByTeamLead(Employee lead) throws Exception {
         LinkedList<Employee> list = new LinkedList<>();
 
-        checkPosition(lead);
-        checkEmployee(lead);
+        Employee l = null;
+        for (Employee employee : EmployeeDAO.getEmployees()) {
+            if (employee.equals(lead)) {
+                l = employee;
+                break;
+            }
+        }
 
-        for (Project project : ProjectDAO.getProjects()) {
-            if (lead.getProjects().contains(project)) {
+        if (l == null) {
+            throw new Exception("error : the required employee was not found.");
+        }
 
-                for (Employee teamLead : EmployeeDAO.getEmployees()) {
-                    if (!teamLead.equals(lead)) {
-                        if (teamLead.getProjects().containsAll(lead.getProjects())) {
-                            list.add(teamLead);
-                        }
-                    }
+        checkPosition(l);
+        checkEmployee(l);
+
+        for (Employee employeeTeam_Lead : EmployeeDAO.getEmployees()) {
+            if (!employeeTeam_Lead.equals(l)) {
+
+                if (employeeTeam_Lead.getProjects().containsAll(l.getProjects())) {
+                    list.add(employeeTeam_Lead);
                 }
             }
         }
@@ -88,18 +98,29 @@ public class Controller {
     public static LinkedList<Employee> employeesByProjectEmployee(Employee employee) throws Exception {
         LinkedList<Employee> list = new LinkedList<>();
 
-        checkEmployee(employee);
-        checkProject(employee);
-
-        for (Project project : ProjectDAO.getProjects()) {
-            if (employee.getProjects().contains(project)) {
-
-                for (Employee emp : EmployeeDAO.getEmployees()) {
-                    if (!emp.equals(employee)) {
-                        if (emp.getProjects().containsAll(employee.getProjects())) {
-                            list.add(emp);
-                        }
+        Employee e = null;
+        for (Employee emp : EmployeeDAO.getEmployees()) {
+            if (emp.equals(employee)) {
+                for (Project project : ProjectDAO.getProjects()) {
+                    if (emp.getProjects().contains(project)) {
+                        e = emp;
+                        break;
                     }
+                }
+            }
+        }
+
+        if (e == null) {
+            throw new Exception("error : the required employee was not found.");
+        }
+
+        checkProject(e);
+        checkEmployee(e);
+
+        for (Employee emp : EmployeeDAO.getEmployees()) {
+            if (!emp.equals(e)) {
+                if (emp.getProjects().containsAll(e.getProjects())) {
+                    list.add(emp);
                 }
             }
         }

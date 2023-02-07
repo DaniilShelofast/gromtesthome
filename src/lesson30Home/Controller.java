@@ -6,8 +6,6 @@ import java.util.LinkedList;
 import java.util.Set;
 
 public class Controller {
-    EmployeeDAO employeeDAO = new EmployeeDAO();
-
 
     public static Collection<Project> projectsByEmployee(Employee employee) throws Exception {
 
@@ -111,7 +109,7 @@ public class Controller {
         }
 
         if (e == null) {
-            throw new Exception("error : the required employee was not found.");
+            throw new Exception("error : the required employee was not found. ");
         }
 
         checkProject(e);

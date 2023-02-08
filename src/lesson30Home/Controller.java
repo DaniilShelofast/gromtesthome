@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
 
+import static lesson30Home.EmployeeDAO.searchEmployee;
+
 public class Controller {
 
     public static Collection<Project> projectsByEmployee(Employee employee) throws Exception {
@@ -47,26 +49,22 @@ public class Controller {
     public static LinkedList<Employee> employeesByTeamLead(Employee lead) throws Exception {
         LinkedList<Employee> list = new LinkedList<>();
 
-        Employee l = null;
+        checkPosition(lead);
+
+        Employee e = null;
         for (Employee employee : EmployeeDAO.getEmployees()) {
-            if (employee.equals(lead)) {
-                l = employee;
-                break;
-            }
+            e = employee;
         }
 
-        if (l == null) {
-            throw new Exception("error : the required employee was not found.");
+        if (e == null) {
+            throw new Exception("error : check the employee data.");
         }
 
-        checkPosition(l);
-        checkEmployee(l);
+        for (Employee l : EmployeeDAO.getEmployees()) {
+            if (!l.equals(e)) {
 
-        for (Employee employeeTeam_Lead : EmployeeDAO.getEmployees()) {
-            if (!employeeTeam_Lead.equals(l)) {
-
-                if (employeeTeam_Lead.getProjects().containsAll(l.getProjects())) {
-                    list.add(employeeTeam_Lead);
+                if (l.getProjects().containsAll(e.getProjects())) {
+                    list.add(l);
                 }
             }
         }
@@ -96,6 +94,7 @@ public class Controller {
     public static LinkedList<Employee> employeesByProjectEmployee(Employee employee) throws Exception {
         LinkedList<Employee> list = new LinkedList<>();
 
+
         Employee e = null;
         for (Employee emp : EmployeeDAO.getEmployees()) {
             if (emp.equals(employee)) {
@@ -109,7 +108,7 @@ public class Controller {
         }
 
         if (e == null) {
-            throw new Exception("error : the required employee was not found. ");
+            throw new Exception("error : the required employee was not found.");
         }
 
         checkProject(e);
@@ -125,8 +124,8 @@ public class Controller {
         return list;
     }
 
-    public static Set<Project> projectsByCustomer(Customer customer) throws Exception {
-        Set<Project> list = new HashSet<>();
+    public static LinkedList<Project> projectsByCustomer(Customer customer) throws Exception {
+        LinkedList<Project> list = new LinkedList<>();
 
         checkCustomer(customer);
 

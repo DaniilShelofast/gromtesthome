@@ -9,10 +9,11 @@ public class EmployeeDAO {
     public EmployeeDAO() {
         Customer customer1 = new Customer("rrr", "ccc", "eee", 100);
         Customer customer2 = new Customer("test", "test", "test", 50);
+        Customer customer3 = new Customer("test", "test", "ooo", 150);
 
         Project project1 = new Project("sss", customer1);
         Project project2 = new Project("test", customer2);
-
+        Project project3 = new Project("test", customer3);
         Department department1 = new Department(DepartmentType.ANALYSTS);
         Department department2 = new Department(DepartmentType.MANAGEMENT);
 
@@ -22,6 +23,7 @@ public class EmployeeDAO {
         Employee employee4 = new Employee("nnn", "aaa", new Date(105, 2, 5), Position.TEAM_LEAD, department2);
         Employee employee5 = new Employee("ooo", "vvv", new Date(105, 1, 2), Position.ANALYST, department2);
         Employee employee6 = new Employee("ggg", "iii", new Date(105, 3, 6), Position.DESIGNER, department2);
+
         employee.getProjects().add(project1);
         employee2.getProjects().add(project1);
         employee3.getProjects().add(project1);
@@ -38,6 +40,17 @@ public class EmployeeDAO {
 
 
     }
+
+    public static Employee searchEmployee(Employee employee) throws Exception {
+
+        for (Employee e : getEmployees()) {
+            if (e.equals(employee)) {
+                return e;
+            }
+        }
+        throw new Exception("error : not found in the database.");
+    }
+
 
     public static LinkedList<Employee> getEmployees() {
 

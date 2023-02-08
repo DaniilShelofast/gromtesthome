@@ -23,8 +23,9 @@ public class Demo {
         Employee employee4 = new Employee("nnn", "aaa", new Date(105, 2, 5), Position.TEAM_LEAD, department2);
         Employee employee5 = new Employee("ooo", "vvv", new Date(105, 1, 2), Position.ANALYST, department2);
         Employee employee6 = new Employee("ggg", "iii", new Date(105, 3, 6), Position.DESIGNER, department2);
+        //Employee employee7 = new Employee("kkk", "ppp", new Date(105, 3, 6), Position.DESIGNER, department2);
 
-        System.out.println(Controller.employeesByProjectEmployee(employee2));
+        System.out.println(Controller.employeesByTeamLead(employee));
 
 
 

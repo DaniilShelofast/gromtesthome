@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.Set;
 
 import static lesson30Home.EmployeeDAO.searchEmployee;
+import static lesson30Home.EmployeeDAO.searchEmployeeAndProject;
 
 public class Controller {
 
@@ -86,25 +87,9 @@ public class Controller {
     public static LinkedList<Employee> employeesByProjectEmployee(Employee employee) throws Exception {
         LinkedList<Employee> list = new LinkedList<>();
 
-
-        Employee e = null;
-        for (Employee emp : EmployeeDAO.getEmployees()) {
-            if (emp.equals(employee)) {
-                for (Project project : ProjectDAO.getProjects()) {
-                    if (emp.getProjects().contains(project)) {
-                        e = emp;
-                        break;
-                    }
-                }
-            }
-        }
-
-        if (e == null) {
-            throw new Exception("error : the required employee was not found.");
-        }
+        Employee e = searchEmployeeAndProject(employee);
 
         checkProject(e);
-        checkEmployee(e);
 
         for (Employee emp : EmployeeDAO.getEmployees()) {
             if (!emp.equals(e)) {

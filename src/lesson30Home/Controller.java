@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import static lesson30Home.EmployeeDAO.*;
+
 public class Controller {
 
     public static Collection<Project> projectsByEmployee(Employee employee) throws Exception {
@@ -83,7 +84,7 @@ public class Controller {
     public static LinkedList<Employee> employeesByProjectEmployee(Employee employee) throws Exception {
         LinkedList<Employee> list = new LinkedList<>();
 
-        Employee e = searchEmployeeAndProject(employee);
+        Employee e = searchEmployee(employee);
 
         checkProject(e);
 

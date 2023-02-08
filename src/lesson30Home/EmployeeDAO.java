@@ -51,21 +51,6 @@ public class EmployeeDAO {
         throw new Exception("error : not found in the database.");
     }
 
-    public static Employee searchEmployeeAndProject(Employee employee) throws Exception {
-
-        for (Employee e : getEmployees()) {
-            if (e.equals(employee)) {
-                for (Project project : ProjectDAO.getProjects()) {
-                    if (e.getProjects().contains(project)) {
-                        return e;
-                    }
-                }
-            }
-        }
-        throw new Exception("error : not found in the database.");
-    }
-
-
     public static LinkedList<Employee> getEmployees() {
 
         return employees;

@@ -51,14 +51,7 @@ public class Controller {
 
         checkPosition(lead);
 
-        Employee e = null;
-        for (Employee employee : EmployeeDAO.getEmployees()) {
-            e = employee;
-        }
-
-        if (e == null) {
-            throw new Exception("error : check the employee data.");
-        }
+        Employee e = searchEmployee(lead);
 
         for (Employee l : EmployeeDAO.getEmployees()) {
             if (!l.equals(e)) {

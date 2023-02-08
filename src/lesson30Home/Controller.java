@@ -1,20 +1,16 @@
 package lesson30Home;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Set;
 
-import static lesson30Home.EmployeeDAO.searchEmployee;
-import static lesson30Home.EmployeeDAO.searchEmployeeAndProject;
-
+import static lesson30Home.EmployeeDAO.*;
 public class Controller {
 
     public static Collection<Project> projectsByEmployee(Employee employee) throws Exception {
 
-        for (Employee emp : EmployeeDAO.getEmployees()) {
-            if (emp.equals(employee)) {
-                return emp.getProjects();
+        for (Employee e : EmployeeDAO.getEmployees()) {
+            if (e.equals(employee)) {
+                return e.getProjects();
             }
         }
         throw new Exception("error : Project list not found, this employee. ");
@@ -26,9 +22,9 @@ public class Controller {
         for (Department department : DepartmentDAO.getDepartments()) {
             if (department.getDepartmentType().equals(departmentType)) {
 
-                for (Employee emp : department.getEmployees()) {
-                    if (emp.getProjects().isEmpty()) {
-                        list.add(emp);
+                for (Employee e : department.getEmployees()) {
+                    if (e.getProjects().isEmpty()) {
+                        list.add(e);
                     }
                 }
             }
@@ -71,11 +67,11 @@ public class Controller {
         checkEmployee(employee);
         checkNotLeads(employee);
 
-        for (Employee index : EmployeeDAO.getEmployees()) {
-            if (index.getPosition() == Position.TEAM_LEAD) {
-                for (Project project : index.getProjects()) {
-                    if (index.getProjects().contains(project)) {
-                        list.add(index);
+        for (Employee e : EmployeeDAO.getEmployees()) {
+            if (e.getPosition() == Position.TEAM_LEAD) {
+                for (Project project : e.getProjects()) {
+                    if (e.getProjects().contains(project)) {
+                        list.add(e);
                     }
                 }
             }

@@ -71,7 +71,6 @@ public class Controller {
         return list;
     }
 
-
     public static LinkedList<Employee> teamLeadsByEmployee(Employee employee) throws Exception {
         LinkedList<Employee> list = new LinkedList<>();
 

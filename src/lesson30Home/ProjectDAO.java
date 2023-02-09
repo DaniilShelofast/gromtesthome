@@ -9,7 +9,7 @@ public class ProjectDAO {
 
     private static Set<Project> projects = new HashSet<>();
 
-    public ProjectDAO() {
+    static {
         Customer customer1 = new Customer("rrr", "ccc", "eee", 100);
         Customer customer2 = new Customer("test", "test", "test", 50);
 
@@ -21,7 +21,6 @@ public class ProjectDAO {
         // projects.add(project3);
 
     }
-
 
 
     public static Set<Project> getProjects() {

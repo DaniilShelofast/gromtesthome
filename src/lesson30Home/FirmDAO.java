@@ -8,7 +8,7 @@ public class FirmDAO {
 
     private static Firm firms;
 
-    public FirmDAO() {
+    static {
         Firm firmLogistics = new Firm(new Date(121, 10, 15));
         Firm firmDesign = new Firm(new Date(100, 15, 10));
 

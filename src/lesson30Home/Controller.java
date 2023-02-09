@@ -3,33 +3,29 @@ package lesson30Home;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import static lesson30Home.DepartmentDAO.searchDepartment;
 import static lesson30Home.EmployeeDAO.*;
 
 public class Controller {
 
     public static Collection<Project> projectsByEmployee(Employee employee) throws Exception {
 
-        for (Employee e : EmployeeDAO.getEmployees()) {
-            if (e.equals(employee)) {
-                return e.getProjects();
-            }
-        }
-        throw new Exception("error : Project list not found, this employee. ");
+        Employee e = searchEmployee(employee);
+        return e.getProjects();
+
     }
 
-    public static LinkedList<Employee> employeesByDepartmentWithoutProject(DepartmentType departmentType) {
+    public static LinkedList<Employee> employeesByDepartmentWithoutProject(DepartmentType departmentType) throws Exception {
         LinkedList<Employee> list = new LinkedList<>();
 
-        for (Department department : DepartmentDAO.getDepartments()) {
-            if (department.getDepartmentType().equals(departmentType)) {
+        Department d  = searchDepartment(departmentType);
 
-                for (Employee e : department.getEmployees()) {
-                    if (e.getProjects().isEmpty()) {
-                        list.add(e);
-                    }
-                }
+        for (Employee e : d.getEmployees()) {
+            if (e.getProjects().isEmpty()) {
+                list.add(e);
             }
         }
+
         return list;
     }
 
@@ -46,6 +42,7 @@ public class Controller {
 
     public static LinkedList<Employee> employeesByTeamLead(Employee lead) throws Exception {
         LinkedList<Employee> list = new LinkedList<>();
+
         checkPosition(lead);
 
         Employee l = searchEmployee(lead);

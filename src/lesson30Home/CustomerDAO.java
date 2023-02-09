@@ -6,7 +6,7 @@ import java.util.Set;
 public class CustomerDAO {
     private static final Set<Customer> customers = new HashSet<>();
 
-    public CustomerDAO() {
+    static {
         Customer customer1 = new Customer("rrr", "ccc", "eee", 100);
         Customer customer2 = new Customer("test", "test", "test", 50);
 

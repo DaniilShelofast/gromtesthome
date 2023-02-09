@@ -6,7 +6,7 @@ import java.util.LinkedList;
 public class EmployeeDAO {
     private static final LinkedList<Employee> employees = new LinkedList<>();
 
-    public EmployeeDAO() {
+    static {
         Customer customer1 = new Customer("rrr", "ccc", "eee", 100);
         Customer customer2 = new Customer("test", "test", "test", 50);
         Customer customer3 = new Customer("test", "test", "ooo", 150);
@@ -15,8 +15,8 @@ public class EmployeeDAO {
         Project project2 = new Project("test", customer2);
         Project project3 = new Project("tes", customer3);
         Project project4 = new Project("qqq", customer3);
-        Department department1 = new Department(DepartmentType.ANALYSTS);
-        Department department2 = new Department(DepartmentType.MANAGEMENT);
+        Department department1 = new Department(DepartmentType.DESIGNERS);
+        Department department2 = new Department(DepartmentType.ANALYSTS);
 
         Employee employee = new Employee("rrr", "ppp", new Date(105, 5, 4), Position.TEAM_LEAD, department1);
         Employee employee2 = new Employee("hhh", "ttt", new Date(105, 5, 7), Position.FINANCE, department1);
@@ -35,9 +35,6 @@ public class EmployeeDAO {
         employee3.getProjects().add(project1);
         employee3.getProjects().add(project3);
 
-        employee4.getProjects().add(project2);
-        employee5.getProjects().add(project2);
-        employee6.getProjects().add(project2);
 
         employees.add(employee);
         employees.add(employee2);

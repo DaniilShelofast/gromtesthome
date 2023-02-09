@@ -22,7 +22,7 @@ public class Demo {
         Employee employee6 = new Employee("ggg", "iii", new Date(105, 3, 6), Position.DESIGNER, department2);
 
 
-        System.out.println(Controller.employeesByDepartmentWithoutProject(department2.getDepartmentType()));
+        System.out.println(Controller.teamLeadsByEmployee(employee2));
 
 
     }

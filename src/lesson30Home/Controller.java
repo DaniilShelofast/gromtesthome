@@ -18,7 +18,7 @@ public class Controller {
     public static LinkedList<Employee> employeesByDepartmentWithoutProject(DepartmentType departmentType) throws Exception {
         LinkedList<Employee> list = new LinkedList<>();
 
-        Department d  = searchDepartment(departmentType);
+        Department d = searchDepartment(departmentType);
 
         for (Employee e : d.getEmployees()) {
             if (e.getProjects().isEmpty()) {
@@ -43,7 +43,9 @@ public class Controller {
     public static LinkedList<Employee> employeesByTeamLead(Employee lead) throws Exception {
         LinkedList<Employee> list = new LinkedList<>();
 
-        checkPosition(lead);
+        if (lead.getPosition() != Position.TEAM_LEAD) {
+            throw new Exception("error : this employee is not a leader on this project.");
+        }
 
         Employee l = searchEmployee(lead);
 
@@ -64,15 +66,14 @@ public class Controller {
         LinkedList<Employee> list = new LinkedList<>();
 
         checkEmployee(employee);
-        checkNotLeads(employee);
+
+        if (employee.getPosition() == Position.TEAM_LEAD) {
+            throw new Exception("error : this employee is a manager.");
+        }
 
         for (Employee e : EmployeeDAO.getEmployees()) {
-            if (e.getPosition() == Position.TEAM_LEAD) {
-                for (Project project : e.getProjects()) {
-                    if (e.getProjects().contains(project)) {
-                        list.add(e);
-                    }
-                }
+            if (!e.equals(employee) && e.getPosition() == Position.TEAM_LEAD) {
+                list.add(e);
             }
         }
         return list;
@@ -131,21 +132,6 @@ public class Controller {
             }
         }
         throw new Exception("error : this employee does not exist in this list.");
-    }
-
-    private static boolean checkPosition(Employee lead) throws Exception {
-        if (lead.getPosition() == Position.TEAM_LEAD) {
-            return true;
-        }
-        throw new Exception("error : this employee is not a leader on this project.");
-    }
-
-    private static boolean checkNotLeads(Employee employee) throws Exception {
-        if (employee.getPosition() == Position.DESIGNER || employee.getPosition() == Position.DEVELOPER || employee.getPosition() == Position.FINANCE
-                || employee.getPosition() == Position.ANALYST || employee.getPosition() == Position.MANAGER || employee.getPosition() == Position.LEAD_DESIGNER) {
-            return true;
-        }
-        throw new Exception("error : this employee is a manager.");
     }
 
     private static boolean checkProject(Employee employee) throws Exception {

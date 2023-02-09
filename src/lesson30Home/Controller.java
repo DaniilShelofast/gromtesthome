@@ -49,12 +49,16 @@ public class Controller {
 
         checkPosition(lead);
 
-        Employee e = searchEmployee(lead);
+        Employee l = searchEmployee(lead);
 
-
-        for (Employee l : EmployeeDAO.getEmployees()) {
-            if (!l.equals(e) && l.getProjects().containsAll(e.getProjects())) {
-                list.add(l);
+        for (Employee e : EmployeeDAO.getEmployees()) {
+            if (!e.equals(l)) {
+                for (Project p : l.getProjects()) {
+                    if (e.getProjects().contains(p)) {
+                        list.add(e);
+                        break;
+                    }
+                }
             }
         }
         return list;

@@ -51,12 +51,10 @@ public class Controller {
 
         Employee e = searchEmployee(lead);
 
-        for (Employee l : EmployeeDAO.getEmployees()) {
-            if (!l.equals(e)) {
 
-                if (l.getProjects().containsAll(e.getProjects())) {
-                    list.add(l);
-                }
+        for (Employee l : EmployeeDAO.getEmployees()) {
+            if (!l.equals(e) && l.getProjects().containsAll(e.getProjects())) {
+                list.add(l);
             }
         }
         return list;
@@ -89,10 +87,8 @@ public class Controller {
         checkProject(e);
 
         for (Employee emp : EmployeeDAO.getEmployees()) {
-            if (!emp.equals(e)) {
-                if (emp.getProjects().containsAll(e.getProjects())) {
-                    list.add(emp);
-                }
+            if (!emp.equals(e) && emp.getProjects().containsAll(e.getProjects())) {
+                list.add(emp);
             }
         }
         return list;

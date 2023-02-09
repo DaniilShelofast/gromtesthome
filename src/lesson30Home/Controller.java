@@ -46,7 +46,6 @@ public class Controller {
 
     public static LinkedList<Employee> employeesByTeamLead(Employee lead) throws Exception {
         LinkedList<Employee> list = new LinkedList<>();
-
         checkPosition(lead);
 
         Employee l = searchEmployee(lead);

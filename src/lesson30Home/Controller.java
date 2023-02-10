@@ -65,8 +65,6 @@ public class Controller {
     public static LinkedList<Employee> teamLeadsByEmployee(Employee employee) throws Exception {
         LinkedList<Employee> list = new LinkedList<>();
 
-        checkEmployee(employee);
-
         if (employee.getPosition() == Position.TEAM_LEAD) {
             throw new Exception("error : this employee is a manager.");
         }

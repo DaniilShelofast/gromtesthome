@@ -73,8 +73,8 @@ public class Controller {
 
         for (Employee l : EmployeeDAO.getEmployees()) {
             if (!l.equals(e) && l.getPosition() == Position.TEAM_LEAD) {
-                for (Project p : e.getProjects()){
-                    if (l.getProjects().contains(p)){
+                for (Project p : e.getProjects()) {
+                    if (l.getProjects().contains(p)) {
                         list.add(l);
                     }
                 }
@@ -127,15 +127,6 @@ public class Controller {
             }
         }
         return list;
-    }
-
-    private static boolean checkEmployee(Employee employee) throws Exception {
-        for (Employee e : EmployeeDAO.getEmployees()) {
-            if (e.equals(employee)) {
-                return true;
-            }
-        }
-        throw new Exception("error : this employee does not exist in this list.");
     }
 
     private static boolean checkProject(Employee employee) throws Exception {

@@ -13,8 +13,7 @@ public class EmployeeDAO {
 
         Project project1 = new Project("sss", customer1);
         Project project2 = new Project("test", customer2);
-        Project project3 = new Project("tes", customer3);
-        Project project4 = new Project("qqq", customer3);
+
         Department department1 = new Department(DepartmentType.DESIGNERS);
         Department department2 = new Department(DepartmentType.ANALYSTS);
 
@@ -26,14 +25,8 @@ public class EmployeeDAO {
         Employee employee6 = new Employee("ggg", "iii", new Date(105, 3, 6), Position.DESIGNER, department2);
 
         employee.getProjects().add(project1);
-        employee.getProjects().add(project3);
-        employee.getProjects().add(project4);
-
         employee2.getProjects().add(project1);
-        employee2.getProjects().add(project3);
-
         employee3.getProjects().add(project1);
-        employee3.getProjects().add(project3);
 
         employee4.getProjects().add(project2);
         employee5.getProjects().add(project2);
@@ -45,7 +38,6 @@ public class EmployeeDAO {
         employees.add(employee4);
         employees.add(employee5);
         employees.add(employee6);
-
 
     }
 

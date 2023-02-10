@@ -71,9 +71,15 @@ public class Controller {
             throw new Exception("error : this employee is a manager.");
         }
 
-        for (Employee e : EmployeeDAO.getEmployees()) {
-            if (!e.equals(employee) && e.getPosition() == Position.TEAM_LEAD) {
-                list.add(e);
+        Employee e = searchEmployee(employee);
+
+        for (Employee l : EmployeeDAO.getEmployees()) {
+            if (!l.equals(e) && l.getPosition() == Position.TEAM_LEAD) {
+                for (Project p : e.getProjects()){
+                    if (l.getProjects().contains(p)){
+                        list.add(l);
+                    }
+                }
             }
         }
         return list;

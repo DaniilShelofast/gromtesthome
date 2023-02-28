@@ -3,6 +3,7 @@ package lesson30Home;
 import java.util.Collection;
 import java.util.LinkedList;
 
+
 import static lesson30Home.DepartmentDAO.searchDepartment;
 import static lesson30Home.EmployeeDAO.*;
 
@@ -15,29 +16,16 @@ public class Controller {
 
     }
 
-    public static LinkedList<Employee> employeesByDepartmentWithoutProject(DepartmentType departmentType) throws Exception {
-        LinkedList<Employee> list = new LinkedList<>();
+    public static Collection<Employee> employeesByDepartmentWithoutProject(DepartmentType departmentType) throws Exception {
 
         Department d = searchDepartment(departmentType);
 
-        for (Employee e : d.getEmployees()) {
-            if (e.getProjects().isEmpty()) {
-                list.add(e);
-            }
-        }
-
-        return list;
+        return findEmployeeWithoutProject(d.getEmployees());
     }
 
-    public static LinkedList<Employee> employeesWithoutProject() {
-        LinkedList<Employee> list = new LinkedList<>();
+    public static Collection<Employee> employeesWithoutProject() throws Exception {
 
-        for (Employee employee : EmployeeDAO.getEmployees()) {
-            if (employee.getProjects().isEmpty()) {
-                list.add(employee);
-            }
-        }
-        return list;
+        return findEmployeeWithoutProject(getEmployees());
     }
 
     public static LinkedList<Employee> employeesByTeamLead(Employee lead) throws Exception {
@@ -89,8 +77,6 @@ public class Controller {
 
         Employee e = searchEmployee(employee);
 
-        checkProject(e);
-
         for (Employee emp : EmployeeDAO.getEmployees()) {
             if (!emp.equals(e) && emp.getProjects().containsAll(e.getProjects())) {
                 list.add(emp);
@@ -129,13 +115,6 @@ public class Controller {
         return list;
     }
 
-    private static boolean checkProject(Employee employee) throws Exception {
-        if (!employee.getProjects().isEmpty()) {
-            return true;
-        }
-        throw new Exception("error : the project does not exist. ");
-    }
-
     private static boolean checkCustomer(Customer customer) throws Exception {
         for (Customer c : CustomerDAO.getCustomers()) {
             if (c.equals(customer)) {
@@ -143,5 +122,15 @@ public class Controller {
             }
         }
         throw new Exception("error : the client does not have in the database.");
+    }
+
+    private static Collection<Employee> findEmployeeWithoutProject(Collection<Employee> employees) {
+        Collection<Employee> list = new LinkedList<>();
+        for (Employee e : employees) {
+            if (e.getProjects().isEmpty()) {
+                list.add(e);
+            }
+        }
+        return list;
     }
 }

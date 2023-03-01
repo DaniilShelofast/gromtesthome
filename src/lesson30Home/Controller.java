@@ -118,6 +118,7 @@ public class Controller {
 
     private static Collection<Employee> findEmployeeWithoutProject(Collection<Employee> employees) {
         Collection<Employee> list = new LinkedList<>();
+
         for (Employee e : employees) {
             if (e.getProjects().isEmpty()) {
                 list.add(e);

@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 import static lesson30Home.DepartmentDAO.searchDepartment;
 import static lesson30Home.EmployeeDAO.*;
+import static lesson30Home.CustomerDAO.findCustomer;
 
 public class Controller {
 
@@ -28,7 +29,7 @@ public class Controller {
         return findEmployeeWithoutProject(getEmployees());
     }
 
-    public static LinkedList<Employee> employeesByTeamLead(Employee lead) throws Exception {
+    public static Collection<Employee> employeesByTeamLead(Employee lead) throws Exception {
         LinkedList<Employee> list = new LinkedList<>();
 
         if (lead.getPosition() != Position.TEAM_LEAD) {
@@ -36,8 +37,7 @@ public class Controller {
         }
 
         Employee l = searchEmployee(lead);
-
-        for (Employee e : EmployeeDAO.getEmployees()) {
+        for (Employee e : getEmployees()) {
             if (!e.equals(l)) {
                 for (Project p : l.getProjects()) {
                     if (e.getProjects().contains(p)) {
@@ -50,7 +50,7 @@ public class Controller {
         return list;
     }
 
-    public static LinkedList<Employee> teamLeadsByEmployee(Employee employee) throws Exception {
+    public static Collection<Employee> teamLeadsByEmployee(Employee employee) throws Exception {
         LinkedList<Employee> list = new LinkedList<>();
 
         if (employee.getPosition() == Position.TEAM_LEAD) {
@@ -64,6 +64,7 @@ public class Controller {
                 for (Project p : e.getProjects()) {
                     if (l.getProjects().contains(p)) {
                         list.add(l);
+                        break;
                     }
                 }
             }
@@ -88,10 +89,10 @@ public class Controller {
     public static LinkedList<Project> projectsByCustomer(Customer customer) throws Exception {
         LinkedList<Project> list = new LinkedList<>();
 
-        checkCustomer(customer);
+        Customer c = findCustomer(customer);
 
         for (Project project : ProjectDAO.getProjects()) {
-            if (project.getCustomer().equals(customer)) {
+            if (project.getCustomer().equals(c)) {
                 list.add(project);
             }
         }
@@ -101,10 +102,10 @@ public class Controller {
     public static LinkedList<Employee> employeesByCustomerProject(Customer customer) throws Exception {
         LinkedList<Employee> list = new LinkedList<>();
 
-        checkCustomer(customer);
+        Customer c = findCustomer(customer);
 
         for (Project project : ProjectDAO.getProjects()) {
-            if (project.getCustomer().equals(customer)) {
+            if (project.getCustomer().equals(c)) {
                 for (Employee employee : EmployeeDAO.getEmployees()) {
                     if (employee.getProjects().contains(project)) {
                         list.add(employee);
@@ -113,15 +114,6 @@ public class Controller {
             }
         }
         return list;
-    }
-
-    private static boolean checkCustomer(Customer customer) throws Exception {
-        for (Customer c : CustomerDAO.getCustomers()) {
-            if (c.equals(customer)) {
-                return true;
-            }
-        }
-        throw new Exception("error : the client does not have in the database.");
     }
 
     private static Collection<Employee> findEmployeeWithoutProject(Collection<Employee> employees) {
@@ -133,4 +125,5 @@ public class Controller {
         }
         return list;
     }
+
 }

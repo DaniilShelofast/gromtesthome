@@ -14,6 +14,15 @@ public class CustomerDAO {
         customers.add(customer2);
     }
 
+    public static Customer findCustomer(Customer customer) throws Exception {
+        for (Customer c : getCustomers()) {
+            if (c.equals(customer)) {
+                return c;
+            }
+        }
+        throw new Exception("error : the client does not have in the database.");
+    }
+
     public static Set<Customer> getCustomers() {
         return customers;
     }

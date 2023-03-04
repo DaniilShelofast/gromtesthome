@@ -11,14 +11,11 @@ public class FindOdd {
                 System.out.println("Found");
             }
         }
-        //System.out.println(sum);
         sum *= b;
-        //System.out.println(sum);
         if (sum > 5000) {
             System.out.println("Bigger");
         } else {
             System.out.println("Smaller or equal");
         }
-
     }
 }

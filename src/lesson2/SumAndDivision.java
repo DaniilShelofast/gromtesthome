@@ -6,12 +6,10 @@ public class SumAndDivision {
         int a = 0;
         long sum = 0;
         while (a <= 10000000) {
-            a++;
             sum += a;
-
+            a++;
         }
         System.out.println(sum);
-
 
     }
 }

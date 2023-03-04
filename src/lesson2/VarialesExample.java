@@ -26,6 +26,6 @@ public class VarialesExample {
 
         test = 30000;
 
-
+        System.out.println(test);
     }
 }

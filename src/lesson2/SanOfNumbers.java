@@ -12,8 +12,6 @@ public class SanOfNumbers {
         int b = 1234;
         int c1 = sum / b;
         int c2 = sum % b;
-      //  System.out.println(c1);
-      //  System.out.println(c2);
         System.out.println(c1 > c2);
 
 

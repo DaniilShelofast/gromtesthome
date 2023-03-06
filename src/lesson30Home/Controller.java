@@ -31,23 +31,23 @@ public class Controller {
 
 
     public static Collection<Employee> employeesByTeamLead(Employee lead) throws Exception {
-        LinkedList<Employee> list = new LinkedList<>();
+        LinkedList<Employee> employees = new LinkedList<>();
 
         if (lead.getPosition() != Position.TEAM_LEAD) {
             throw new Exception("error : this employee is not a leader on this project.");
         }
 
-        Employee team = searchEmployee(lead);
+        Employee foundLead = searchEmployee(lead);
         for (Employee employee : getEmployees()) {
-            if (!employee.equals(team) && !Collections.disjoint(team.getProjects(), employee.getProjects())) {
-                list.add(employee);
+            if (!employee.equals(foundLead) && !Collections.disjoint(foundLead.getProjects(), employee.getProjects())) {
+                employees.add(employee);
             }
         }
-        return list;
+        return employees;
     }
 
     public static Collection<Employee> teamLeadsByEmployee(Employee employee) throws Exception {
-        LinkedList<Employee> list = new LinkedList<>();
+        LinkedList<Employee> teamLeads = new LinkedList<>();
 
         if (employee.getPosition() == Position.TEAM_LEAD) {
             throw new Exception("error : this employee is a manager.");
@@ -56,56 +56,58 @@ public class Controller {
         Employee foundEmployee = searchEmployee(employee);
         for (Employee lead : getEmployees()) {
             if (!lead.equals(foundEmployee) && lead.getPosition() == Position.TEAM_LEAD && !Collections.disjoint(foundEmployee.getProjects(), lead.getProjects())) {
-                list.add(lead);
+                teamLeads.add(lead);
             }
         }
-        return list;
+        return teamLeads;
     }
 
 
     public static LinkedList<Employee> employeesByProjectEmployee(Employee employee) throws Exception {
-        LinkedList<Employee> list = new LinkedList<>();
+        LinkedList<Employee> employees = new LinkedList<>();
         Employee foundEmployee = searchEmployee(employee);
         for (Employee e : getEmployees()) {
             if (!e.equals(foundEmployee) && e.getProjects().containsAll(foundEmployee.getProjects())) {
-                list.add(e);
+                employees.add(e);
             }
         }
-        return list;
+        return employees;
     }
 
     public static Collection<Project> projectsByCustomer(Customer customer) throws Exception {
-        return foundCustomer(customer);
+        return findProjectsByCustomer(customer);
     }
 
     public static Collection<Employee> employeesByCustomerProject(Customer customer) throws Exception {
-        LinkedList<Employee> list = new LinkedList<>();
+        LinkedList<Employee> employees = new LinkedList<>();
+
+        Collection<Project> customerProjects = findProjectsByCustomer(customer);
         for (Employee employee : getEmployees()) {
-            if (employee.getProjects().containsAll(foundCustomer(customer))) {
-                list.add(employee);
+            if (!Collections.disjoint(employee.getProjects(), customerProjects)) {
+                employees.add(employee);
             }
         }
-        return list;
+        return employees;
     }
 
     private static Collection<Employee> findEmployeeWithoutProject(Collection<Employee> employees) {
-        Collection<Employee> list = new LinkedList<>();
+        Collection<Employee> employeesWithoutProjects = new LinkedList<>();
         for (Employee employee : employees) {
             if (employee.getProjects().isEmpty()) {
-                list.add(employee);
+                employeesWithoutProjects.add(employee);
             }
         }
-        return list;
+        return employeesWithoutProjects;
     }
 
-    private static Collection<Project> foundCustomer(Customer customer) throws Exception {
-        Collection<Project> list = new LinkedList<>();
+    private static Collection<Project> findProjectsByCustomer(Customer customer) throws Exception {
+        Collection<Project> projects = new LinkedList<>();
         Customer foundCustomer = findCustomer(customer);
         for (Project project : getProjects()) {
             if (project.getCustomer().equals(foundCustomer)) {
-                list.add(project);
+                projects.add(project);
             }
         }
-        return list;
+        return projects;
     }
 }

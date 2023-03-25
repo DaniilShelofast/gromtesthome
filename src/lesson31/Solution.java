@@ -7,7 +7,7 @@ import java.util.TreeMap;
 public class Solution {
 
     public static Map<Character, Integer> countSymbols(String text) {
-        Map<Character, Integer> map = new TreeMap<>();
+        Map<Character, Integer> map = new HashMap<>();
         for (char symbol : text.toCharArray()) {
             if (!map.containsKey(symbol)) {
                 map.put(symbol, 1);

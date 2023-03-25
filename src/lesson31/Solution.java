@@ -5,16 +5,17 @@ import java.util.Map;
 
 public class Solution {
 
-    public static Map<Character, Integer> countSymbols(String text) throws Exception {
+    public static Map<Character, Integer> countSymbols(String text) {
         Map<Character, Integer> map = new HashMap<>();
-        checkSymbol(text);
-        int count = 0;
 
+        int count = 0;
         for (char symbol : text.toCharArray()) {
-            if (map.containsKey(symbol)) {
+            if (!map.containsKey(symbol)) {
+                map.put(symbol, 1);
+            } else {
                 count = map.get(symbol);
+                map.put(symbol, count + 1);
             }
-            map.put(symbol, count + 1);
         }
         return map;
     }
@@ -24,21 +25,14 @@ public class Solution {
         int count = 0;
 
         for (String string : text.split(" ")) {
-            if (map.containsKey(string)) {
+            if (!map.containsKey(string)) {
+                map.put(string, 1);
+            } else {
                 count = map.get(string);
+                map.put(string, count + 1);
             }
-            map.put(string, count + 1);
         }
         return map;
     }
 
-    private static boolean checkSymbol(String string) throws Exception {
-        char[] ch = string.toCharArray();
-        for (char c : ch) {
-            if (!Character.isLetterOrDigit(c)) {
-                throw new Exception("error : need to review the data provided.");
-            }
-        }
-        return true;
-    }
 }

@@ -2,7 +2,7 @@ package lesson31;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
+
 
 public class Solution {
 
@@ -20,7 +20,8 @@ public class Solution {
         return map;
     }
 
-    public static Map<String, Integer> words(String text) {
+    public static Map<String, Integer> words(String text) throws Exception {
+        characterChecker(text);
         Map<String, Integer> map = new HashMap<>();
         for (String string : text.split(" ")) {
             if (!map.containsKey(string)) {
@@ -29,8 +30,18 @@ public class Solution {
                 int count = 0;
                 count = map.get(string);
                 map.put(string, count + 1);
+
             }
         }
         return map;
+    }
+
+    private static boolean characterChecker(String text) throws Exception {
+        for (String s : text.split(" ")) {
+            if (s.length() < 2) {
+                throw new Exception("error : word - more than two characters.");
+            }
+        }
+        return true;
     }
 }

@@ -11,7 +11,7 @@ public class Demo {
         System.out.println(Solution.countSymbols("programmer"));
         System.out.println(Solution.countSymbols("summer"));
         System.out.println(Solution.countSymbols("apple"));
-
+        System.out.println(" ");
         System.out.println(Solution.words("text one two text one text"));
         System.out.println(Solution.words("java php js php java home"));
         System.out.println(Solution.words("one one one one one text"));

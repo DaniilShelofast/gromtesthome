@@ -13,8 +13,8 @@ public class Solution2 {
         String[] texts = text.split(" ");
         int[] index = new int[texts.length];
         int add = 0;
-        for (int i = 0; i < texts.length; i++) {
-            if (isDigitPresent(texts[i].trim())) {
+        for (String s : texts) {
+            if (isDigitPresent(s.trim())) {
                 add++;
 
             }

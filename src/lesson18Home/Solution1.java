@@ -16,9 +16,9 @@ public class Solution1 {
         String[] texts = text.split(" ");
 
         int score = 0;
-        for (int j = 0; j < texts.length; j++) {
+        for (String s : texts) {
             try {
-                Integer.parseInt(texts[j]);
+                Integer.parseInt(s);
                 score++;
             } catch (Exception ignored) {
 

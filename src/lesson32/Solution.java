@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class Solution {
     public static void main(String[] args) throws Exception {
-
         readNumbers();
     }
 
@@ -13,81 +12,83 @@ public class Solution {
         int suma = 0;
 
         try {
-
             System.out.println("Hello, before calculating, keep a number from 1-10. thank you ");
-            String count = scanner.nextLine();
-            checkSymbol(count);
-            System.out.print(count + " !   enter numbers : ");
+            String symbol = scanner.nextLine();
+            checkSymbol(symbol);
+            System.out.print(symbol + " !   enter numbers : ");
             String string = scanner.nextLine();
             suma = sum(string);
             System.out.println("The sum of these numbers : " + suma);
             return suma;
         } catch (Exception e) {
-            System.out.println("Your numbers are wrong. You have " + 3 + " attempts to try again");
+            System.err.println("Your numbers are wrong. You have " + 1 + " attempts to try again");
         }
 
         try {
-
             System.out.println("Hello, before calculating, keep a number from 1-10. thank you");
-            String count = scanner.nextLine();
-            checkSymbol(count);
-            System.out.print(count + "!" + " enter numbers : ");
+            String symbol = scanner.nextLine();
+            checkSymbol(symbol);
+            System.out.print(symbol + "!" + " enter numbers : ");
             String string = scanner.nextLine();
             suma = sum(string);
             System.out.println("The sum of these numbers : " + suma);
             return suma;
         } catch (Exception e) {
-            System.out.println("Your numbers are wrong. You have " + 2 + " attempts to try again");
+            System.err.println("Your numbers are wrong. You have " + 2 + " attempts to try again");
         }
 
         try {
-
             System.out.println("Hello, before calculating, keep a number from 1-10. thank you ");
-            String count = scanner.nextLine();
-            checkSymbol(count);
-            System.out.print(count + "!" + " enter numbers : ");
+            String symbol = scanner.nextLine();
+            checkSymbol(symbol);
+            System.out.print(symbol + "!" + " enter numbers : ");
             String string = scanner.nextLine();
             suma = sum(string);
             System.out.println("The sum of these numbers : " + suma);
             return suma;
         } catch (Exception e) {
-            System.out.println("Your numbers are wrong. You have " + 1 + " attempts to try again");
             System.err.println("Your numbers are wrong.Number of attempts exceeded");
             throw new Exception("Error...");
         }
-
     }
 
-    private static boolean checkSymbol(String s) throws Exception {
+    private static int checkSymbol(String string) throws Exception {
         int i = 0;
         try {
-            i = Integer.parseInt(s);
-            if (99 < i) {
-                throw new Exception("error :the number is available up to ninety nine.");
+            i = Integer.parseInt(string);
+            if (i > 10) {
+                throw new Exception("error ");
             }
-            return true;
+            return i;
         } catch (Exception e) {
-            System.err.println("error: error: The specified character is not a number, or it is possible because the number is greater than ninety-nine. ");
+            System.err.println("error:  The specified character is not a number, or it is possible because the number is greater than 10. ");
         }
-        throw new Exception("Error.");
+        throw new Exception("error .");
     }
 
     private static int sum(String string) throws Exception {
         int suma = 0;
         String[] strings = string.split(" ");
 
-        for (String s : strings) {
-            try {
-                suma += Integer.parseInt(s.trim());
+        if (strings.length > 10) {
+            throw new Exception("error : ");
+        }
 
-            } catch (Exception exception) {
-                System.err.println("error : an error occurred in the array of numbers or the number is greater than hundred .");
+        for (String s : strings) {
+            if (isDigitPresent(s)) {
+                suma += Integer.parseInt(s.trim());
             }
         }
-        if (suma > 99) {
-            throw new Exception("error : the number is greater than hundred.");
-        }
-
         return suma;
+    }
+
+    private static boolean isDigitPresent(String string) throws Exception {
+        char[] chars = string.toCharArray();
+        for (char ch : chars) {
+            if (!Character.isDigit(ch)) {
+                throw new Exception("error :");
+            }
+        }
+        return true;
     }
 }

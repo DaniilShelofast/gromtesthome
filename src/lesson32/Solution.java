@@ -10,7 +10,7 @@ public class Solution {
 
     public static int readNumbers() throws Exception {
         Scanner scanner = new Scanner(System.in).useDelimiter("[\\s,;]+");
-        int res = 0;
+        int suma = 0;
 
         try {
 
@@ -19,9 +19,9 @@ public class Solution {
             checkSymbol(count);
             System.out.print(count + " !   enter numbers : ");
             String string = scanner.nextLine();
-            res = sum(string);
-            System.out.println("The sum of these numbers : " + res);
-            return res;
+            suma = sum(string);
+            System.out.println("The sum of these numbers : " + suma);
+            return suma;
         } catch (Exception e) {
             System.out.println("Your numbers are wrong. You have " + 3 + " attempts to try again");
         }
@@ -33,9 +33,9 @@ public class Solution {
             checkSymbol(count);
             System.out.print(count + "!" + " enter numbers : ");
             String string = scanner.nextLine();
-            res = sum(string);
-            System.out.println("The sum of these numbers : " + res);
-            return res;
+            suma = sum(string);
+            System.out.println("The sum of these numbers : " + suma);
+            return suma;
         } catch (Exception e) {
             System.out.println("Your numbers are wrong. You have " + 2 + " attempts to try again");
         }
@@ -47,9 +47,9 @@ public class Solution {
             checkSymbol(count);
             System.out.print(count + "!" + " enter numbers : ");
             String string = scanner.nextLine();
-            res = sum(string);
-            System.out.println("The sum of these numbers : " + res);
-            return res;
+            suma = sum(string);
+            System.out.println("The sum of these numbers : " + suma);
+            return suma;
         } catch (Exception e) {
             System.out.println("Your numbers are wrong. You have " + 1 + " attempts to try again");
             System.err.println("Your numbers are wrong.Number of attempts exceeded");
@@ -81,7 +81,7 @@ public class Solution {
                 suma += Integer.parseInt(s.trim());
 
             } catch (Exception exception) {
-                System.err.println("error : an error occurred in the array of numbers.");
+                System.err.println("error : an error occurred in the array of numbers or the number is greater than hundred .");
             }
         }
         if (suma > 99) {

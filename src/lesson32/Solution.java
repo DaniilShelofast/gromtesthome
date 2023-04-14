@@ -10,12 +10,9 @@ public class Solution {
     public static int readNumbers() throws Exception {
         Scanner scanner = new Scanner(System.in).useDelimiter("[\\s,;]+");
         int suma = 0;
+        System.out.println("Hello, before you calculate, write down the numbers.Thank you! ");
 
         try {
-            System.out.println("Hello, before calculating, keep a number from 1-10. thank you ");
-            String symbol = scanner.nextLine();
-            checkSymbol(symbol);
-            System.out.print(symbol + " !   enter numbers : ");
             String string = scanner.nextLine();
             suma = sum(string);
             System.out.println("The sum of these numbers : " + suma);
@@ -25,10 +22,6 @@ public class Solution {
         }
 
         try {
-            System.out.println("Hello, before calculating, keep a number from 1-10. thank you");
-            String symbol = scanner.nextLine();
-            checkSymbol(symbol);
-            System.out.print(symbol + "!" + " enter numbers : ");
             String string = scanner.nextLine();
             suma = sum(string);
             System.out.println("The sum of these numbers : " + suma);
@@ -38,10 +31,6 @@ public class Solution {
         }
 
         try {
-            System.out.println("Hello, before calculating, keep a number from 1-10. thank you ");
-            String symbol = scanner.nextLine();
-            checkSymbol(symbol);
-            System.out.print(symbol + "!" + " enter numbers : ");
             String string = scanner.nextLine();
             suma = sum(string);
             System.out.println("The sum of these numbers : " + suma);
@@ -52,19 +41,6 @@ public class Solution {
         }
     }
 
-    private static int checkSymbol(String string) throws Exception {
-        int i = 0;
-        try {
-            i = Integer.parseInt(string);
-            if (i > 10) {
-                throw new Exception("error ");
-            }
-            return i;
-        } catch (Exception e) {
-            System.err.println("error:  The specified character is not a number, or it is possible because the number is greater than 10. ");
-        }
-        throw new Exception("error .");
-    }
 
     private static int sum(String string) throws Exception {
         int suma = 0;

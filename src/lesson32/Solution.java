@@ -47,22 +47,30 @@ public class Solution {
         String[] strings = string.split(" ");
 
         if (strings.length > 10) {
-            throw new Exception("error : ");
+            throw new Exception("Error.");
         }
 
         for (String s : strings) {
-            if (isDigitPresent(s)) {
+            if (isDigitPresent(s) && numberCheck(s)) {
                 suma += Integer.parseInt(s.trim());
             }
         }
         return suma;
     }
 
+    private static boolean numberCheck(String string) throws Exception {
+        String s = "100";
+        if (string.equals(s)) {
+            throw new Exception("Error.");
+        }
+        return true;
+    }
+
     private static boolean isDigitPresent(String string) throws Exception {
         char[] chars = string.toCharArray();
         for (char ch : chars) {
             if (!Character.isDigit(ch)) {
-                throw new Exception("error :");
+                throw new Exception("Error.");
             }
         }
         return true;

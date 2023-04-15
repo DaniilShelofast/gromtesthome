@@ -1,5 +1,6 @@
 package lesson32;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Solution {
@@ -41,7 +42,6 @@ public class Solution {
         }
     }
 
-
     private static int sum(String string) throws Exception {
         int suma = 0;
         String[] strings = string.split(" ");
@@ -59,11 +59,10 @@ public class Solution {
     }
 
     private static boolean numberCheck(String string) throws Exception {
-        String s = "100";
-        if (string.equals(s)) {
-            throw new Exception("Error.");
+        if (Integer.parseInt(string) <= 100) {
+            return true;
         }
-        return true;
+        throw new Exception("Error.");
     }
 
     private static boolean isDigitPresent(String string) throws Exception {

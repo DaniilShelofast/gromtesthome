@@ -1,6 +1,5 @@
 package lesson32;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Solution {
@@ -9,37 +8,34 @@ public class Solution {
     }
 
     public static int readNumbers() throws Exception {
-        Scanner scanner = new Scanner(System.in).useDelimiter("[\\s,;]+");
-        int suma = 0;
         System.out.println("Hello, before you calculate, write down the numbers.Thank you! ");
-
         try {
-            String string = scanner.nextLine();
-            suma = sum(string);
-            System.out.println("The sum of these numbers : " + suma);
-            return suma;
+            return count();
         } catch (Exception e) {
             System.err.println("Your numbers are wrong. You have " + 1 + " attempts to try again");
         }
 
         try {
-            String string = scanner.nextLine();
-            suma = sum(string);
-            System.out.println("The sum of these numbers : " + suma);
-            return suma;
+            return count();
         } catch (Exception e) {
             System.err.println("Your numbers are wrong. You have " + 2 + " attempts to try again");
         }
 
         try {
-            String string = scanner.nextLine();
-            suma = sum(string);
-            System.out.println("The sum of these numbers : " + suma);
-            return suma;
+            return count();
         } catch (Exception e) {
             System.err.println("Your numbers are wrong.Number of attempts exceeded");
             throw new Exception("Error...");
         }
+    }
+
+    private static int count() throws Exception {
+        int suma = 0;
+        Scanner scanner = new Scanner(System.in).useDelimiter("[\\s,;]+");
+        String string = scanner.nextLine();
+        suma = sum(string);
+        System.out.println("The sum of these numbers : " + suma);
+        return suma;
     }
 
     private static int sum(String string) throws Exception {

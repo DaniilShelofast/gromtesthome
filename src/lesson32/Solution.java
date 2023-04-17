@@ -3,43 +3,40 @@ package lesson32;
 import java.util.Scanner;
 
 public class Solution {
-    public static void main(String[] args) throws Exception {
-        readNumbers();
-    }
 
     public static int readNumbers() throws Exception {
         System.out.println("Hello, before you calculate, write down the numbers.Thank you! ");
         try {
-            return count();
+            return countNumbers();
         } catch (Exception e) {
             System.err.println("Your numbers are wrong. You have " + 1 + " attempts to try again");
         }
 
         try {
-            return count();
+            return countNumbers();
         } catch (Exception e) {
             System.err.println("Your numbers are wrong. You have " + 2 + " attempts to try again");
         }
 
         try {
-            return count();
+            return countNumbers();
         } catch (Exception e) {
             System.err.println("Your numbers are wrong.Number of attempts exceeded");
             throw new Exception("Error...");
         }
     }
 
-    private static int count() throws Exception {
-        int suma = 0;
+    private static int countNumbers() throws Exception {
+        int count = 0;
         Scanner scanner = new Scanner(System.in).useDelimiter("[\\s,;]+");
         String string = scanner.nextLine();
-        suma = sum(string);
-        System.out.println("The sum of these numbers : " + suma);
-        return suma;
+        count = sumNumbers(string);
+        System.out.println("The sum of these numbers : " + count);
+        return count;
     }
 
-    private static int sum(String string) throws Exception {
-        int suma = 0;
+    private static int sumNumbers(String string) throws Exception {
+        int sum = 0;
         String[] strings = string.split(" ");
 
         if (strings.length > 10) {
@@ -48,10 +45,10 @@ public class Solution {
 
         for (String s : strings) {
             if (isDigitPresent(s) && numberCheck(s)) {
-                suma += Integer.parseInt(s.trim());
+                sum += Integer.parseInt(s.trim());
             }
         }
-        return suma;
+        return sum;
     }
 
     private static boolean numberCheck(String string) throws Exception {

@@ -29,11 +29,12 @@ public class Solution {
     private static int countNumbers() throws Exception {
         Scanner scanner = new Scanner(System.in).useDelimiter("[\\s,;]+");
         String string = scanner.nextLine();
-        System.out.println("The sum of these numbers : " + sumNumbers(string));
-        return sumNumbers(string);
+        int count = sumNumbers(string);
+        System.out.println("The sum of these numbers : " + count);
+        return count;
     }
 
-    private static int sumNumbers(String string) throws Exception {
+    static int sumNumbers(String string) throws Exception {
         int sum = 0;
         String[] strings = string.split(" ");
 
@@ -42,24 +43,13 @@ public class Solution {
         }
 
         for (String s : strings) {
-            if (isDigitPresent(s.trim()) && Integer.parseInt(s) <= 100) {
+            if (Integer.parseInt(s) <= 100) {
                 sum += Integer.parseInt(s.trim());
             } else {
                 throw new Exception("Error.");
             }
         }
         return sum;
-    }
-
-
-    private static boolean isDigitPresent(String string) throws Exception {
-        char[] chars = string.toCharArray();
-        for (char ch : chars) {
-            if (!Character.isDigit(ch)) {
-                throw new Exception("Error.");
-            }
-        }
-        return true;
     }
 }
 

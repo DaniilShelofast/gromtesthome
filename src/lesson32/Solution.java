@@ -2,7 +2,7 @@ package lesson32;
 
 import java.util.Scanner;
 
-public class SolutionOne {
+public class Solution {
 
     public static int readNumbers() throws Exception {
         System.out.println("Hello, before you calculate, write down the numbers.Thank you! ");
@@ -15,7 +15,7 @@ public class SolutionOne {
         try {
             return countNumbers();
         } catch (Exception e) {
-            System.err.println("Your numbers are wrong. You have " + 1 + " attempts to try");
+            System.err.println("Your numbers are wrong. You have " + 1 + " attempt to try");
         }
 
         try {

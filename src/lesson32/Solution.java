@@ -6,24 +6,18 @@ public class Solution {
 
     public static int readNumbers() throws Exception {
         System.out.println("Hello, before you calculate, write down the numbers.Thank you! ");
-        try {
-            return countNumbers();
-        } catch (Exception e) {
-            System.err.println("Your numbers are wrong. You have " + 2 + " attempts to try");
+        for (int i = 2; i < 3; i--) {
+            try {
+                return countNumbers();
+            } catch (Exception e) {
+                System.err.println("Your numbers are wrong. You have " + i + " attempts to try");
+            }
+            if (i == 0) {
+                System.err.println("Your numbers are wrong.Number of attempts exceeded");
+                break;
+            }
         }
-
-        try {
-            return countNumbers();
-        } catch (Exception e) {
-            System.err.println("Your numbers are wrong. You have " + 1 + " attempt to try");
-        }
-
-        try {
-            return countNumbers();
-        } catch (Exception e) {
-            System.err.println("Your numbers are wrong.Number of attempts exceeded");
-            throw new Exception("Error...");
-        }
+        throw new Exception("Error.");
     }
 
     private static int countNumbers() throws Exception {

@@ -9,7 +9,6 @@ import java.io.InputStreamReader;
 public class ReadFromKeyboard {
     public static void main(String[] args) throws IOException {
         readKeyboardWithIOStream();
-
     }
 
     private static void readKeyboardWithIOStream() {

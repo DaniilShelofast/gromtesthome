@@ -3,14 +3,11 @@ package lesson33;
 import org.apache.commons.io.IOUtils;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class ReadWriteFile {
-    public static void main(String[] args) throws InterruptedException {
-        readFile("C:\\Users\\User\\Desktop/test.txt");
-        writeFile("C:\\Users\\User\\Desktop/test1.txt");
-    }
 
-    private static void readFile(String path) {
+    public static void readFile(String path) {
         FileReader reader;
         try {
             reader = new FileReader(path);
@@ -34,7 +31,7 @@ public class ReadWriteFile {
         }
     }
 
-    private static void writeFile(String path) throws InterruptedException {
+    public static void writeFile(String path) {
         FileWriter writer = null;
         BufferedWriter bufferedWriter = null;
         try {
@@ -49,5 +46,38 @@ public class ReadWriteFile {
             IOUtils.closeQuietly(bufferedWriter);
             IOUtils.closeQuietly(writer);
         }
+    }
+
+    public static void writeToFileFromConsole(String path) {
+        System.out.println("Enter file content to write in the file: ");
+
+        FileWriter fileWriter;
+        try {
+            fileWriter = new FileWriter(path);
+        } catch (IOException e) {
+            System.err.println("File with path " + path + " not found.");
+            return;
+        }
+        BufferedWriter writer = new BufferedWriter(fileWriter);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            String line;
+            while (!(line = reader.readLine()).equals("wr")) {
+                writer.append(line);
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("Can`t write to file with path " + path);
+        } finally {
+            IOUtils.closeQuietly(reader);
+            IOUtils.closeQuietly(writer);
+        }
+    }
+
+    public static void readFileByConsolePath() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please, enter file path to read : ");
+        String path = scanner.nextLine();
+        readFile(path);
     }
 }

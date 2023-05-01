@@ -7,28 +7,31 @@ import java.util.Scanner;
 
 public class ReadWriteFile {
 
-    public static void readFile(String path) {
-        FileReader reader;
+    public static void readFile(String path)  {
+
+        FileReader fileReader = null;
         try {
-            reader = new FileReader(path);
-        } catch (FileNotFoundException e) {
+            fileReader = new FileReader(path);
+        } catch (IOException e) {
             System.err.println("File does not exist");
+            IOUtils.closeQuietly(fileReader);
             return;
         }
 
-        BufferedReader br = new BufferedReader(reader);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
 
         try {
             String line;
-            while ((line = br.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null) {
                 System.out.println(line);
             }
         } catch (IOException e) {
-            System.out.println("Reading from file" + path + "failed");
+            System.err.println("Reading from file " + path + " failed");
         } finally {
-            IOUtils.closeQuietly(br);
-            IOUtils.closeQuietly(reader);
+            IOUtils.closeQuietly(bufferedReader);
+            IOUtils.closeQuietly(fileReader);
         }
+
     }
 
     public static void writeFile(String path) {
@@ -74,7 +77,7 @@ public class ReadWriteFile {
         }
     }
 
-    public static void readFileByConsolePath() {
+    public static void readFileByConsolePath() throws Exception {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please, enter file path to read : ");
         String path = scanner.nextLine();

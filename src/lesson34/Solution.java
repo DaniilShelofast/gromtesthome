@@ -9,7 +9,44 @@ public class Solution {
         delete(fileFromPath);
     }
 
-    private static StringBuffer readFromFile(String path) throws Exception {
+    public static StringBuffer transferSentences(String fileFromPath, String fileToPath, String wordToCheck) throws Exception {
+        validate(fileFromPath, fileToPath);
+        StringBuffer stringBuffer = new StringBuffer();
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileFromPath))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileToPath))) {
+
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    stringBuffer.append(line);
+                }
+
+                String strings = stringBuffer.toString();
+                String[] string = strings.split("\\.");
+                stringBuffer.setLength(0);
+                for (String s : string) {
+                    if (s.length() > 10 && s.contains(wordToCheck)) {
+                        writer.append(s).append(".");
+                        writer.newLine();
+                    } else {
+                        stringBuffer.append(s).append(".");
+                    }
+                }
+
+                try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileFromPath))) {
+                    bufferedWriter.append(stringBuffer.toString());
+                } catch (IOException e) {
+                    System.out.println("Error.");
+                }
+            } catch (IOException e) {
+                System.out.println("Error.");
+            }
+        } catch (IOException e) {
+            System.out.println("Error.");
+        }
+        return stringBuffer;
+    }
+
+    private static StringBuffer readFromFile(String path)  {
 
         StringBuffer buffer = new StringBuffer();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {

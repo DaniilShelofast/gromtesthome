@@ -7,9 +7,9 @@ import java.util.Set;
 public class IteratorIntro {
     public static void main(String[] args) {
         Set<File> files = new HashSet<>();
-        File file1 = new File("pict,txt", 100);
-        File file2 = new File("home,txt", 178);
-        File file3 = new File("home2,txt", 348);
+        File file1 = new File("pict,jpg", 100);
+        File file2 = new File("home,jpg", 178);
+        File file3 = new File("home2,jpg", 348);
 
         files.add(file1);
         files.add(file2);

@@ -9,44 +9,52 @@ public class Solution {
         delete(fileFromPath);
     }
 
-    public static StringBuffer transferSentences(String fileFromPath, String fileToPath, String wordToCheck) throws Exception {
+    public static void transferSentences(String fileFromPath, String fileToPath, String wordToCheck) throws Exception {
         validate(fileFromPath, fileToPath);
-        StringBuffer stringBuffer = new StringBuffer();
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileFromPath))) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileToPath))) {
 
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    stringBuffer.append(line);
-                }
+        String fileFrom;
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileToPath))) {
+            fileFrom = readFile(fileFromPath);
 
-                String strings = stringBuffer.toString();
-                String[] string = strings.split("\\.");
-                stringBuffer.setLength(0);
-                for (String s : string) {
-                    if (s.length() > 10 && s.contains(wordToCheck)) {
-                        writer.append(s).append(".");
-                        writer.newLine();
-                    } else {
-                        stringBuffer.append(s).append(".");
-                    }
+            String[] string = fileFrom.split("\\.");
+            fileFrom = "";
+            for (String s : string) {
+                if (s.length() > 10 && s.contains(wordToCheck)) {
+                    writer.append(s).append(".");
+                    writer.newLine();
+                } else {
+                    fileFrom += s + ".";
                 }
-
-                try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileFromPath))) {
-                    bufferedWriter.append(stringBuffer.toString());
-                } catch (IOException e) {
-                    System.out.println("Error.");
-                }
-            } catch (IOException e) {
-                System.out.println("Error.");
             }
+            overwritingFile(fileFromPath, fileFrom);
         } catch (IOException e) {
             System.out.println("Error.");
         }
-        return stringBuffer;
     }
 
-    private static StringBuffer readFromFile(String path)  {
+    private static String readFile(String string) {
+        String s = " ";
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(string))) {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                s += line;
+            }
+        } catch (IOException ioException) {
+            System.out.println("Error.");
+        }
+        return s;
+    }
+
+
+    private static void overwritingFile(String string, String fileFrom) {
+        try (BufferedWriter remainingWriter = new BufferedWriter(new FileWriter(string))) {
+            remainingWriter.write(fileFrom);
+        } catch (IOException e) {
+            System.out.println("Error.");
+        }
+    }
+
+    private static StringBuffer readFromFile(String path) {
 
         StringBuffer buffer = new StringBuffer();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
@@ -74,9 +82,12 @@ public class Solution {
         }
     }
 
-    private static void delete(String path) throws Exception {
-        PrintWriter p = new PrintWriter(path);
-        p.close();
+    private static void delete(String path) {
+        try (BufferedWriter remainingWriter = new BufferedWriter(new FileWriter(path))) {
+            remainingWriter.write("");
+        } catch (IOException e) {
+            System.out.println("Error.");
+        }
     }
 
     private static void validate(String fileFromPath, String fileToPath) throws Exception {

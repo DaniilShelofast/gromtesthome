@@ -1,8 +1,15 @@
 package lesson34;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.*;
 
 public class Solution {
+
+    public static void copyFileContentApacheIO(String fileFromPath, String fileToPath) throws Exception {
+        FileUtils.copyFile(new File(fileFromPath), new File(fileToPath));
+    }
+
     public static void transferFileContent(String fileFromPath, String fileToPath) throws Exception {
         validate(fileFromPath, fileToPath);
         writerToFile(fileToPath, readFromFile(fileFromPath));

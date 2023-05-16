@@ -90,8 +90,8 @@ public class Solution {
     }
 
     private static void delete(String path) {
-        try (BufferedWriter remainingWriter = new BufferedWriter(new FileWriter(path))) {
-            remainingWriter.write("");
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
+            writer.write("");
         } catch (IOException e) {
             System.out.println("Error.");
         }

@@ -20,23 +20,18 @@ public class Solution {
         validate(fileFromPath, fileToPath);
 
         String fileFrom;
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileToPath))) {
-            fileFrom = String.valueOf(readFromFile(fileFromPath));
+        fileFrom = String.valueOf(readFromFile(fileFromPath));
 
-            String[] string = fileFrom.split("\\.");
-            fileFrom = "";
-            for (String s : string) {
-                if (s.length() > 10 && s.contains(wordToCheck)) {
-                    writer.append(s).append(".");
-                    writer.newLine();
-                } else {
-                    fileFrom += s + ".";
-                }
+        String[] string = fileFrom.split("\\.");
+        fileFrom = "";
+        for (String s : string) {
+            if (s.length() > 10 && s.contains(wordToCheck)) {
+                writerToFile(fileToPath, s + ".");
+            } else {
+                fileFrom += s + ".";
             }
-            overwritingFile(fileFromPath, fileFrom);
-        } catch (IOException e) {
-            System.out.println("Error.");
         }
+        overwritingFile(fileFromPath, fileFrom);
     }
 
     private static void overwritingFile(String string, String fileFrom) {
@@ -47,13 +42,12 @@ public class Solution {
         }
     }
 
-    private static StringBuffer readFromFile(String path) {
-
-        StringBuffer buffer = new StringBuffer();
+    private static String readFromFile(String path) {
+        String string = "";
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                buffer.append(line).append("\n");
+                string += line + "\n";
             }
 
         } catch (FileNotFoundException e) {
@@ -61,10 +55,10 @@ public class Solution {
         } catch (IOException ioException) {
             System.err.println("Reading from file " + path + " failed");
         }
-        return buffer;
+        return string;
     }
 
-    private static void writerToFile(String path, StringBuffer contentToWrite) {
+    private static void writerToFile(String path, String contentToWrite) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path, true))) {
             bufferedWriter.append(contentToWrite);
             bufferedWriter.newLine();

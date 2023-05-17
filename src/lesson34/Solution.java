@@ -13,7 +13,7 @@ public class Solution {
     public static void transferFileContent(String fileFromPath, String fileToPath) throws Exception {
         validate(fileFromPath, fileToPath);
         writerToFile(fileToPath, readFromFile(fileFromPath));
-        delete(fileFromPath);
+        deleteTextFile(fileFromPath);
     }
 
     public static void transferSentences(String fileFromPath, String fileToPath, String wordToCheck) throws Exception {
@@ -21,7 +21,7 @@ public class Solution {
 
         String fileFrom;
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileToPath))) {
-            fileFrom = readFile(fileFromPath);
+            fileFrom = String.valueOf(readFromFile(fileFromPath));
 
             String[] string = fileFrom.split("\\.");
             fileFrom = "";
@@ -39,20 +39,6 @@ public class Solution {
         }
     }
 
-    private static String readFile(String string) {
-        String s = " ";
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(string))) {
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                s += line;
-            }
-        } catch (IOException ioException) {
-            System.out.println("Error.");
-        }
-        return s;
-    }
-
-
     private static void overwritingFile(String string, String fileFrom) {
         try (BufferedWriter remainingWriter = new BufferedWriter(new FileWriter(string))) {
             remainingWriter.write(fileFrom);
@@ -67,10 +53,8 @@ public class Solution {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                buffer.append(line);
-                buffer.append("\n");
+                buffer.append(line).append("\n");
             }
-            buffer.replace((buffer.length() - 1), buffer.length(), " ");
 
         } catch (FileNotFoundException e) {
             System.err.println("File does not exist");
@@ -89,7 +73,7 @@ public class Solution {
         }
     }
 
-    private static void delete(String path) {
+    private static void deleteTextFile(String path) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
             writer.write("");
         } catch (IOException e) {

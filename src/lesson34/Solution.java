@@ -13,14 +13,14 @@ public class Solution {
     public static void transferFileContent(String fileFromPath, String fileToPath) throws Exception {
         validate(fileFromPath, fileToPath);
         writerToFile(fileToPath, readFromFile(fileFromPath));
-        deleteTextFile(fileFromPath);
+        deleteContent(fileFromPath);
     }
 
     public static void transferSentences(String fileFromPath, String fileToPath, String wordToCheck) throws Exception {
         validate(fileFromPath, fileToPath);
 
         String fileFrom;
-        fileFrom = String.valueOf(readFromFile(fileFromPath));
+        fileFrom = readFromFile(fileFromPath);
 
         String[] string = fileFrom.split("\\.");
         fileFrom = "";
@@ -67,7 +67,7 @@ public class Solution {
         }
     }
 
-    private static void deleteTextFile(String path) {
+    private static void deleteContent(String path) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
             writer.write("");
         } catch (IOException e) {

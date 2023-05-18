@@ -60,8 +60,10 @@ public class Solution {
 
     private static void writerToFile(String path, String contentToWrite) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path, true))) {
+            if (path.length() != 0) {
+                bufferedWriter.newLine();
+            }
             bufferedWriter.append(contentToWrite);
-            bufferedWriter.newLine();
         } catch (IOException e) {
             System.err.println("Can`t write to file");
         }

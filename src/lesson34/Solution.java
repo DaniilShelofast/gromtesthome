@@ -13,7 +13,7 @@ public class Solution {
     public static void transferFileContent(String fileFromPath, String fileToPath) throws Exception {
         validate(fileFromPath, fileToPath);
         writerToFile(fileToPath, readFromFile(fileFromPath));
-        deleteContent(fileFromPath);
+        writerToFile(fileFromPath, "");
     }
 
     public static void transferSentences(String fileFromPath, String fileToPath, String wordToCheck) throws Exception {
@@ -31,14 +31,18 @@ public class Solution {
                 fileFrom += s + ".";
             }
         }
-        overwritingFile(fileFromPath, fileFrom);
+        writerToFile(fileFromPath, fileFrom);
     }
 
-    private static void overwritingFile(String string, String fileFrom) {
-        try (BufferedWriter remainingWriter = new BufferedWriter(new FileWriter(string))) {
-            remainingWriter.write(fileFrom);
+    private static void writerToFile(String path, String contentToWrite) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path))) {
+            if (path.length() != 0) {
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.append(contentToWrite);
+
         } catch (IOException e) {
-            System.out.println("Error.");
+            System.err.println("Can`t write to file");
         }
     }
 
@@ -56,25 +60,6 @@ public class Solution {
             System.err.println("Reading from file " + path + " failed");
         }
         return string;
-    }
-
-    private static void writerToFile(String path, String contentToWrite) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path, true))) {
-            if (path.length() != 0) {
-                bufferedWriter.newLine();
-            }
-            bufferedWriter.append(contentToWrite);
-        } catch (IOException e) {
-            System.err.println("Can`t write to file");
-        }
-    }
-
-    private static void deleteContent(String path) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
-            writer.write("");
-        } catch (IOException e) {
-            System.out.println("Error.");
-        }
     }
 
     private static void validate(String fileFromPath, String fileToPath) throws Exception {

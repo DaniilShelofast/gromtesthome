@@ -13,8 +13,8 @@ public class Solution {
 
     public static void transferFileContent(String fileFromPath, String fileToPath) throws Exception {
         validate(fileFromPath, fileToPath);
-        writerToFile(fileToPath, readFromFile(fileFromPath));
-        overwriteFile(fileFromPath, "");
+        writerToFile(fileToPath, readFromFile(fileFromPath), true);
+        writerToFile(fileFromPath, "", false);
     }
 
     public static void transferSentences(String fileFromPath, String fileToPath, String wordToCheck) throws Exception {
@@ -27,42 +27,26 @@ public class Solution {
         fileFrom = "";
         for (String s : string) {
             if (s.length() > 10 && s.contains(wordToCheck)) {
-                writerToFile(fileToPath, s + ".");
+                writerToFile(fileToPath, s + ".", true);
             } else {
                 fileFrom += s + ".";
             }
         }
-        overwriteFile(fileFromPath, fileFrom);
+        writerToFile(fileFromPath, fileFrom, false);
     }
 
-    private static void writerToFile(String path, String contentToWrite) throws IOException {
+    private static void writerToFile(String path, String contentToWrite, boolean append) {
 
-        FileWriter fileWriter = new FileWriter(path, true);
-
-        try (BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
-
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path, append))) {
             if (path.length() != 0) {
                 bufferedWriter.newLine();
-            } else {
-                bufferedWriter.append(contentToWrite);
             }
             bufferedWriter.append(contentToWrite);
         } catch (IOException e) {
             System.err.println("Can`t write to file");
         }
-
-
-
     }
 
-
-    private static void overwriteFile(String path, String string) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path.trim()))) {
-            bufferedWriter.append(string);
-        } catch (IOException e) {
-            System.err.println("Can`t write to file");
-        }
-    }
 
     private static String readFromFile(String path) {
         String string = "";

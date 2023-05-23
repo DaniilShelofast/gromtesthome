@@ -3,6 +3,7 @@ package lesson34;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
+import java.nio.charset.Charset;
 
 public class Solution {
 
@@ -13,7 +14,7 @@ public class Solution {
     public static void transferFileContent(String fileFromPath, String fileToPath) throws Exception {
         validate(fileFromPath, fileToPath);
         writerToFile(fileToPath, readFromFile(fileFromPath));
-        writerToFile(fileFromPath, "");
+        overwriteFile(fileFromPath, "");
     }
 
     public static void transferSentences(String fileFromPath, String fileToPath, String wordToCheck) throws Exception {
@@ -31,16 +32,33 @@ public class Solution {
                 fileFrom += s + ".";
             }
         }
-        writerToFile(fileFromPath, fileFrom);
+        overwriteFile(fileFromPath, fileFrom);
     }
 
-    private static void writerToFile(String path, String contentToWrite) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path))) {
+    private static void writerToFile(String path, String contentToWrite) throws IOException {
+
+        FileWriter fileWriter = new FileWriter(path, true);
+
+        try (BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+
             if (path.length() != 0) {
                 bufferedWriter.newLine();
+            } else {
+                bufferedWriter.append(contentToWrite);
             }
             bufferedWriter.append(contentToWrite);
+        } catch (IOException e) {
+            System.err.println("Can`t write to file");
+        }
 
+
+
+    }
+
+
+    private static void overwriteFile(String path, String string) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path.trim()))) {
+            bufferedWriter.append(string);
         } catch (IOException e) {
             System.err.println("Can`t write to file");
         }
@@ -53,7 +71,6 @@ public class Solution {
             while ((line = bufferedReader.readLine()) != null) {
                 string += line + "\n";
             }
-
         } catch (FileNotFoundException e) {
             System.err.println("File does not exist");
         } catch (IOException ioException) {

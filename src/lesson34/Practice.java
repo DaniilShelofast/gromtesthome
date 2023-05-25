@@ -1,43 +1,65 @@
 package lesson34;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Practice {
     public static void main(String[] args) throws Exception {
-        copyFileContent("C:\\Users\\User\\Desktop/test.txt", "C:\\Users\\User\\Desktop/test1.txt");
+        transferSentences("C:\\Users\\User\\Desktop/test.txt", "C:\\Users\\User\\Desktop/test1.txt", "hello");
     }
 
-    public static void copyFileContent(String fileFromPath, String fileToPath) throws Exception {
-        validate(fileFromPath, fileToPath);
-        writerToFile(fileToPath, readFromFile(fileFromPath));
-    }
+    public static void transferSentences(String fileFrom, String fileTo, String keyword) {
+        Map<Integer, String> map = new HashMap<>();
+        ArrayList<String> list = new ArrayList<>();
 
-    private static StringBuffer readFromFile(String path) {
+        String line = " ";
+        line = readFile(fileFrom);
 
-        StringBuffer buffer = new StringBuffer();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                buffer.append(line);
-                buffer.append("\n");
+        Pattern pattern = Pattern.compile("[^\\.]+\\.");
+        Matcher matcher = pattern.matcher(line);
+
+        while (matcher.find()) {
+            String sentence = matcher.group();
+
+            if (sentence.contains(keyword) && sentence.length() > 10) {
+                map.put(matcher.start(), sentence);
+            } else {
+                list.add(sentence);
             }
-            buffer.replace((buffer.length() - 1), buffer.length(), "");
-
-        } catch (FileNotFoundException e) {
-            System.err.println("File does not exist");
-        } catch (IOException ioException) {
-            System.err.println("Reading from file " + path + " failed");
         }
-        return buffer;
+
+        try (BufferedWriter writerTo = new BufferedWriter(new FileWriter(fileTo, true))) {
+            for (String m : map.values()) {
+                writerTo.append(m.trim());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try (BufferedWriter writerFrom = new BufferedWriter(new FileWriter(fileFrom))) {
+            for (String l : list) {
+                writerFrom.append(l.trim());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private static void writerToFile(String path, StringBuffer contentToWrite) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path, false))) {
-            bufferedWriter.append(contentToWrite);
-            bufferedWriter.newLine();
-        } catch (IOException e) {
-            System.err.println("Can`t write to file");
+    private static String readFile(String fileFrom) {
+        String line = " ";
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileFrom))) {
+            String s;
+            while ((s = reader.readLine()) != null) {
+                line += s + "\n";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return line;
     }
 
     private static void validate(String fileFromPath, String fileToPath) throws Exception {

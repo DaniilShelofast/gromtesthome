@@ -7,6 +7,8 @@ import java.nio.charset.Charset;
 
 public class Solution {
 
+
+
     public static void copyFileContentApacheIO(String fileFromPath, String fileToPath) throws Exception {
         FileUtils.copyFile(new File(fileFromPath), new File(fileToPath));
     }
@@ -15,6 +17,11 @@ public class Solution {
         validate(fileFromPath, fileToPath);
         writerToFile(fileToPath, readFromFile(fileFromPath), true);
         writerToFile(fileFromPath, "", false);
+    }
+
+    public static void copyFileContent(String fileFromPath, String fileToPath) throws Exception {
+        validate(fileFromPath, fileToPath);
+        writerToFile(fileToPath, readFromFile(fileFromPath), true);
     }
 
     public static void transferSentences(String fileFromPath, String fileToPath, String wordToCheck) throws Exception {

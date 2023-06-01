@@ -41,12 +41,16 @@ public class Solution {
     }
 
     private static void writerToFile(String path, String contentToWrite, boolean append) {
-
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path, append))) {
-            bufferedWriter.append(contentToWrite);
-            bufferedWriter.newLine();
+            File line = new File(path);
+            if (line.length() == 0) {
+                bufferedWriter.append(contentToWrite);
+            } else {
+                bufferedWriter.newLine();
+                bufferedWriter.append(contentToWrite);
+            }
         } catch (IOException e) {
-            System.err.println("Can`t write to file");
+            System.err.println("Can't write to file");
         }
     }
 
@@ -58,7 +62,9 @@ public class Solution {
             while ((line = bufferedReader.readLine()) != null) {
                 string.append(line).append("\n");
             }
-            string.replace(string.length() - 1, string.length(), "");
+            if (!string.isEmpty()) {
+                string.replace(string.length() - 1, string.length(), "");
+            }
         } catch (FileNotFoundException e) {
             System.err.println("File does not exist");
         } catch (IOException ioException) {

@@ -12,11 +12,13 @@ public class Practice {
         transferSentences("C:\\Users\\User\\Desktop/test.txt", "C:\\Users\\User\\Desktop/test1.txt", "hello");
     }
 
-    public static void transferSentences(String fileFrom, String fileTo, String keyword) {
+    public static void transferSentences(String fileFrom, String fileTo, String keyword) throws Exception {
+        validate(fileFrom, fileTo);
+
         Map<Integer, String> map = new HashMap<>();
         ArrayList<String> list = new ArrayList<>();
 
-        String line = " ";
+        String line;
         line = readFile(fileFrom);
 
         Pattern pattern = Pattern.compile("[^\\.]+\\.");
@@ -24,7 +26,6 @@ public class Practice {
 
         while (matcher.find()) {
             String sentence = matcher.group();
-
             if (sentence.contains(keyword) && sentence.length() > 10) {
                 map.put(matcher.start(), sentence);
             } else {
@@ -50,7 +51,7 @@ public class Practice {
     }
 
     private static String readFile(String fileFrom) {
-        String line = " ";
+        String line = "";
         try (BufferedReader reader = new BufferedReader(new FileReader(fileFrom))) {
             String s;
             while ((s = reader.readLine()) != null) {

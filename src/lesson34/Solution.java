@@ -3,10 +3,8 @@ package lesson34;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
-import java.nio.charset.Charset;
 
 public class Solution {
-
 
 
     public static void copyFileContentApacheIO(String fileFromPath, String fileToPath) throws Exception {
@@ -45,10 +43,8 @@ public class Solution {
     private static void writerToFile(String path, String contentToWrite, boolean append) {
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path, append))) {
-            if (path.length() != 0) {
-                bufferedWriter.newLine();
-            }
             bufferedWriter.append(contentToWrite);
+            bufferedWriter.newLine();
         } catch (IOException e) {
             System.err.println("Can`t write to file");
         }
@@ -56,18 +52,19 @@ public class Solution {
 
 
     private static String readFromFile(String path) {
-        String string = "";
+        StringBuilder string = new StringBuilder();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                string += line + "\n";
+                string.append(line).append("\n");
             }
+            string.replace(string.length() - 1, string.length(), "");
         } catch (FileNotFoundException e) {
             System.err.println("File does not exist");
         } catch (IOException ioException) {
             System.err.println("Reading from file " + path + " failed");
         }
-        return string;
+        return string.toString();
     }
 
     private static void validate(String fileFromPath, String fileToPath) throws Exception {

@@ -3,39 +3,36 @@ package lesson35.dao;
 
 import lesson35.model.Hotel;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.LinkedList;
 
 public class HotelDAO {
+    public static void main(String[] args) throws Exception {
+        findHotelByCity("Lviv");
+    }
+
     private static final LinkedList<Hotel> hotels = new LinkedList<>();
 
-    public static LinkedList<Hotel> getHotels() {
-        return hotels;
+    public HotelDAO() {
     }
 
-    static {
-        Hotel hotel1 = new Hotel(1, "Hotel Ukraine", "Ukraine", "Odessa", "street11");
-        Hotel hotel2 = new Hotel(2, "Patio di Fiori", "Ukraine", "Lviv", "street167");
-        Hotel hotel3 = new Hotel(3, "Rhombus Hotel", "Ukraine", "Lviv", "street121");
-        Hotel hotel4 = new Hotel(4, "Power House", "Ukraine", "Lutsk", "street143");
-        Hotel hotel5 = new Hotel(5, "Maximus Hotel", "Ukraine", "Kyiv", "street1");
-        Hotel hotel6 = new Hotel(6, "Motor Hotel", "Ukraine", "Lutsk", "street74");
-
-    }
-
-   /* public static void readFile() {
-
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader())) {
+    public static LinkedList<Hotel> readFile() throws Exception {
+        LinkedList<Hotel> list = new LinkedList<>();
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\User\\Desktop/HotelDb.txt"))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                System.out.println(line);
+
             }
         } catch (IOException e) {
-            System.err.println("Can`t write to file with path ");
+            System.err.println("Reading from file failed");
         }
-    }*/
+        return list;
+    }
 
     public static Hotel findHotelByName(String name) throws Exception {
-        for (Hotel hotel : getHotels()) {
+        for (Hotel hotel : readFile()) {
             if (hotel.getName().equals(name)) {
                 return hotel;
             }
@@ -44,7 +41,7 @@ public class HotelDAO {
     }
 
     public static Hotel findHotelByCity(String city) throws Exception {
-        for (Hotel hotel : getHotels()) {
+        for (Hotel hotel : readFile()) {
             if (hotel.getCity().equals(city)) {
                 return hotel;
             }
@@ -52,4 +49,7 @@ public class HotelDAO {
         throw new Exception("Error:");
     }
 
+    public static LinkedList<Hotel> getHotels() {
+        return hotels;
+    }
 }

@@ -6,50 +6,57 @@ import lesson35.model.Hotel;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class HotelDAO {
-    public static void main(String[] args) throws Exception {
-        findHotelByCity("Lviv");
-    }
 
-    private static final LinkedList<Hotel> hotels = new LinkedList<>();
-
-    public HotelDAO() {
-    }
-
-    public static LinkedList<Hotel> readFile() throws Exception {
-        LinkedList<Hotel> list = new LinkedList<>();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("C:\\Users\\User\\Desktop/HotelDb.txt"))) {
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-
+    private static ArrayList<Hotel> readHotels() {
+        ArrayList<Hotel> hotels = new ArrayList<>();
+        String[] data;
+        String line;
+        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\User\\Desktop//HotelDb.txt"))) {
+            while ((line = reader.readLine()) != null) {
+                data = line.split(", ");
+                if (data.length >= 5) {
+                    int id = 0;
+                    String nameHotel = "";
+                    String country = "";
+                    String hotelCity = "";
+                    String street = "";
+                    try {
+                        id = Integer.parseInt(data[0]);
+                        nameHotel = data[1];
+                        country = data[2];
+                        hotelCity = data[3];
+                        street = data[4];
+                        hotels.add(new Hotel(id, nameHotel, country, hotelCity, street));
+                    } catch (Exception e) {
+                        System.err.println("Error: " + line);
+                    }
+                }
             }
         } catch (IOException e) {
-            System.err.println("Reading from file failed");
+            System.out.println("Error:");
+            e.printStackTrace();
         }
-        return list;
-    }
-
-    public static Hotel findHotelByName(String name) throws Exception {
-        for (Hotel hotel : readFile()) {
-            if (hotel.getName().equals(name)) {
-                return hotel;
-            }
-        }
-        throw new Exception("Error:");
+        return hotels;
     }
 
     public static Hotel findHotelByCity(String city) throws Exception {
-        for (Hotel hotel : readFile()) {
+        for (Hotel hotel : readHotels()) {
             if (hotel.getCity().equals(city)) {
                 return hotel;
             }
         }
-        throw new Exception("Error:");
+        throw new Exception("Error : this city is not in our database.");
     }
 
-    public static LinkedList<Hotel> getHotels() {
-        return hotels;
+    public static Hotel findHotelByName(String name) throws Exception {
+        for (Hotel hotel : readHotels()) {
+            if (hotel.getName().equals(name)) {
+                return hotel;
+            }
+        }
+        throw new Exception("Error : this city is not in our database.");
     }
 }

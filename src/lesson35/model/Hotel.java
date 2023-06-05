@@ -1,5 +1,7 @@
 package lesson35.model;
 
+import java.util.Objects;
+
 public class Hotel {
     private long id;
     private String name;
@@ -34,4 +36,30 @@ public class Hotel {
     public String getStreet() {
         return street;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Hotel hotel = (Hotel) o;
+        return id == hotel.id && Objects.equals(name, hotel.name) && Objects.equals(country, hotel.country) && Objects.equals(city, hotel.city) && Objects.equals(street, hotel.street);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, country, city, street);
+    }
+
+    @Override
+    public String toString() {
+        return "Hotel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                '}';
+    }
+
 }
+

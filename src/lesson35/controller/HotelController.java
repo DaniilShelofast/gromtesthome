@@ -5,12 +5,14 @@ import lesson35.service.HotelService;
 
 public class HotelController {
 
-    private static HotelService hotelService = new HotelService();
+    public static final HotelService hotelService = new HotelService();
 
     public static Hotel findHotelByName(String name) throws Exception {
-        return HotelService.findHotelByName(name);
+        return hotelService.findHotelByName(name);
     }
+
     public static Hotel findHotelByCity(String city) throws Exception {
-        return HotelService.findHotelByCity(city);
+
+        return hotelService.findHotelByCity(city);
     }
 }

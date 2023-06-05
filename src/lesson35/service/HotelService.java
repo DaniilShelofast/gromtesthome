@@ -5,13 +5,13 @@ import lesson35.model.Hotel;
 
 public class HotelService {
 
-    private static final HotelDAO hotelDAO = new HotelDAO();
+    private static final HotelDAO dao = new HotelDAO();
 
     public static Hotel findHotelByName(String name) throws Exception {
-        return HotelDAO.findHotelByName(name);
+        return dao.findHotelByName(name);
     }
 
     public static Hotel findHotelByCity(String city) throws Exception {
-        return HotelDAO.findHotelByCity(city);
+        return dao.findHotelByCity(city);
     }
 }

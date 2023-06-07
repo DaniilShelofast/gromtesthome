@@ -1,6 +1,7 @@
 package lesson35.dao;
 
 
+import lesson35.exception.BadRequestException;
 import lesson35.model.Hotel;
 
 import java.io.*;
@@ -42,7 +43,7 @@ public class HotelDAO {
                 return hotel;
             }
         }
-        throw new Exception("Error : this city is not in our database.");
+        throw new BadRequestException("Error : this city is not in our database.");
     }
 
     public static Hotel findHotelByName(String name) throws Exception {
@@ -51,7 +52,7 @@ public class HotelDAO {
                 return hotel;
             }
         }
-        throw new Exception("Error : this city is not in our database.");
+        throw new BadRequestException("Error : this city is not in our database.");
     }
 
     public static void addHotel(Hotel hotel) throws Exception {
@@ -88,7 +89,7 @@ public class HotelDAO {
     private static boolean findHotelById(long id) throws Exception {
         for (Hotel hotel : readHotels()) {
             if (hotel != null && hotel.getId() == id) {
-                throw new Exception("Error : a hotel with such an ID already exists");
+                throw new BadRequestException("Error : a hotel with such an ID already exists");
             }
         }
         return true;

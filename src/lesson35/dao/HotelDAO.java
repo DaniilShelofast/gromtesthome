@@ -2,6 +2,7 @@ package lesson35.dao;
 
 
 import lesson35.exception.BadRequestException;
+import lesson35.exception.InternalServerException;
 import lesson35.model.Hotel;
 
 import java.io.*;
@@ -89,7 +90,7 @@ public class HotelDAO {
     private static boolean findHotelById(long id) throws Exception {
         for (Hotel hotel : readHotels()) {
             if (hotel != null && hotel.getId() == id) {
-                throw new BadRequestException("Error : a hotel with such an ID already exists");
+                throw new InternalServerException("Error : a hotel with such an ID already exists");
             }
         }
         return true;

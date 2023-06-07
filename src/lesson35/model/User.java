@@ -2,6 +2,8 @@ package lesson35.model;
 
 import lesson35.UserType;
 
+import java.util.Objects;
+
 public class User {
     private long id;
     private String userName;
@@ -35,5 +37,29 @@ public class User {
 
     public UserType getUserType() {
         return userType;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", country='" + country + '\'' +
+                ", userType=" + userType +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && Objects.equals(userName, user.userName) && Objects.equals(password, user.password) && Objects.equals(country, user.country) && userType == user.userType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, userName, password, country, userType);
     }
 }

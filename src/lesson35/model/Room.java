@@ -1,17 +1,15 @@
 package lesson35.model;
 
-import java.util.Date;
-
 public class Room {
     private long id;
     private int numberOfGuests;
     private double price;
     private boolean breakfastIncluded;
     private boolean petsAllowed;
-    private Date dateAvailableFrom;
+    private String dateAvailableFrom;
     private Hotel hotel;
 
-    public Room(long id, int numberOfGuests, double price, boolean breakfastIncluded, boolean petsAllowed, Date dateAvailableFrom, Hotel hotel) {
+    public Room(long id, int numberOfGuests, double price, boolean breakfastIncluded, boolean petsAllowed, String dateAvailableFrom, Hotel hotel) {
         this.id = id;
         this.numberOfGuests = numberOfGuests;
         this.price = price;
@@ -41,7 +39,24 @@ public class Room {
         return petsAllowed;
     }
 
+    public String  getDateAvailableFrom() {
+        return dateAvailableFrom;
+    }
+
     public Hotel getHotel() {
         return hotel;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "id=" + id +
+                ", numberOfGuests=" + numberOfGuests +
+                ", price=" + price +
+                ", breakfastIncluded=" + breakfastIncluded +
+                ", petsAllowed=" + petsAllowed +
+                ", dateAvailableFrom=" + dateAvailableFrom +
+                ", hotel=" + hotel +
+                '}';
     }
 }

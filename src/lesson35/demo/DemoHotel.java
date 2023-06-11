@@ -2,13 +2,14 @@ package lesson35.demo;
 
 import lesson35.controller.HotelController;
 
+import java.util.Random;
+
 public class DemoHotel {
     public static void main(String[] args) throws Exception {
-        System.out.println(HotelController.findHotelByCity("Lviv"));
-        System.out.println("-------");
-        System.out.println(HotelController.findHotelByName("Hotel ukraine"));
-        System.out.println("-------");
+        Random random = new Random();
+        int randomNumber = random.nextInt(100);
 
+        HotelController.deleteHotel(2);
 
     }
 }

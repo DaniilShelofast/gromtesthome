@@ -2,6 +2,7 @@ package lesson35.dao;
 
 
 import lesson35.UserType;
+import lesson35.exception.InternalServerException;
 import lesson35.model.User;
 
 import java.io.*;
@@ -50,11 +51,15 @@ public class UserDAO {
         }
 
         if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
-            System.out.println("Login accepted");
+            System.out.println("Login accepted." + "\n" + user);
         } else {
             System.err.println("Error : the specified data is incorrect");
         }
 
+    }
+
+    public static void main(String[] args)throws Exception {
+        login("Max","q1w2e3");
     }
 
 
@@ -76,12 +81,13 @@ public class UserDAO {
     public static void logout() throws IOException {
         FileInputStream file = new FileInputStream(fileName);
         file.close();
+
     }
 
     private static boolean findUserId(long id) throws Exception {
         for (User user : readUsers()) {
             if (user.getId() == id) {
-                throw new Exception("Error");
+                throw new InternalServerException("Error");
             }
         }
         return true;

@@ -2,41 +2,12 @@ package lesson35.dao;
 
 
 import lesson35.UserType;
-import lesson35.exception.InternalServerException;
 import lesson35.model.User;
 
 import java.io.*;
 import java.util.LinkedList;
 
 public class UserDAO {
-
-    private static final String fileName = "C:\\Users\\User\\Desktop//UserDb.txt";
-
-    private static LinkedList<User> readUsers() {
-        LinkedList<User> users = new LinkedList<>();
-        String[] data;
-        String line;
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            while ((line = reader.readLine()) != null) {
-                data = line.split(", ");
-                if (data.length >= 5) {
-                    try {
-                        int id = Integer.parseInt(data[0]);
-                        String userName = data[1];
-                        String password = data[2];
-                        String country = data[3];
-                        UserType userType = UserType.valueOf((data[4]));
-                        users.add(new User(id, userName, password, country, userType));
-                    } catch (Exception e) {
-                        System.err.println("Error: " + line);
-                    }
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return users;
-    }
 
     public static void login(String userName, String password) throws Exception {
         User user = null;
@@ -47,26 +18,21 @@ public class UserDAO {
         }
 
         if (user == null) {
-            throw new Exception("Error.");
-        }
-
-        if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
-            System.out.println("Login accepted." + "\n" + user);
+            throw new Exception("Error : the specified data is incorrect");
         } else {
-            System.err.println("Error : the specified data is incorrect");
+            if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
+                System.out.println("Login accepted." + "\n" + user);
+            }
         }
 
-    }
 
-    public static void main(String[] args)throws Exception {
-        login("Max","q1w2e3");
     }
 
 
     public static void registerUser(User user) throws Exception {
-        findUserId(user.getId());
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
-            File file = new File(fileName);
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\User\\Desktop//UserDb.txt", true))) {
+            File file = new File("C:\\Users\\User\\Desktop//UserDb.txt");
             if (file.length() == 0) {
                 writer.write(user.getId() + ", " + user.getUserName() + ", " + user.getPassword() + ", " + user.getCountry() + ", " + user.getUserType());
             } else {
@@ -79,18 +45,24 @@ public class UserDAO {
     }
 
     public static void logout() throws IOException {
-        FileInputStream file = new FileInputStream(fileName);
+        FileInputStream file = new FileInputStream("C:\\Users\\User\\Desktop//UserDb.txt");
         file.close();
 
     }
 
-    private static boolean findUserId(long id) throws Exception {
-        for (User user : readUsers()) {
-            if (user.getId() == id) {
-                throw new InternalServerException("Error");
+    public static LinkedList<User> readUsers() {
+        LinkedList<User> users = new LinkedList<>();
+        String line;
+        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\User\\Desktop//UserDb.txt"))) {
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(", ");
+                if (data.length == 5) {
+                    users.add(new User(Integer.parseInt(data[0]), data[1], data[2], data[3], UserType.valueOf(data[4])));
+                }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return true;
+        return users;
     }
-
 }

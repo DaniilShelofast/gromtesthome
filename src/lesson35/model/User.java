@@ -1,10 +1,10 @@
 package lesson35.model;
 
-import lesson35.UserType;
+import lesson35.WriteToFile;
 
 import java.util.Objects;
 
-public class User {
+public class User implements WriteToFile {
     private long id;
     private String userName;
     private String password;
@@ -62,4 +62,10 @@ public class User {
     public int hashCode() {
         return Objects.hash(id, userName, password, country, userType);
     }
+
+    @Override
+    public String toFileString() {
+        return this.getId() + ", " + this.getUserName() + ", " + this.getPassword() + ", " + this.getCountry() + ", " + this.getUserType();
+    }
+
 }

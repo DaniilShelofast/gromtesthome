@@ -1,8 +1,11 @@
 package lesson35.model;
 
+import lesson35.WriteToFile;
+
 import java.util.Objects;
 
-public class Hotel {
+public class Hotel implements WriteToFile {
+
     private long id;
     private String name;
     private String country;
@@ -59,6 +62,11 @@ public class Hotel {
                 ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
                 '}';
+    }
+
+    @Override
+    public String toFileString() {
+        return this.getId() + ", " + this.getName() + ", " + this.getCountry() + ", " + this.getCity() + ", " + this.getStreet();
     }
 
 }

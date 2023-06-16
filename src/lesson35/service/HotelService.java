@@ -6,14 +6,27 @@ import lesson35.model.Hotel;
 
 import java.util.LinkedList;
 
+import static lesson35.dao.HotelDAO.readFileText;
+import static lesson35.dao.HotelDAO.recordObject;
+
 public class HotelService {
 
-    public static Hotel findHotelByName(String name) throws Exception {
-        return HotelDAO.findHotelByName(name);
+    public static Hotel findHotelByCity(String city) throws Exception {
+        for (Hotel hotel : recordObject(readFileText())) {
+            if (hotel.getCity().equals(city)) {
+                return hotel;
+            }
+        }
+        throw new BadRequestException("Error : this city is not in our database.");
     }
 
-    public static Hotel findHotelByCity(String city) throws Exception {
-        return HotelDAO.findHotelByCity(city);
+    public static Hotel findHotelByName(String name) throws Exception {
+        for (Hotel hotel : recordObject(readFileText())) {
+            if (hotel.getName().equals(name)) {
+                return hotel;
+            }
+        }
+        throw new BadRequestException("Error : this city is not in our database.");
     }
 
     public static void addHotel(Hotel hotel,boolean append) throws Exception {
@@ -26,7 +39,7 @@ public class HotelService {
     }
 
     private static boolean findHotelById(long id) throws Exception {
-        LinkedList<Hotel> hotels = HotelDAO.readHotels();
+        LinkedList<Hotel> hotels = recordObject(readFileText());
         for (Hotel hotel : hotels) {
             if (hotel != null && hotel.getId() == id) {
                 throw new BadRequestException("Error : a hotel with such an ID already exists");

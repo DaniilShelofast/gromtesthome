@@ -1,15 +1,20 @@
 package lesson35.model;
 
-public class Room {
+import lesson35.WriteToFile;
+
+import java.util.Date;
+
+public class Room implements WriteToFile {
+
     private long id;
     private int numberOfGuests;
     private double price;
     private boolean breakfastIncluded;
     private boolean petsAllowed;
-    private String dateAvailableFrom;
+    private Date dateAvailableFrom;
     private Hotel hotel;
 
-    public Room(long id, int numberOfGuests, double price, boolean breakfastIncluded, boolean petsAllowed, String dateAvailableFrom, Hotel hotel) {
+    public Room(long id, int numberOfGuests, double price, boolean breakfastIncluded, boolean petsAllowed, Date dateAvailableFrom, Hotel hotel) {
         this.id = id;
         this.numberOfGuests = numberOfGuests;
         this.price = price;
@@ -39,7 +44,7 @@ public class Room {
         return petsAllowed;
     }
 
-    public String  getDateAvailableFrom() {
+    public Date getDateAvailableFrom() {
         return dateAvailableFrom;
     }
 
@@ -58,5 +63,10 @@ public class Room {
                 ", dateAvailableFrom=" + dateAvailableFrom +
                 ", hotel=" + hotel +
                 '}';
+    }
+
+    @Override
+    public String toFileString() {
+        return this.getId() + ", " + this.getNumberOfGuests() + ", " + this.getPrice() + ", " + this.isBreakfastIncluded() + ", " + this.isPetsAllowed() + ", " + this.getDateAvailableFrom() + ", " + this.getHotel().getId();
     }
 }

@@ -1,7 +1,5 @@
 package lesson35.model;
 
-import lesson35.model.Hotel;
-
 import java.util.Date;
 
 public class Filter {
@@ -56,5 +54,19 @@ public class Filter {
 
     public Hotel getHotel() {
         return hotel;
+    }
+
+    @Override
+    public String toString() {
+        return "Filter{" +
+                "numberOfGuests=" + numberOfGuests +
+                ", price=" + price +
+                ", breakfastIncluded=" + breakfastIncluded +
+                ", petsAllowed=" + petsAllowed +
+                ", dateAvailableFrom=" + dateAvailableFrom +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", hotel=" + hotel +
+                '}';
     }
 }

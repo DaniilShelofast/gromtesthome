@@ -1,4 +1,4 @@
-package lesson35;
+package lesson35.dao;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,10 +7,8 @@ import java.io.IOException;
 
 public class GeneralDAO {
 
-
-    @SuppressWarnings("undchecked")
-    public static <T extends WriteToFile> void addObjectToFile(T t, String pathFile, boolean append) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathFile, append))) {
+    public static <T extends WriteToFile> void addObjectToFile(T t, String pathFile) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathFile, true))) {
             File line = new File(pathFile);
             if (line.length() == 0) {
                 writer.write(t.toFileString());
@@ -22,4 +20,5 @@ public class GeneralDAO {
             e.printStackTrace();
         }
     }
+
 }

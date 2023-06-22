@@ -7,15 +7,15 @@ import lesson35.model.Room;
 
 import java.awt.*;
 
-import static lesson35.dao.RoomDAO.readFileText;
-import static lesson35.dao.RoomDAO.recordObject;
+import static lesson35.dao.RoomDAO.readFileTextRoom;
+import static lesson35.dao.RoomDAO.recordObjectRoom;
 
 public class RoomService {
 
 
-    public static void addRoom(Room room, boolean append) throws Exception {
-        idRooms(room.getId());
-        RoomDAO.addRoom(room, append);
+    public static void addRoom(Room room) throws Exception {
+        checkIdRoom(room.getId());
+        RoomDAO.addRoom(room);
     }
 
     public static void deleteRoom(long idRoom) throws Exception {
@@ -24,7 +24,7 @@ public class RoomService {
 
     public static List findRooms(Filter filter) throws Exception {
         List rooms = new List();
-        for (Room room : recordObject(readFileText())) {
+        for (Room room : recordObjectRoom(readFileTextRoom())) {
             if (room.getNumberOfGuests() == filter.getNumberOfGuests() && room.getPrice() == filter.getPrice() && room.isBreakfastIncluded() == filter.isBreakfastIncluded()
                     && room.isPetsAllowed() == filter.isPetsAllowed() && room.getDateAvailableFrom().toString().equals(filter.getDateAvailableFrom().toString())
                     && room.getHotel().getCity().equals(filter.getCity()) && room.getHotel().getCountry().equals(filter.getCountry()) && room.getHotel() == filter.getHotel()) {
@@ -34,12 +34,21 @@ public class RoomService {
         return rooms;
     }
 
-    private static boolean idRooms(long id) throws Exception {
-        for (Room room : recordObject(readFileText())) {
+    private static boolean checkIdRoom(long id) throws Exception {
+        for (Room room : recordObjectRoom(readFileTextRoom())) {
             if (room.getId() == id) {
-                throw new BadRequestException("Error");
+                throw new BadRequestException("Error : a room with this ID already exists.");
             }
         }
         return true;
+    }
+
+    public static Room findRoomId(long idRoom) throws Exception {
+        for (Room room : recordObjectRoom(readFileTextRoom())) {
+            if (room.getId() == idRoom) {
+                return room;
+            }
+        }
+        return null;
     }
 }

@@ -6,13 +6,13 @@ import lesson35.model.User;
 
 import java.io.IOException;
 
-import static lesson35.dao.UserDAO.readFileText;
-import static lesson35.dao.UserDAO.recordObject;
+import static lesson35.dao.UserDAO.readFileTextUsers;
+import static lesson35.dao.UserDAO.recordObjectUser;
 
 public class UserService {
 
     public static void registerUser(User user) throws Exception {
-        findUserId(user.getId());
+        checkIdUser(user.getId());
         UserDAO.registerUser(user);
     }
     public static void logout() throws IOException {
@@ -21,7 +21,7 @@ public class UserService {
 
     public static void login(String userName, String password) throws Exception {
         User user = null;
-        for (User u : recordObject(readFileText())) {
+        for (User u : recordObjectUser(readFileTextUsers())) {
             if (u.getUserName().equals(userName) && u.getPassword().equals(password)) {
                 user = u;
             }
@@ -36,12 +36,20 @@ public class UserService {
         }
     }
 
-    private static boolean findUserId(long id) throws Exception {
-        for (User user : recordObject(readFileText())) {
+    private static boolean checkIdUser(long id) throws Exception {
+        for (User user : recordObjectUser(readFileTextUsers())) {
             if (user.getId() == id) {
-                throw new BadRequestException("Error");
+                throw new BadRequestException("Error : a user with this id already exists.");
             }
         }
         return true;
+    }
+    public static User findUserId(long idUser) {
+        for (User user : recordObjectUser(readFileTextUsers())) {
+            if (user.getId() == idUser) {
+                return user;
+            }
+        }
+        return null;
     }
 }

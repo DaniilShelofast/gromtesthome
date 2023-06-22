@@ -1,7 +1,6 @@
 package lesson35.dao;
 
 
-import lesson35.GeneralDAO;
 import lesson35.model.UserType;
 import lesson35.model.User;
 
@@ -10,9 +9,8 @@ import java.util.LinkedList;
 
 public class UserDAO {
 
-
     public static void registerUser(User user)  {
-        GeneralDAO.addObjectToFile(user,"C:\\Users\\User\\Desktop//UserDb.txt",true);
+        GeneralDAO.addObjectToFile(user,"C:\\Users\\User\\Desktop//UserDb.txt");
     }
 
     public static void logout() throws IOException {
@@ -20,7 +18,7 @@ public class UserDAO {
         file.close();
     }
 
-    public static LinkedList<User> recordObject(LinkedList<String> strings) {
+    public static LinkedList<User> recordObjectUser(LinkedList<String> strings) {
         LinkedList<User> users = new LinkedList<>();
         for (String line : strings) {
             String[] data = line.split(", ");
@@ -31,7 +29,7 @@ public class UserDAO {
         return users;
     }
 
-    public static LinkedList<String> readFileText() {
+    public static LinkedList<String> readFileTextUsers() {
         String line;
         LinkedList<String> lines = new LinkedList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\User\\Desktop//UserDb.txt"))) {

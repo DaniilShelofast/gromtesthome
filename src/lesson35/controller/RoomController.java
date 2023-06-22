@@ -5,8 +5,8 @@ import lesson35.service.RoomService;
 
 public class RoomController {
 
-    public static void addRoom(Room room, boolean append) throws Exception {
-        RoomService.addRoom(room, append);
+    public static void addRoom(Room room) throws Exception {
+        RoomService.addRoom(room);
     }
 
     public static void deleteRoom(long idRoom) throws Exception {

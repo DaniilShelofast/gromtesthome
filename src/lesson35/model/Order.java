@@ -1,8 +1,10 @@
 package lesson35.model;
 
+import lesson35.dao.WriteToFile;
+
 import java.util.Date;
 
-public class Order {
+public class Order implements WriteToFile {
     private long id;
     private User user;
     private Room room;
@@ -31,7 +33,36 @@ public class Order {
         return room;
     }
 
+    public Date getDateFrom() {
+        return dateFrom;
+    }
+
+    public Date getDateTo() {
+        return dateTo;
+    }
+
     public double getMoneyPaid() {
         return moneyPaid;
     }
+
+    @Override
+    public String toFileString() {
+        return this.getId() + ", " + this.getUser() + ", " + this.getRoom() + ", " + this.getDateFrom() + ", " + this.getDateTo() + ", " + this.getMoneyPaid();
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", user=" + user +
+                ", room=" + room +
+                ", dateFrom='" + dateFrom + '\'' +
+                ", dateTo='" + dateTo + '\'' +
+                ", moneyPaid=" + moneyPaid +
+                '}';
+    }
+
+
 }

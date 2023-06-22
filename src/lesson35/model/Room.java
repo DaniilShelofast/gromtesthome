@@ -1,6 +1,6 @@
 package lesson35.model;
 
-import lesson35.WriteToFile;
+import lesson35.dao.WriteToFile;
 
 import java.util.Date;
 

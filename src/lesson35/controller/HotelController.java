@@ -15,8 +15,8 @@ public class HotelController {
         return HotelService.findHotelByCity(city);
     }
 
-    public static void addHotel(Hotel hotel, boolean append) throws Exception {
-        HotelService.addHotel(hotel, append);
+    public static void addHotel(Hotel hotel) throws Exception {
+        HotelService.addHotel(hotel);
     }
 
     public static void deleteHotel(long idHotel) {

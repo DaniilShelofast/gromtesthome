@@ -6,13 +6,13 @@ import lesson35.model.Hotel;
 
 import java.util.LinkedList;
 
-import static lesson35.dao.HotelDAO.readFileText;
-import static lesson35.dao.HotelDAO.recordObject;
+import static lesson35.dao.HotelDAO.readFileTextHotel;
+import static lesson35.dao.HotelDAO.recordObjectHotel;
 
 public class HotelService {
 
     public static Hotel findHotelByCity(String city) throws Exception {
-        for (Hotel hotel : recordObject(readFileText())) {
+        for (Hotel hotel : recordObjectHotel(readFileTextHotel())) {
             if (hotel.getCity().equals(city)) {
                 return hotel;
             }
@@ -21,7 +21,7 @@ public class HotelService {
     }
 
     public static Hotel findHotelByName(String name) throws Exception {
-        for (Hotel hotel : recordObject(readFileText())) {
+        for (Hotel hotel : recordObjectHotel(readFileTextHotel())) {
             if (hotel.getName().equals(name)) {
                 return hotel;
             }
@@ -29,17 +29,17 @@ public class HotelService {
         throw new BadRequestException("Error : this city is not in our database.");
     }
 
-    public static void addHotel(Hotel hotel,boolean append) throws Exception {
-        findHotelById(hotel.getId());
-        HotelDAO.addHotel(hotel,append);
+    public static void addHotel(Hotel hotel) throws Exception {
+        checkIdHotel(hotel.getId());
+        HotelDAO.addHotel(hotel);
     }
 
     public static void deleteHotel(long idHotel) {
         HotelDAO.deleteHotel(idHotel);
     }
 
-    private static boolean findHotelById(long id) throws Exception {
-        LinkedList<Hotel> hotels = recordObject(readFileText());
+    private static boolean checkIdHotel(long id) throws Exception {
+        LinkedList<Hotel> hotels = recordObjectHotel(readFileTextHotel());
         for (Hotel hotel : hotels) {
             if (hotel != null && hotel.getId() == id) {
                 throw new BadRequestException("Error : a hotel with such an ID already exists");
@@ -47,5 +47,13 @@ public class HotelService {
         }
         return true;
     }
-
+    public static Hotel findIdHotel(long idHotel) throws Exception {
+        for (Hotel hotel : recordObjectHotel(readFileTextHotel())) {
+            if (hotel.getId() == idHotel) {
+                return hotel;
+            }
+        }
+        return null;
+       // throw new Exception("Error : the data is incorrect, the hotel with this ID does not exist");
+    }
 }

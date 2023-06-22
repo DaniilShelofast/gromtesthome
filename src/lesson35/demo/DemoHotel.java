@@ -10,7 +10,7 @@ public class DemoHotel {
         Random random = new Random();
         int randomNumber = random.nextInt(100);
         Hotel hotel = new Hotel(randomNumber, "ooo", "ggg", "ccc", "ppp");
-        HotelController.addHotel(hotel,true);
+        HotelController.addHotel(hotel);
 
     }
 }

@@ -50,6 +50,10 @@ public class Order implements WriteToFile {
         return this.getId() + ", " + this.getUser() + ", " + this.getRoom() + ", " + this.getDateFrom() + ", " + this.getDateTo() + ", " + this.getMoneyPaid();
     }
 
+    @Override
+    public long id() {
+        return this.getId();
+    }
 
 
     @Override

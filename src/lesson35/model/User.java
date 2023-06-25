@@ -68,4 +68,8 @@ public class User implements WriteToFile {
         return this.getId() + ", " + this.getUserName() + ", " + this.getPassword() + ", " + this.getCountry() + ", " + this.getUserType();
     }
 
+    @Override
+    public long id() {
+        return this.getId();
+    }
 }

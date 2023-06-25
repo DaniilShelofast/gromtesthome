@@ -10,9 +10,9 @@ import java.util.LinkedList;
 public class UserDAO extends GeneralDAO<User> {
 
     @Override
-    public void addObjectTo(User user) {
+    public void addObjectToFile(User user) {
         setPath("C:\\Users\\User\\Desktop//UserDb.txt");
-        super.addObjectTo(user);
+        super.addObjectToFile(user);
     }
 
     public static void logout() throws IOException {

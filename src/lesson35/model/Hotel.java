@@ -68,6 +68,10 @@ public class Hotel implements WriteToFile {
     public String toFileString() {
         return this.getId() + ", " + this.getName() + ", " + this.getCountry() + ", " + this.getCity() + ", " + this.getStreet();
     }
+    @Override
+    public long id() {
+        return this.getId();
+    }
 
 }
 

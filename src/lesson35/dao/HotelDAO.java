@@ -8,24 +8,30 @@ import java.util.LinkedList;
 public class HotelDAO extends GeneralDAO<Hotel> {
 
     @Override
-    public void addObjectTo(Hotel hotel) {
+    public void addObjectToFile(Hotel hotel) {
         setPath("C:\\Users\\User\\Desktop//HotelDb.txt");
-        super.addObjectTo(hotel);
+        super.addObjectToFile(hotel);
     }
 
+    @Override
+    public void deleteObjectFromFile(long id) throws Exception {
+        setReadFile(recordObjectHotel(readFileTextHotel()));
+        setPath("C:\\Users\\User\\Desktop//HotelDb.txt");
+        super.deleteObjectFromFile(id);
+    }
 
-    public static void deleteHotel(long idHotel) {
+    /*public static void deleteHotel(long idHotel) {
         HotelDAO hotelDAO = new HotelDAO();
         LinkedList<Hotel> hotels = recordObjectHotel(readFileTextHotel());
         hotels.removeIf(h -> h.getId() == idHotel);
         try (BufferedWriter ignored = new BufferedWriter(new FileWriter("C:\\Users\\User\\Desktop//HotelDb.txt", false))) {
             for (Hotel hotel : hotels) {
-                hotelDAO.addObjectTo(hotel);
+                hotelDAO.addObjectToFile(hotel);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     public static LinkedList<Hotel> recordObjectHotel(LinkedList<String> lines) {
         LinkedList<Hotel> hotels = new LinkedList<>();

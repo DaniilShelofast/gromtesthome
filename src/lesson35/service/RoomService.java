@@ -16,11 +16,11 @@ public class RoomService {
     public static void addRoom(Room room) throws Exception {
         RoomDAO roomDAO = new RoomDAO();
         checkIdRoom(room.getId());
-        roomDAO.addObjectTo(room);
+        roomDAO.addObjectToFile(room);
     }
 
     public static void deleteRoom(long idRoom) throws Exception {
-        RoomDAO.deleteRoom(idRoom);
+       // RoomDAO.deleteRoom(idRoom);
     }
 
     public static List findRooms(Filter filter) throws Exception {

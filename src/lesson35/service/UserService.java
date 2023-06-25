@@ -14,7 +14,7 @@ public class UserService {
     public static void registerUser(User user) throws Exception {
         UserDAO userDAO = new UserDAO();
         checkIdUser(user.getId());
-        userDAO.addObjectTo(user);
+        userDAO.addObjectToFile(user);
     }
     public static void logout() throws IOException {
         UserDAO.logout();

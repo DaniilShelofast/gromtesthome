@@ -3,9 +3,10 @@ package lesson35.dao;
 import lesson35.model.Hotel;
 import lesson35.model.Room;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedList;
 
 import static lesson35.service.HotelService.findIdHotel;
@@ -13,26 +14,17 @@ import static lesson35.service.HotelService.findIdHotel;
 public class RoomDAO extends GeneralDAO<Room> {
 
     @Override
-    public void addObjectTo(Room room) {
+    public void addObjectToFile(Room room) {
         setPath("C:\\Users\\User\\Desktop//RoomDb.txt");
-        super.addObjectTo(room);
+        super.addObjectToFile(room);
     }
 
-
-    public static void deleteRoom(long idRoom) throws Exception {
-        RoomDAO dao = new RoomDAO();
-        LinkedList<Room> rooms = recordObjectRoom(readFileTextRoom());
-        rooms.removeIf(room -> room.getId() == idRoom);
-
-        try (BufferedWriter ignored = new BufferedWriter(new FileWriter("C:\\Users\\User\\Desktop//RoomDb.txt", false))) {
-            for (Room room : rooms) {
-                dao.addObjectTo(room);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    @Override
+    public void deleteObjectFromFile(long id) throws Exception {
+        setReadFile(recordObjectRoom(readFileTextRoom()));
+        setPath("C:\\Users\\User\\Desktop//RoomDb.txt");
+        super.deleteObjectFromFile(id);
     }
-
 
     public static LinkedList<String> readFileTextRoom() {
         String line;
@@ -53,10 +45,10 @@ public class RoomDAO extends GeneralDAO<Room> {
         for (String line : strings) {
             String[] s = line.split(", ");
             if (s.length == 7) {
-                Date date = dateFormat.parse(s[5]);
+               // Date date = dateFormat.parse(s[5]);
                 int idHotel = Integer.parseInt(s[6]);
                 Hotel hotel = findIdHotel(idHotel);
-                rooms.add(new Room(Integer.parseInt(s[0]), Integer.parseInt(s[1]), Double.parseDouble(s[2]), Boolean.parseBoolean(s[3]), Boolean.parseBoolean(s[4]), date, hotel));
+                rooms.add(new Room(Integer.parseInt(s[0]), Integer.parseInt(s[1]), Double.parseDouble(s[2]), Boolean.parseBoolean(s[3]), Boolean.parseBoolean(s[4]), dateFormat.parse(s[5]), hotel));
             }
         }
         return rooms;

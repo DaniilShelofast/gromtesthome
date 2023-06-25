@@ -14,11 +14,12 @@ public class HotelService {
     public static void addHotel(Hotel hotel) throws Exception {
         HotelDAO hotelDAO = new HotelDAO();
         checkIdHotel(hotel.getId());
-        hotelDAO.addObjectTo(hotel);
+        hotelDAO.addObjectToFile(hotel);
     }
 
-    public static void deleteHotel(long idHotel) {
-        HotelDAO.deleteHotel(idHotel);
+    public static void deleteHotel(long idHotel) throws Exception {
+        HotelDAO hotelDAO = new HotelDAO();
+        hotelDAO.deleteObjectFromFile(idHotel);
     }
 
     public static Hotel findHotelByCity(String city) throws Exception {

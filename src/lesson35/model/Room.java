@@ -69,4 +69,9 @@ public class Room implements WriteToFile {
     public String toFileString() {
         return this.getId() + ", " + this.getNumberOfGuests() + ", " + this.getPrice() + ", " + this.isBreakfastIncluded() + ", " + this.isPetsAllowed() + ", " + this.getDateAvailableFrom() + ", " + this.getHotel().getId();
     }
+
+    @Override
+    public long id() {
+        return this.getId();
+    }
 }

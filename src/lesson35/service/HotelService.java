@@ -11,6 +11,16 @@ import static lesson35.dao.HotelDAO.recordObjectHotel;
 
 public class HotelService {
 
+    public static void addHotel(Hotel hotel) throws Exception {
+        HotelDAO hotelDAO = new HotelDAO();
+        checkIdHotel(hotel.getId());
+        hotelDAO.addObjectTo(hotel);
+    }
+
+    public static void deleteHotel(long idHotel) {
+        HotelDAO.deleteHotel(idHotel);
+    }
+
     public static Hotel findHotelByCity(String city) throws Exception {
         for (Hotel hotel : recordObjectHotel(readFileTextHotel())) {
             if (hotel.getCity().equals(city)) {
@@ -29,15 +39,6 @@ public class HotelService {
         throw new BadRequestException("Error : this city is not in our database.");
     }
 
-    public static void addHotel(Hotel hotel) throws Exception {
-        checkIdHotel(hotel.getId());
-        HotelDAO.addHotel(hotel);
-    }
-
-    public static void deleteHotel(long idHotel) {
-        HotelDAO.deleteHotel(idHotel);
-    }
-
     private static boolean checkIdHotel(long id) throws Exception {
         LinkedList<Hotel> hotels = recordObjectHotel(readFileTextHotel());
         for (Hotel hotel : hotels) {
@@ -47,13 +48,13 @@ public class HotelService {
         }
         return true;
     }
+
     public static Hotel findIdHotel(long idHotel) throws Exception {
         for (Hotel hotel : recordObjectHotel(readFileTextHotel())) {
             if (hotel.getId() == idHotel) {
                 return hotel;
             }
         }
-        return null;
-       // throw new Exception("Error : the data is incorrect, the hotel with this ID does not exist");
+        throw new Exception("Error : the data is incorrect, the hotel with this ID does not exist");
     }
 }

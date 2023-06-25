@@ -14,8 +14,9 @@ public class RoomService {
 
 
     public static void addRoom(Room room) throws Exception {
+        RoomDAO roomDAO = new RoomDAO();
         checkIdRoom(room.getId());
-        RoomDAO.addRoom(room);
+        roomDAO.addObjectTo(room);
     }
 
     public static void deleteRoom(long idRoom) throws Exception {
@@ -49,6 +50,6 @@ public class RoomService {
                 return room;
             }
         }
-        return null;
+        throw new Exception("Error : the data is incorrect, the room with this ID does not exist");
     }
 }

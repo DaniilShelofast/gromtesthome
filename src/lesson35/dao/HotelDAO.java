@@ -5,20 +5,22 @@ import lesson35.model.Hotel;
 import java.io.*;
 import java.util.LinkedList;
 
-public class HotelDAO  {
+public class HotelDAO extends GeneralDAO<Hotel> {
 
-
-    public static void addHotel(Hotel hotel) {
-        GeneralDAO.addObjectToFile(hotel,"C:\\Users\\User\\Desktop//HotelDb.txt");
+    @Override
+    public void addObjectTo(Hotel hotel) {
+        setPath("C:\\Users\\User\\Desktop//HotelDb.txt");
+        super.addObjectTo(hotel);
     }
 
 
     public static void deleteHotel(long idHotel) {
+        HotelDAO hotelDAO = new HotelDAO();
         LinkedList<Hotel> hotels = recordObjectHotel(readFileTextHotel());
         hotels.removeIf(h -> h.getId() == idHotel);
         try (BufferedWriter ignored = new BufferedWriter(new FileWriter("C:\\Users\\User\\Desktop//HotelDb.txt", false))) {
             for (Hotel hotel : hotels) {
-                addHotel(hotel);
+                hotelDAO.addObjectTo(hotel);
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -14,9 +14,9 @@ import java.util.LinkedList;
 import static lesson35.service.RoomService.findRoomId;
 import static lesson35.service.UserService.findUserId;
 
-public class OrderDAO {
+public class OrderDAO extends GeneralDAO<Order> {
     public static void main(String[] args) throws Exception {
-        //bookRoom(3, 88, new Date(), new Date());
+        System.out.println(recordObjectOrder(readFileTextOrder()));
     }
 
     public static void bookRoom(long userId, long roomId, Date dateFrom, Date dateTo) throws Exception {
@@ -28,7 +28,7 @@ public class OrderDAO {
             }
         }
         for (Order order : orders) {
-            GeneralDAO.addObjectToFile(order, "C:\\Users\\User\\Desktop//OrderDb.txt");
+            //GeneralDAO.addObjectToFile(order, "C:\\Users\\User\\Desktop//OrderDb.txt");
         }
     }
 

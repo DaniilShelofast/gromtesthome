@@ -7,10 +7,12 @@ import lesson35.model.User;
 import java.io.*;
 import java.util.LinkedList;
 
-public class UserDAO {
+public class UserDAO extends GeneralDAO<User> {
 
-    public static void registerUser(User user)  {
-        GeneralDAO.addObjectToFile(user,"C:\\Users\\User\\Desktop//UserDb.txt");
+    @Override
+    public void addObjectTo(User user) {
+        setPath("C:\\Users\\User\\Desktop//UserDb.txt");
+        super.addObjectTo(user);
     }
 
     public static void logout() throws IOException {

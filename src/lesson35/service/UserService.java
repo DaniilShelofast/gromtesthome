@@ -12,8 +12,9 @@ import static lesson35.dao.UserDAO.recordObjectUser;
 public class UserService {
 
     public static void registerUser(User user) throws Exception {
+        UserDAO userDAO = new UserDAO();
         checkIdUser(user.getId());
-        UserDAO.registerUser(user);
+        userDAO.addObjectTo(user);
     }
     public static void logout() throws IOException {
         UserDAO.logout();
@@ -44,12 +45,13 @@ public class UserService {
         }
         return true;
     }
-    public static User findUserId(long idUser) {
+    public static User findUserId(long idUser)throws Exception {
         for (User user : recordObjectUser(readFileTextUsers())) {
             if (user.getId() == idUser) {
                 return user;
             }
         }
-        return null;
+        //return null;
+        throw new Exception("Error : the data is incorrect, the user with this ID does not exist");
     }
 }

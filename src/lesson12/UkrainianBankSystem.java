@@ -65,11 +65,7 @@ public class UkrainianBankSystem implements BankSystem {
     }
 
     private boolean checkFundLimits(User user, int amount, double limit) {
-        if (amount + user.getBank().getCommissions(amount) > limit) {
-
-            return false;
-        }
-        return true;
+        return !(amount + user.getBank().getCommissions(amount) > limit);
     }
 
     private boolean checkTransferMoney(User fromUser, User toUser, int amount) {

@@ -10,18 +10,23 @@ import java.util.LinkedList;
 
 import static lesson35.service.HotelService.findIdHotel;
 
-public class RoomDAO {
-    public static void addRoom(Room room) {
-        GeneralDAO.addObjectToFile(room, "C:\\Users\\User\\Desktop//RoomDb.txt");
+public class RoomDAO extends GeneralDAO<Room> {
+
+    @Override
+    public void addObjectTo(Room room) {
+        setPath("C:\\Users\\User\\Desktop//RoomDb.txt");
+        super.addObjectTo(room);
     }
 
+
     public static void deleteRoom(long idRoom) throws Exception {
+        RoomDAO dao = new RoomDAO();
         LinkedList<Room> rooms = recordObjectRoom(readFileTextRoom());
         rooms.removeIf(room -> room.getId() == idRoom);
 
         try (BufferedWriter ignored = new BufferedWriter(new FileWriter("C:\\Users\\User\\Desktop//RoomDb.txt", false))) {
             for (Room room : rooms) {
-                addRoom(room);
+                dao.addObjectTo(room);
             }
         } catch (Exception e) {
             e.printStackTrace();

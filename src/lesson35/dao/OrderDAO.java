@@ -3,6 +3,8 @@ package lesson35.dao;
 import lesson35.model.Order;
 import lesson35.model.Room;
 import lesson35.model.User;
+import lesson35.service.RoomService;
+import lesson35.service.UserService;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -11,13 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
-import static lesson35.service.RoomService.findRoomId;
-import static lesson35.service.UserService.findUserId;
-
 public class OrderDAO extends GeneralDAO<Order> {
-    public static void main(String[] args) throws Exception {
-        System.out.println(recordObjectOrder(readFileTextOrder()));
-    }
 
     public static void bookRoom(long userId, long roomId, Date dateFrom, Date dateTo) throws Exception {
         LinkedList<Order> orders = new LinkedList<>();
@@ -28,12 +24,14 @@ public class OrderDAO extends GeneralDAO<Order> {
             }
         }
         for (Order order : orders) {
-            //GeneralDAO.addObjectToFile(order, "C:\\Users\\User\\Desktop//OrderDb.txt");
+
         }
     }
 
 
     public static LinkedList<Order> recordObjectOrder(LinkedList<String> lines) throws Exception {
+        UserService userService = new UserService();
+        RoomService roomService = new RoomService();
         SimpleDateFormat toDate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         SimpleDateFormat fromDate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         LinkedList<Order> orders = new LinkedList<>();
@@ -43,9 +41,9 @@ public class OrderDAO extends GeneralDAO<Order> {
                 Date to = toDate.parse(data[3]);
                 Date from = fromDate.parse(data[4]);
                 int idUser = Integer.parseInt(data[1]);
-                User user = findUserId(idUser);
+                User user = userService.findIdObject(idUser);
                 int idRoom = Integer.parseInt(data[2]);
-                Room room = findRoomId(idRoom);
+                Room room = roomService.findIdObject(idRoom);
                 orders.add(new Order(Integer.parseInt(data[0]), user, room, to, from, Double.parseDouble(data[5])));
             }
         }

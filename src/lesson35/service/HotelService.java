@@ -4,23 +4,10 @@ import lesson35.dao.HotelDAO;
 import lesson35.exception.BadRequestException;
 import lesson35.model.Hotel;
 
-import java.util.LinkedList;
-
 import static lesson35.dao.HotelDAO.readFileTextHotel;
 import static lesson35.dao.HotelDAO.recordObjectHotel;
 
-public class HotelService {
-
-    public static void addHotel(Hotel hotel) throws Exception {
-        HotelDAO hotelDAO = new HotelDAO();
-        checkIdHotel(hotel.getId());
-        hotelDAO.addObjectToFile(hotel);
-    }
-
-    public static void deleteHotel(long idHotel) throws Exception {
-        HotelDAO hotelDAO = new HotelDAO();
-        hotelDAO.deleteObjectFromFile(idHotel);
-    }
+public class HotelService extends GeneralService<Hotel> {
 
     public static Hotel findHotelByCity(String city) throws Exception {
         for (Hotel hotel : recordObjectHotel(readFileTextHotel())) {
@@ -40,22 +27,28 @@ public class HotelService {
         throw new BadRequestException("Error : this city is not in our database.");
     }
 
-    private static boolean checkIdHotel(long id) throws Exception {
-        LinkedList<Hotel> hotels = recordObjectHotel(readFileTextHotel());
-        for (Hotel hotel : hotels) {
-            if (hotel != null && hotel.getId() == id) {
-                throw new BadRequestException("Error : a hotel with such an ID already exists");
-            }
-        }
-        return true;
+    public static void addHotel(Hotel hotel) throws Exception {
+        HotelDAO hotelDAO = new HotelDAO();
+        HotelService hotelService = new HotelService();
+        hotelService.verificationObjectID(hotel.getId());
+        hotelDAO.addObjectToFile(hotel);
     }
 
-    public static Hotel findIdHotel(long idHotel) throws Exception {
-        for (Hotel hotel : recordObjectHotel(readFileTextHotel())) {
-            if (hotel.getId() == idHotel) {
-                return hotel;
-            }
-        }
-        throw new Exception("Error : the data is incorrect, the hotel with this ID does not exist");
+    public static void deleteHotel(long idHotel) throws Exception {
+        HotelDAO hotelDAO = new HotelDAO();
+        hotelDAO.deleteObjectFromFile(idHotel);
     }
+
+    @Override
+    protected boolean verificationObjectID(long id) throws Exception {
+        setReadFile(recordObjectHotel(readFileTextHotel()));
+        return super.verificationObjectID(id);
+    }
+
+    @Override
+    public Hotel findIdObject(long id) throws Exception {
+        setReadFile(recordObjectHotel(readFileTextHotel()));
+        return super.findIdObject(id);
+    }
+
 }

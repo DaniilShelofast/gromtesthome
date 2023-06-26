@@ -1,7 +1,6 @@
 package lesson35.service;
 
 import lesson35.dao.UserDAO;
-import lesson35.exception.BadRequestException;
 import lesson35.model.User;
 
 import java.io.IOException;
@@ -9,11 +8,12 @@ import java.io.IOException;
 import static lesson35.dao.UserDAO.readFileTextUsers;
 import static lesson35.dao.UserDAO.recordObjectUser;
 
-public class UserService {
+public class UserService extends GeneralService<User> {
 
     public static void registerUser(User user) throws Exception {
         UserDAO userDAO = new UserDAO();
-        checkIdUser(user.getId());
+        UserService userService = new UserService();
+        userService.verificationObjectID(user.getId());
         userDAO.addObjectToFile(user);
     }
     public static void logout() throws IOException {
@@ -37,21 +37,15 @@ public class UserService {
         }
     }
 
-    private static boolean checkIdUser(long id) throws Exception {
-        for (User user : recordObjectUser(readFileTextUsers())) {
-            if (user.getId() == id) {
-                throw new BadRequestException("Error : a user with this id already exists.");
-            }
-        }
-        return true;
+    @Override
+    protected boolean verificationObjectID(long id) throws Exception {
+        setReadFile(recordObjectUser(readFileTextUsers()));
+        return super.verificationObjectID(id);
     }
-    public static User findUserId(long idUser)throws Exception {
-        for (User user : recordObjectUser(readFileTextUsers())) {
-            if (user.getId() == idUser) {
-                return user;
-            }
-        }
-        //return null;
-        throw new Exception("Error : the data is incorrect, the user with this ID does not exist");
+
+    @Override
+    public User findIdObject(long id) throws Exception {
+        setReadFile(recordObjectUser(readFileTextUsers()));
+        return super.findIdObject(id);
     }
 }

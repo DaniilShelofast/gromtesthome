@@ -19,7 +19,7 @@ public class HotelController {
         HotelService.addHotel(hotel);
     }
 
-    public static void deleteHotel(long idHotel) {
+    public static void deleteHotel(long idHotel) throws Exception {
         HotelService.deleteHotel(idHotel);
     }
 }

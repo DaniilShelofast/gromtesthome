@@ -1,7 +1,6 @@
 package lesson35.service;
 
 import lesson35.dao.RoomDAO;
-import lesson35.exception.BadRequestException;
 import lesson35.model.Filter;
 import lesson35.model.Room;
 
@@ -10,18 +9,7 @@ import java.awt.*;
 import static lesson35.dao.RoomDAO.readFileTextRoom;
 import static lesson35.dao.RoomDAO.recordObjectRoom;
 
-public class RoomService {
-
-
-    public static void addRoom(Room room) throws Exception {
-        RoomDAO roomDAO = new RoomDAO();
-        checkIdRoom(room.getId());
-        roomDAO.addObjectToFile(room);
-    }
-
-    public static void deleteRoom(long idRoom) throws Exception {
-       // RoomDAO.deleteRoom(idRoom);
-    }
+public class RoomService extends GeneralService<Room>{
 
     public static List findRooms(Filter filter) throws Exception {
         List rooms = new List();
@@ -35,21 +23,27 @@ public class RoomService {
         return rooms;
     }
 
-    private static boolean checkIdRoom(long id) throws Exception {
-        for (Room room : recordObjectRoom(readFileTextRoom())) {
-            if (room.getId() == id) {
-                throw new BadRequestException("Error : a room with this ID already exists.");
-            }
-        }
-        return true;
+    public static void addRoom(Room room) throws Exception {
+        RoomService roomService = new RoomService();
+        RoomDAO roomDAO = new RoomDAO();
+        roomService.verificationObjectID(room.getId());
+        roomDAO.addObjectToFile(room);
     }
 
-    public static Room findRoomId(long idRoom) throws Exception {
-        for (Room room : recordObjectRoom(readFileTextRoom())) {
-            if (room.getId() == idRoom) {
-                return room;
-            }
-        }
-        throw new Exception("Error : the data is incorrect, the room with this ID does not exist");
+    public static void deleteRoom(long idRoom) throws Exception {
+        RoomDAO roomDAO = new RoomDAO();
+        roomDAO.deleteObjectFromFile(idRoom);
+    }
+
+    @Override
+    protected boolean verificationObjectID(long id) throws Exception {
+        setReadFile(recordObjectRoom(readFileTextRoom()));
+        return super.verificationObjectID(id);
+    }
+
+    @Override
+    public Room findIdObject(long id) throws Exception {
+        setReadFile(recordObjectRoom(readFileTextRoom()));
+        return super.findIdObject(id);
     }
 }

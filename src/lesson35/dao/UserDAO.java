@@ -31,17 +31,10 @@ public class UserDAO extends GeneralDAO<User> {
         return users;
     }
 
-    public static LinkedList<String> readFileTextUsers() {
-        String line;
-        LinkedList<String> lines = new LinkedList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\User\\Desktop//UserDb.txt"))) {
-            while ((line = reader.readLine()) != null) {
-                lines.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return lines;
+    @Override
+    public LinkedList<String> readFileText() {
+        setPath("C:\\Users\\User\\Desktop//UserDb.txt");
+        return super.readFileText();
     }
 
 }

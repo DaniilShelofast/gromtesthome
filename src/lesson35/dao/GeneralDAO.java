@@ -1,9 +1,6 @@
 package lesson35.dao;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.LinkedList;
 
 public class GeneralDAO<T> {
@@ -43,6 +40,19 @@ public class GeneralDAO<T> {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public LinkedList<String> readFileText() {
+        String line;
+        LinkedList<String> lines = new LinkedList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+            while ((line = reader.readLine()) != null) {
+                lines.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return lines;
     }
 
 }

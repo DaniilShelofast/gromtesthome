@@ -6,14 +6,14 @@ import lesson35.model.Room;
 
 import java.awt.*;
 
-import static lesson35.dao.RoomDAO.readFileTextRoom;
 import static lesson35.dao.RoomDAO.recordObjectRoom;
 
-public class RoomService extends GeneralService<Room>{
+public class RoomService extends GeneralService<Room> {
 
     public static List findRooms(Filter filter) throws Exception {
+        RoomDAO dao = new RoomDAO();
         List rooms = new List();
-        for (Room room : recordObjectRoom(readFileTextRoom())) {
+        for (Room room : recordObjectRoom(dao.readFileText())) {
             if (room.getNumberOfGuests() == filter.getNumberOfGuests() && room.getPrice() == filter.getPrice() && room.isBreakfastIncluded() == filter.isBreakfastIncluded()
                     && room.isPetsAllowed() == filter.isPetsAllowed() && room.getDateAvailableFrom().toString().equals(filter.getDateAvailableFrom().toString())
                     && room.getHotel().getCity().equals(filter.getCity()) && room.getHotel().getCountry().equals(filter.getCountry()) && room.getHotel() == filter.getHotel()) {
@@ -37,13 +37,15 @@ public class RoomService extends GeneralService<Room>{
 
     @Override
     protected boolean verificationObjectID(long id) throws Exception {
-        setReadFile(recordObjectRoom(readFileTextRoom()));
+        RoomDAO dao = new RoomDAO();
+        setReadFile(recordObjectRoom(dao.readFileText()));
         return super.verificationObjectID(id);
     }
 
     @Override
     public Room findIdObject(long id) throws Exception {
-        setReadFile(recordObjectRoom(readFileTextRoom()));
+        RoomDAO dao = new RoomDAO();
+        setReadFile(recordObjectRoom(dao.readFileText()));
         return super.findIdObject(id);
     }
 }

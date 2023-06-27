@@ -5,7 +5,6 @@ import lesson35.model.User;
 
 import java.io.IOException;
 
-import static lesson35.dao.UserDAO.readFileTextUsers;
 import static lesson35.dao.UserDAO.recordObjectUser;
 
 public class UserService extends GeneralService<User> {
@@ -16,13 +15,15 @@ public class UserService extends GeneralService<User> {
         userService.verificationObjectID(user.getId());
         userDAO.addObjectToFile(user);
     }
+
     public static void logout() throws IOException {
         UserDAO.logout();
     }
 
     public static void login(String userName, String password) throws Exception {
+        UserDAO dao = new UserDAO();
         User user = null;
-        for (User u : recordObjectUser(readFileTextUsers())) {
+        for (User u : recordObjectUser(dao.readFileText())) {
             if (u.getUserName().equals(userName) && u.getPassword().equals(password)) {
                 user = u;
             }
@@ -39,13 +40,15 @@ public class UserService extends GeneralService<User> {
 
     @Override
     protected boolean verificationObjectID(long id) throws Exception {
-        setReadFile(recordObjectUser(readFileTextUsers()));
+        UserDAO dao = new UserDAO();
+        setReadFile(recordObjectUser(dao.readFileText()));
         return super.verificationObjectID(id);
     }
 
     @Override
     public User findIdObject(long id) throws Exception {
-        setReadFile(recordObjectUser(readFileTextUsers()));
+        UserDAO dao = new UserDAO();
+        setReadFile(recordObjectUser(dao.readFileText()));
         return super.findIdObject(id);
     }
 }

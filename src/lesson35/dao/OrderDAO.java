@@ -1,30 +1,31 @@
 package lesson35.dao;
 
-import lesson35.model.Order;
-import lesson35.model.Room;
-import lesson35.model.User;
+import lesson35.model.*;
 import lesson35.service.RoomService;
 import lesson35.service.UserService;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
 public class OrderDAO extends GeneralDAO<Order> {
+    public static void main(String[] args) throws Exception {
+        OrderDAO orderDAO = new OrderDAO();
+        Order order = new Order(12, new User(1, "", "", "", null), new Room(98, 13, 13.4, true, true, new Date(), new Hotel(4, "", "", "", "")), new Date(), new Date(), 123.4);
+        orderDAO.bookRoom(13, 43, new Date(), new Date(231, 4, 4));
 
-    public static void bookRoom(long userId, long roomId, Date dateFrom, Date dateTo) throws Exception {
+    }
+
+    public void bookRoom(long userId, long roomId, Date dateFrom, Date dateTo) throws Exception {
         LinkedList<Order> orders = new LinkedList<>();
-        for (Order order : recordObjectOrder(readFileTextOrder())) {
+        for (Order order : recordObjectOrder(readFileText())) {
             if (order.getUser().getId() == userId && order.getRoom().getId() == roomId
                     && order.getDateFrom().equals(dateFrom) && order.getDateTo().equals(dateTo)) {
                 orders.add(order);
             }
         }
         for (Order order : orders) {
-
+            addObjectToFile(order);
         }
     }
 
@@ -50,18 +51,16 @@ public class OrderDAO extends GeneralDAO<Order> {
         return orders;
     }
 
+    @Override
+    public LinkedList<String> readFileText() {
+        setPath("C:\\Users\\User\\Desktop//OrderDb.txt");
+        return super.readFileText();
+    }
 
-    public static LinkedList<String> readFileTextOrder() {
-        String line;
-        LinkedList<String> lines = new LinkedList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\User\\Desktop//OrderDb.txt"))) {
-            while ((line = reader.readLine()) != null) {
-                lines.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return lines;
+    @Override
+    public void addObjectToFile(Order order) {
+        setPath("C:\\Users\\User\\Desktop//OrderDb.txt");
+        super.addObjectToFile(order);
     }
 
 }

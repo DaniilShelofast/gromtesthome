@@ -4,9 +4,6 @@ import lesson35.model.Hotel;
 import lesson35.model.Room;
 import lesson35.service.HotelService;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 
@@ -21,22 +18,15 @@ public class RoomDAO extends GeneralDAO<Room> {
 
     @Override
     public void deleteObjectFromFile(long id) throws Exception {
-        setReadFile(recordObjectRoom(readFileTextRoom()));
+        setReadFile(recordObjectRoom(readFileText()));
         setPath("C:\\Users\\User\\Desktop//RoomDb.txt");
         super.deleteObjectFromFile(id);
     }
 
-    public static LinkedList<String> readFileTextRoom() {
-        String line;
-        LinkedList<String> lines = new LinkedList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\User\\Desktop//RoomDb.txt"))) {
-            while ((line = reader.readLine()) != null) {
-                lines.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return lines;
+    @Override
+    public LinkedList<String> readFileText() {
+        setPath("C:\\Users\\User\\Desktop//RoomDb.txt");
+        return super.readFileText();
     }
 
     public static LinkedList<Room> recordObjectRoom(LinkedList<String> strings) throws Exception {

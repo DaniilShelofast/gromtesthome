@@ -4,14 +4,14 @@ import lesson35.dao.HotelDAO;
 import lesson35.exception.BadRequestException;
 import lesson35.model.Hotel;
 
-import static lesson35.dao.HotelDAO.readFileTextHotel;
 import static lesson35.dao.HotelDAO.recordObjectHotel;
 
 public class HotelService extends GeneralService<Hotel> {
 
 
     public static Hotel findHotelByCity(String city) throws Exception {
-        for (Hotel hotel : recordObjectHotel(readFileTextHotel())) {
+        HotelDAO dao = new HotelDAO();
+        for (Hotel hotel : recordObjectHotel(dao.readFileText())) {
             if (hotel.getCity().equals(city)) {
                 return hotel;
             }
@@ -20,7 +20,8 @@ public class HotelService extends GeneralService<Hotel> {
     }
 
     public static Hotel findHotelByName(String name) throws Exception {
-        for (Hotel hotel : recordObjectHotel(readFileTextHotel())) {
+        HotelDAO dao = new HotelDAO();
+        for (Hotel hotel : recordObjectHotel(dao.readFileText())) {
             if (hotel.getName().equals(name)) {
                 return hotel;
             }
@@ -42,13 +43,15 @@ public class HotelService extends GeneralService<Hotel> {
 
     @Override
     protected boolean verificationObjectID(long id) throws Exception {
-        setReadFile(recordObjectHotel(readFileTextHotel()));
+        HotelDAO dao = new HotelDAO();
+        setReadFile(recordObjectHotel(dao.readFileText()));
         return super.verificationObjectID(id);
     }
 
     @Override
     public Hotel findIdObject(long id) throws Exception {
-        setReadFile(recordObjectHotel(readFileTextHotel()));
+        HotelDAO dao = new HotelDAO();
+        setReadFile(recordObjectHotel(dao.readFileText()));
         return super.findIdObject(id);
     }
 

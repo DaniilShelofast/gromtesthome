@@ -2,7 +2,6 @@ package lesson35.dao;
 
 import lesson35.model.Hotel;
 
-import java.io.*;
 import java.util.LinkedList;
 
 public class HotelDAO extends GeneralDAO<Hotel> {
@@ -15,7 +14,7 @@ public class HotelDAO extends GeneralDAO<Hotel> {
 
     @Override
     public void deleteObjectFromFile(long id) throws Exception {
-        setReadFile(recordObjectHotel(readFileTextHotel()));
+        setReadFile(recordObjectHotel(readFileText()));
         setPath("C:\\Users\\User\\Desktop//HotelDb.txt");
         super.deleteObjectFromFile(id);
     }
@@ -31,18 +30,9 @@ public class HotelDAO extends GeneralDAO<Hotel> {
         return hotels;
     }
 
-
-    public static LinkedList<String> readFileTextHotel() {
-        String line;
-        LinkedList<String> lines = new LinkedList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\User\\Desktop//HotelDb.txt"))) {
-            while ((line = reader.readLine()) != null) {
-                lines.add(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return lines;
+    @Override
+    public LinkedList<String> readFileText() {
+        setPath("C:\\Users\\User\\Desktop//HotelDb.txt");
+        return super.readFileText();
     }
-
 }

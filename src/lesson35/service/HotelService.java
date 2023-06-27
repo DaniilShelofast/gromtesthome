@@ -9,6 +9,7 @@ import static lesson35.dao.HotelDAO.recordObjectHotel;
 
 public class HotelService extends GeneralService<Hotel> {
 
+
     public static Hotel findHotelByCity(String city) throws Exception {
         for (Hotel hotel : recordObjectHotel(readFileTextHotel())) {
             if (hotel.getCity().equals(city)) {
@@ -31,12 +32,12 @@ public class HotelService extends GeneralService<Hotel> {
         HotelDAO hotelDAO = new HotelDAO();
         HotelService hotelService = new HotelService();
         hotelService.verificationObjectID(hotel.getId());
-        hotelDAO.addObjectToFile(hotel,"C:\\Users\\User\\Desktop//HotelDb.txt");
+        hotelDAO.addObjectToFile(hotel);
     }
 
     public static void deleteHotel(long idHotel) throws Exception {
         HotelDAO hotelDAO = new HotelDAO();
-        hotelDAO.deleteObjectFromFile(idHotel,"C:\\Users\\User\\Desktop//HotelDb.txt");
+        hotelDAO.deleteObjectFromFile(idHotel);
     }
 
     @Override

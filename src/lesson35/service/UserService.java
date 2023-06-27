@@ -14,7 +14,7 @@ public class UserService extends GeneralService<User> {
         UserDAO userDAO = new UserDAO();
         UserService userService = new UserService();
         userService.verificationObjectID(user.getId());
-        userDAO.addObjectToFile(user,"C:\\Users\\User\\Desktop//UserDb.txt");
+        userDAO.addObjectToFile(user);
     }
     public static void logout() throws IOException {
         UserDAO.logout();

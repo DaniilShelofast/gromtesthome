@@ -27,12 +27,12 @@ public class RoomService extends GeneralService<Room>{
         RoomService roomService = new RoomService();
         RoomDAO roomDAO = new RoomDAO();
         roomService.verificationObjectID(room.getId());
-        roomDAO.addObjectToFile(room,"C:\\Users\\User\\Desktop//RoomDb.txt");
+        roomDAO.addObjectToFile(room);
     }
 
     public static void deleteRoom(long idRoom) throws Exception {
         RoomDAO roomDAO = new RoomDAO();
-        roomDAO.deleteObjectFromFile(idRoom,"C:\\Users\\User\\Desktop//RoomDb.txt");
+        roomDAO.deleteObjectFromFile(idRoom);
     }
 
     @Override

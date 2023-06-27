@@ -14,14 +14,16 @@ import java.util.LinkedList;
 public class RoomDAO extends GeneralDAO<Room> {
 
     @Override
-    public void addObjectToFile(Room room, String path) {
-        super.addObjectToFile(room, "C:\\Users\\User\\Desktop//RoomDb.txt");
+    public void addObjectToFile(Room room) {
+        setPath("C:\\Users\\User\\Desktop//RoomDb.txt");
+        super.addObjectToFile(room);
     }
 
     @Override
-    public void deleteObjectFromFile(long id, String path) throws Exception {
+    public void deleteObjectFromFile(long id) throws Exception {
         setReadFile(recordObjectRoom(readFileTextRoom()));
-        super.deleteObjectFromFile(id, "C:\\Users\\User\\Desktop//RoomDb.txt");
+        setPath("C:\\Users\\User\\Desktop//RoomDb.txt");
+        super.deleteObjectFromFile(id);
     }
 
     public static LinkedList<String> readFileTextRoom() {

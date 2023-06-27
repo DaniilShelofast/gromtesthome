@@ -31,12 +31,12 @@ public class HotelService extends GeneralService<Hotel> {
         HotelDAO hotelDAO = new HotelDAO();
         HotelService hotelService = new HotelService();
         hotelService.verificationObjectID(hotel.getId());
-        hotelDAO.addObjectToFile(hotel);
+        hotelDAO.addObjectToFile(hotel,"C:\\Users\\User\\Desktop//HotelDb.txt");
     }
 
     public static void deleteHotel(long idHotel) throws Exception {
         HotelDAO hotelDAO = new HotelDAO();
-        hotelDAO.deleteObjectFromFile(idHotel);
+        hotelDAO.deleteObjectFromFile(idHotel,"C:\\Users\\User\\Desktop//HotelDb.txt");
     }
 
     @Override

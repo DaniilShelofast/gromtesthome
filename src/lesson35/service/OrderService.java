@@ -11,7 +11,7 @@ import static lesson35.dao.OrderDAO.recordObjectOrder;
 public class OrderService {
 
 
-    public static boolean findRoomByDate(Date dataFrom, Date dateTo) throws Exception {
+    private static boolean findRoomByDate(Date dataFrom, Date dateTo) throws Exception {
         for (Order order : recordObjectOrder(readFileTextOrder())) {
             if (!order.getDateFrom().equals(dataFrom) && order.getDateTo().equals(dateTo)) {
                 throw new BadRequestException("Error");

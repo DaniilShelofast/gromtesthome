@@ -4,14 +4,13 @@ import lesson35.dao.HotelDAO;
 import lesson35.exception.BadRequestException;
 import lesson35.model.Hotel;
 
-import static lesson35.dao.HotelDAO.recordObjectHotel;
 
-public class HotelService extends GeneralService<Hotel> {
+public class HotelService {
 
 
     public static Hotel findHotelByCity(String city) throws Exception {
         HotelDAO dao = new HotelDAO();
-        for (Hotel hotel : recordObjectHotel(dao.readFileText())) {
+        for (Hotel hotel : dao.recordObject(dao.readFileText())) {
             if (hotel.getCity().equals(city)) {
                 return hotel;
             }
@@ -21,7 +20,7 @@ public class HotelService extends GeneralService<Hotel> {
 
     public static Hotel findHotelByName(String name) throws Exception {
         HotelDAO dao = new HotelDAO();
-        for (Hotel hotel : recordObjectHotel(dao.readFileText())) {
+        for (Hotel hotel : dao.recordObject(dao.readFileText())) {
             if (hotel.getName().equals(name)) {
                 return hotel;
             }
@@ -31,28 +30,15 @@ public class HotelService extends GeneralService<Hotel> {
 
     public static void addHotel(Hotel hotel) throws Exception {
         HotelDAO hotelDAO = new HotelDAO();
-        HotelService hotelService = new HotelService();
-        hotelService.verificationObjectID(hotel.getId());
+        hotelDAO.verificationObjectID(hotel.getId());
         hotelDAO.addObjectToFile(hotel);
     }
 
     public static void deleteHotel(long idHotel) throws Exception {
         HotelDAO hotelDAO = new HotelDAO();
+        hotelDAO.findIdObject(idHotel);
         hotelDAO.deleteObjectFromFile(idHotel);
     }
 
-    @Override
-    protected boolean verificationObjectID(long id) throws Exception {
-        HotelDAO dao = new HotelDAO();
-        setReadFile(recordObjectHotel(dao.readFileText()));
-        return super.verificationObjectID(id);
-    }
-
-    @Override
-    public Hotel findIdObject(long id) throws Exception {
-        HotelDAO dao = new HotelDAO();
-        setReadFile(recordObjectHotel(dao.readFileText()));
-        return super.findIdObject(id);
-    }
 
 }

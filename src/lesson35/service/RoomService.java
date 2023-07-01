@@ -6,14 +6,12 @@ import lesson35.model.Room;
 
 import java.awt.*;
 
-import static lesson35.dao.RoomDAO.recordObjectRoom;
-
-public class RoomService extends GeneralService<Room> {
+public class RoomService {
 
     public static List findRooms(Filter filter) throws Exception {
-        RoomDAO dao = new RoomDAO();
+        RoomDAO roomDAO = new RoomDAO();
         List rooms = new List();
-        for (Room room : recordObjectRoom(dao.readFileText())) {
+        for (Room room : roomDAO.recordObject(roomDAO.readFileText())) {
             if (room.getNumberOfGuests() == filter.getNumberOfGuests() && room.getPrice() == filter.getPrice() && room.isBreakfastIncluded() == filter.isBreakfastIncluded()
                     && room.isPetsAllowed() == filter.isPetsAllowed() && room.getDateAvailableFrom().toString().equals(filter.getDateAvailableFrom().toString())
                     && room.getHotel().getCity().equals(filter.getCity()) && room.getHotel().getCountry().equals(filter.getCountry()) && room.getHotel() == filter.getHotel()) {
@@ -24,28 +22,15 @@ public class RoomService extends GeneralService<Room> {
     }
 
     public static void addRoom(Room room) throws Exception {
-        RoomService roomService = new RoomService();
         RoomDAO roomDAO = new RoomDAO();
-        roomService.verificationObjectID(room.getId());
+        roomDAO.verificationObjectID(room.getId());
         roomDAO.addObjectToFile(room);
     }
 
     public static void deleteRoom(long idRoom) throws Exception {
         RoomDAO roomDAO = new RoomDAO();
+        roomDAO.findIdObject(idRoom);
         roomDAO.deleteObjectFromFile(idRoom);
     }
 
-    @Override
-    protected boolean verificationObjectID(long id) throws Exception {
-        RoomDAO dao = new RoomDAO();
-        setReadFile(recordObjectRoom(dao.readFileText()));
-        return super.verificationObjectID(id);
-    }
-
-    @Override
-    public Room findIdObject(long id) throws Exception {
-        RoomDAO dao = new RoomDAO();
-        setReadFile(recordObjectRoom(dao.readFileText()));
-        return super.findIdObject(id);
-    }
 }

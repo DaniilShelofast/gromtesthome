@@ -5,6 +5,7 @@ public  interface WriteToFile {
     String toFileString();
     long id();
 
+
 }
 
 

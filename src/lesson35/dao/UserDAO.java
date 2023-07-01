@@ -11,16 +11,17 @@ public class UserDAO extends GeneralDAO<User> {
 
     @Override
     public void addObjectToFile(User user) {
-        setPath("C:\\Users\\User\\Desktop//UserDb.txt");
+        txtPath("C:\\Users\\User\\Desktop/UserDb.txt");
         super.addObjectToFile(user);
     }
 
     public static void logout() throws IOException {
-        FileInputStream file = new FileInputStream("C:\\Users\\User\\Desktop//UserDb.txt");
+        FileInputStream file = new FileInputStream("C:\\Users\\User\\Desktop/UserDb.txt");
         file.close();
     }
 
-    public static LinkedList<User> recordObjectUser(LinkedList<String> strings) {
+    @Override
+    public LinkedList<User> recordObject(LinkedList<String> strings) {
         LinkedList<User> users = new LinkedList<>();
         for (String line : strings) {
             String[] data = line.split(", ");
@@ -33,7 +34,7 @@ public class UserDAO extends GeneralDAO<User> {
 
     @Override
     public LinkedList<String> readFileText() {
-        setPath("C:\\Users\\User\\Desktop//UserDb.txt");
+        txtPath("C:\\Users\\User\\Desktop/UserDb.txt");
         return super.readFileText();
     }
 

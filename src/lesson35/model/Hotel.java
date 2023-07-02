@@ -1,10 +1,8 @@
 package lesson35.model;
 
-import lesson35.dao.WriteToFile;
-
 import java.util.Objects;
 
-public class Hotel implements WriteToFile {
+public class Hotel extends ParametersFile {
 
     private long id;
     private String name;
@@ -68,6 +66,7 @@ public class Hotel implements WriteToFile {
     public String toFileString() {
         return this.getId() + ", " + this.getName() + ", " + this.getCountry() + ", " + this.getCity() + ", " + this.getStreet();
     }
+
     @Override
     public long id() {
         return this.getId();

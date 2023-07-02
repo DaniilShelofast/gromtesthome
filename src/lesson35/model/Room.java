@@ -1,10 +1,8 @@
 package lesson35.model;
 
-import lesson35.dao.WriteToFile;
-
 import java.util.Date;
 
-public class Room implements WriteToFile {
+public class Room extends ParametersFile {
 
     private long id;
     private int numberOfGuests;

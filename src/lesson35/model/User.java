@@ -1,10 +1,8 @@
 package lesson35.model;
 
-import lesson35.dao.WriteToFile;
-
 import java.util.Objects;
 
-public class User implements WriteToFile {
+public class User extends ParametersFile {
     private long id;
     private String userName;
     private String password;

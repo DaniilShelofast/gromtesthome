@@ -1,10 +1,8 @@
 package lesson35.model;
 
-import lesson35.dao.WriteToFile;
-
 import java.util.Date;
 
-public class Order implements WriteToFile {
+public class Order extends ParametersFile {
     private long id;
     private User user;
     private Room room;

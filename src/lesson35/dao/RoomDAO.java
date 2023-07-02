@@ -22,7 +22,7 @@ public class RoomDAO extends GeneralDAO<Room> {
     }
 
     @Override
-    public LinkedList<Room> recordObject(LinkedList<String> strings)throws Exception {
+    public LinkedList<Room> map(LinkedList<String> strings)throws Exception {
         HotelDAO  hotelDAO = new HotelDAO();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         LinkedList<Room> rooms = new LinkedList<>();
@@ -38,9 +38,9 @@ public class RoomDAO extends GeneralDAO<Room> {
     }
 
     @Override
-    public LinkedList<String> readFileText() {
+    public LinkedList<String> readAll() {
         txtPath("C:\\Users\\User\\Desktop//RoomDb.txt");
-        return super.readFileText();
+        return super.readAll();
     }
 
 }

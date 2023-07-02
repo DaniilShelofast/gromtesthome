@@ -19,7 +19,7 @@ public class HotelDAO extends GeneralDAO<Hotel> {
     }
 
     @Override
-    public LinkedList<Hotel> recordObject(LinkedList<String> strings) {
+    public LinkedList<Hotel> map(LinkedList<String> strings) {
         LinkedList<Hotel> hotels = new LinkedList<>();
         for (String line : strings) {
             String[] data = line.split(", ");
@@ -31,8 +31,9 @@ public class HotelDAO extends GeneralDAO<Hotel> {
     }
 
     @Override
-    public LinkedList<String> readFileText() {
+    public LinkedList<String> readAll() {
         txtPath("C:\\Users\\User\\Desktop/HotelDb.txt");
-        return super.readFileText();
+        return super.readAll();
     }
+
 }

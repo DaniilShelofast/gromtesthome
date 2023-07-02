@@ -13,7 +13,7 @@ public class OrderService {
 
     private static boolean findRoomByDate(Date dataFrom, Date dateTo) throws Exception {
         OrderDAO dao = new OrderDAO();
-        for (Order order : dao.recordObject(dao.readFileText())) {
+        for (Order order : dao.map(dao.readAll())) {
             if (!order.getDateFrom().equals(dataFrom) && order.getDateTo().equals(dateTo)) {
                 throw new BadRequestException("Error");
             }

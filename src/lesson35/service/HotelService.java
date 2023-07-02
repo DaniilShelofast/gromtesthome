@@ -10,7 +10,7 @@ public class HotelService {
 
     public static Hotel findHotelByCity(String city) throws Exception {
         HotelDAO dao = new HotelDAO();
-        for (Hotel hotel : dao.recordObject(dao.readFileText())) {
+        for (Hotel hotel : dao.map(dao.readAll())) {
             if (hotel.getCity().equals(city)) {
                 return hotel;
             }
@@ -20,7 +20,7 @@ public class HotelService {
 
     public static Hotel findHotelByName(String name) throws Exception {
         HotelDAO dao = new HotelDAO();
-        for (Hotel hotel : dao.recordObject(dao.readFileText())) {
+        for (Hotel hotel : dao.map(dao.readAll())) {
             if (hotel.getName().equals(name)) {
                 return hotel;
             }
@@ -30,7 +30,7 @@ public class HotelService {
 
     public static void addHotel(Hotel hotel) throws Exception {
         HotelDAO hotelDAO = new HotelDAO();
-        hotelDAO.verificationObjectID(hotel.getId());
+        hotelDAO.verify(hotel.getId());
         hotelDAO.addObjectToFile(hotel);
     }
 

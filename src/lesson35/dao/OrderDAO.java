@@ -18,7 +18,7 @@ public class OrderDAO extends GeneralDAO<Order> {
 
     public void bookRoom(long userId, long roomId, Date dateFrom, Date dateTo) throws Exception {
         LinkedList<Order> orders = new LinkedList<>();
-        for (Order order : recordObject(readFileText())) {
+        for (Order order : map(readAll())) {
             if (order.getUser().getId() == userId && order.getRoom().getId() == roomId
                     && order.getDateFrom().equals(dateFrom) && order.getDateTo().equals(dateTo)) {
                 orders.add(order);
@@ -31,7 +31,7 @@ public class OrderDAO extends GeneralDAO<Order> {
 
 
     @Override
-    public LinkedList<Order> recordObject(LinkedList<String> strings) throws Exception {
+    public LinkedList<Order> map(LinkedList<String> strings) throws Exception {
         UserDAO userDAO = new UserDAO();
         RoomDAO roomDAO = new RoomDAO();
         SimpleDateFormat toDate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -53,9 +53,9 @@ public class OrderDAO extends GeneralDAO<Order> {
     }
 
     @Override
-    public LinkedList<String> readFileText() {
+    public LinkedList<String> readAll() {
         txtPath("C:\\Users\\User\\Desktop//OrderDb.txt");
-        return super.readFileText();
+        return super.readAll();
     }
 
     @Override

@@ -1,21 +1,21 @@
 package lesson35.dao;
 
 import lesson35.exception.BadRequestException;
+import lesson35.model.ParametersFile;
 
 import java.io.*;
 import java.util.LinkedList;
 
-public abstract class GeneralDAO<T> {
-
-    public abstract LinkedList<T> recordObject(LinkedList<String> strings) throws Exception;
-
+public abstract class GeneralDAO<T extends ParametersFile> {
     private String path;
 
     public void txtPath(String path) {
         this.path = path;
     }
 
-    public LinkedList<String> readFileText() {
+    public abstract LinkedList<T> map(LinkedList<String> strings) throws Exception;
+
+    protected LinkedList<String> readAll() {
         String line;
         LinkedList<String> lines = new LinkedList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
@@ -32,10 +32,10 @@ public abstract class GeneralDAO<T> {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, true))) {
             File file = new File(path);
             if (file.length() == 0) {
-                writer.write(((WriteToFile) t).toFileString());
+                writer.write(t.toFileString());
             } else {
                 writer.newLine();
-                writer.write(((WriteToFile) t).toFileString());
+                writer.write(t.toFileString());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,8 +43,8 @@ public abstract class GeneralDAO<T> {
     }
 
     public void deleteObjectFromFile(long id) throws Exception {
-        LinkedList<T> objects = recordObject(readFileText());
-        objects.removeIf(objectId -> (((WriteToFile) objectId).id()) == id);
+        LinkedList<T> objects = map(readAll());
+        objects.removeIf(objectId -> objectId.id() == id);
         try (BufferedWriter ignore = new BufferedWriter(new FileWriter(path, false))) {
             for (T o : objects) {
                 addObjectToFile(o);
@@ -55,17 +55,17 @@ public abstract class GeneralDAO<T> {
     }
 
     public T findIdObject(long id) throws Exception {
-        for (T t : recordObject(readFileText())) {
-            if (t != null && ((WriteToFile) t).id() == id) {
+        for (T t : map(readAll())) {
+            if (t != null && t.id() == id) {
                 return t;
             }
         }
         throw new BadRequestException("Error : the data is incorrect, the " + id + " with this ID does not exist");
     }
 
-    public boolean verificationObjectID(long id) throws Exception {
-        for (T t : recordObject(readFileText())) {
-            if (t != null && ((WriteToFile) t).id() == id) {
+    public boolean verify(long id) throws Exception {
+        for (T t : map(readAll())) {
+            if (t != null && t.id() == id) {
                 throw new BadRequestException("Error : " + id + " with such an ID already exists");
             }
         }

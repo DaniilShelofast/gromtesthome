@@ -11,7 +11,7 @@ public class RoomService {
     public static List findRooms(Filter filter) throws Exception {
         RoomDAO roomDAO = new RoomDAO();
         List rooms = new List();
-        for (Room room : roomDAO.recordObject(roomDAO.readFileText())) {
+        for (Room room : roomDAO.map(roomDAO.readAll())) {
             if (room.getNumberOfGuests() == filter.getNumberOfGuests() && room.getPrice() == filter.getPrice() && room.isBreakfastIncluded() == filter.isBreakfastIncluded()
                     && room.isPetsAllowed() == filter.isPetsAllowed() && room.getDateAvailableFrom().toString().equals(filter.getDateAvailableFrom().toString())
                     && room.getHotel().getCity().equals(filter.getCity()) && room.getHotel().getCountry().equals(filter.getCountry()) && room.getHotel() == filter.getHotel()) {
@@ -23,7 +23,7 @@ public class RoomService {
 
     public static void addRoom(Room room) throws Exception {
         RoomDAO roomDAO = new RoomDAO();
-        roomDAO.verificationObjectID(room.getId());
+        roomDAO.verify(room.getId());
         roomDAO.addObjectToFile(room);
     }
 

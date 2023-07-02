@@ -11,7 +11,7 @@ public class UserService {
 
     public static void registerUser(User user) throws Exception {
         UserDAO userDAO = new UserDAO();
-        userDAO.verificationObjectID(user.getId());
+        userDAO.verify(user.getId());
         userDAO.addObjectToFile(user);
     }
 
@@ -22,7 +22,7 @@ public class UserService {
     public static void login(String userName, String password) throws Exception {
         UserDAO dao = new UserDAO();
         User user = null;
-        for (User u : dao.recordObject(dao.readFileText())) {
+        for (User u : dao.map(dao.readAll())) {
             if (u.getUserName().equals(userName) && u.getPassword().equals(password)) {
                 user = u;
             }

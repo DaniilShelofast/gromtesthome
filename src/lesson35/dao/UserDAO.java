@@ -21,7 +21,7 @@ public class UserDAO extends GeneralDAO<User> {
     }
 
     @Override
-    public LinkedList<User> recordObject(LinkedList<String> strings) {
+    public LinkedList<User> map(LinkedList<String> strings) {
         LinkedList<User> users = new LinkedList<>();
         for (String line : strings) {
             String[] data = line.split(", ");
@@ -33,9 +33,9 @@ public class UserDAO extends GeneralDAO<User> {
     }
 
     @Override
-    public LinkedList<String> readFileText() {
+    public LinkedList<String> readAll() {
         txtPath("C:\\Users\\User\\Desktop/UserDb.txt");
-        return super.readFileText();
+        return super.readAll();
     }
 
 }

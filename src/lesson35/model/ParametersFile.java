@@ -1,9 +1,12 @@
 package lesson35.model;
 
-public abstract class ParametersFile {
+public interface ParametersFile {
 
-    public abstract String toFileString();
-    public abstract long id();
+    String toFileString();
+
+    //public abstract String pathFile();
+
+
 }
 
 

@@ -11,9 +11,9 @@ public class RoomService {
     public static List findRooms(Filter filter) throws Exception {
         RoomDAO roomDAO = new RoomDAO();
         List rooms = new List();
-        for (Room room : roomDAO.map(roomDAO.readAll())) {
+        for (Room room : roomDAO.readAll()) {
             if (room.getNumberOfGuests() == filter.getNumberOfGuests() && room.getPrice() == filter.getPrice() && room.isBreakfastIncluded() == filter.isBreakfastIncluded()
-                    && room.isPetsAllowed() == filter.isPetsAllowed() && room.getDateAvailableFrom().toString().equals(filter.getDateAvailableFrom().toString())
+                    && room.isPetsAllowed() == filter.isPetsAllowed() && room.getDateAvailableFrom().equals(filter.getDateAvailableFrom())
                     && room.getHotel().getCity().equals(filter.getCity()) && room.getHotel().getCountry().equals(filter.getCountry()) && room.getHotel() == filter.getHotel()) {
                 rooms.add(room.toString());
             }

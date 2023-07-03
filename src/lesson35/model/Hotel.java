@@ -2,7 +2,7 @@ package lesson35.model;
 
 import java.util.Objects;
 
-public class Hotel extends ParametersFile {
+public class Hotel implements ParametersFile {
 
     private long id;
     private String name;
@@ -65,11 +65,6 @@ public class Hotel extends ParametersFile {
     @Override
     public String toFileString() {
         return this.getId() + ", " + this.getName() + ", " + this.getCountry() + ", " + this.getCity() + ", " + this.getStreet();
-    }
-
-    @Override
-    public long id() {
-        return this.getId();
     }
 
 }

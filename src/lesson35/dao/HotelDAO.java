@@ -7,19 +7,23 @@ import java.util.LinkedList;
 public class HotelDAO extends GeneralDAO<Hotel> {
 
     @Override
+    public String getPath() {
+        return "C:\\Users\\User\\Desktop/HotelDb.txt";
+    }
+
+    @Override
     public void addObjectToFile(Hotel hotel) {
-        txtPath("C:\\Users\\User\\Desktop/HotelDb.txt");
         super.addObjectToFile(hotel);
     }
 
     @Override
     public void deleteObjectFromFile(long id) throws Exception {
-        txtPath("C:\\Users\\User\\Desktop/HotelDb.txt");
         super.deleteObjectFromFile(id);
     }
 
     @Override
-    public LinkedList<Hotel> map(LinkedList<String> strings) {
+    public LinkedList<Hotel> readAll() {
+        LinkedList<String> strings = readFile();
         LinkedList<Hotel> hotels = new LinkedList<>();
         for (String line : strings) {
             String[] data = line.split(", ");
@@ -31,9 +35,8 @@ public class HotelDAO extends GeneralDAO<Hotel> {
     }
 
     @Override
-    public LinkedList<String> readAll() {
-        txtPath("C:\\Users\\User\\Desktop/HotelDb.txt");
-        return super.readAll();
+    public LinkedList<String> readFile() {
+        return super.readFile();
     }
 
 }

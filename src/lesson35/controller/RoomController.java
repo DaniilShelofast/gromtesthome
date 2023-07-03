@@ -1,7 +1,10 @@
 package lesson35.controller;
 
+import lesson35.model.Filter;
 import lesson35.model.Room;
 import lesson35.service.RoomService;
+
+import java.awt.*;
 
 public class RoomController {
 
@@ -11,5 +14,9 @@ public class RoomController {
 
     public static void deleteRoom(long idRoom) throws Exception {
         RoomService.deleteRoom(idRoom);
+    }
+
+    public static List findRooms(Filter filter) throws Exception {
+        return RoomService.findRooms(filter);
     }
 }

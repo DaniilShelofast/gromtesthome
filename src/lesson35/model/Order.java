@@ -2,7 +2,7 @@ package lesson35.model;
 
 import java.util.Date;
 
-public class Order extends ParametersFile {
+public class Order implements ParametersFile {
     private long id;
     private User user;
     private Room room;
@@ -47,12 +47,6 @@ public class Order extends ParametersFile {
     public String toFileString() {
         return this.getId() + ", " + this.getUser() + ", " + this.getRoom() + ", " + this.getDateFrom() + ", " + this.getDateTo() + ", " + this.getMoneyPaid();
     }
-
-    @Override
-    public long id() {
-        return this.getId();
-    }
-
 
     @Override
     public String toString() {

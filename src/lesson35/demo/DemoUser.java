@@ -10,7 +10,7 @@ public class DemoUser {
     public static void main(String[] args) throws Exception {
         Random random = new Random();
         int randomNumber = random.nextInt(100);
-        User user = new User(randomNumber,"fff","fff","fff", UserType.ADMIN);
+        User user = new User(randomNumber,"fff","fff","fff", UserType.USER);
         UserController.registerUser(user);
     }
 }

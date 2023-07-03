@@ -9,16 +9,16 @@ import java.util.Date;
 import java.util.LinkedList;
 
 public class OrderDAO extends GeneralDAO<Order> {
-   /* public static void main(String[] args) throws Exception {
-        OrderDAO orderDAO = new OrderDAO();
-        Order order = new Order(12, new User(1, "", "", "", null), new Room(98, 13, 13.4, true, true, new Date(), new Hotel(4, "", "", "", "")), new Date(), new Date(), 123.4);
-        orderDAO.bookRoom(13, 43, new Date(), new Date(231, 4, 4));
 
-    }*/
 
-    public void bookRoom(long userId, long roomId, Date dateFrom, Date dateTo) throws Exception {
+    @Override
+    public String getPath() {
+        return "C:\\Users\\User\\Desktop//OrderDb.txt";
+    }
+
+    /*public void bookRoom(long userId, long roomId, Date dateFrom, Date dateTo) throws Exception {
         LinkedList<Order> orders = new LinkedList<>();
-        for (Order order : map(readAll())) {
+        for (Order order : readAll(readFile())) {
             if (order.getUser().getId() == userId && order.getRoom().getId() == roomId
                     && order.getDateFrom().equals(dateFrom) && order.getDateTo().equals(dateTo)) {
                 orders.add(order);
@@ -27,11 +27,12 @@ public class OrderDAO extends GeneralDAO<Order> {
         for (Order order : orders) {
             addObjectToFile(order);
         }
-    }
+    }*/
 
 
     @Override
-    public LinkedList<Order> map(LinkedList<String> strings) throws Exception {
+    public LinkedList<Order> readAll() throws Exception {
+        LinkedList<String> strings = readFile();
         UserDAO userDAO = new UserDAO();
         RoomDAO roomDAO = new RoomDAO();
         SimpleDateFormat toDate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -53,14 +54,12 @@ public class OrderDAO extends GeneralDAO<Order> {
     }
 
     @Override
-    public LinkedList<String> readAll() {
-        txtPath("C:\\Users\\User\\Desktop//OrderDb.txt");
-        return super.readAll();
+    public LinkedList<String> readFile() {
+        return super.readFile();
     }
 
     @Override
     public void addObjectToFile(Order order) {
-        txtPath("C:\\Users\\User\\Desktop//OrderDb.txt");
         super.addObjectToFile(order);
     }
 

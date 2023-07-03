@@ -10,7 +10,7 @@ public class HotelService {
 
     public static Hotel findHotelByCity(String city) throws Exception {
         HotelDAO dao = new HotelDAO();
-        for (Hotel hotel : dao.map(dao.readAll())) {
+        for (Hotel hotel : dao.readAll()) {
             if (hotel.getCity().equals(city)) {
                 return hotel;
             }
@@ -20,7 +20,7 @@ public class HotelService {
 
     public static Hotel findHotelByName(String name) throws Exception {
         HotelDAO dao = new HotelDAO();
-        for (Hotel hotel : dao.map(dao.readAll())) {
+        for (Hotel hotel : dao.readAll()) {
             if (hotel.getName().equals(name)) {
                 return hotel;
             }

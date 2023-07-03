@@ -4,26 +4,45 @@ import lesson35.model.Hotel;
 import lesson35.model.Room;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 
 
 public class RoomDAO extends GeneralDAO<Room> {
+    public static void main(String[] args) throws Exception {
+        RoomDAO roomDAO = new RoomDAO();
+       /* SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String dateInString = "15-05-2005 12:00:00";
+        Date date = sdf.parse(dateInString);*/
+      /*  String date_s = "2011-01-18 00:00:00.0";
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date date = dt.parse(date_s);*/
+
+        Room room = new Room(4, 2, 134.5, true, true, new Date(110,01,05), new Hotel(34, "", "", "", ""));
+        //roomDAO.addObjectToFile(room);
+        roomDAO.deleteObjectFromFile(1);
+
+    }
+
+    @Override
+    public String getPath() {
+        return "C:\\Users\\User\\Desktop//RoomDb.txt";
+    }
 
     @Override
     public void addObjectToFile(Room room) {
-        txtPath("C:\\Users\\User\\Desktop//RoomDb.txt");
         super.addObjectToFile(room);
     }
 
     @Override
     public void deleteObjectFromFile(long id) throws Exception {
-        txtPath("C:\\Users\\User\\Desktop//RoomDb.txt");
         super.deleteObjectFromFile(id);
     }
 
     @Override
-    public LinkedList<Room> map(LinkedList<String> strings)throws Exception {
+    public LinkedList<Room> readAll() throws Exception {
         HotelDAO  hotelDAO = new HotelDAO();
+        LinkedList<String> strings = readFile();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         LinkedList<Room> rooms = new LinkedList<>();
         for (String line : strings) {
@@ -38,9 +57,8 @@ public class RoomDAO extends GeneralDAO<Room> {
     }
 
     @Override
-    public LinkedList<String> readAll() {
-        txtPath("C:\\Users\\User\\Desktop//RoomDb.txt");
-        return super.readAll();
+    public LinkedList<String> readFile() {
+        return super.readFile();
     }
 
 }

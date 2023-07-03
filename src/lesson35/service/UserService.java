@@ -22,7 +22,7 @@ public class UserService {
     public static void login(String userName, String password) throws Exception {
         UserDAO dao = new UserDAO();
         User user = null;
-        for (User u : dao.map(dao.readAll())) {
+        for (User u : dao.readAll()) {
             if (u.getUserName().equals(userName) && u.getPassword().equals(password)) {
                 user = u;
             }

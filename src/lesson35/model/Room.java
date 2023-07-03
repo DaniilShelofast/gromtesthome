@@ -2,7 +2,7 @@ package lesson35.model;
 
 import java.util.Date;
 
-public class Room extends ParametersFile {
+public class Room implements ParametersFile {
 
     private long id;
     private int numberOfGuests;
@@ -68,8 +68,4 @@ public class Room extends ParametersFile {
         return this.getId() + ", " + this.getNumberOfGuests() + ", " + this.getPrice() + ", " + this.isBreakfastIncluded() + ", " + this.isPetsAllowed() + ", " + this.getDateAvailableFrom() + ", " + this.getHotel().getId();
     }
 
-    @Override
-    public long id() {
-        return this.getId();
-    }
 }

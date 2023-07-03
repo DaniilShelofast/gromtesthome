@@ -8,10 +8,13 @@ import java.io.*;
 import java.util.LinkedList;
 
 public class UserDAO extends GeneralDAO<User> {
+    @Override
+    public String getPath() {
+        return "C:\\Users\\User\\Desktop/UserDb.txt";
+    }
 
     @Override
     public void addObjectToFile(User user) {
-        txtPath("C:\\Users\\User\\Desktop/UserDb.txt");
         super.addObjectToFile(user);
     }
 
@@ -21,7 +24,8 @@ public class UserDAO extends GeneralDAO<User> {
     }
 
     @Override
-    public LinkedList<User> map(LinkedList<String> strings) {
+    public LinkedList<User> readAll() {
+        LinkedList<String> strings = readFile();
         LinkedList<User> users = new LinkedList<>();
         for (String line : strings) {
             String[] data = line.split(", ");
@@ -33,9 +37,8 @@ public class UserDAO extends GeneralDAO<User> {
     }
 
     @Override
-    public LinkedList<String> readAll() {
-        txtPath("C:\\Users\\User\\Desktop/UserDb.txt");
-        return super.readAll();
+    public LinkedList<String> readFile() {
+        return super.readFile();
     }
 
 }

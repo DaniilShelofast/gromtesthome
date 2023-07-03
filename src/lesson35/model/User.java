@@ -2,7 +2,7 @@ package lesson35.model;
 
 import java.util.Objects;
 
-public class User extends ParametersFile {
+public class User implements ParametersFile {
     private long id;
     private String userName;
     private String password;
@@ -66,8 +66,4 @@ public class User extends ParametersFile {
         return this.getId() + ", " + this.getUserName() + ", " + this.getPassword() + ", " + this.getCountry() + ", " + this.getUserType();
     }
 
-    @Override
-    public long id() {
-        return this.getId();
-    }
 }

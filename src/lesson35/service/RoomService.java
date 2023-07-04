@@ -4,21 +4,29 @@ import lesson35.dao.RoomDAO;
 import lesson35.model.Filter;
 import lesson35.model.Room;
 
-import java.awt.*;
+import java.util.LinkedList;
+import java.util.List;
+
 
 public class RoomService {
 
-    public static List findRooms(Filter filter) throws Exception {
+    public static List<Room> findRooms(Filter filter) throws Exception {
         RoomDAO roomDAO = new RoomDAO();
-        List rooms = new List();
+        List<Room> list = new LinkedList<>();
         for (Room room : roomDAO.readAll()) {
             if (room.getNumberOfGuests() == filter.getNumberOfGuests() && room.getPrice() == filter.getPrice() && room.isBreakfastIncluded() == filter.isBreakfastIncluded()
-                    && room.isPetsAllowed() == filter.isPetsAllowed() && room.getDateAvailableFrom().equals(filter.getDateAvailableFrom())
-                    && room.getHotel().getCity().equals(filter.getCity()) && room.getHotel().getCountry().equals(filter.getCountry()) && room.getHotel() == filter.getHotel()) {
-                rooms.add(room.toString());
+                    && room.isPetsAllowed() == filter.isPetsAllowed() && room.getDateAvailableFrom().toString().equals(filter.getDateAvailableFrom().toString())
+                    && room.getHotel().getCity().equals(filter.getCity())
+                    && room.getHotel().getCountry().equals(filter.getCountry())
+                    && room.getHotel().getId() == filter.getHotel().getId()
+                    && room.getHotel().getName().equals(filter.getHotel().getName())
+                    && room.getHotel().getCountry().equals(filter.getHotel().getCountry())
+                    && room.getHotel().getCity().equals(filter.getHotel().getCity())
+                    && room.getHotel().getStreet().equals( filter.getHotel().getStreet())) {
+                list.add(room);
             }
         }
-        return rooms;
+        return list;
     }
 
     public static void addRoom(Room room) throws Exception {

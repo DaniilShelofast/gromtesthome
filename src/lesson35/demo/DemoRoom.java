@@ -17,7 +17,9 @@ public class DemoRoom {
         String date_s = "2015-01-18 00:00:00";
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date date = dt.parse(date_s);
-        Room room = new Room(randomNumber, 2, 134.5, true, true, date, new Hotel(34, "", "", "", ""));
-        System.out.println(RoomController.findRooms(new Filter(1, 50.0, true, false, new Date(105, 5, 4), "Ukraine", "Kyiv", new Hotel(15, "Maximus hotel", "Ukraine", "Kyiv", "Street1"))));
+        Room room = new Room(randomNumber, 2, 134.5, true, true, date, new Hotel(15, "", "", "", ""));
+        //RoomController.deleteRoom(1);
+        //RoomController.addRoom(room);
+        System.out.println(RoomController.findRooms(new Filter(1, 135.0, true, true, date, "Ukraine", "Kyiv", new Hotel(15, "Maximus hotel", "Ukraine", "Kyiv", "Street1"))));
     }
 }

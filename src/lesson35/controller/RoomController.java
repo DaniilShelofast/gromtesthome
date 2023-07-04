@@ -4,7 +4,8 @@ import lesson35.model.Filter;
 import lesson35.model.Room;
 import lesson35.service.RoomService;
 
-import java.awt.*;
+import java.util.List;
+
 
 public class RoomController {
 
@@ -16,7 +17,7 @@ public class RoomController {
         RoomService.deleteRoom(idRoom);
     }
 
-    public static List findRooms(Filter filter) throws Exception {
+    public static List<Room> findRooms(Filter filter) throws Exception {
         return RoomService.findRooms(filter);
     }
 }

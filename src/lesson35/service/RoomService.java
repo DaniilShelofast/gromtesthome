@@ -14,15 +14,7 @@ public class RoomService {
         RoomDAO roomDAO = new RoomDAO();
         List<Room> list = new LinkedList<>();
         for (Room room : roomDAO.readAll()) {
-            if (room.getNumberOfGuests() == filter.getNumberOfGuests() && room.getPrice() == filter.getPrice() && room.isBreakfastIncluded() == filter.isBreakfastIncluded()
-                    && room.isPetsAllowed() == filter.isPetsAllowed() && room.getDateAvailableFrom().toString().equals(filter.getDateAvailableFrom().toString())
-                    && room.getHotel().getCity().equals(filter.getCity())
-                    && room.getHotel().getCountry().equals(filter.getCountry())
-                    && room.getHotel().getId() == filter.getHotel().getId()
-                    && room.getHotel().getName().equals(filter.getHotel().getName())
-                    && room.getHotel().getCountry().equals(filter.getHotel().getCountry())
-                    && room.getHotel().getCity().equals(filter.getHotel().getCity())
-                    && room.getHotel().getStreet().equals( filter.getHotel().getStreet())) {
+            if (checkRoom(room, filter)) {
                 list.add(room);
             }
         }
@@ -41,4 +33,15 @@ public class RoomService {
         roomDAO.deleteObjectFromFile(idRoom);
     }
 
+    private static boolean checkRoom(Room room, Filter filter) {
+        return room.getNumberOfGuests() == filter.getNumberOfGuests() && room.getPrice() >= filter.getPrice() && room.isBreakfastIncluded() == filter.isBreakfastIncluded()
+                && room.isPetsAllowed() == filter.isPetsAllowed() && room.getDateAvailableFrom().toString().equals(filter.getDateAvailableFrom().toString())
+                && room.getHotel().getCity().equals(filter.getCity())
+                && room.getHotel().getCountry().equals(filter.getCountry())
+                && room.getHotel().getId() == filter.getHotel().getId()
+                && room.getHotel().getName().equals(filter.getHotel().getName())
+                && room.getHotel().getCountry().equals(filter.getHotel().getCountry())
+                && room.getHotel().getCity().equals(filter.getHotel().getCity())
+                && room.getHotel().getStreet().equals(filter.getHotel().getStreet());
+    }
 }

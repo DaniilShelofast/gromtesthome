@@ -65,6 +65,7 @@ public class Room implements ParametersFile {
     }
 
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
     @Override
     public String toFileString() {
         return this.getId() + ", " + this.getNumberOfGuests() + ", " + this.getPrice() + ", " + this.isBreakfastIncluded() + ", " + this.isPetsAllowed() + ", " + dateFormat.format(getDateAvailableFrom()) + ", " + this.getHotel().getId();

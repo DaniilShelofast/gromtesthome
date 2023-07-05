@@ -38,10 +38,6 @@ public class RoomService {
                 && room.isPetsAllowed() == filter.isPetsAllowed() && room.getDateAvailableFrom().toString().equals(filter.getDateAvailableFrom().toString())
                 && room.getHotel().getCity().equals(filter.getCity())
                 && room.getHotel().getCountry().equals(filter.getCountry())
-                && room.getHotel().getId() == filter.getHotel().getId()
-                && room.getHotel().getName().equals(filter.getHotel().getName())
-                && room.getHotel().getCountry().equals(filter.getHotel().getCountry())
-                && room.getHotel().getCity().equals(filter.getHotel().getCity())
-                && room.getHotel().getStreet().equals(filter.getHotel().getStreet());
+                && room.getHotel().getId() == filter.getHotel().getId();
     }
 }

@@ -69,12 +69,11 @@ public abstract class GeneralDAO<T extends ParametersFile> {
         throw new BadRequestException("Error : the data is incorrect, the " + id + " with this ID does not exist");
     }
 
-    public boolean verify(long id) throws Exception {
+    public void verify(long id) throws Exception {
         for (T t : readAll()) {
             if (t != null && (long) t.getClass().getMethod("getId").invoke(t) == id) {
                 throw new BadRequestException("Error : " + id + " with such an ID already exists");
             }
         }
-        return true;
     }
 }

@@ -3,7 +3,7 @@ package lesson35.model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Room implements ParametersFile {
+public class Room implements ModelObject {
 
     private long id;
     private int numberOfGuests;

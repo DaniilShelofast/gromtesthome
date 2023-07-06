@@ -5,6 +5,10 @@ import lesson35.model.Hotel;
 import java.util.LinkedList;
 
 public class HotelDAO extends GeneralDAO<Hotel> {
+    public static void main(String[] args) {
+        HotelDAO hotelDAO = new HotelDAO();
+        System.out.println(hotelDAO.readAll());
+    }
 
     @Override
     public String getPath() {
@@ -35,7 +39,7 @@ public class HotelDAO extends GeneralDAO<Hotel> {
     }
 
     @Override
-    public LinkedList<String> readFile() {
+    protected LinkedList<String> readFile() {
         return super.readFile();
     }
 

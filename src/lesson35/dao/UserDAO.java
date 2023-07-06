@@ -37,7 +37,7 @@ public class UserDAO extends GeneralDAO<User> {
     }
 
     @Override
-    public LinkedList<String> readFile() {
+    protected LinkedList<String> readFile() {
         return super.readFile();
     }
 

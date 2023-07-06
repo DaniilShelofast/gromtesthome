@@ -1,8 +1,9 @@
 package lesson35.model;
 
-public interface ParametersFile {
+public interface ModelObject {
 
     String toFileString();
+    long getId();
 }
 
 

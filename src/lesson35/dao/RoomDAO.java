@@ -35,7 +35,7 @@ public class RoomDAO extends GeneralDAO<Room> {
             String[] s = line.split(", ");
             if (s.length == 7) {
                 int idHotel = Integer.parseInt(s[6]);
-                Hotel hotel = hotelDao.findIdObject(idHotel);
+                Hotel hotel = hotelDao.findObject(idHotel);
                 Date date = dateFormat.parse(s[5]);
                 rooms.add(new Room(Integer.parseInt(s[0]), Integer.parseInt(s[1]), Double.parseDouble(s[2]), Boolean.parseBoolean(s[3]), Boolean.parseBoolean(s[4]), date, hotel));
             }
@@ -44,7 +44,7 @@ public class RoomDAO extends GeneralDAO<Room> {
     }
 
     @Override
-    public LinkedList<String> readFile() {
+    protected LinkedList<String> readFile() {
         return super.readFile();
     }
 

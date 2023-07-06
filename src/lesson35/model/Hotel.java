@@ -2,7 +2,7 @@ package lesson35.model;
 
 import java.util.Objects;
 
-public class Hotel implements ParametersFile {
+public class Hotel implements ModelObject {
 
     private long id;
     private String name;
@@ -39,7 +39,7 @@ public class Hotel implements ParametersFile {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(java.lang.Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Hotel hotel = (Hotel) o;

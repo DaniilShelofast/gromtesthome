@@ -36,7 +36,7 @@ public class HotelService {
 
     public static void deleteHotel(long idHotel) throws Exception {
         HotelDAO hotelDAO = new HotelDAO();
-        hotelDAO.findIdObject(idHotel);
+        hotelDAO.findObject(idHotel);
         hotelDAO.deleteObjectFromFile(idHotel);
     }
 

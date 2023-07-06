@@ -29,7 +29,7 @@ public class RoomService {
 
     public static void deleteRoom(long idRoom) throws Exception {
         RoomDAO roomDAO = new RoomDAO();
-        roomDAO.findIdObject(idRoom);
+        roomDAO.findObject(idRoom);
         roomDAO.deleteObjectFromFile(idRoom);
     }
 

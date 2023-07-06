@@ -2,7 +2,7 @@ package lesson35.model;
 
 import java.util.Objects;
 
-public class User implements ParametersFile {
+public class User implements ModelObject {
     private long id;
     private String userName;
     private String password;
@@ -49,7 +49,7 @@ public class User implements ParametersFile {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(java.lang.Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;

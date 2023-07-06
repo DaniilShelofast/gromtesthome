@@ -1,16 +1,17 @@
 package lesson35.dao;
 
 import lesson35.exception.BadRequestException;
-import lesson35.model.ParametersFile;
+import lesson35.model.ModelObject;
 
 import java.io.*;
 import java.util.LinkedList;
 
-public abstract class GeneralDAO<T extends ParametersFile> {
+public abstract class GeneralDAO<T extends ModelObject> {
 
     public abstract String getPath();
 
     public LinkedList<T> readAll() throws Exception {
+
         return new LinkedList<>();
     }
 
@@ -22,7 +23,7 @@ public abstract class GeneralDAO<T extends ParametersFile> {
                 lines.add(line);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error: the file could not be read, the specified data is incorrect.");
         }
         return lines;
     }
@@ -30,11 +31,12 @@ public abstract class GeneralDAO<T extends ParametersFile> {
     public void addObjectToFile(T t) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(getPath(), true))) {
             File file = new File(getPath());
+            String write = t.toFileString();
             if (file.length() == 0) {
-                writer.write(t.toFileString());
+                writer.write(write);
             } else {
                 writer.newLine();
-                writer.write(t.toFileString());
+                writer.write(write);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,13 +45,7 @@ public abstract class GeneralDAO<T extends ParametersFile> {
 
     public void deleteObjectFromFile(long id) throws Exception {
         LinkedList<T> objects = readAll();
-        objects.removeIf(objectId -> {
-            try {
-                return (long) objectId.getClass().getMethod("getId").invoke(objectId) == id;
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
+        objects.removeIf(objectsId -> objectsId.getId() == id);
         try (BufferedWriter ignore = new BufferedWriter(new FileWriter(getPath(), false))) {
             for (T o : objects) {
                 addObjectToFile(o);
@@ -60,9 +56,9 @@ public abstract class GeneralDAO<T extends ParametersFile> {
 
     }
 
-    public T findIdObject(long id) throws Exception {
+    public T findObject(long id) throws Exception {
         for (T t : readAll()) {
-            if (t != null && (long) t.getClass().getMethod("getId").invoke(t) == id) {
+            if (t != null && t.getId() == id) {
                 return t;
             }
         }
@@ -71,7 +67,7 @@ public abstract class GeneralDAO<T extends ParametersFile> {
 
     public void verify(long id) throws Exception {
         for (T t : readAll()) {
-            if (t != null && (long) t.getClass().getMethod("getId").invoke(t) == id) {
+            if (t != null && t.getId() == id) {
                 throw new BadRequestException("Error : " + id + " with such an ID already exists");
             }
         }

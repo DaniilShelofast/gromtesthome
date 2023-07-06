@@ -44,9 +44,9 @@ public class OrderDAO extends GeneralDAO<Order> {
                 Date to = toDate.parse(data[3]);
                 Date from = fromDate.parse(data[4]);
                 int idUser = Integer.parseInt(data[1]);
-                User user = userDAO.findIdObject(idUser);
+                User user = userDAO.findObject(idUser);
                 int idRoom = Integer.parseInt(data[2]);
-                Room room = roomDAO.findIdObject(idRoom);
+                Room room = roomDAO.findObject(idRoom);
                 orders.add(new Order(Integer.parseInt(data[0]), user, room, to, from, Double.parseDouble(data[5])));
             }
         }
@@ -54,7 +54,7 @@ public class OrderDAO extends GeneralDAO<Order> {
     }
 
     @Override
-    public LinkedList<String> readFile() {
+    protected LinkedList<String> readFile() {
         return super.readFile();
     }
 

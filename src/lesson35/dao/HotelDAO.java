@@ -1,14 +1,11 @@
 package lesson35.dao;
 
+import lesson35.exception.BadRequestException;
 import lesson35.model.Hotel;
 
 import java.util.LinkedList;
 
 public class HotelDAO extends GeneralDAO<Hotel> {
-    public static void main(String[] args) {
-        HotelDAO hotelDAO = new HotelDAO();
-        System.out.println(hotelDAO.readAll());
-    }
 
     @Override
     public String getPath() {
@@ -26,21 +23,21 @@ public class HotelDAO extends GeneralDAO<Hotel> {
     }
 
     @Override
-    public LinkedList<Hotel> readAll() {
-        LinkedList<String> strings = readFile();
+    public LinkedList<Hotel> readAll() throws Exception {
         LinkedList<Hotel> hotels = new LinkedList<>();
-        for (String line : strings) {
-            String[] data = line.split(", ");
-            if (data.length == 5) {
-                hotels.add(new Hotel(Integer.parseInt(data[0]), data[1], data[2], data[3], data[4]));
-            }
+        for (String s : readFile()) {
+            hotels.add(convert(s));
         }
         return hotels;
     }
 
     @Override
-    protected LinkedList<String> readFile() {
-        return super.readFile();
+    public Hotel convert(String string) throws BadRequestException {
+        String[] data = string.split(", ");
+        if (data.length == 5) {
+            return new Hotel(Integer.parseInt(data[0]), data[1], data[2], data[3], data[4]);
+        }
+        throw new BadRequestException("Error...");
     }
 
 }

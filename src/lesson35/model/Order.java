@@ -1,5 +1,6 @@
 package lesson35.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Order implements ModelObject {
@@ -43,9 +44,12 @@ public class Order implements ModelObject {
         return moneyPaid;
     }
 
+    SimpleDateFormat fromData = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    SimpleDateFormat toData = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
     @Override
     public String toFileString() {
-        return this.getId() + ", " + this.getUser() + ", " + this.getRoom() + ", " + this.getDateFrom() + ", " + this.getDateTo() + ", " + this.getMoneyPaid();
+        return this.getId() + ", " + this.getUser().getId() + ", " + this.getRoom().getId() + ", " + fromData.format(getDateFrom()) + ", " + toData.format(getDateTo()) + ", " + this.getMoneyPaid();
     }
 
     @Override
@@ -59,6 +63,5 @@ public class Order implements ModelObject {
                 ", moneyPaid=" + moneyPaid +
                 '}';
     }
-
 
 }

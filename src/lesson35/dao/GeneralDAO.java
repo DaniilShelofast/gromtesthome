@@ -10,8 +10,9 @@ public abstract class GeneralDAO<T extends ModelObject> {
 
     public abstract String getPath();
 
-    public LinkedList<T> readAll() throws Exception {
+    public abstract T convert(String string) throws Exception;
 
+    public LinkedList<T> readAll() throws Exception {
         return new LinkedList<>();
     }
 
@@ -72,4 +73,5 @@ public abstract class GeneralDAO<T extends ModelObject> {
             }
         }
     }
+
 }

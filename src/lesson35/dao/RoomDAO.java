@@ -1,5 +1,6 @@
 package lesson35.dao;
 
+import lesson35.exception.BadRequestException;
 import lesson35.model.Hotel;
 import lesson35.model.Room;
 
@@ -27,25 +28,25 @@ public class RoomDAO extends GeneralDAO<Room> {
 
     @Override
     public LinkedList<Room> readAll() throws Exception {
-        HotelDAO hotelDao = new HotelDAO();
-        LinkedList<String> strings = readFile();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         LinkedList<Room> rooms = new LinkedList<>();
-        for (String line : strings) {
-            String[] s = line.split(", ");
-            if (s.length == 7) {
-                int idHotel = Integer.parseInt(s[6]);
-                Hotel hotel = hotelDao.findObject(idHotel);
-                Date date = dateFormat.parse(s[5]);
-                rooms.add(new Room(Integer.parseInt(s[0]), Integer.parseInt(s[1]), Double.parseDouble(s[2]), Boolean.parseBoolean(s[3]), Boolean.parseBoolean(s[4]), date, hotel));
-            }
+        for (String s : readFile()) {
+            rooms.add(convert(s));
         }
         return rooms;
     }
 
     @Override
-    protected LinkedList<String> readFile() {
-        return super.readFile();
+    public Room convert(String string) throws Exception {
+        HotelDAO hotelDao = new HotelDAO();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String[] data = string.split(", ");
+        if (data.length == 7) {
+            int idHotel = Integer.parseInt(data[6]);
+            Hotel hotel = hotelDao.findObject(idHotel);
+            Date date = dateFormat.parse(data[5]);
+            return new Room(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Double.parseDouble(data[2]), Boolean.parseBoolean(data[3]), Boolean.parseBoolean(data[4]), date, hotel);
+        }
+        throw new BadRequestException("Error...");
     }
 
 }

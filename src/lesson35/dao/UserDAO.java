@@ -40,7 +40,7 @@ public class UserDAO extends GeneralDAO<User> {
         if (data.length == 5) {
             return new User(Integer.parseInt(data[0]), data[1], data[2], data[3], UserType.valueOf(data[4]));
         }
-        throw new BadRequestException("Error...");
+        throw new BadRequestException("Error : not a correct reading object.");
     }
 
 }

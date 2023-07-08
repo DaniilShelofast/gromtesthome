@@ -38,6 +38,11 @@ public class User implements ModelObject {
     }
 
     @Override
+    public String toFileString() {
+        return this.getId() + ", " + this.getUserName() + ", " + this.getPassword() + ", " + this.getCountry() + ", " + this.getUserType();
+    }
+
+    @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
@@ -59,11 +64,6 @@ public class User implements ModelObject {
     @Override
     public int hashCode() {
         return Objects.hash(id, userName, password, country, userType);
-    }
-
-    @Override
-    public String toFileString() {
-        return this.getId() + ", " + this.getUserName() + ", " + this.getPassword() + ", " + this.getCountry() + ", " + this.getUserType();
     }
 
 }

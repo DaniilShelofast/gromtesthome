@@ -46,7 +46,7 @@ public class RoomDAO extends GeneralDAO<Room> {
             Date date = dateFormat.parse(data[5]);
             return new Room(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Double.parseDouble(data[2]), Boolean.parseBoolean(data[3]), Boolean.parseBoolean(data[4]), date, hotel);
         }
-        throw new BadRequestException("Error...");
+        throw new BadRequestException("Error : not a correct reading object.");
     }
 
 }

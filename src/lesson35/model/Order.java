@@ -44,12 +44,11 @@ public class Order implements ModelObject {
         return moneyPaid;
     }
 
-    SimpleDateFormat fromData = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-    SimpleDateFormat toData = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    SimpleDateFormat data = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
     @Override
     public String toFileString() {
-        return this.getId() + ", " + this.getUser().getId() + ", " + this.getRoom().getId() + ", " + fromData.format(getDateFrom()) + ", " + toData.format(getDateTo()) + ", " + this.getMoneyPaid();
+        return this.getId() + ", " + this.getUser().getId() + ", " + this.getRoom().getId() + ", " + data.format(getDateFrom()) + ", " + data.format(getDateTo()) + ", " + this.getMoneyPaid();
     }
 
     @Override

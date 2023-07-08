@@ -39,6 +39,11 @@ public class Hotel implements ModelObject {
     }
 
     @Override
+    public String toFileString() {
+        return this.getId() + ", " + this.getName() + ", " + this.getCountry() + ", " + this.getCity() + ", " + this.getStreet();
+    }
+
+    @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -60,11 +65,6 @@ public class Hotel implements ModelObject {
                 ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
                 '}';
-    }
-
-    @Override
-    public String toFileString() {
-        return this.getId() + ", " + this.getName() + ", " + this.getCountry() + ", " + this.getCity() + ", " + this.getStreet();
     }
 
 }

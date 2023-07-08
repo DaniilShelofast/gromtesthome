@@ -37,7 +37,7 @@ public class HotelDAO extends GeneralDAO<Hotel> {
         if (data.length == 5) {
             return new Hotel(Integer.parseInt(data[0]), data[1], data[2], data[3], data[4]);
         }
-        throw new BadRequestException("Error...");
+        throw new BadRequestException("Error : not a correct reading object.");
     }
 
 }

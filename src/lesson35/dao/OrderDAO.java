@@ -79,6 +79,6 @@ public class OrderDAO extends GeneralDAO<Order> {
             Room room = roomDAO.findObject(idRoom);
             return new Order(Integer.parseInt(data[0]), user, room, to, from, Double.parseDouble(data[5]));
         }
-        throw new BadRequestException("Error...");
+        throw new BadRequestException("Error : not a correct reading object.");
     }
 }

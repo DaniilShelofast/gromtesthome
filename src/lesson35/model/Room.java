@@ -51,6 +51,13 @@ public class Room implements ModelObject {
         return hotel;
     }
 
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+
+    @Override
+    public String toFileString() {
+        return this.getId() + ", " + this.getNumberOfGuests() + ", " + this.getPrice() + ", " + this.isBreakfastIncluded() + ", " + this.isPetsAllowed() + ", " + dateFormat.format(getDateAvailableFrom()) + ", " + this.getHotel().getId();
+    }
+
     @Override
     public String toString() {
         return "Room{" +
@@ -62,13 +69,6 @@ public class Room implements ModelObject {
                 ", dateAvailableFrom=" + dateAvailableFrom +
                 ", hotel=" + hotel +
                 '}';
-    }
-
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-
-    @Override
-    public String toFileString() {
-        return this.getId() + ", " + this.getNumberOfGuests() + ", " + this.getPrice() + ", " + this.isBreakfastIncluded() + ", " + this.isPetsAllowed() + ", " + dateFormat.format(getDateAvailableFrom()) + ", " + this.getHotel().getId();
     }
 
 }

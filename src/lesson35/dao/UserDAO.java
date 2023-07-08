@@ -2,10 +2,11 @@ package lesson35.dao;
 
 
 import lesson35.exception.BadRequestException;
-import lesson35.model.UserType;
 import lesson35.model.User;
+import lesson35.model.UserType;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.LinkedList;
 
 public class UserDAO extends GeneralDAO<User> {
@@ -27,11 +28,7 @@ public class UserDAO extends GeneralDAO<User> {
 
     @Override
     public LinkedList<User> readAll() throws Exception {
-        LinkedList<User> users = new LinkedList<>();
-        for (String s : readFile()) {
-            users.add(convert(s));
-        }
-        return users;
+        return super.readAll();
     }
 
     @Override

@@ -13,10 +13,14 @@ public abstract class GeneralDAO<T extends ModelObject> {
     public abstract T convert(String string) throws Exception;
 
     public LinkedList<T> readAll() throws Exception {
-        return new LinkedList<>();
+        LinkedList<T> list = new LinkedList<>();
+        for (String s : readFile()) {
+            list.add(convert(s));
+        }
+        return list;
     }
 
-    protected LinkedList<String> readFile() {
+    private LinkedList<String> readFile() {
         String line;
         LinkedList<String> lines = new LinkedList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(getPath()))) {
@@ -24,7 +28,7 @@ public abstract class GeneralDAO<T extends ModelObject> {
                 lines.add(line);
             }
         } catch (IOException e) {
-            System.out.println("Error: the file could not be read, the specified data is incorrect.");
+            System.err.println("Error: The specified file path is incorrect.");
         }
         return lines;
     }
@@ -32,12 +36,12 @@ public abstract class GeneralDAO<T extends ModelObject> {
     public void addObjectToFile(T t) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(getPath(), true))) {
             File file = new File(getPath());
-            String write = t.toFileString();
+            String s = t.toFileString();
             if (file.length() == 0) {
-                writer.write(write);
+                writer.append(s);
             } else {
                 writer.newLine();
-                writer.write(write);
+                writer.append(s);
             }
         } catch (IOException e) {
             e.printStackTrace();

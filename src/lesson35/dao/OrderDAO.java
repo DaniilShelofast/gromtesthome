@@ -56,11 +56,7 @@ public class OrderDAO extends GeneralDAO<Order> {
 
     @Override
     public LinkedList<Order> readAll() throws Exception {
-        LinkedList<Order> orders = new LinkedList<>();
-        for (String s : readFile()) {
-            orders.add(convert(s));
-        }
-        return orders;
+        return super.readAll();
     }
 
     @Override

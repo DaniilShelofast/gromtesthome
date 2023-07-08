@@ -11,7 +11,7 @@ public class DemoHotel {
         int randomNumber = random.nextInt(100);
         Hotel hotel = new Hotel(randomNumber, "ooo", "ggg", "ccc", "ppp");
         HotelController.addHotel(hotel);
-        HotelController.deleteHotel(34);
+        //HotelController.deleteHotel(34);
 
     }
 }

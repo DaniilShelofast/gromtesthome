@@ -28,11 +28,7 @@ public class RoomDAO extends GeneralDAO<Room> {
 
     @Override
     public LinkedList<Room> readAll() throws Exception {
-        LinkedList<Room> rooms = new LinkedList<>();
-        for (String s : readFile()) {
-            rooms.add(convert(s));
-        }
-        return rooms;
+        return super.readAll();
     }
 
     @Override

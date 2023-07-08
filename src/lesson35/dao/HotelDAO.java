@@ -24,11 +24,7 @@ public class HotelDAO extends GeneralDAO<Hotel> {
 
     @Override
     public LinkedList<Hotel> readAll() throws Exception {
-        LinkedList<Hotel> hotels = new LinkedList<>();
-        for (String s : readFile()) {
-            hotels.add(convert(s));
-        }
-        return hotels;
+        return super.readAll();
     }
 
     @Override

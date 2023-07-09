@@ -36,13 +36,10 @@ public abstract class GeneralDAO<T extends ModelObject> {
     public void addObjectToFile(T t) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(getPath(), true))) {
             File file = new File(getPath());
-            String s = t.toFileString();
-            if (file.length() == 0) {
-                writer.append(s);
-            } else {
+            if (file.length() != 0) {
                 writer.newLine();
-                writer.append(s);
             }
+            writer.append(t.toFileString());
         } catch (IOException e) {
             e.printStackTrace();
         }

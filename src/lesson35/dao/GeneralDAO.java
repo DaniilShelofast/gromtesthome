@@ -47,14 +47,11 @@ public abstract class GeneralDAO<T extends ModelObject> {
     public void deleteObjectFromFile(long id) throws Exception {
         LinkedList<T> objects = readAll();
         objects.removeIf(objectsId -> objectsId.getId() == id);
-        try (BufferedWriter ignore = new BufferedWriter(new FileWriter(getPath(), false))) {
-            for (T o : objects) {
-                addObjectToFile(o);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        FileWriter file = new FileWriter(getPath(), false);
+        file.close();
+        for (T o : objects) {
+            addObjectToFile(o);
         }
-
     }
 
     public T findObject(long id) throws Exception {

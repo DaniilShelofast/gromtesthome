@@ -27,8 +27,7 @@ public abstract class GeneralDAO<T extends ModelObject> {
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
             }
-        } catch (IOException e) {
-            System.err.println("Error: The specified file path is incorrect.");
+        } catch (IOException ignored) {
         }
         return lines;
     }
@@ -64,13 +63,13 @@ public abstract class GeneralDAO<T extends ModelObject> {
                 return t;
             }
         }
-        throw new BadRequestException("Error : the data is incorrect, the " + id + " with this ID does not exist");
+        throw new BadRequestException("Error :" + id + " ID does not exist");
     }
 
     public void verify(long id) throws Exception {
         for (T t : readAll()) {
             if (t != null && t.getId() == id) {
-                throw new BadRequestException("Error : " + id + " with such an ID already exists");
+                throw new BadRequestException("Error:" + id + " ID already exists");
             }
         }
     }

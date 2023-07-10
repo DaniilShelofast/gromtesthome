@@ -11,6 +11,8 @@ import java.util.LinkedList;
 
 public class UserDAO extends GeneralDAO<User> {
 
+    public static final UserDAO userDAO = new UserDAO();
+
     @Override
     public String getPath() {
         return "C:\\Users\\User\\Desktop/UserDb.txt";
@@ -21,7 +23,7 @@ public class UserDAO extends GeneralDAO<User> {
         super.addObjectToFile(user);
     }
 
-    public static void logout() throws IOException {
+    public void logout() throws IOException {
         FileInputStream file = new FileInputStream("C:\\Users\\User\\Desktop/UserDb.txt");
         file.close();
     }
@@ -37,7 +39,7 @@ public class UserDAO extends GeneralDAO<User> {
         if (data.length == 5) {
             return new User(Integer.parseInt(data[0]), data[1], data[2], data[3], UserType.valueOf(data[4]));
         }
-        throw new BadRequestException("Error : not a correct reading object.");
+        throw new BadRequestException("Database error");
     }
 
 }

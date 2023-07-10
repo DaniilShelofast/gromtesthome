@@ -2,22 +2,23 @@ package lesson35.controller;
 
 import lesson35.model.Filter;
 import lesson35.model.Room;
-import lesson35.service.RoomService;
 
 import java.util.List;
+
+import static lesson35.service.RoomService.roomService;
 
 
 public class RoomController {
 
     public static void addRoom(Room room) throws Exception {
-        RoomService.addRoom(room);
+        roomService.addRoom(room);
     }
 
     public static void deleteRoom(long idRoom) throws Exception {
-        RoomService.deleteRoom(idRoom);
+        roomService.deleteRoom(idRoom);
     }
 
     public static List<Room> findRooms(Filter filter) throws Exception {
-        return RoomService.findRooms(filter);
+        return roomService.findRooms(filter);
     }
 }

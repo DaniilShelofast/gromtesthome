@@ -1,28 +1,28 @@
 package lesson35.service;
 
-import lesson35.dao.UserDAO;
 import lesson35.model.User;
 
 import java.io.IOException;
 
+import static lesson35.dao.UserDAO.userDAO;
 
 
 public class UserService {
 
-    public static void registerUser(User user) throws Exception {
-        UserDAO userDAO = new UserDAO();
+    public final static UserService userService = new UserService();
+
+    public void registerUser(User user) throws Exception {
         userDAO.verify(user.getId());
         userDAO.addObjectToFile(user);
     }
 
-    public static void logout() throws IOException {
-        UserDAO.logout();
+    public void logout() throws IOException {
+        userDAO.logout();
     }
 
-    public static void login(String userName, String password) throws Exception {
-        UserDAO dao = new UserDAO();
+    public void login(String userName, String password) throws Exception {
         User user = null;
-        for (User u : dao.readAll()) {
+        for (User u : userDAO.readAll()) {
             if (u.getUserName().equals(userName) && u.getPassword().equals(password)) {
                 user = u;
             }

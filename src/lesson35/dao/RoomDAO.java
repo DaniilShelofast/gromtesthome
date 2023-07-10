@@ -8,8 +8,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
+import static lesson35.dao.HotelDAO.hotelDAO;
 
 public class RoomDAO extends GeneralDAO<Room> {
+
+    public final static RoomDAO roomDAO = new RoomDAO();
+
 
     @Override
     public String getPath() {
@@ -33,16 +37,15 @@ public class RoomDAO extends GeneralDAO<Room> {
 
     @Override
     public Room convert(String string) throws Exception {
-        HotelDAO hotelDao = new HotelDAO();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String[] data = string.split(", ");
         if (data.length == 7) {
             int idHotel = Integer.parseInt(data[6]);
-            Hotel hotel = hotelDao.findObject(idHotel);
+            Hotel hotel = hotelDAO.findObject(idHotel);
             Date date = dateFormat.parse(data[5]);
             return new Room(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Double.parseDouble(data[2]), Boolean.parseBoolean(data[3]), Boolean.parseBoolean(data[4]), date, hotel);
         }
-        throw new BadRequestException("Error : not a correct reading object.");
+        throw new BadRequestException("Database error");
     }
 
 }

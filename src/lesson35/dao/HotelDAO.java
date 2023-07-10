@@ -7,6 +7,8 @@ import java.util.LinkedList;
 
 public class HotelDAO extends GeneralDAO<Hotel> {
 
+    public final static HotelDAO hotelDAO = new HotelDAO();
+
     @Override
     public String getPath() {
         return "C:\\Users\\User\\Desktop/HotelDb.txt";
@@ -33,7 +35,7 @@ public class HotelDAO extends GeneralDAO<Hotel> {
         if (data.length == 5) {
             return new Hotel(Integer.parseInt(data[0]), data[1], data[2], data[3], data[4]);
         }
-        throw new BadRequestException("Error : not a correct reading object.");
+        throw new BadRequestException("Database error");
     }
 
 }

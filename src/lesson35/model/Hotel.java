@@ -18,6 +18,8 @@ public class Hotel implements ModelObject {
         this.street = street;
     }
 
+
+
     public long getId() {
         return id;
     }

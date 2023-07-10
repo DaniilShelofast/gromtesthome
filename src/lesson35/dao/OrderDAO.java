@@ -9,6 +9,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
+import static lesson35.dao.RoomDAO.roomDAO;
+import static lesson35.dao.UserDAO.userDAO;
+
 public class OrderDAO extends GeneralDAO<Order> {
 
     /* public static void main(String[] args) throws Exception {
@@ -61,20 +64,17 @@ public class OrderDAO extends GeneralDAO<Order> {
 
     @Override
     public Order convert(String string) throws Exception {
-        UserDAO userDAO = new UserDAO();
-        RoomDAO roomDAO = new RoomDAO();
-        SimpleDateFormat toDate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        SimpleDateFormat fromDate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String[] data = string.split(", ");
         if (data.length == 6) {
-            Date to = toDate.parse(data[3]);
-            Date from = fromDate.parse(data[4]);
+            Date to = date.parse(data[3]);
+            Date from = date.parse(data[4]);
             int idUser = Integer.parseInt(data[1]);
             User user = userDAO.findObject(idUser);
             int idRoom = Integer.parseInt(data[2]);
             Room room = roomDAO.findObject(idRoom);
             return new Order(Integer.parseInt(data[0]), user, room, to, from, Double.parseDouble(data[5]));
         }
-        throw new BadRequestException("Error : not a correct reading object.");
+        throw new BadRequestException("Database error");
     }
 }

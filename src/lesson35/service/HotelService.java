@@ -1,16 +1,17 @@
 package lesson35.service;
 
-import lesson35.dao.HotelDAO;
 import lesson35.exception.BadRequestException;
 import lesson35.model.Hotel;
+
+import static lesson35.dao.HotelDAO.hotelDAO;
 
 
 public class HotelService {
 
+    public static final HotelService hotelService = new HotelService();
 
-    public static Hotel findHotelByCity(String city) throws Exception {
-        HotelDAO dao = new HotelDAO();
-        for (Hotel hotel : dao.readAll()) {
+    public  Hotel findHotelByCity(String city) throws Exception {
+        for (Hotel hotel : hotelDAO.readAll()) {
             if (hotel.getCity().equals(city)) {
                 return hotel;
             }
@@ -18,9 +19,8 @@ public class HotelService {
         throw new BadRequestException("Error : this city is not in our database.");
     }
 
-    public static Hotel findHotelByName(String name) throws Exception {
-        HotelDAO dao = new HotelDAO();
-        for (Hotel hotel : dao.readAll()) {
+    public  Hotel findHotelByName(String name) throws Exception {
+        for (Hotel hotel : hotelDAO.readAll()) {
             if (hotel.getName().equals(name)) {
                 return hotel;
             }
@@ -28,14 +28,12 @@ public class HotelService {
         throw new BadRequestException("Error : this city is not in our database.");
     }
 
-    public static void addHotel(Hotel hotel) throws Exception {
-        HotelDAO hotelDAO = new HotelDAO();
+    public  void addHotel(Hotel hotel) throws Exception {
         hotelDAO.verify(hotel.getId());
         hotelDAO.addObjectToFile(hotel);
     }
 
-    public static void deleteHotel(long idHotel) throws Exception {
-        HotelDAO hotelDAO = new HotelDAO();
+    public  void deleteHotel(long idHotel) throws Exception {
         hotelDAO.findObject(idHotel);
         hotelDAO.deleteObjectFromFile(idHotel);
     }

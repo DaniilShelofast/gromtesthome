@@ -9,6 +9,9 @@ public class HotelDAO extends GeneralDAO<Hotel> {
 
     public final static HotelDAO hotelDAO = new HotelDAO();
 
+    public static void main(String[] args) throws Exception {
+        System.out.println(hotelDAO.readAll());
+    }
     @Override
     public String getPath() {
         return "C:\\Users\\User\\Desktop/HotelDb.txt";

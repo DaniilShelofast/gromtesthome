@@ -27,7 +27,8 @@ public abstract class GeneralDAO<T extends ModelObject> {
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
             }
-        } catch (IOException ignored) {
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return lines;
     }
@@ -47,8 +48,7 @@ public abstract class GeneralDAO<T extends ModelObject> {
     public void deleteObjectFromFile(long id) throws Exception {
         LinkedList<T> objects = readAll();
         objects.removeIf(objectsId -> objectsId.getId() == id);
-        FileWriter file = new FileWriter(getPath(), false);
-        file.close();
+        fileClear(getPath());
         for (T o : objects) {
             addObjectToFile(o);
         }
@@ -69,6 +69,11 @@ public abstract class GeneralDAO<T extends ModelObject> {
                 throw new BadRequestException("Error:" + id + " ID already exists");
             }
         }
+    }
+
+    private static void fileClear(String path) throws Exception {
+        FileWriter file = new FileWriter(path, false);
+        file.close();
     }
 
 }

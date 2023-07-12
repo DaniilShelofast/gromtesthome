@@ -5,6 +5,7 @@ import lesson35.model.ModelObject;
 
 import java.io.*;
 import java.util.LinkedList;
+import java.util.Random;
 
 public abstract class GeneralDAO<T extends ModelObject> {
 
@@ -49,6 +50,7 @@ public abstract class GeneralDAO<T extends ModelObject> {
         LinkedList<T> objects = readAll();
         objects.removeIf(objectsId -> objectsId.getId() == id);
         fileClear(getPath());
+
         for (T o : objects) {
             addObjectToFile(o);
         }
@@ -76,4 +78,14 @@ public abstract class GeneralDAO<T extends ModelObject> {
         file.close();
     }
 
+    public static long randomID() {
+        long min = 1;
+        long max = Long.MAX_VALUE;
+        long count = max - min;
+        Random random = new Random();
+        long i = random.nextLong(count + 1);
+        i += min;
+        return i;
+    }
 }
+

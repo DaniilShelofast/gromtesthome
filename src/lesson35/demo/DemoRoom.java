@@ -7,17 +7,14 @@ import lesson35.model.Room;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Random;
-
+import static lesson35.dao.GeneralDAO.randomID;
 
 public class DemoRoom {
     public static void main(String[] args) throws Exception {
-        Random random = new Random();
-        int randomNumber = random.nextInt(100);
         String date_s = "2015-01-18 00:00:00";
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date date = dt.parse(date_s);
-        Room room = new Room(randomNumber, 2, 134.5, true, true, date, new Hotel(15, "", "", "", ""));
+        Room room = new Room(randomID(), 2, 134.5, true, true, date, new Hotel(15, "", "", "", ""));
         //RoomController.deleteRoom(1);
         //RoomController.addRoom(room);//32, 1, 135.0, true, true, 18-01-2015 00:00:00, 15
         System.out.println(RoomController.findRooms(new Filter(1, 135.0, true, true, date, "Ukraine", "Kyiv", new Hotel(15, "Maximus hotel", "Ukraine", "Kyiv", "Street1"))));

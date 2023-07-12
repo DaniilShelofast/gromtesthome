@@ -38,5 +38,4 @@ public class HotelService {
         hotelDAO.deleteObjectFromFile(idHotel);
     }
 
-
 }

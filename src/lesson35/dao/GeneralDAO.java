@@ -79,7 +79,7 @@ public abstract class GeneralDAO<T extends ModelObject> {
     }
 
     public static long generatedID() {
-        return ThreadLocalRandom.current().nextLong(1L, Integer.MAX_VALUE);
+        return ThreadLocalRandom.current().nextLong(1L, Long.MAX_VALUE);
     }
 
 

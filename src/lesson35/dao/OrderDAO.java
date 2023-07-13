@@ -69,11 +69,11 @@ public class OrderDAO extends GeneralDAO<Order> {
         if (data.length == 6) {
             Date to = date.parse(data[3]);
             Date from = date.parse(data[4]);
-            int idUser = Integer.parseInt(data[1]);
+            long idUser = Long.parseLong(data[1]);
             User user = userDAO.findObject(idUser);
-            int idRoom = Integer.parseInt(data[2]);
+            long idRoom = Long.parseLong(data[2]);
             Room room = roomDAO.findObject(idRoom);
-            return new Order(Integer.parseInt(data[0]), user, room, to, from, Double.parseDouble(data[5]));
+            return new Order(Long.parseLong(data[0]), user, room, to, from, Double.parseDouble(data[5]));
         }
         throw new BadRequestException("Database error");
     }

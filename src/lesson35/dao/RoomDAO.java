@@ -40,10 +40,10 @@ public class RoomDAO extends GeneralDAO<Room> {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String[] data = string.split(", ");
         if (data.length == 7) {
-            int idHotel = Integer.parseInt(data[6]);
+            long idHotel = Long.parseLong(data[6]);
             Hotel hotel = hotelDAO.findObject(idHotel);
             Date date = dateFormat.parse(data[5]);
-            return new Room(Integer.parseInt(data[0]), Integer.parseInt(data[1]), Double.parseDouble(data[2]), Boolean.parseBoolean(data[3]), Boolean.parseBoolean(data[4]), date, hotel);
+            return new Room(Long.parseLong(data[0]), Integer.parseInt(data[1]), Double.parseDouble(data[2]), Boolean.parseBoolean(data[3]), Boolean.parseBoolean(data[4]), date, hotel);
         }
         throw new BadRequestException("Database error");
     }

@@ -5,7 +5,7 @@ import lesson35.model.ModelObject;
 
 import java.io.*;
 import java.util.LinkedList;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class GeneralDAO<T extends ModelObject> {
 
@@ -78,14 +78,11 @@ public abstract class GeneralDAO<T extends ModelObject> {
         file.close();
     }
 
-    public static long randomID() {
-        long min = 1;
-        long max = Long.MAX_VALUE;
-        long count = max - min;
-        Random random = new Random();
-        long i = random.nextLong(count + 1);
-        i += min;
-        return i;
+    public static long generatedID() {
+        return ThreadLocalRandom.current().nextLong(1L, Integer.MAX_VALUE);
     }
+
+
 }
+
 

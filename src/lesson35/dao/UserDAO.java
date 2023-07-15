@@ -20,6 +20,7 @@ public class UserDAO extends GeneralDAO<User> {
 
     @Override
     public void addObjectToFile(User user) {
+        user.setId(generatedID());
         super.addObjectToFile(user);
     }
 
@@ -42,4 +43,8 @@ public class UserDAO extends GeneralDAO<User> {
         throw new BadRequestException("Database error");
     }
 
+    @Override
+    public long generatedID() {
+        return super.generatedID();
+    }
 }

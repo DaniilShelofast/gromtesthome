@@ -17,8 +17,19 @@ public class User implements ModelObject {
         this.userType = userType;
     }
 
+    public User(String userName, String password, String country, UserType userType) {
+        this.userName = userName;
+        this.password = password;
+        this.country = country;
+        this.userType = userType;
+    }
+
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getUserName() {

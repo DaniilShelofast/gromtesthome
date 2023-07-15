@@ -11,7 +11,6 @@ public class HotelController {
     }
 
     public static Hotel findHotelByCity(String city) throws Exception {
-
         return hotelService.findHotelByCity(city);
     }
 

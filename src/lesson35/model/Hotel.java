@@ -18,7 +18,12 @@ public class Hotel implements ModelObject {
         this.street = street;
     }
 
-
+    public Hotel(String name, String country, String city, String street) {
+        this.name = name;
+        this.country = country;
+        this.city = city;
+        this.street = street;
+    }
 
     public long getId() {
         return id;
@@ -38,6 +43,10 @@ public class Hotel implements ModelObject {
 
     public String getStreet() {
         return street;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     @Override

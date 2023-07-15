@@ -22,6 +22,7 @@ public class RoomDAO extends GeneralDAO<Room> {
 
     @Override
     public void addObjectToFile(Room room) {
+        room.setId(generatedID());
         super.addObjectToFile(room);
     }
 
@@ -46,6 +47,11 @@ public class RoomDAO extends GeneralDAO<Room> {
             return new Room(Long.parseLong(data[0]), Integer.parseInt(data[1]), Double.parseDouble(data[2]), Boolean.parseBoolean(data[3]), Boolean.parseBoolean(data[4]), date, hotel);
         }
         throw new BadRequestException("Database error");
+    }
+
+    @Override
+    public long generatedID() {
+        return super.generatedID();
     }
 
 }

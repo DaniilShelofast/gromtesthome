@@ -29,7 +29,7 @@ public abstract class GeneralDAO<T extends ModelObject> {
                 lines.add(line);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error: file cannot be read.");
         }
         return lines;
     }
@@ -42,14 +42,14 @@ public abstract class GeneralDAO<T extends ModelObject> {
             }
             writer.append(t.toFileString());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error: data cannot be entered.");
         }
     }
 
     public void deleteObjectFromFile(long id) throws Exception {
         LinkedList<T> objects = readAll();
         objects.removeIf(objectsId -> objectsId.getId() == id);
-        fileClear(getPath());
+        fileClear();
 
         for (T o : objects) {
             addObjectToFile(o);
@@ -73,12 +73,12 @@ public abstract class GeneralDAO<T extends ModelObject> {
         }
     }
 
-    private static void fileClear(String path) throws Exception {
-        FileWriter file = new FileWriter(path, false);
+    private void fileClear() throws Exception {
+        FileWriter file = new FileWriter(getPath(), false);
         file.close();
     }
 
-    public static long generatedID() {
+    public long generatedID() {
         return ThreadLocalRandom.current().nextLong(1L, Long.MAX_VALUE);
     }
 

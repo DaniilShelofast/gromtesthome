@@ -39,8 +39,4 @@ public class HotelDAO extends GeneralDAO<Hotel> {
         throw new BadRequestException("Database error");
     }
 
-    @Override
-    public long generatedID() {
-        return super.generatedID();
-    }
 }

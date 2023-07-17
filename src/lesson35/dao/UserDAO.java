@@ -43,8 +43,4 @@ public class UserDAO extends GeneralDAO<User> {
         throw new BadRequestException("Database error");
     }
 
-    @Override
-    public long generatedID() {
-        return super.generatedID();
-    }
 }

@@ -49,11 +49,6 @@ public class RoomDAO extends GeneralDAO<Room> {
         throw new BadRequestException("Database error");
     }
 
-    @Override
-    public long generatedID() {
-        return super.generatedID();
-    }
-
 }
 
 

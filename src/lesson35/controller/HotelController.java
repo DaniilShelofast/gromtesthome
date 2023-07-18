@@ -21,4 +21,5 @@ public class HotelController {
     public static void deleteHotel(long idHotel) throws Exception {
         hotelService.deleteHotel(idHotel);
     }
+
 }

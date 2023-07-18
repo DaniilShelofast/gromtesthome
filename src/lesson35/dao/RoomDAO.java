@@ -22,7 +22,6 @@ public class RoomDAO extends GeneralDAO<Room> {
 
     @Override
     public void addObjectToFile(Room room) {
-        room.setId(generatedID());
         super.addObjectToFile(room);
     }
 

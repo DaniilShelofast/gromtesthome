@@ -20,7 +20,6 @@ public class UserDAO extends GeneralDAO<User> {
 
     @Override
     public void addObjectToFile(User user) {
-        user.setId(generatedID());
         super.addObjectToFile(user);
     }
 

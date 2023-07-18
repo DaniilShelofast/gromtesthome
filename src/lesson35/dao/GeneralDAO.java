@@ -1,6 +1,8 @@
 package lesson35.dao;
 
 import lesson35.exception.BadRequestException;
+import lesson35.exception.DataWritingException;
+import lesson35.exception.ObjectFileReadException;
 import lesson35.model.ModelObject;
 
 import java.io.*;
@@ -21,7 +23,7 @@ public abstract class GeneralDAO<T extends ModelObject> {
         return list;
     }
 
-    private LinkedList<String> readFile() {
+    private LinkedList<String> readFile() throws ObjectFileReadException {
         String line;
         LinkedList<String> lines = new LinkedList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(getPath()))) {
@@ -29,12 +31,12 @@ public abstract class GeneralDAO<T extends ModelObject> {
                 lines.add(line);
             }
         } catch (IOException e) {
-            System.err.println("Error: file cannot be read.");
+            throw new ObjectFileReadException("Error: data cannot be entered.", e);
         }
         return lines;
     }
 
-    public void addObjectToFile(T t) {
+    public void addObjectToFile(T t) throws DataWritingException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(getPath(), true))) {
             File file = new File(getPath());
             if (file.length() != 0) {
@@ -43,7 +45,7 @@ public abstract class GeneralDAO<T extends ModelObject> {
             t.setId(generatedID());
             writer.append(t.toFileString());
         } catch (IOException e) {
-            System.err.println("Error: data cannot be entered.");
+            throw new DataWritingException("Error: data cannot be entered.", e);
         }
     }
 

@@ -16,7 +16,6 @@ public class HotelDAO extends GeneralDAO<Hotel> {
 
     @Override
     public void addObjectToFile(Hotel hotel) {
-        hotel.setId(generatedID());
         super.addObjectToFile(hotel);
     }
 

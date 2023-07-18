@@ -48,7 +48,6 @@ public class RoomDAO extends GeneralDAO<Room> {
         }
         throw new BadRequestException("Database error");
     }
-
 }
 
 

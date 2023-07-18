@@ -24,6 +24,10 @@ public class Order implements ModelObject {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public User getUser() {
         return user;
     }

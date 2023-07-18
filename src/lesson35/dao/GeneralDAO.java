@@ -40,6 +40,7 @@ public abstract class GeneralDAO<T extends ModelObject> {
             if (file.length() != 0) {
                 writer.newLine();
             }
+            t.setId(generatedID());
             writer.append(t.toFileString());
         } catch (IOException e) {
             System.err.println("Error: data cannot be entered.");
@@ -73,7 +74,7 @@ public abstract class GeneralDAO<T extends ModelObject> {
         }
     }
 
-    private void fileClear() throws Exception {
+    private void fileClear() throws IOException {
         FileWriter file = new FileWriter(getPath(), false);
         file.close();
     }

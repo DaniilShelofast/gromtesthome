@@ -29,6 +29,9 @@ public class Hotel implements ModelObject {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
     public String getName() {
         return name;
     }
@@ -43,10 +46,6 @@ public class Hotel implements ModelObject {
 
     public String getStreet() {
         return street;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     @Override

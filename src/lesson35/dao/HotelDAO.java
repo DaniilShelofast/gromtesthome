@@ -1,6 +1,6 @@
 package lesson35.dao;
 
-import lesson35.exception.BadRequestException;
+import lesson35.exception.ObjectConvertingException;
 import lesson35.model.Hotel;
 
 import java.util.LinkedList;
@@ -31,12 +31,12 @@ public class HotelDAO extends GeneralDAO<Hotel> {
     }
 
     @Override
-    public Hotel convert(String string) throws BadRequestException {
+    public Hotel convert(String string) throws ObjectConvertingException {
         String[] data = string.split(", ");
         if (data.length == 5) {
             return new Hotel(generatedID(), data[1], data[2], data[3], data[4]);
         }
-        throw new BadRequestException("Database error");
+        throw new ObjectConvertingException("Database error");
     }
 
 }

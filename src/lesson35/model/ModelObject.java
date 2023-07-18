@@ -6,6 +6,8 @@ public interface ModelObject {
 
     long getId();
 
+    void setId(long id);
+
 }
 
 

@@ -1,24 +1,26 @@
 package lesson35.controller;
 
 import lesson35.model.Hotel;
+import lesson35.service.HotelService;
 
-import static lesson35.service.HotelService.hotelService;
 
 public class HotelController {
 
-    public static Hotel findHotelByName(String name) throws Exception {
+    public final HotelService hotelService = new HotelService();
+
+    public Hotel findHotelByName(String name) throws Exception {
         return hotelService.findHotelByName(name);
     }
 
-    public static Hotel findHotelByCity(String city) throws Exception {
+    public Hotel findHotelByCity(String city) throws Exception {
         return hotelService.findHotelByCity(city);
     }
 
-    public static void addHotel(Hotel hotel) throws Exception {
+    public void addHotel(Hotel hotel) throws Exception {
         hotelService.addHotel(hotel);
     }
 
-    public static void deleteHotel(long idHotel) throws Exception {
+    public void deleteHotel(long idHotel) throws Exception {
         hotelService.deleteHotel(idHotel);
     }
 

@@ -6,7 +6,8 @@ import lesson35.model.UserType;
 
 public class DemoUser {
     public static void main(String[] args) throws Exception {
+        UserController userController = new UserController();
         User user = new User("ddd", "fff", "fff", UserType.USER);
-        UserController.registerUser(user);
+        userController.registerUser(user);
     }
 }

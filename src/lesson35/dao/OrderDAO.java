@@ -1,5 +1,6 @@
 package lesson35.dao;
 
+import lesson35.exception.DataWritingException;
 import lesson35.exception.ObjectConvertingException;
 import lesson35.model.Order;
 import lesson35.model.Room;
@@ -8,9 +9,6 @@ import lesson35.model.User;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
-
-import static lesson35.dao.RoomDAO.roomDAO;
-import static lesson35.dao.UserDAO.userDAO;
 
 public class OrderDAO extends GeneralDAO<Order> {
 
@@ -53,7 +51,7 @@ public class OrderDAO extends GeneralDAO<Order> {
 
 
     @Override
-    public void addObjectToFile(Order order) {
+    public void addObjectToFile(Order order) throws DataWritingException {
         super.addObjectToFile(order);
     }
 
@@ -64,6 +62,8 @@ public class OrderDAO extends GeneralDAO<Order> {
 
     @Override
     public Order convert(String string) throws Exception {
+        final RoomDAO roomDAO = new RoomDAO();
+        final UserDAO userDAO = new UserDAO();
         SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String[] data = string.split(", ");
         if (data.length == 6) {

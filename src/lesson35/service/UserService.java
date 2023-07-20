@@ -1,18 +1,16 @@
 package lesson35.service;
 
+import lesson35.dao.UserDAO;
 import lesson35.model.User;
 
 import java.io.IOException;
 
-import static lesson35.dao.UserDAO.userDAO;
-
 
 public class UserService {
 
-    public final static UserService userService = new UserService();
+    public final UserDAO userDAO = new UserDAO();
 
     public void registerUser(User user) throws Exception {
-        userDAO.verify(user.getId());
         userDAO.addObjectToFile(user);
     }
 

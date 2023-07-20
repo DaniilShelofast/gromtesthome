@@ -1,5 +1,6 @@
 package lesson35.dao;
 
+import lesson35.exception.DataWritingException;
 import lesson35.exception.ObjectConvertingException;
 import lesson35.model.Hotel;
 
@@ -7,15 +8,13 @@ import java.util.LinkedList;
 
 public class HotelDAO extends GeneralDAO<Hotel> {
 
-    public final static HotelDAO hotelDAO = new HotelDAO();
-
     @Override
     public String getPath() {
         return "C:\\Users\\User\\Desktop/HotelDb.txt";
     }
 
     @Override
-    public void addObjectToFile(Hotel hotel) {
+    public void addObjectToFile(Hotel hotel) throws DataWritingException {
         super.addObjectToFile(hotel);
     }
 
@@ -33,7 +32,7 @@ public class HotelDAO extends GeneralDAO<Hotel> {
     public Hotel convert(String string) throws ObjectConvertingException {
         String[] data = string.split(", ");
         if (data.length == 5) {
-            return new Hotel(generatedID(), data[1], data[2], data[3], data[4]);
+            return new Hotel(Long.parseLong(data[0]), data[1], data[2], data[3], data[4]);
         }
         throw new ObjectConvertingException("Database error");
     }

@@ -1,5 +1,6 @@
 package lesson35.dao;
 
+import lesson35.exception.DataWritingException;
 import lesson35.exception.ObjectConvertingException;
 import lesson35.model.Hotel;
 import lesson35.model.Room;
@@ -8,12 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
-import static lesson35.dao.HotelDAO.hotelDAO;
-
 public class RoomDAO extends GeneralDAO<Room> {
-
-    public final static RoomDAO roomDAO = new RoomDAO();
-
 
     @Override
     public String getPath() {
@@ -21,7 +17,7 @@ public class RoomDAO extends GeneralDAO<Room> {
     }
 
     @Override
-    public void addObjectToFile(Room room) {
+    public void addObjectToFile(Room room) throws DataWritingException {
         super.addObjectToFile(room);
     }
 
@@ -37,6 +33,7 @@ public class RoomDAO extends GeneralDAO<Room> {
 
     @Override
     public Room convert(String string) throws Exception {
+        HotelDAO hotelDAO = new HotelDAO();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String[] data = string.split(", ");
         if (data.length == 7) {

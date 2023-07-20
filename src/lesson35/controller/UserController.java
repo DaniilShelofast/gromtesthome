@@ -1,14 +1,15 @@
 package lesson35.controller;
 
 import lesson35.model.User;
+import lesson35.service.UserService;
 
 import java.io.IOException;
 
-import static lesson35.service.UserService.userService;
-
 public class UserController {
 
-    public static void registerUser(User user) throws Exception {
+    public final UserService userService = new UserService();
+
+    public void registerUser(User user) throws Exception {
         userService.registerUser(user);
     }
 
@@ -16,7 +17,7 @@ public class UserController {
         userService.login(userName, password);
     }
 
-    public static void logout() throws IOException {
+    public void logout() throws IOException {
         userService.logout();
     }
 }

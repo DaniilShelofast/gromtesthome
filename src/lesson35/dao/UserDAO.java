@@ -1,6 +1,7 @@
 package lesson35.dao;
 
 
+import lesson35.exception.DataWritingException;
 import lesson35.exception.ObjectConvertingException;
 import lesson35.model.User;
 import lesson35.model.UserType;
@@ -11,15 +12,13 @@ import java.util.LinkedList;
 
 public class UserDAO extends GeneralDAO<User> {
 
-    public static final UserDAO userDAO = new UserDAO();
-
     @Override
     public String getPath() {
         return "C:\\Users\\User\\Desktop/UserDb.txt";
     }
 
     @Override
-    public void addObjectToFile(User user) {
+    public void addObjectToFile(User user) throws DataWritingException {
         super.addObjectToFile(user);
     }
 

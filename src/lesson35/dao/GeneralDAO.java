@@ -68,14 +68,6 @@ public abstract class GeneralDAO<T extends ModelObject> {
         throw new BadRequestException("Error :" + id + " ID does not exist");
     }
 
-    public void verify(long id) throws Exception {
-        for (T t : readAll()) {
-            if (t != null && t.getId() == id) {
-                throw new BadRequestException("Error:" + id + " ID already exists");
-            }
-        }
-    }
-
     private void fileClear() throws IOException {
         FileWriter file = new FileWriter(getPath(), false);
         file.close();

@@ -24,7 +24,7 @@ public class RoomService {
     }
 
     public void addRoom(Room room) throws Exception {
-        dataValidation(room);
+        validationData(room);
         roomDAO.addObjectToFile(room);
     }
 
@@ -41,9 +41,8 @@ public class RoomService {
                 && room.getHotel().getId() == filter.getHotel().getId();
     }
 
-    private void dataValidation(Room room) throws Exception {
-        if (room.getNumberOfGuests() == 0 || room.getPrice() == 0 || room.getDateAvailableFrom().toString().equals("") || room.getDateAvailableFrom().toString().equals(" ") ||
-                room.getHotel().getId() == 0) {
+    private void validationData(Room room) throws Exception {
+        if (room.getNumberOfGuests() <= 0 || room.getPrice() <= 0 || room.getHotel().getId() <= 0) {
             throw new BadRequestException("Error, the entered data is incomplete, fill in each specified field.");
         }
     }

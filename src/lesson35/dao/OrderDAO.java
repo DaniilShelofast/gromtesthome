@@ -31,6 +31,9 @@ public class OrderDAO extends GeneralDAO<Order> {
         //System.out.println(o.readAll());
     }*/
 
+    public final RoomDAO roomDAO = new RoomDAO();
+    public final UserDAO userDAO = new UserDAO();
+
     @Override
     public String getPath() {
         return "C:\\Users\\User\\Desktop//OrderDb.txt";
@@ -60,9 +63,6 @@ public class OrderDAO extends GeneralDAO<Order> {
         return super.readAll();
     }
 
-    public final RoomDAO roomDAO = new RoomDAO();
-    public final UserDAO userDAO = new UserDAO();
-
     @Override
     public Order convert(String string) throws Exception {
         SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -76,7 +76,7 @@ public class OrderDAO extends GeneralDAO<Order> {
             Room room = roomDAO.findObject(idRoom);
             return new Order(Long.parseLong(data[0]), user, room, to, from, Double.parseDouble(data[5]));
         }
-        throw new ObjectConvertingException("Database error", new IOException());
+        throw new ObjectConvertingException("Database error", new Exception("Error..."));
     }
 
 }

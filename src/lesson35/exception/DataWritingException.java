@@ -1,9 +1,7 @@
 package lesson35.exception;
 
-import java.io.IOException;
-
 public class DataWritingException extends InternalServerException {
-    public DataWritingException(String message, IOException e) {
-        super(message);
+    public DataWritingException(String message, Exception e) {
+        super(message, e);
     }
 }

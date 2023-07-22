@@ -28,7 +28,7 @@ public class HotelService {
     }
 
     public void addHotel(Hotel hotel) throws Exception {
-        dataValidation(hotel);
+        validationData(hotel);
         hotelDAO.addObjectToFile(hotel);
     }
 
@@ -37,11 +37,9 @@ public class HotelService {
         hotelDAO.deleteObjectFromFile(idHotel);
     }
 
-    private void dataValidation(Hotel hotel) throws Exception {
-        if (hotel.getName().equals("") || hotel.getCity().equals("") || hotel.getStreet().equals("") || hotel.getCountry().equals("") ||
-                hotel.getName().equals(" ") || hotel.getCity().equals(" ") || hotel.getStreet().equals(" ") || hotel.getCountry().equals(" ")) {
+    private void validationData(Hotel hotel) throws Exception {
+        if (hotel.getName().isBlank() || hotel.getCity().isBlank() || hotel.getStreet().isBlank() || hotel.getCountry().isBlank()) {
             throw new BadRequestException("Error, the entered data is incomplete, fill in each specified field.");
         }
     }
-
 }

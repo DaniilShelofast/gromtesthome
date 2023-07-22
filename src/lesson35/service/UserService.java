@@ -12,7 +12,7 @@ public class UserService {
     public final UserDAO userDAO = new UserDAO();
 
     public void registerUser(User user) throws Exception {
-        dataValidation(user);
+        validationData(user);
         userDAO.addObjectToFile(user);
     }
 
@@ -37,9 +37,8 @@ public class UserService {
         }
     }
 
-    private void dataValidation(User user) throws Exception {
-        if (user.getUserName().equals("") || user.getUserName().equals(" ") || user.getPassword().equals("") || user.getPassword().equals(" ")
-                || user.getCountry().equals("") || user.getCountry().equals(" ")) {
+    private void validationData(User user) throws Exception {
+        if (user.getPassword().isBlank() || user.getUserName().isBlank() || user.getCountry().isBlank()) {
             throw new BadRequestException("Error, the entered data is incomplete, fill in each specified field.");
         }
     }

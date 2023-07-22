@@ -44,7 +44,7 @@ public abstract class GeneralDAO<T extends ModelObject> {
             }
             t.setId(generatedID());
             writer.append(t.toFileString());
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new DataWritingException("Error: data cannot be entered.", e);
         }
     }
@@ -73,9 +73,8 @@ public abstract class GeneralDAO<T extends ModelObject> {
         file.close();
     }
 
-    public long generatedID() {
-        long id;
-        id = ThreadLocalRandom.current().nextLong(1L, 4L);
+    public long generatedID() throws Exception {
+        long id = ThreadLocalRandom.current().nextLong(1L, 4L);
         return id;
     }
 

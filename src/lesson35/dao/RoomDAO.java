@@ -12,6 +12,8 @@ import java.util.LinkedList;
 
 public class RoomDAO extends GeneralDAO<Room> {
 
+    public final HotelDAO hotelDAO = new HotelDAO();
+
     @Override
     public String getPath() {
         return "C:\\Users\\User\\Desktop//RoomDb.txt";
@@ -32,7 +34,6 @@ public class RoomDAO extends GeneralDAO<Room> {
         return super.readAll();
     }
 
-    public final HotelDAO hotelDAO = new HotelDAO();
     @Override
     public Room convert(String string) throws Exception {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -43,7 +44,7 @@ public class RoomDAO extends GeneralDAO<Room> {
             Date date = dateFormat.parse(data[5]);
             return new Room(Long.parseLong(data[0]), Integer.parseInt(data[1]), Double.parseDouble(data[2]), Boolean.parseBoolean(data[3]), Boolean.parseBoolean(data[4]), date, hotel);
         }
-        throw new ObjectConvertingException("Database error", new IOException());
+        throw new ObjectConvertingException("Database error", new Exception("Error..."));
     }
 }
 

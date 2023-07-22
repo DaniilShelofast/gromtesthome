@@ -74,10 +74,19 @@ public abstract class GeneralDAO<T extends ModelObject> {
     }
 
     public long generatedID() {
-        return ThreadLocalRandom.current().nextLong(1L, Long.MAX_VALUE);
+        long id;
+        id = ThreadLocalRandom.current().nextLong(1L, 4L);
+        return id;
     }
 
-
+    /*private void verify(long id) throws Exception {
+        for (T t : readAll()) {
+            if (t != null && t.getId() == id) {
+                throw new DataWritingException("Error: " + id + " ID already exists", new IOException());
+            }
+        }
+    }
+*/
 }
 
 

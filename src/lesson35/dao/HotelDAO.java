@@ -4,6 +4,7 @@ import lesson35.exception.DataWritingException;
 import lesson35.exception.ObjectConvertingException;
 import lesson35.model.Hotel;
 
+import java.io.IOException;
 import java.util.LinkedList;
 
 public class HotelDAO extends GeneralDAO<Hotel> {
@@ -34,7 +35,7 @@ public class HotelDAO extends GeneralDAO<Hotel> {
         if (data.length == 5) {
             return new Hotel(Long.parseLong(data[0]), data[1], data[2], data[3], data[4]);
         }
-        throw new ObjectConvertingException("Database error");
+        throw new ObjectConvertingException("Database error", new IOException());
     }
 
 }

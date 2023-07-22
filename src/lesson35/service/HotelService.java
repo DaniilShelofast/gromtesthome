@@ -28,12 +28,20 @@ public class HotelService {
     }
 
     public void addHotel(Hotel hotel) throws Exception {
+        dataValidation(hotel);
         hotelDAO.addObjectToFile(hotel);
     }
 
     public void deleteHotel(long idHotel) throws Exception {
         hotelDAO.findObject(idHotel);
         hotelDAO.deleteObjectFromFile(idHotel);
+    }
+
+    private void dataValidation(Hotel hotel) throws Exception {
+        if (hotel.getName().equals("") || hotel.getCity().equals("") || hotel.getStreet().equals("") || hotel.getCountry().equals("") ||
+                hotel.getName().equals(" ") || hotel.getCity().equals(" ") || hotel.getStreet().equals(" ") || hotel.getCountry().equals(" ")) {
+            throw new BadRequestException("Error, the entered data is incomplete, fill in each specified field.");
+        }
     }
 
 }

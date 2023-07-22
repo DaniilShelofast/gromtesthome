@@ -6,6 +6,7 @@ import lesson35.model.Order;
 import lesson35.model.Room;
 import lesson35.model.User;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -30,6 +31,8 @@ public class OrderDAO extends GeneralDAO<Order> {
         //System.out.println(o.readAll());
     }*/
 
+    public final RoomDAO roomDAO = new RoomDAO();
+    public final UserDAO userDAO = new UserDAO();
 
     @Override
     public String getPath() {
@@ -62,8 +65,6 @@ public class OrderDAO extends GeneralDAO<Order> {
 
     @Override
     public Order convert(String string) throws Exception {
-        final RoomDAO roomDAO = new RoomDAO();
-        final UserDAO userDAO = new UserDAO();
         SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String[] data = string.split(", ");
         if (data.length == 6) {
@@ -75,7 +76,7 @@ public class OrderDAO extends GeneralDAO<Order> {
             Room room = roomDAO.findObject(idRoom);
             return new Order(Long.parseLong(data[0]), user, room, to, from, Double.parseDouble(data[5]));
         }
-        throw new ObjectConvertingException("Database error");
+        throw new ObjectConvertingException("Database error", new IOException());
     }
 
 }

@@ -1,6 +1,7 @@
 package lesson35.service;
 
 import lesson35.dao.UserDAO;
+import lesson35.exception.BadRequestException;
 import lesson35.model.User;
 
 import java.io.IOException;
@@ -11,6 +12,7 @@ public class UserService {
     public final UserDAO userDAO = new UserDAO();
 
     public void registerUser(User user) throws Exception {
+        dataValidation(user);
         userDAO.addObjectToFile(user);
     }
 
@@ -34,4 +36,12 @@ public class UserService {
             }
         }
     }
+
+    private void dataValidation(User user) throws Exception {
+        if (user.getUserName().equals("") || user.getUserName().equals(" ") || user.getPassword().equals("") || user.getPassword().equals(" ")
+                || user.getCountry().equals("") || user.getCountry().equals(" ")) {
+            throw new BadRequestException("Error, the entered data is incomplete, fill in each specified field.");
+        }
+    }
+
 }

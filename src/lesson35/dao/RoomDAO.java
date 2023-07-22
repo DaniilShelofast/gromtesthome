@@ -5,11 +5,14 @@ import lesson35.exception.ObjectConvertingException;
 import lesson35.model.Hotel;
 import lesson35.model.Room;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
 public class RoomDAO extends GeneralDAO<Room> {
+
+    public final HotelDAO hotelDAO = new HotelDAO();
 
     @Override
     public String getPath() {
@@ -33,7 +36,6 @@ public class RoomDAO extends GeneralDAO<Room> {
 
     @Override
     public Room convert(String string) throws Exception {
-        HotelDAO hotelDAO = new HotelDAO();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String[] data = string.split(", ");
         if (data.length == 7) {
@@ -42,7 +44,7 @@ public class RoomDAO extends GeneralDAO<Room> {
             Date date = dateFormat.parse(data[5]);
             return new Room(Long.parseLong(data[0]), Integer.parseInt(data[1]), Double.parseDouble(data[2]), Boolean.parseBoolean(data[3]), Boolean.parseBoolean(data[4]), date, hotel);
         }
-        throw new ObjectConvertingException("Database error");
+        throw new ObjectConvertingException("Database error", new IOException());
     }
 }
 

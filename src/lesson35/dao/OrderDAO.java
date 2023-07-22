@@ -31,9 +31,6 @@ public class OrderDAO extends GeneralDAO<Order> {
         //System.out.println(o.readAll());
     }*/
 
-    public final RoomDAO roomDAO = new RoomDAO();
-    public final UserDAO userDAO = new UserDAO();
-
     @Override
     public String getPath() {
         return "C:\\Users\\User\\Desktop//OrderDb.txt";
@@ -62,6 +59,9 @@ public class OrderDAO extends GeneralDAO<Order> {
     public LinkedList<Order> readAll() throws Exception {
         return super.readAll();
     }
+
+    public final RoomDAO roomDAO = new RoomDAO();
+    public final UserDAO userDAO = new UserDAO();
 
     @Override
     public Order convert(String string) throws Exception {

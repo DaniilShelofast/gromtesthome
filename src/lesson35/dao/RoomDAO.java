@@ -12,8 +12,6 @@ import java.util.LinkedList;
 
 public class RoomDAO extends GeneralDAO<Room> {
 
-    public final HotelDAO hotelDAO = new HotelDAO();
-
     @Override
     public String getPath() {
         return "C:\\Users\\User\\Desktop//RoomDb.txt";
@@ -34,6 +32,7 @@ public class RoomDAO extends GeneralDAO<Room> {
         return super.readAll();
     }
 
+    public final HotelDAO hotelDAO = new HotelDAO();
     @Override
     public Room convert(String string) throws Exception {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");

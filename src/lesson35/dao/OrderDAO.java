@@ -6,30 +6,11 @@ import lesson35.model.Order;
 import lesson35.model.Room;
 import lesson35.model.User;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
 public class OrderDAO extends GeneralDAO<Order> {
-
-    /* public static void main(String[] args) throws Exception {
-        String date_s = "2010-01-18 00:00:00";
-        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Date dateFrom = dt.parse(date_s);
-
-        String date = "2015-01-18 00:00:00";
-        SimpleDateFormat t = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Date dateTo = t.parse(date);
-
-        OrderDAO o = new OrderDAO();
-        User user = new User(1, "", "", "", null);
-        Room room = new Room(231, 32, 123.3, true, true, dateFrom, null);
-        Order order = new Order(123, user, room, dateFrom, dateTo, 123.4);
-        o.bookRoom(1, 2, dateFrom, dateTo);
-        o.addObjectToFile(order);
-        //System.out.println(o.readAll());
-    }*/
 
     public final RoomDAO roomDAO = new RoomDAO();
     public final UserDAO userDAO = new UserDAO();

@@ -4,8 +4,4 @@ public class DataWritingException extends InternalServerException {
     public DataWritingException(String message, Throwable cause) {
         super(message, cause);
     }
-
-    public DataWritingException(String message) {
-        super(message);
-    }
 }

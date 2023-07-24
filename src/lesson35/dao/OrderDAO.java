@@ -33,7 +33,6 @@ public class OrderDAO extends GeneralDAO<Order> {
         }
     }
 
-
     @Override
     public void addObjectToFile(Order order) throws DataWritingException {
         super.addObjectToFile(order);

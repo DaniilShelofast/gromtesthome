@@ -14,8 +14,6 @@ public class DemoRoom {
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date date = dt.parse(date_s);
         Room room = new Room(1, 1, true, true, date, new Hotel(6018783734745449911L, "", "", "", ""));
-        //RoomController.deleteRoom(1);
-        roomController.addRoom(room);//32, 1, 135.0, true, true, 18-01-2015 00:00:00, 15
-        //System.out.println(roomController.findRooms(new Filter(1, 135.0, true, true, date, "Ukraine", "Kyiv", new Hotel(15, "Maximus hotel", "Ukraine", "Kyiv", "Street1"))));
+        roomController.addRoom(room);
     }
 }

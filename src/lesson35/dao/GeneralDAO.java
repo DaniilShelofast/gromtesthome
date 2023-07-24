@@ -74,10 +74,10 @@ public abstract class GeneralDAO<T extends ModelObject> {
     }
 
     public long generatedID() throws Exception {
-        long id = ThreadLocalRandom.current().nextLong(1L, Long.MAX_VALUE);
-        if (verifyIdUniqueness(id)) {
-            return generatedID();
-        }
+        long id;
+        do {
+            id = ThreadLocalRandom.current().nextLong(1L, Long.MAX_VALUE);
+        } while (verifyIdUniqueness(id));
         return id;
     }
 

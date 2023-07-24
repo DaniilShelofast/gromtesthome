@@ -5,7 +5,4 @@ public class ObjectConvertingException extends InternalServerException {
         super(message);
     }
 
-    public ObjectConvertingException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }

@@ -1,6 +1,5 @@
 package lesson35.service;
 
-import lesson35.dao.HotelDAO;
 import lesson35.dao.RoomDAO;
 import lesson35.exception.BadRequestException;
 import lesson35.model.Filter;
@@ -13,7 +12,6 @@ import java.util.List;
 public class RoomService {
 
     public final RoomDAO roomDAO = new RoomDAO();
-    public final HotelDAO hotelDAO = new HotelDAO();
 
     public List<Room> findRooms(Filter filter) throws Exception {
         List<Room> list = new LinkedList<>();
@@ -44,8 +42,8 @@ public class RoomService {
     }
 
     private void validateRoom(Room room) throws Exception {
-        hotelDAO.findObject(room.getHotel().getId());
-        if (room.getNumberOfGuests() <= 0 || room.getPrice() <= 0 || room.getDateAvailableFrom() == null) {
+        roomDAO.findObject(room.getHotel().getId());
+        if (room.getNumberOfGuests() <= 0 || room.getPrice() <= 0 || room.getDateAvailableFrom() == null || roomDAO.findObject(room.getHotel().getId()) == null) {
             throw new BadRequestException("Error, the entered data is incomplete, fill in each specified field.");
         }
     }

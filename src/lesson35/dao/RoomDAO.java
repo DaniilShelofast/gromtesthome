@@ -34,7 +34,7 @@ public class RoomDAO extends GeneralDAO<Room> {
     }
 
     @Override
-    public Room convert(String string) throws Exception {
+    public Room convert(String string) throws Exception{
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String[] data = string.split(", ");
         if (data.length == 7) {

@@ -1,12 +1,11 @@
 package lesson35.exception;
 
 public class ObjectConvertingException extends InternalServerException {
-    public ObjectConvertingException(String message, Throwable cause) {
-        super(message,cause);
+    public ObjectConvertingException(String message) {
+        super(message);
     }
 
-    @Override
-    public String getMessage() {
-        return super.getMessage();
+    public ObjectConvertingException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

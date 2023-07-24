@@ -5,8 +5,7 @@ public class DataWritingException extends InternalServerException {
         super(message, cause);
     }
 
-    @Override
-    public String getMessage() {
-        return super.getMessage();
+    public DataWritingException(String message) {
+        super(message);
     }
 }

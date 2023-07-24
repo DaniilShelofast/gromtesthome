@@ -10,7 +10,7 @@ public class HotelDAO extends GeneralDAO<Hotel> {
 
     @Override
     public String getPath() {
-        return "C:\\Users\\User\\Desktop/HotelDb.txt";
+        return "C:\\Users\\User\\Desktop/Hotel.txt";
     }
 
     @Override
@@ -34,7 +34,7 @@ public class HotelDAO extends GeneralDAO<Hotel> {
         if (data.length == 5) {
             return new Hotel(Long.parseLong(data[0]), data[1], data[2], data[3], data[4]);
         }
-        throw new ObjectConvertingException("Database error",new Exception("..."));
+        throw new ObjectConvertingException("Database error");
     }
 
 }

@@ -2,7 +2,7 @@ package lesson35.dao;
 
 import lesson35.exception.BadRequestException;
 import lesson35.exception.DataWritingException;
-import lesson35.exception.ObjectFileReadException;
+import lesson35.exception.InternalServerException;
 import lesson35.model.ModelObject;
 
 import java.io.*;
@@ -23,7 +23,7 @@ public abstract class GeneralDAO<T extends ModelObject> {
         return list;
     }
 
-    private LinkedList<String> readFile() throws ObjectFileReadException {
+    private LinkedList<String> readFile() throws InternalServerException {
         String line;
         LinkedList<String> lines = new LinkedList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(getPath()))) {
@@ -31,7 +31,7 @@ public abstract class GeneralDAO<T extends ModelObject> {
                 lines.add(line);
             }
         } catch (IOException e) {
-            throw new ObjectFileReadException("Error: data cannot be entered.", e);
+            throw new InternalServerException("Error: data cannot be entered.", e);
         }
         return lines;
     }
@@ -75,19 +75,23 @@ public abstract class GeneralDAO<T extends ModelObject> {
 
     public long generatedID() throws Exception {
         long id = ThreadLocalRandom.current().nextLong(1L, Long.MAX_VALUE);
-        if (verify(id)) {
+        if (verifyIdUniqueness(id)) {
             return generatedID();
         }
         return id;
     }
 
-    private boolean verify(long id) throws Exception {
+    private boolean verifyIdUniqueness(long id) throws Exception {
         for (T t : readAll()) {
             if (t != null && t.getId() == id) {
                 return true;
             }
         }
         return false;
+    }
+
+    public boolean checkContentAndNull(String s) {
+        return s == null || s.isBlank();
     }
 }
 

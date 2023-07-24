@@ -4,9 +4,8 @@ public class InternalServerException extends Exception {
     public InternalServerException(String message, Throwable cause) {
         super(message, cause);
     }
-
-    @Override
-    public String getMessage() {
-        return super.getMessage();
+    public InternalServerException(String message) {
+        super(message);
     }
+
 }

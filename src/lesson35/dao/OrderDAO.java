@@ -57,7 +57,7 @@ public class OrderDAO extends GeneralDAO<Order> {
             Room room = roomDAO.findObject(idRoom);
             return new Order(Long.parseLong(data[0]), user, room, to, from, Double.parseDouble(data[5]));
         }
-        throw new ObjectConvertingException("Database error", new Exception("Error..."));
+        throw new ObjectConvertingException("Database error");
     }
 
 }

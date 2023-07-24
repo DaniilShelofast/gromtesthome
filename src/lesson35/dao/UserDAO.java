@@ -38,7 +38,7 @@ public class UserDAO extends GeneralDAO<User> {
         if (data.length == 5) {
             return new User(Long.parseLong(data[0]), data[1], data[2], data[3], UserType.valueOf(data[4]));
         }
-        throw new ObjectConvertingException("Database error", new Exception("Error..."));
+        throw new ObjectConvertingException("Database error");
     }
 
 }

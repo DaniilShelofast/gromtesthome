@@ -43,7 +43,8 @@ public class RoomService {
 
     private void validateRoom(Room room) throws Exception {
         roomDAO.findObject(room.getHotel().getId());
-        if (room.getNumberOfGuests() <= 0 || room.getPrice() <= 0 || room.getDateAvailableFrom() == null || roomDAO.findObject(room.getHotel().getId()) == null) {
+        if (room.getNumberOfGuests() == 0 || room.getNumberOfGuests() <= 0 || room.getPrice() == 0 || room.getPrice() <= 0
+                || room.getDateAvailableFrom() == null || roomDAO.findObject(room.getHotel().getId()) == null) {
             throw new BadRequestException("Error, the entered data is incomplete, fill in each specified field.");
         }
     }

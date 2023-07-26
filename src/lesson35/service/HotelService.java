@@ -4,6 +4,8 @@ import lesson35.dao.HotelDAO;
 import lesson35.exception.BadRequestException;
 import lesson35.model.Hotel;
 
+import static lesson35.model.Utils.checkContentAndNull;
+
 
 public class HotelService {
 
@@ -38,7 +40,7 @@ public class HotelService {
     }
 
     private void validateHotel(Hotel hotel) throws Exception {
-        if (hotelDAO.checkContentAndNull(hotel.getName()) || hotelDAO.checkContentAndNull(hotel.getCity()) || hotelDAO.checkContentAndNull(hotel.getCountry()) || hotelDAO.checkContentAndNull(hotel.getStreet())) {
+        if (checkContentAndNull(hotel.getName()) || checkContentAndNull(hotel.getCity()) || checkContentAndNull(hotel.getCountry()) || checkContentAndNull(hotel.getStreet())) {
             throw new BadRequestException("Error, the entered data is incomplete, fill in each specified field.");
         }
     }

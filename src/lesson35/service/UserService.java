@@ -6,6 +6,8 @@ import lesson35.model.User;
 
 import java.io.IOException;
 
+import static lesson35.model.Utils.checkContentAndNull;
+
 
 public class UserService {
 
@@ -38,7 +40,7 @@ public class UserService {
     }
 
     private void validateUser(User user) throws Exception {
-        if (userDAO.checkContentAndNull(user.getPassword()) || userDAO.checkContentAndNull(user.getUserName()) || userDAO.checkContentAndNull(user.getCountry()) || user.getUserType() == null) {
+        if (checkContentAndNull(user.getPassword()) || checkContentAndNull(user.getUserName()) || checkContentAndNull(user.getCountry()) || user.getUserType() == null) {
             throw new BadRequestException("Error, the entered data is incomplete, fill in each specified field.");
         }
     }

@@ -15,7 +15,7 @@ public class RoomDAO extends GeneralDAO<Room> {
 
     @Override
     public String getPath() {
-        return "C:\\Users\\User\\Desktop//Room.txt";
+        return "C:\\Users\\User\\Desktop//RoomDb.txt";
     }
 
     @Override

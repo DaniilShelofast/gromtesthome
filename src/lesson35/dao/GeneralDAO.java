@@ -89,10 +89,6 @@ public abstract class GeneralDAO<T extends ModelObject> {
         }
         return false;
     }
-
-    public boolean checkContentAndNull(String s) {
-        return s == null || s.isBlank();
-    }
 }
 
 

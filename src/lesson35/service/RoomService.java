@@ -36,18 +36,19 @@ public class RoomService {
     }
 
     private boolean checkRoom(Room room, Filter filter) {
-        return room.getNumberOfGuests() == filter.getNumberOfGuests() && room.getPrice() >= filter.getPrice() && room.isBreakfastIncluded() == filter.isBreakfastIncluded()
-                && room.isPetsAllowed() == filter.isPetsAllowed() && room.getDateAvailableFrom().toString().equals(filter.getDateAvailableFrom().toString())
+        return room.getNumberOfGuests() <= filter.getNumberOfGuests() && room.getPrice() >= filter.getPrice() && room.isBreakfastIncluded() == filter.isBreakfastIncluded()
+                && room.isPetsAllowed() == filter.isPetsAllowed() && room.getDateAvailableFrom().equals(filter.getDateAvailableFrom())
                 && room.getHotel().getCity().equals(filter.getCity())
                 && room.getHotel().getCountry().equals(filter.getCountry())
                 && room.getHotel().getId() == filter.getHotel().getId();
     }
 
     private void validateRoom(Room room) throws Exception {
-        hotelDAO.findObject(room.getHotel().getId());
-        if (room.getNumberOfGuests() <= 0 || room.getPrice() <= 0 || room.getDateAvailableFrom() == null) {
+        if (room.getNumberOfGuests() <= 0 || room.getPrice() <= 0 || room.getDateAvailableFrom() == null
+                || hotelDAO.findObject(room.getHotel().getId()) == null) {
             throw new BadRequestException("Error, the entered data is incomplete, fill in each specified field.");
         }
+        hotelDAO.findObject(room.getHotel().getId());
     }
 
 }

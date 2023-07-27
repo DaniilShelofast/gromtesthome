@@ -6,7 +6,7 @@ import lesson35.model.User;
 
 import java.io.IOException;
 
-import static lesson35.model.Utils.checkContentAndNull;
+import static lesson35.service.ExceptionUtils.checkContentAndNull;
 
 
 public class UserService {

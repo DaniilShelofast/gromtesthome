@@ -1,6 +1,6 @@
 package lesson35.service;
 
-public class ExceptionUtils {
+public class ValidationUtils {
 
     public static boolean checkContentAndNull(String s) {
         return s == null || s.isBlank();

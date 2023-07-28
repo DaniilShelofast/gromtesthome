@@ -4,7 +4,7 @@ import lesson35.dao.HotelDAO;
 import lesson35.exception.BadRequestException;
 import lesson35.model.Hotel;
 
-import static lesson35.service.ExceptionUtils.checkContentAndNull;
+import static lesson35.service.ValidationUtils.checkContentAndNull;
 
 
 public class HotelService {

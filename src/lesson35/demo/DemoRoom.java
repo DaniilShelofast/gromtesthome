@@ -13,7 +13,8 @@ public class DemoRoom {
         String date_s = "2015-01-18 00:00:00";
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date date = dt.parse(date_s);
-        Room room = new Room(1, 1, true, true, date, new Hotel(8402174472181398681L, "", "", "", ""));
+        Hotel hotel = null;
+        Room room = new Room(1, 1, true, true, date, hotel);
         roomController.addRoom(room);
     }
 }

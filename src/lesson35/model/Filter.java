@@ -1,6 +1,7 @@
 package lesson35.model;
 
 import java.util.Date;
+import java.util.Objects;
 
 public class Filter {
 
@@ -68,5 +69,18 @@ public class Filter {
                 ", city='" + city + '\'' +
                 ", hotel=" + hotel +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Filter filter = (Filter) o;
+        return numberOfGuests == filter.numberOfGuests && Double.compare(filter.price, price) == 0 && breakfastIncluded == filter.breakfastIncluded && petsAllowed == filter.petsAllowed && Objects.equals(dateAvailableFrom, filter.dateAvailableFrom) && Objects.equals(country, filter.country) && Objects.equals(city, filter.city) && Objects.equals(hotel, filter.hotel);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numberOfGuests, price, breakfastIncluded, petsAllowed, dateAvailableFrom, country, city, hotel);
     }
 }

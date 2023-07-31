@@ -2,6 +2,7 @@ package lesson35.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 public class Room implements ModelObject {
 
@@ -84,4 +85,16 @@ public class Room implements ModelObject {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Room room = (Room) o;
+        return numberOfGuests == room.numberOfGuests && Double.compare(room.price, price) == 0 && breakfastIncluded == room.breakfastIncluded && petsAllowed == room.petsAllowed && Objects.equals(dateAvailableFrom, room.dateAvailableFrom) && Objects.equals(hotel, room.hotel) && Objects.equals(dateFormat, room.dateFormat);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numberOfGuests, price, breakfastIncluded, petsAllowed, dateAvailableFrom, hotel, dateFormat);
+    }
 }

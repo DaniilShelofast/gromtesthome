@@ -13,11 +13,11 @@ public class DemoRoom {
         String date_s = "2015-01-18 00:00:00";
         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date date = dt.parse(date_s);
-        Hotel hotel = new Hotel(8402174472181398681L, "Rhombus hotel", "Ukraine", "Lviv", "Street121");
+        Hotel hotel = new Hotel(2L, "Rhombus hotel", "Ukraine", "Lviv", "Street121");
         //Room room = new Room(1, 1, true, true, date, hotel);
         //roomController.addRoom(room);
         // 1, 1.0, true, true, 18-01-2015 00:00:00, 8402174472181398681
 
-        System.out.println(roomController.findRooms(new Filter(5, 5000.0, false, false, null, "U", "", hotel)));
+        System.out.println(roomController.findRooms(new Filter(5, 5000.0, false, false, null, "", "", null)));
     }
 }

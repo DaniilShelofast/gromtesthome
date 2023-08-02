@@ -18,20 +18,20 @@ public class RoomService {
     public final HotelDAO hotelDAO = new HotelDAO();
 
     public List<Room> findRooms(Filter filter) throws Exception {
-
-        List<Room> list = new LinkedList<>();
         validateFilter(filter);
 
+        List<Room> rooms = new LinkedList<>();
         for (Room room : roomDAO.readAll()) {
-            if (room.getNumberOfGuests() == filter.getNumberOfGuests() || room.getPrice() >= filter.getPrice()
-                    || room.isBreakfastIncluded() == filter.isBreakfastIncluded() || room.isPetsAllowed() == filter.isPetsAllowed() ||
-                    room.getDateAvailableFrom().equals(filter.getDateAvailableFrom())
-                    || room.getHotel().getCountry().equals(filter.getCountry()) || room.getHotel().getCity().equals(filter.getCity())
-                    || room.getHotel().equals(filter.getHotel())) {
-                list.add(room);
+            if (matchesFilter(room, filter)) {
+                rooms.add(room);
             }
         }
-        return list;
+
+        if (rooms.isEmpty()) {
+            throw new BadRequestException("error : there are no rooms that meet the criteria.");
+        }
+
+        return rooms;
     }
 
     public void addRoom(Room room) throws Exception {
@@ -60,4 +60,11 @@ public class RoomService {
         hotelDAO.findObject(filter.getHotel().getId());
     }
 
+    private boolean matchesFilter(Room room, Filter filter) {
+        return room.getNumberOfGuests() == filter.getNumberOfGuests() || room.getPrice() >= filter.getPrice()
+                || room.isBreakfastIncluded() == filter.isBreakfastIncluded() || room.isPetsAllowed() == filter.isPetsAllowed() ||
+                room.getDateAvailableFrom().equals(filter.getDateAvailableFrom())
+                || room.getHotel().getCountry().equals(filter.getCountry()) || room.getHotel().getCity().equals(filter.getCity())
+                || room.getHotel().equals(filter.getHotel());
+    }
 }

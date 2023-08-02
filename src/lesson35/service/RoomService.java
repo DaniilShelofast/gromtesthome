@@ -18,18 +18,20 @@ public class RoomService {
     public final HotelDAO hotelDAO = new HotelDAO();
 
     public List<Room> findRooms(Filter filter) throws Exception {
-        if (filter.getHotel() == null) {
-            return roomDAO.readAll();
-        } else {
-            List<Room> list = new LinkedList<>();
-            for (Room room : roomDAO.readAll()) {
-                if (room.getNumberOfGuests() == filter.getNumberOfGuests() || room.getPrice() >= filter.getPrice() || room.isBreakfastIncluded() == filter.isBreakfastIncluded() || room.isPetsAllowed() == filter.isPetsAllowed() ||
-                        room.getDateAvailableFrom().equals(filter.getDateAvailableFrom()) || room.getHotel().getCountry().equals(filter.getCountry()) || room.getHotel().getCity().equals(filter.getCity()) || room.getHotel().getId() == filter.getHotel().getId()) {
-                    list.add(room);
-                }
+
+        List<Room> list = new LinkedList<>();
+        validateFilter(filter);
+
+        for (Room room : roomDAO.readAll()) {
+            if (room.getNumberOfGuests() == filter.getNumberOfGuests() || room.getPrice() >= filter.getPrice()
+                    || room.isBreakfastIncluded() == filter.isBreakfastIncluded() || room.isPetsAllowed() == filter.isPetsAllowed() ||
+                    room.getDateAvailableFrom().equals(filter.getDateAvailableFrom())
+                    || room.getHotel().getCountry().equals(filter.getCountry()) || room.getHotel().getCity().equals(filter.getCity())
+                    || room.getHotel().equals(filter.getHotel())) {
+                list.add(room);
             }
-            return list;
         }
+        return list;
     }
 
     public void addRoom(Room room) throws Exception {
@@ -50,10 +52,12 @@ public class RoomService {
         hotelDAO.findObject(room.getHotel().getId());
     }
 
-    private void validateFilter(Filter filter) throws BadRequestException {
+    private void validateFilter(Filter filter) throws Exception {
         if (filter.getNumberOfGuests() <= 0 || filter.getPrice() <= 0 || filter.getDateAvailableFrom() == null
                 || checkContentAndNull(filter.getCountry()) || checkContentAndNull(filter.getCity()) || filter.getHotel() == null) {
             throw new BadRequestException("Error, the entered data is incomplete, fill in each specified field.");
         }
+        hotelDAO.findObject(filter.getHotel().getId());
     }
+
 }

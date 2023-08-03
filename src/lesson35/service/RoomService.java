@@ -18,19 +18,16 @@ public class RoomService {
     public final HotelDAO hotelDAO = new HotelDAO();
 
     public List<Room> findRooms(Filter filter) throws Exception {
-        validateFilter(filter);
-
         List<Room> rooms = new LinkedList<>();
-        for (Room room : roomDAO.readAll()) {
-            if (matchesFilter(room, filter)) {
-                rooms.add(room);
+        if (filter.getDateAvailableFrom() == null && filter.getHotel() == null) {
+            return roomDAO.readAll();
+        } else {
+            for (Room room : roomDAO.readAll()) {
+                if (matchesFilter(room, filter)) {
+                    rooms.add(room);
+                }
             }
         }
-
-        if (rooms.isEmpty()) {
-            throw new BadRequestException("error : there are no rooms that meet the criteria.");
-        }
-
         return rooms;
     }
 
@@ -57,7 +54,6 @@ public class RoomService {
                 || checkContentAndNull(filter.getCountry()) || checkContentAndNull(filter.getCity()) || filter.getHotel() == null) {
             throw new BadRequestException("Error, the entered data is incomplete, fill in each specified field.");
         }
-        hotelDAO.findObject(filter.getHotel().getId());
     }
 
     private boolean matchesFilter(Room room, Filter filter) {

@@ -9,8 +9,6 @@ import lesson35.model.Room;
 import java.util.LinkedList;
 import java.util.List;
 
-import static lesson35.service.ValidationUtils.checkContentAndNull;
-
 
 public class RoomService {
 
@@ -30,7 +28,6 @@ public class RoomService {
             }
         }
         return rooms;
-
     }
 
 
@@ -50,13 +47,6 @@ public class RoomService {
             throw new BadRequestException("Error, the entered data is incomplete, fill in each specified field.");
         }
         hotelDAO.findObject(room.getHotel().getId());
-    }
-
-    private void validateFilter(Filter filter) throws Exception {
-        if (filter.getNumberOfGuests() <= 0 || filter.getPrice() <= 0 || filter.getDateAvailableFrom() == null
-                || checkContentAndNull(filter.getCountry()) || checkContentAndNull(filter.getCity()) || filter.getHotel() == null) {
-            throw new BadRequestException("Error, the entered data is incomplete, fill in each specified field.");
-        }
     }
 
     private boolean matchesFilter(Room room, Filter filter) {

@@ -19,7 +19,8 @@ public class RoomService {
 
     public List<Room> findRooms(Filter filter) throws Exception {
         List<Room> rooms = new LinkedList<>();
-        if (filter.getDateAvailableFrom() == null && filter.getHotel() == null) {
+
+        if (checkNull(filter)) {
             return roomDAO.readAll();
         } else {
             for (Room room : roomDAO.readAll()) {
@@ -29,7 +30,9 @@ public class RoomService {
             }
         }
         return rooms;
+
     }
+
 
     public void addRoom(Room room) throws Exception {
         validateRoom(room);
@@ -57,10 +60,15 @@ public class RoomService {
     }
 
     private boolean matchesFilter(Room room, Filter filter) {
-        return room.getNumberOfGuests() == filter.getNumberOfGuests() || room.getPrice() >= filter.getPrice()
-                || room.isBreakfastIncluded() == filter.isBreakfastIncluded() || room.isPetsAllowed() == filter.isPetsAllowed() ||
+        return ((Integer) room.getNumberOfGuests()).equals(filter.getNumberOfGuests()) || ((Double) room.getPrice()).equals(filter.getPrice())
+                || (Boolean) room.isBreakfastIncluded() == filter.isBreakfastIncluded() || (Boolean) room.isPetsAllowed() == filter.isPetsAllowed() ||
                 room.getDateAvailableFrom().equals(filter.getDateAvailableFrom())
                 || room.getHotel().getCountry().equals(filter.getCountry()) || room.getHotel().getCity().equals(filter.getCity())
-                || room.getHotel().equals(filter.getHotel());
+                || room.getHotel().getName().equals(filter.getHotel());
+    }
+
+    private boolean checkNull(Filter filter) {
+        return filter.getNumberOfGuests() == null && filter.getPrice() == null && filter.isBreakfastIncluded() == null && filter.isPetsAllowed() == null &&
+                filter.getDateAvailableFrom() == null && filter.getCountry() == null && filter.getCity() == null && filter.getHotel() == null;
     }
 }

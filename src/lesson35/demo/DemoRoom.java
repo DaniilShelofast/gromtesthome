@@ -18,6 +18,6 @@ public class DemoRoom {
         //roomController.addRoom(room);
         // 1, 1.0, true, true, 18-01-2015 00:00:00, 8402174472181398681
 
-        System.out.println(roomController.findRooms(new Filter(1, 1000.0, null, null, null, null, null, hotel)));
+        System.out.println(roomController.findRooms(new Filter(null, null, null, null, null, null, null, hotel)));
     }
 }

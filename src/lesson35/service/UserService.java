@@ -4,8 +4,6 @@ import lesson35.dao.UserDAO;
 import lesson35.exception.BadRequestException;
 import lesson35.model.User;
 
-import java.io.IOException;
-
 import static lesson35.service.ValidationUtils.checkContentAndNull;
 
 
@@ -18,8 +16,8 @@ public class UserService {
         userDAO.addObjectToFile(user);
     }
 
-    public void logout() throws IOException {
-        userDAO.logout();
+    public void logout() {
+
     }
 
     public void login(String userName, String password) throws Exception {

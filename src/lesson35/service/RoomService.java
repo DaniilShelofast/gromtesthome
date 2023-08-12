@@ -48,13 +48,13 @@ public class RoomService {
 
     private boolean checkFilter(Room room, Filter filter) {
         Hotel roomHotel = room.getHotel();
-        return (areEqual(filter.getNumberOfGuests(), room.getNumberOfGuests())) &&
-                (areEqual(filter.getPrice(), room.getPrice())) &&
-                (areEqual(filter.isBreakfastIncluded(), room.isBreakfastIncluded())) &&
-                (areEqual(filter.isPetsAllowed(), room.isPetsAllowed())) &&
-                (areEqual(filter.getDateAvailableFrom(), room.getDateAvailableFrom())) &&
-                (areEqual(filter.getCountry(), roomHotel.getCountry())) &&
-                (areEqual(filter.getCity(), roomHotel.getCity())) &&
-                (areEqual(filter.getHotel(), roomHotel.getName()));
+        return areEqual(filter.getNumberOfGuests(), room.getNumberOfGuests()) &&
+                areEqual(filter.getPrice(), room.getPrice()) &&
+                areEqual(filter.isBreakfastIncluded(), room.isBreakfastIncluded()) &&
+                areEqual(filter.isPetsAllowed(), room.isPetsAllowed()) &&
+                areEqual(filter.getDateAvailableFrom(), room.getDateAvailableFrom()) &&
+                areEqual(filter.getCountry(), roomHotel.getCountry()) &&
+                areEqual(filter.getCity(), roomHotel.getCity()) &&
+                areEqual(filter.getHotel(), roomHotel.getName());
     }
 }

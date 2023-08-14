@@ -40,17 +40,18 @@ public class OrderService {
         }
     }
 
-    private double calculateTotalPrice(Room room, Date dateFrom, Date dateTo) {
+    private double calculateTotalPrice(Room room, Date dateFrom, Date dateTo) throws BadRequestException {
         return room.getPrice() * getNumberOfNights(dateFrom, dateTo);
     }
 
     private boolean isRoomAvailable(long room, Date dateFrom, Date dateTo) throws Exception {
         roomDAO.findObject(room);
         for (Order order : orderDAO.readAll()) {
-            if (dateFrom.before(order.getDateTo()) && dateTo.after(order.getDateFrom())) {
+            if (dateFrom != null && dateFrom.before(order.getDateTo()) && dateTo != null && dateTo.after(order.getDateFrom())) {
                 throw new BadRequestException("Error : hotel number and these date numbers are busy.");
             }
         }
         return true;
     }
+
 }

@@ -1,5 +1,7 @@
 package lesson35.service;
 
+import lesson35.exception.BadRequestException;
+
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -8,7 +10,10 @@ import java.util.concurrent.TimeUnit;
 
 public class DateUtils {
 
-    public static long getNumberOfNights(Date dateFrom, Date dateTo) {
+    public static long getNumberOfNights(Date dateFrom, Date dateTo) throws BadRequestException {
+        if (dateFrom == null || dateTo == null) {
+            throw new BadRequestException("Error : date parameter can not be Null.");
+        }
         long diff = dateTo.getTime() - dateFrom.getTime();
         return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }

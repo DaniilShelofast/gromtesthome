@@ -45,9 +45,13 @@ public class OrderService {
     }
 
     private boolean isRoomAvailable(long room, Date dateFrom, Date dateTo) throws Exception {
+        if (dateFrom == null || dateTo == null) {
+            throw new BadRequestException("Error : date parameter can not be Null.");
+        }
+
         roomDAO.findObject(room);
         for (Order order : orderDAO.readAll()) {
-            if (dateFrom != null && dateFrom.before(order.getDateTo()) && dateTo != null && dateTo.after(order.getDateFrom())) {
+            if (dateFrom.before(order.getDateTo()) && dateTo.after(order.getDateFrom())) {
                 throw new BadRequestException("Error : hotel number and these date numbers are busy.");
             }
         }

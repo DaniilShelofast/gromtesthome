@@ -20,6 +20,15 @@ public class Order implements ModelObject {
         this.moneyPaid = moneyPaid;
     }
 
+
+    public Order(User user, Room room, Date dateFrom, Date dateTo, double moneyPaid) {
+        this.user = user;
+        this.room = room;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+        this.moneyPaid = moneyPaid;
+    }
+
     public long getId() {
         return id;
     }

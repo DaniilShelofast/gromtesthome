@@ -20,17 +20,9 @@ public class OrderDAO extends GeneralDAO<Order> {
         return "C:\\Users\\User\\Desktop//OrderDb.txt";
     }
 
-    public void bookRoom(long userId, long roomId, Date dateFrom, Date dateTo) throws Exception {
-        LinkedList<Order> orders = new LinkedList<>();
-        for (Order order : readAll()) {
-            if (order.getUser().getId() != userId && order.getRoom().getId() != roomId
-                    && !order.getDateFrom().equals(dateFrom) && !order.getDateTo().equals(dateTo)) {
-                orders.add(order);
-            }
-        }
-        for (Order order : orders) {
-            addObjectToFile(order);
-        }
+    @Override
+    public void deleteObjectFromFile(long id) throws Exception {
+        super.deleteObjectFromFile(id);
     }
 
     @Override

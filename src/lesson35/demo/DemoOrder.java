@@ -12,11 +12,11 @@ import java.util.Date;
 public class DemoOrder {
     public static void main(String[] args) throws Exception {
         OrderController orderController = new OrderController();
-        String date_s = "31-06-2017 00:00:00";
+        String date_s = "10-08-2023 00:00:00";
         SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         Date date = dt.parse(date_s);
         //------------------------------------------------------------------
-        String date_s2 = "02-07-2017 00:00:00";
+        String date_s2 = "16-08-2023 00:00:00";
         SimpleDateFormat dt2 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         Date date2 = dt2.parse(date_s2);
         //------------------------------------------------------------------
@@ -31,6 +31,6 @@ public class DemoOrder {
         User user1 = new User(8676814712850982767L, "ddd", "fff", "fff", UserType.USER);
         Room room1 = new Room(2359048199224659412L, 2, 200.0, true, true, date3, hotel1);
 
-        orderController.bookRoom(user1.getId(), room1.getId(), date, date2);
+        orderController.bookRoom(user.getId(), room.getId(), date, date2);
     }
 }

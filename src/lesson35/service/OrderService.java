@@ -44,14 +44,15 @@ public class OrderService {
         return room.getPrice() * getNumberOfNights(dateFrom, dateTo);
     }
 
-    private boolean isRoomAvailable(long room, Date dateFrom, Date dateTo) throws Exception {
+    private boolean isRoomAvailable(long roomId, Date dateFrom, Date dateTo) throws Exception {
+
+        Room room = roomDAO.findObject(roomId);
         if (dateFrom == null || dateTo == null) {
             throw new BadRequestException("Error : date parameter can not be Null.");
         }
 
-        roomDAO.findObject(room);
         for (Order order : orderDAO.readAll()) {
-            if (dateFrom.before(order.getDateTo()) && dateTo.after(order.getDateFrom())) {
+            if (order.getRoom().getId() == room.getId() && dateFrom.before(order.getDateTo()) && dateTo.after(order.getDateFrom())) {
                 throw new BadRequestException("Error : hotel number and these date numbers are busy.");
             }
         }

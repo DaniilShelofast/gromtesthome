@@ -45,7 +45,6 @@ public class OrderService {
     }
 
     private boolean isRoomAvailable(long roomId, Date dateFrom, Date dateTo) throws Exception {
-
         Room room = roomDAO.findObject(roomId);
         if (dateFrom == null || dateTo == null) {
             throw new BadRequestException("Error : date parameter can not be Null.");

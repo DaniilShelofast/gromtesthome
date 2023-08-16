@@ -7,6 +7,7 @@ import lesson35.model.User;
 import lesson35.model.UserType;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DemoOrder {
@@ -31,6 +32,13 @@ public class DemoOrder {
         User user1 = new User(8676814712850982767L, "ddd", "fff", "fff", UserType.USER);
         Room room1 = new Room(2359048199224659412L, 2, 200.0, true, true, date3, hotel1);
 
-        orderController.bookRoom(user.getId(), room.getId(), date, date2);
+        // orderController.bookRoom(user.getId(), room.getId(), date, date2);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2023, Calendar.AUGUST, 18);
+        Date dateFrom = calendar.getTime();
+        calendar.set(2023, Calendar.AUGUST, 19);
+        Date dateTo = calendar.getTime();
+        orderController.bookRoom(user1.getId(), room1.getId(), dateFrom, dateTo);
+
     }
 }

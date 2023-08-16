@@ -26,8 +26,7 @@ public class OrderService {
         User user = userDAO.findObject(userId);
 
         double totalPrice = calculateTotalPrice(room.getPrice(), dateFrom, dateTo);
-        Order order = new Order(user, room, dateFrom, dateTo, totalPrice);
-        orderDAO.addObjectToFile(order);
+        orderDAO.addObjectToFile(new Order(user, room, dateFrom, dateTo, totalPrice));
     }
 
     public void cancelReservation(long roomId, long userId) throws Exception {

@@ -11,6 +11,7 @@ import lesson35.model.User;
 import java.util.Date;
 
 import static lesson35.service.DateUtils.getNumberOfNights;
+import static lesson35.service.ValidationUtils.validateDate;
 
 public class OrderService {
 
@@ -24,7 +25,7 @@ public class OrderService {
         Room room = roomDAO.findObject(roomId);
         User user = userDAO.findObject(userId);
 
-        double totalPrice = calculateTotalPrice(room, dateFrom, dateTo);
+        double totalPrice = calculateTotalPrice(room.getPrice(), dateFrom, dateTo);
         Order order = new Order(user, room, dateFrom, dateTo, totalPrice);
         orderDAO.addObjectToFile(order);
     }
@@ -40,15 +41,13 @@ public class OrderService {
         }
     }
 
-    private double calculateTotalPrice(Room room, Date dateFrom, Date dateTo) throws BadRequestException {
-        return room.getPrice() * getNumberOfNights(dateFrom, dateTo);
+    private double calculateTotalPrice(double roomPrice, Date dateFrom, Date dateTo) throws BadRequestException {
+        return roomPrice * getNumberOfNights(dateFrom, dateTo);
     }
 
     private boolean isRoomAvailable(long roomId, Date dateFrom, Date dateTo) throws Exception {
         Room room = roomDAO.findObject(roomId);
-        if (dateFrom == null || dateTo == null) {
-            throw new BadRequestException("Error : date parameter can not be Null.");
-        }
+        validateDate(dateFrom, dateTo);
 
         for (Order order : orderDAO.readAll()) {
             if (order.getRoom().getId() == room.getId() && dateFrom.before(order.getDateTo()) && dateTo.after(order.getDateFrom())) {

@@ -21,10 +21,8 @@ public class OrderService {
 
     public void bookRoom(long userId, long roomId, Date dateFrom, Date dateTo) throws Exception {
         isRoomAvailable(roomId, dateFrom, dateTo);
-
         Room room = roomDAO.findObject(roomId);
         User user = userDAO.findObject(userId);
-
         double totalPrice = calculateTotalPrice(room.getPrice(), dateFrom, dateTo);
         orderDAO.addObjectToFile(new Order(user, room, dateFrom, dateTo, totalPrice));
     }
@@ -32,7 +30,6 @@ public class OrderService {
     public void cancelReservation(long roomId, long userId) throws Exception {
         Room room = roomDAO.findObject(roomId);
         User user = userDAO.findObject(userId);
-
         for (Order o : orderDAO.readAll()) {
             if (o.getUser().getId() == user.getId() && o.getRoom().getId() == room.getId()) {
                 orderDAO.deleteObjectFromFile(o.getId());
@@ -47,7 +44,6 @@ public class OrderService {
     private boolean isRoomAvailable(long roomId, Date dateFrom, Date dateTo) throws Exception {
         Room room = roomDAO.findObject(roomId);
         validateDate(dateFrom, dateTo);
-
         for (Order order : orderDAO.readAll()) {
             if (order.getRoom().getId() == room.getId() && dateFrom.before(order.getDateTo()) && dateTo.after(order.getDateFrom())) {
                 throw new BadRequestException("Error : hotel number and these date numbers are busy.");

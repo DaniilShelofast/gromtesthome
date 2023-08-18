@@ -34,7 +34,7 @@ public class DemoOrder {
 
         // orderController.bookRoom(user.getId(), room.getId(), date, date2);
         Calendar calendar = Calendar.getInstance();
-        calendar.set(2023, Calendar.AUGUST, 18);
+        calendar.set(2023, Calendar.AUGUST, 19);
         Date dateFrom = calendar.getTime();
         calendar.set(2023, Calendar.AUGUST, 27);
         Date dateTo = calendar.getTime();

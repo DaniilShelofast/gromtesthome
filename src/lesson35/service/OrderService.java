@@ -40,7 +40,7 @@ public class OrderService {
     }
 
     private boolean isRoomAvailable(long roomId, Date dateFrom, Date dateTo) throws Exception {
-        validateDate(dateFrom, dateTo);
+
         for (Order order : orderDAO.readAll()) {
             if (order.getRoom().getId() == roomId && dateFrom.before(order.getDateTo()) && dateTo.after(order.getDateFrom())) {
                 throw new BadRequestException("Error : hotel number and these date numbers are busy.");
@@ -51,18 +51,15 @@ public class OrderService {
 
     private long getNumberOfNights(Date dateFrom, Date dateTo) throws BadRequestException {
         Date today = new Date();
-        if (dateFrom.getTime() >= dateTo.getTime() || today.getTime() > dateTo.getTime() || today.getTime() >= dateFrom.getTime()) {
+        if (dateFrom == null || dateTo == null) {
+            throw new BadRequestException("Error : date parameter can not be Null.");
+        }
+
+        if (dateFrom.getTime() >= dateTo.getTime() ||  today.getTime() >= dateFrom.getTime()) {
             throw new BadRequestException("Error : the arrival date is greater than the departure date.");
         }
         long timeIndex = dateTo.getTime() - dateFrom.getTime();
         return TimeUnit.DAYS.convert(timeIndex, TimeUnit.MILLISECONDS);
     }
-
-    private void validateDate(Date dateFrom, Date dateTo) throws BadRequestException {
-        if (dateFrom == null || dateTo == null) {
-            throw new BadRequestException("Error : date parameter can not be Null.");
-        }
-    }
-
 
 }

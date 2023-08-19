@@ -40,26 +40,34 @@ public class OrderService {
     }
 
     private boolean isRoomAvailable(long roomId, Date dateFrom, Date dateTo) throws Exception {
+        if (dateFrom == null || dateTo == null) {
+            throw new BadRequestException("Error : date parameter can not be Null.");
+        }
+
+        validateDate(dateFrom, dateTo);
         for (Order order : orderDAO.readAll()) {
-            if (order.getRoom().getId() == roomId && dateFrom != null && dateFrom.before(order.getDateTo()) && dateTo != null && dateTo.after(order.getDateFrom())) {
+            if (order.getRoom().getId() == roomId && dateFrom.before(order.getDateTo()) && dateTo.after(order.getDateFrom())) {
                 throw new BadRequestException("Error : hotel number and these date numbers are busy.");
             }
         }
         return true;
     }
 
-    private long getNumberOfNights(Date dateFrom, Date dateTo) throws BadRequestException {
-        Date today = new Date();
-
-        if (dateFrom == null || dateTo == null) {
-            throw new BadRequestException("Error : date parameter can not be Null.");
-        }
-
-        if (dateFrom.getTime() >= dateTo.getTime() || today.getTime() >= dateFrom.getTime()) {
-            throw new BadRequestException("Error : the arrival date is greater than the departure date.");
-        }
+    private long getNumberOfNights(Date dateFrom, Date dateTo) {
         long timeIndex = dateTo.getTime() - dateFrom.getTime();
         return TimeUnit.DAYS.convert(timeIndex, TimeUnit.MILLISECONDS);
+    }
+
+    private void validateDate(Date dateFrom, Date dateTo) throws BadRequestException {
+        Date today = new Date();
+        if (dateFrom.getTime() >= dateTo.getTime()) {
+            throw new BadRequestException("Error : date of arrival, can't be bigger for the departure date.");
+        }
+
+        if (today.getTime() >= dateFrom.getTime()) {
+            throw new BadRequestException("Error :check the check-in date, or the check-in date has not yet passed.");
+        }
+
     }
 
 }

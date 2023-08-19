@@ -34,11 +34,11 @@ public class DemoOrder {
 
         // orderController.bookRoom(user.getId(), room.getId(), date, date2);
         Calendar calendar = Calendar.getInstance();
-        calendar.set(2023, Calendar.AUGUST, 25);
+        calendar.set(2023, Calendar.AUGUST, 2);
         Date dateFrom = calendar.getTime();
         calendar.set(2023, Calendar.AUGUST, 26);
         Date dateTo = calendar.getTime();
-        orderController.bookRoom(user.getId(), room.getId(), null, null);
+        orderController.bookRoom(user.getId(), room.getId(), dateFrom, dateTo);
 
     }
 }

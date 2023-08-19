@@ -40,9 +40,8 @@ public class OrderService {
     }
 
     private boolean isRoomAvailable(long roomId, Date dateFrom, Date dateTo) throws Exception {
-
         for (Order order : orderDAO.readAll()) {
-            if (order.getRoom().getId() == roomId && dateFrom.before(order.getDateTo()) && dateTo.after(order.getDateFrom())) {
+            if (order.getRoom().getId() == roomId && dateFrom != null && dateFrom.before(order.getDateTo()) && dateTo != null && dateTo.after(order.getDateFrom())) {
                 throw new BadRequestException("Error : hotel number and these date numbers are busy.");
             }
         }
@@ -51,11 +50,12 @@ public class OrderService {
 
     private long getNumberOfNights(Date dateFrom, Date dateTo) throws BadRequestException {
         Date today = new Date();
+
         if (dateFrom == null || dateTo == null) {
             throw new BadRequestException("Error : date parameter can not be Null.");
         }
 
-        if (dateFrom.getTime() >= dateTo.getTime() ||  today.getTime() >= dateFrom.getTime()) {
+        if (dateFrom.getTime() >= dateTo.getTime() || today.getTime() >= dateFrom.getTime()) {
             throw new BadRequestException("Error : the arrival date is greater than the departure date.");
         }
         long timeIndex = dateTo.getTime() - dateFrom.getTime();

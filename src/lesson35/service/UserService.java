@@ -24,6 +24,11 @@ public class UserService {
     }
 
     public void registerUser(User user) throws Exception {
+        User u = loggedInUser;
+        if (u.getUserType() == null) {
+            throw new BadRequestException("Error...");
+        }
+
         validateUser(user);
         userDAO.addObjectToFile(user);
     }

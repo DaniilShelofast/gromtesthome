@@ -17,7 +17,7 @@ public class HotelService {
     public Hotel findHotelByCity(String city) throws Exception {
         User user = loggedInUser;
         if (user.getUserType() == null) {
-            throw new BadRequestException("error: //.");
+            throw new BadRequestException("Error...");
         }
 
         for (Hotel hotel : hotelDAO.readAll()) {
@@ -44,8 +44,8 @@ public class HotelService {
 
     public void addHotel(Hotel hotel) throws Exception {
         User user = loggedInUser;
-        if (user.getUserType() != UserType.ADMIN || user.getUserType() != UserType.USER) {
-            throw new BadRequestException("Error...");
+        if (user.getUserType() != UserType.ADMIN) {
+            throw new BadRequestException("error: the user is not an admin.");
         }
 
         validateHotel(hotel);

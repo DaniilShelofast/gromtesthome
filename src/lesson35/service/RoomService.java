@@ -3,13 +3,12 @@ package lesson35.service;
 import lesson35.dao.HotelDAO;
 import lesson35.dao.RoomDAO;
 import lesson35.exception.BadRequestException;
-import lesson35.model.Filter;
-import lesson35.model.Hotel;
-import lesson35.model.Room;
+import lesson35.model.*;
 
 import java.util.LinkedList;
 import java.util.List;
 
+import static lesson35.service.UserService.loggedInUser;
 import static lesson35.service.ValidationUtils.areEqual;
 
 
@@ -19,8 +18,12 @@ public class RoomService {
     public final HotelDAO hotelDAO = new HotelDAO();
 
     public List<Room> findRooms(Filter filter) throws Exception {
-        List<Room> rooms = new LinkedList<>();
+        User user = loggedInUser;
+        if (user.getUserType() != UserType.ADMIN || user.getUserType() != UserType.USER) {
+            throw new BadRequestException("Error...");
+        }
 
+        List<Room> rooms = new LinkedList<>();
         for (Room room : roomDAO.readAll()) {
             if (checkFilter(room, filter)) {
                 rooms.add(room);
@@ -30,11 +33,21 @@ public class RoomService {
     }
 
     public void addRoom(Room room) throws Exception {
+        User user = loggedInUser;
+        if (user.getUserType() != UserType.ADMIN) {
+            throw new BadRequestException("error: the user is not an admin.");
+        }
+
         validateRoom(room);
         roomDAO.addObjectToFile(room);
     }
 
     public void deleteRoom(long idRoom) throws Exception {
+        User user = loggedInUser;
+        if (user.getUserType() != UserType.ADMIN) {
+            throw new BadRequestException("error: the user is not an admin.");
+        }
+
         roomDAO.findObject(idRoom);
         roomDAO.deleteObjectFromFile(idRoom);
     }

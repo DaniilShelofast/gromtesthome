@@ -9,5 +9,6 @@ public class DemoUser {
         UserController userController = new UserController();
         User user = new User("jjj", "eee", "null", UserType.USER);
         userController.registerUser(user);
+
     }
 }

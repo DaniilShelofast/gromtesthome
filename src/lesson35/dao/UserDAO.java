@@ -6,8 +6,6 @@ import lesson35.exception.ObjectConvertingException;
 import lesson35.model.User;
 import lesson35.model.UserType;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.LinkedList;
 
 public class UserDAO extends GeneralDAO<User> {
@@ -20,11 +18,6 @@ public class UserDAO extends GeneralDAO<User> {
     @Override
     public void addObjectToFile(User user) throws DataWritingException {
         super.addObjectToFile(user);
-    }
-
-    public void logout() throws IOException {
-        FileInputStream file = new FileInputStream("C:\\Users\\User\\Desktop/UserDb.txt");
-        file.close();
     }
 
     @Override

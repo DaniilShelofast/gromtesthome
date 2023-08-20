@@ -10,37 +10,43 @@ import static lesson35.service.ValidationUtils.checkContentAndNull;
 public class UserService {
 
     public final UserDAO userDAO = new UserDAO();
+    public static User loggedInUser = null;
+
+    public void login(String userName, String password) throws Exception {
+        User user = findUserPasswordAndUserName(userName, password);
+        System.out.println("Login accepted." + "\n" + user);
+        loggedInUser = user;
+    }
+
+    public void logout() {
+        loggedInUser = null;
+        System.out.println("User exit from the system.");
+    }
 
     public void registerUser(User user) throws Exception {
         validateUser(user);
         userDAO.addObjectToFile(user);
     }
 
-    public void logout() {
-
-    }
-
-    public void login(String userName, String password) throws Exception {
-        User user = null;
-        for (User u : userDAO.readAll()) {
-            if (u.getUserName().equals(userName) && u.getPassword().equals(password)) {
-                user = u;
-            }
-        }
-
-        if (user == null) {
-            throw new Exception("Error : the specified data is incorrect");
-        } else {
-            if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
-                System.out.println("Login accepted." + "\n" + user);
-            }
-        }
-    }
-
     private void validateUser(User user) throws Exception {
         if (checkContentAndNull(user.getPassword()) || checkContentAndNull(user.getUserName()) || checkContentAndNull(user.getCountry()) || user.getUserType() == null) {
             throw new BadRequestException("Error, the entered data is incomplete, fill in each specified field.");
         }
+
+        for (User u : userDAO.readAll()) {
+            if (u.getUserName().equals(user.getUserName()) && u.getPassword().equals(user.getPassword())) {
+                throw new BadRequestException("error : a user with this name and password exists.");
+            }
+        }
+    }
+
+    private User findUserPasswordAndUserName(String userName, String password) throws Exception {
+        for (User user : userDAO.readAll()) {
+            if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+        throw new BadRequestException("this user does not exist, or the data is not correct");
     }
 
 }

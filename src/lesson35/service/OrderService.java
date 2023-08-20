@@ -7,9 +7,12 @@ import lesson35.exception.BadRequestException;
 import lesson35.model.Order;
 import lesson35.model.Room;
 import lesson35.model.User;
+import lesson35.model.UserType;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+
+import static lesson35.service.UserService.loggedInUser;
 
 public class OrderService {
 
@@ -18,6 +21,11 @@ public class OrderService {
     public final UserDAO userDAO = new UserDAO();
 
     public void bookRoom(long userId, long roomId, Date dateFrom, Date dateTo) throws Exception {
+        User u = loggedInUser;
+        if (u.getUserType() != UserType.ADMIN || u.getUserType() != UserType.USER) {
+            throw new BadRequestException("Error...");
+        }
+
         Room room = roomDAO.findObject(roomId);
         User user = userDAO.findObject(userId);
         isRoomAvailable(room.getId(), dateFrom, dateTo);
@@ -26,6 +34,11 @@ public class OrderService {
     }
 
     public void cancelReservation(long roomId, long userId) throws Exception {
+        User u = loggedInUser;
+        if (u.getUserType() != UserType.ADMIN || u.getUserType() != UserType.USER) {
+            throw new BadRequestException("Error...");
+        }
+
         Room room = roomDAO.findObject(roomId);
         User user = userDAO.findObject(userId);
         for (Order o : orderDAO.readAll()) {

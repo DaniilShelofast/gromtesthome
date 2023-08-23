@@ -9,11 +9,11 @@ public class DemoHotel {
         HotelController hotelController = new HotelController();
         UserController userController = new UserController();
         Hotel hotel = new Hotel(1, "ooo", "ggg", "ccc", "ppp");
-        Hotel hotel1 = new Hotel("null","eee","eee","ddd");
-        userController.login("eee","eee");
-        //System.out.println(hotelController.findHotelByName("null"));
-        //HotelController.deleteHotel(53);
-        hotelController.addHotel(hotel);
+        Hotel hotel1 = new Hotel("null", "eee", "eee", "ddd");
+        userController.login("eee", "hhh");
+        System.out.println(hotelController.findHotelByName("null"));
+        hotelController.deleteHotel(53);
+        hotelController.addHotel(hotel1);
 
     }
 }

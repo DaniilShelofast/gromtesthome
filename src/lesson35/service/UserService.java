@@ -4,13 +4,12 @@ import lesson35.dao.UserDAO;
 import lesson35.exception.BadRequestException;
 import lesson35.model.User;
 
+import static lesson35.model.Session.loggedInUser;
 import static lesson35.service.ValidationUtils.checkContentAndNull;
-
 
 public class UserService {
 
     public final UserDAO userDAO = new UserDAO();
-    public static User loggedInUser = null;
 
     public void login(String userName, String password) throws Exception {
         User user = findUserPasswordAndUserName(userName, password);
@@ -24,11 +23,6 @@ public class UserService {
     }
 
     public void registerUser(User user) throws Exception {
-        User u = loggedInUser;
-        if (u.getUserType() == null) {
-            throw new BadRequestException("Error...");
-        }
-
         validateUser(user);
         userDAO.addObjectToFile(user);
     }
@@ -39,8 +33,8 @@ public class UserService {
         }
 
         for (User u : userDAO.readAll()) {
-            if (u.getUserName().equals(user.getUserName()) && u.getPassword().equals(user.getPassword())) {
-                throw new BadRequestException("error : a user with this name and password exists.");
+            if (u.getUserName().equals(user.getUserName())) {
+                throw new BadRequestException("Error: user with this login already exists, enter another login to complete registration");
             }
         }
     }

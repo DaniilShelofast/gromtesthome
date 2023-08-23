@@ -12,7 +12,7 @@ import lesson35.model.UserType;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import static lesson35.service.UserService.loggedInUser;
+import static lesson35.model.Session.loggedInUser;
 
 public class OrderService {
 
@@ -21,34 +21,30 @@ public class OrderService {
     public final UserDAO userDAO = new UserDAO();
 
     public void bookRoom(long userId, long roomId, Date dateFrom, Date dateTo) throws Exception {
-        User u = loggedInUser;
-        if (u.getUserType() != UserType.ADMIN || u.getUserType() != UserType.USER) {
-            throw new BadRequestException("Error...");
+        if (loggedInUser != null && loggedInUser.getUserType() == UserType.ADMIN || loggedInUser != null && loggedInUser.getUserType() == UserType.USER) {
+            Room room = roomDAO.findObject(roomId);
+            User user = userDAO.findObject(userId);
+            isRoomAvailable(room.getId(), dateFrom, dateTo);
+            double totalPrice = calculateTotalPrice(room.getPrice(), dateFrom, dateTo);
+            orderDAO.addObjectToFile(new Order(user, room, dateFrom, dateTo, totalPrice));
         }
-
-        Room room = roomDAO.findObject(roomId);
-        User user = userDAO.findObject(userId);
-        isRoomAvailable(room.getId(), dateFrom, dateTo);
-        double totalPrice = calculateTotalPrice(room.getPrice(), dateFrom, dateTo);
-        orderDAO.addObjectToFile(new Order(user, room, dateFrom, dateTo, totalPrice));
+        throw new BadRequestException("error, you need to log in to your account first, then you can use search.");
     }
 
     public void cancelReservation(long roomId, long userId) throws Exception {
-        User u = loggedInUser;
-        if (u.getUserType() != UserType.ADMIN || u.getUserType() != UserType.USER) {
-            throw new BadRequestException("Error...");
-        }
-
-        Room room = roomDAO.findObject(roomId);
-        User user = userDAO.findObject(userId);
-        for (Order o : orderDAO.readAll()) {
-            if (o.getUser().getId() == user.getId() && o.getRoom().getId() == room.getId()) {
-                orderDAO.deleteObjectFromFile(o.getId());
+        if (loggedInUser != null && loggedInUser.getUserType() == UserType.ADMIN || loggedInUser != null && loggedInUser.getUserType() == UserType.USER) {
+            Room room = roomDAO.findObject(roomId);
+            User user = userDAO.findObject(userId);
+            for (Order o : orderDAO.readAll()) {
+                if (o.getUser().getId() == user.getId() && o.getRoom().getId() == room.getId()) {
+                    orderDAO.deleteObjectFromFile(o.getId());
+                }
             }
         }
+        throw new BadRequestException("error, you need to log in to your account first, then you can use search.");
     }
 
-    private double calculateTotalPrice(double roomPrice, Date dateFrom, Date dateTo) throws BadRequestException {
+    private double calculateTotalPrice(double roomPrice, Date dateFrom, Date dateTo) {
         return roomPrice * getNumberOfNights(dateFrom, dateTo);
     }
 

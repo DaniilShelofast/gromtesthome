@@ -4,7 +4,7 @@ import lesson35.dao.UserDAO;
 import lesson35.exception.BadRequestException;
 import lesson35.model.User;
 
-import static lesson35.model.Session.loggedInUser;
+import static lesson35.service.SessionUtils.*;
 import static lesson35.service.ValidationUtils.checkContentAndNull;
 
 public class UserService {
@@ -14,11 +14,11 @@ public class UserService {
     public void login(String userName, String password) throws Exception {
         User user = findUserPasswordAndUserName(userName, password);
         System.out.println("Login accepted." + "\n" + user);
-        loggedInUser = user;
+        setLoggedInUser(user);
     }
 
     public void logout() {
-        loggedInUser = null;
+        setLoggedInUser(null);
         System.out.println("User exit from the system.");
     }
 

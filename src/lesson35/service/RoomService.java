@@ -3,12 +3,15 @@ package lesson35.service;
 import lesson35.dao.HotelDAO;
 import lesson35.dao.RoomDAO;
 import lesson35.exception.BadRequestException;
-import lesson35.model.*;
+import lesson35.model.Filter;
+import lesson35.model.Hotel;
+import lesson35.model.Room;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import static lesson35.model.Session.loggedInUser;
+import static lesson35.service.SessionUtils.isAdminAuthorized;
+import static lesson35.service.SessionUtils.isAuthorized;
 import static lesson35.service.ValidationUtils.areEqual;
 
 
@@ -18,33 +21,27 @@ public class RoomService {
     public final HotelDAO hotelDAO = new HotelDAO();
 
     public List<Room> findRooms(Filter filter) throws Exception {
-        if (loggedInUser != null && loggedInUser.getUserType() == UserType.ADMIN || loggedInUser != null && loggedInUser.getUserType() == UserType.USER) {
-            List<Room> rooms = new LinkedList<>();
-            for (Room room : roomDAO.readAll()) {
-                if (checkFilter(room, filter)) {
-                    rooms.add(room);
-                }
+        isAuthorized();
+        List<Room> rooms = new LinkedList<>();
+        for (Room room : roomDAO.readAll()) {
+            if (checkFilter(room, filter)) {
+                rooms.add(room);
             }
-            return rooms;
-        } else {
-            throw new BadRequestException("error, you need to log in to your account first, then you can use search.");
         }
+        return rooms;
     }
 
     public void addRoom(Room room) throws Exception {
-        if (loggedInUser != null && loggedInUser.getUserType() == UserType.ADMIN) {
-            validateRoom(room);
-            roomDAO.addObjectToFile(room);
-        }
-        throw new BadRequestException("error: the user is not an admin.");
+        isAdminAuthorized();
+        validateRoom(room);
+        roomDAO.addObjectToFile(room);
     }
 
     public void deleteRoom(long idRoom) throws Exception {
-        if (loggedInUser != null && loggedInUser.getUserType() == UserType.ADMIN) {
-            roomDAO.findObject(idRoom);
-            roomDAO.deleteObjectFromFile(idRoom);
-        }
-        throw new BadRequestException("error: the user is not an admin.");
+        isAdminAuthorized();
+        roomDAO.findObject(idRoom);
+        roomDAO.deleteObjectFromFile(idRoom);
+
     }
 
     private void validateRoom(Room room) throws Exception {

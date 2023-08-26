@@ -16,8 +16,8 @@ import static lesson35.service.SessionUtils.isAuthorized;
 public class OrderService {
 
     private final OrderDAO orderDAO = new OrderDAO();
-    public final RoomDAO roomDAO = new RoomDAO();
-    public final UserDAO userDAO = new UserDAO();
+    private final RoomDAO roomDAO = new RoomDAO();
+    private final UserDAO userDAO = new UserDAO();
 
     public void bookRoom(long userId, long roomId, Date dateFrom, Date dateTo) throws Exception {
         isAuthorized();

@@ -17,8 +17,8 @@ import static lesson35.service.ValidationUtils.areEqual;
 
 public class RoomService {
 
-    public final RoomDAO roomDAO = new RoomDAO();
-    public final HotelDAO hotelDAO = new HotelDAO();
+    private final RoomDAO roomDAO = new RoomDAO();
+    private final HotelDAO hotelDAO = new HotelDAO();
 
     public List<Room> findRooms(Filter filter) throws Exception {
         isAuthorized();

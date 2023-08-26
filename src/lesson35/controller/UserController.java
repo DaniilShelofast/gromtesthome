@@ -5,7 +5,7 @@ import lesson35.service.UserService;
 
 public class UserController {
 
-    public final UserService userService = new UserService();
+    private final UserService userService = new UserService();
 
     public void registerUser(User user) throws Exception {
         userService.registerUser(user);

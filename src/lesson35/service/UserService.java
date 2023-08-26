@@ -9,7 +9,7 @@ import static lesson35.service.ValidationUtils.checkContentAndNull;
 
 public class UserService {
 
-    public final UserDAO userDAO = new UserDAO();
+    private final UserDAO userDAO = new UserDAO();
 
     public void login(String userName, String password) throws Exception {
         User user = findUserPasswordAndUserName(userName, password);

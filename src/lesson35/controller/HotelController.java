@@ -6,7 +6,7 @@ import lesson35.service.HotelService;
 
 public class HotelController {
 
-    public final HotelService hotelService = new HotelService();
+    private final HotelService hotelService = new HotelService();
 
     public Hotel findHotelByName(String name) throws Exception {
         return hotelService.findHotelByName(name);

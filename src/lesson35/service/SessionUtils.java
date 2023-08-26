@@ -13,7 +13,7 @@ public class SessionUtils {
     }
 
     public static boolean isAuthorized() throws BadRequestException {
-        if (loggedInUser != null && (isAdminAuthorized() || loggedInUser.getUserType() == UserType.USER)) {
+        if (loggedInUser != null) {
             return true;
         }
         throw new BadRequestException("error, you need to log in to your account first, then you can use search.");

@@ -6,9 +6,9 @@ import lesson35.service.RoomService;
 
 import java.util.List;
 
-
 public class RoomController {
-    public final RoomService roomService = new RoomService();
+
+    private final RoomService roomService = new RoomService();
 
     public void addRoom(Room room) throws Exception {
         roomService.addRoom(room);

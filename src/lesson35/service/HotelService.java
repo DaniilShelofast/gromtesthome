@@ -11,7 +11,7 @@ import static lesson35.service.ValidationUtils.checkContentAndNull;
 
 public class HotelService {
 
-    public final HotelDAO hotelDAO = new HotelDAO();
+    private final HotelDAO hotelDAO = new HotelDAO();
 
     public Hotel findHotelByCity(String city) throws Exception {
         isAuthorized();

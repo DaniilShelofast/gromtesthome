@@ -12,11 +12,10 @@ public class SessionUtils {
         SessionUtils.loggedInUser = loggedInUser;
     }
 
-    public static boolean isAuthorized() throws BadRequestException {
-        if (loggedInUser != null) {
-            return true;
+    public static void isAuthorized() throws BadRequestException {
+        if (loggedInUser == null) {
+            throw new BadRequestException("error, you need to log in to your account first, then you can use search.");
         }
-        throw new BadRequestException("error, you need to log in to your account first, then you can use search.");
     }
 
     public static boolean isAdminAuthorized() throws BadRequestException {

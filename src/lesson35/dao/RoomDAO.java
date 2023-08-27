@@ -11,7 +11,7 @@ import java.util.LinkedList;
 
 public class RoomDAO extends GeneralDAO<Room> {
 
-    public final HotelDAO hotelDAO = new HotelDAO();
+    private final HotelDAO hotelDAO = new HotelDAO();
 
     @Override
     public String getPath() {

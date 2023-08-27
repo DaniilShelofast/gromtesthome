@@ -12,8 +12,8 @@ import java.util.LinkedList;
 
 public class OrderDAO extends GeneralDAO<Order> {
 
-    public final RoomDAO roomDAO = new RoomDAO();
-    public final UserDAO userDAO = new UserDAO();
+    private final RoomDAO roomDAO = new RoomDAO();
+    private final UserDAO userDAO = new UserDAO();
 
     @Override
     public String getPath() {
